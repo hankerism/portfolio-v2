@@ -3,6 +3,7 @@ import Section from "@/components/layout/Section";
 import Reveal from "@/components/ui/Reveal";
 import Doodle from "@/components/ui/Doodle";
 import SectionHeading from "./SectionHeading";
+import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
  * SelectedProjects — an exhibition, not a grid.
@@ -25,7 +26,49 @@ import SectionHeading from "./SectionHeading";
  * the heroes and the copy stays exactly as specified.
  * ------------------------------------------------------------------------- */
 
+/* Live sites --------------------------------------------------------------- */
+
+const LINKS = {
+  bahay: "https://heyitsabby.space/website/bahay-liwanag",
+  casa: "https://heyitsabby.space/casa-kape",
+  purr: "https://heyitsabby.space/website/purrheaven/home",
+} as const;
+
 /* Shared caption-plate bits ------------------------------------------------ */
+
+/** Quiet editorial text link to the live site, tinted per piece. */
+function VisitLink({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className?: string;
+  children: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={cx(
+        "group/link mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold no-underline",
+        className,
+      )}
+    >
+      <span className="underline-offset-4 group-hover/link:underline">{children}</span>
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-4 transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5">
+        <path
+          d="M7 17 17 7M9 7h8v8"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </a>
+  );
+}
 
 function Tags({ tags }: { tags: string[] }) {
   return (
@@ -50,18 +93,24 @@ function BahayLiwanag() {
       <div className="relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
         {/* Postcard spread */}
         <figure className="relative pb-14 pr-4 sm:pr-8">
-          {/* The postcard — main screenshot */}
+          {/* The postcard — main screenshot, links to the live site */}
           <div className="paper relative p-3 motion-safe:-rotate-1">
             <span aria-hidden className="tape tape-cream left-6 -top-3 -rotate-6 rounded-[2px]" />
-            <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-sm)] bg-muted">
+            <a
+              href={LINKS.bahay}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit the Bahay Liwanag website"
+              className="group relative block aspect-[16/10] overflow-hidden rounded-[var(--radius-sm)] bg-muted"
+            >
               <Image
                 src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
                 alt="Bahay Liwanag — website homepage"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
                 sizes="(min-width: 1024px) 560px, 92vw"
               />
-            </div>
+            </a>
             {/* Postage stamp + postmark */}
             <div aria-hidden className="stamp -right-3 -top-6 w-14 rotate-6 sm:w-16">
               <div className="relative aspect-[4/5] overflow-hidden">
@@ -107,6 +156,9 @@ function BahayLiwanag() {
             pipeline that turns enquiries into booked reservations automatically.
           </p>
           <Tags tags={["Boutique resort", "Website", "Make + Airtable"]} />
+          <VisitLink href={LINKS.bahay} className="text-primary">
+            Visit Bahay Liwanag
+          </VisitLink>
         </div>
       </div>
     </article>
@@ -130,6 +182,9 @@ function CasaKape() {
             tap-to-message enquiry form that lands straight in the owner&apos;s inbox.
           </p>
           <Tags tags={["Local café", "One-page", "Enquiry form"]} />
+          <VisitLink href={LINKS.casa} className="text-accent-hover">
+            Visit Casa Kape
+          </VisitLink>
         </div>
 
         {/* The kitchen table */}
@@ -140,18 +195,24 @@ function CasaKape() {
             className="absolute right-12 -top-7 w-7 text-muted-foreground/70"
           />
 
-          {/* Main screenshot — taped photo on the page */}
+          {/* Main screenshot — taped photo on the page, links to the live site */}
           <div className="paper relative p-3 shadow-lg motion-safe:rotate-1">
             <span aria-hidden className="tape tape-peach right-8 -top-3 rotate-3 rounded-[2px]" />
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-sm)] bg-muted">
+            <a
+              href={LINKS.casa}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit the Casa Kape website"
+              className="group relative block aspect-[4/3] overflow-hidden rounded-[var(--radius-sm)] bg-muted"
+            >
               <Image
                 src="/images/casa-kape/casa-kape-homepage.png"
                 alt="Casa Kape — website homepage"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
                 sizes="(min-width: 1024px) 560px, 92vw"
               />
-            </div>
+            </a>
           </div>
 
           {/* Clipped menu page */}
@@ -206,15 +267,21 @@ function PurrHeaven() {
           {/* Front — the poster polaroid */}
           <div className="paper relative z-10 w-[74%] p-3 pb-2 shadow-lg motion-safe:-rotate-2">
             <span aria-hidden className="tape tape-pink left-1/2 -top-3 -translate-x-1/2 rotate-2 rounded-[2px]" />
-            <div className="relative aspect-square overflow-hidden rounded-[2px] bg-muted">
+            <a
+              href={LINKS.purr}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Visit the Purr Heaven website"
+              className="group relative block aspect-square overflow-hidden rounded-[2px] bg-muted"
+            >
               <Image
                 src="/images/purr-heaven/purr-heaven-homepage.png"
                 alt="Purr Heaven — website homepage"
                 fill
-                className="object-cover object-top"
+                className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
                 sizes="(min-width: 1024px) 420px, 74vw"
               />
-            </div>
+            </a>
             <p aria-hidden className="hand py-2 text-center text-2xl leading-none text-pink-deep">
               adopt, don&apos;t shop
             </p>
@@ -236,6 +303,9 @@ function PurrHeaven() {
             through GoHighLevel.
           </p>
           <Tags tags={["Adoption group", "Multi-page", "GoHighLevel"]} />
+          <VisitLink href={LINKS.purr} className="text-pink-deep">
+            Visit Purr Heaven
+          </VisitLink>
         </div>
       </div>
     </article>
