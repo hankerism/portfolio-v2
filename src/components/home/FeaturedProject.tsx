@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
 import Button from "@/components/ui/Button";
@@ -51,16 +52,49 @@ export default function FeaturedProject() {
           </Stack>
         </Stack>
 
-        {/* Scrapbook wordmark placeholder (stands in for cover art) */}
-        <figure className="relative mx-auto w-full max-w-md" aria-label="KATHA platform">
-          <span aria-hidden className="tape left-1/2 -top-3 -translate-x-1/2 -rotate-2 rounded-[2px]" />
-          <div className="paper flex aspect-[4/3] flex-col items-center justify-center gap-3 p-8 motion-safe:-rotate-1">
-            <span className="hand text-xl text-muted-foreground">a quiet bookstore, online</span>
-            <span className="font-serif text-6xl font-semibold tracking-tight text-primary sm:text-7xl">
-              KATHA
-            </span>
-            <span className="h-px w-24 bg-border-strong" />
-            <span className="text-sm font-semibold text-muted-foreground">Filipino literature, beautifully read</span>
+        {/* Scrapbook stack of real screenshots — homepage in front, two behind */}
+        <figure className="relative mx-auto aspect-[4/3] w-full max-w-md" aria-label="KATHA screenshots">
+          {/* Behind, left */}
+          <div className="absolute left-0 top-8 z-0 w-[56%] motion-safe:-rotate-6">
+            <div className="paper relative aspect-[3/4] overflow-hidden">
+              <Image
+                src="/images/katha/katha-library.png"
+                alt=""
+                aria-hidden="true"
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 1024px) 240px, 40vw"
+              />
+            </div>
+          </div>
+
+          {/* Behind, right */}
+          <div className="absolute right-0 top-12 z-0 w-[52%] motion-safe:rotate-6">
+            <div className="paper relative aspect-[3/4] overflow-hidden">
+              <Image
+                src="/images/katha/katha-reader-mode.png"
+                alt=""
+                aria-hidden="true"
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 1024px) 220px, 38vw"
+              />
+            </div>
+          </div>
+
+          {/* Front — the hero */}
+          <div className="absolute left-1/2 top-0 z-10 w-[66%] -translate-x-1/2 motion-safe:-rotate-1">
+            <span aria-hidden className="tape left-1/2 -top-3 -translate-x-1/2 -rotate-2 rounded-[2px]" />
+            <div className="paper relative aspect-[3/4] overflow-hidden">
+              <Image
+                src="/images/katha/katha-homepage.png"
+                alt="The KATHA homepage — a calm, editorial reading experience"
+                fill
+                priority
+                className="object-cover object-top"
+                sizes="(min-width: 1024px) 300px, 55vw"
+              />
+            </div>
           </div>
         </figure>
       </div>

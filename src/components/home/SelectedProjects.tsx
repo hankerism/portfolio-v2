@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
 import Card from "@/components/ui/Card";
@@ -9,13 +10,13 @@ import SectionHeading from "./SectionHeading";
  * structured like a client project. Blurbs for the three finished pieces come
  * verbatim-in-spirit from the GHL reference; Stephanie Center has no source
  * copy yet, so it is shown honestly as in-progress rather than invented.
- * Cover images aren't hydrated, so each card leads with a tinted monogram.
+ * Each card leads with a real homepage screenshot (next/image, cropped to the
+ * hero via object-top).
  * ------------------------------------------------------------------------- */
 
 type Project = {
   name: string;
-  monogram: string;
-  tint: string;
+  image: string;
   tags: string[];
   blurb: string;
   status?: "in-progress";
@@ -24,32 +25,28 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     name: "Bahay Liwanag",
-    monogram: "BL",
-    tint: "bg-lavender-tint text-plum-ink",
+    image: "/images/bahay-liwanag/bahay-liwanag-homepage.png",
     tags: ["Boutique resort", "Website", "Make + Airtable"],
     blurb:
       "A serene site for a boutique resort — paired with a Make + Airtable pipeline that turns enquiries into booked reservations automatically.",
   },
   {
     name: "Casa Kape",
-    monogram: "CK",
-    tint: "bg-peach/25 text-primary",
+    image: "/images/casa-kape/casa-kape-homepage.png",
     tags: ["Local café", "One-page", "Enquiry form"],
     blurb:
       "A warm one-page site for a local café — menu, story, and a tap-to-message enquiry form that lands straight in the owner's inbox.",
   },
   {
     name: "Purr Heaven",
-    monogram: "PH",
-    tint: "bg-pink/40 text-plum-ink",
+    image: "/images/purr-heaven/purr-heaven-homepage.png",
     tags: ["Adoption group", "Multi-page", "GoHighLevel"],
     blurb:
       "A playful multi-page site for a cat adoption & rescue group — an adoptable-cat gallery, enquiry forms, and friendly auto-replies through GoHighLevel.",
   },
   {
     name: "Stephanie Center Wellness",
-    monogram: "SC",
-    tint: "bg-muted text-primary",
+    image: "/images/stephanie-center/steph-homepage.png",
     tags: ["Wellness studio"],
     blurb: "Case study in progress — write-up coming soon.",
     status: "in-progress",
@@ -75,10 +72,14 @@ export default function SelectedProjects() {
               className="h-full overflow-hidden"
               interactive
             >
-              <div className={`flex h-32 items-center justify-center ${p.tint}`}>
-                <span className="font-serif text-4xl font-semibold" aria-hidden>
-                  {p.monogram}
-                </span>
+              <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-muted">
+                <Image
+                  src={p.image}
+                  alt={`${p.name} — website homepage`}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 100vw"
+                />
               </div>
               <div className="p-6">
                 <Stack gap="sm" align="start">

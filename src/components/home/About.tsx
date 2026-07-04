@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
 
@@ -12,14 +13,22 @@ export default function About() {
   return (
     <Section id="about" tone="default" aria-labelledby="about-heading">
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
-        {/* Portrait placeholder */}
+        {/* Real portrait in a scrapbook paper mount */}
         <figure className="relative mx-auto w-full max-w-xs" aria-label="Portrait of Abby">
           <span aria-hidden className="tape left-8 -top-3 -rotate-6 rounded-[2px]" />
-          <div className="paper flex aspect-[4/5] flex-col items-center justify-center gap-3 p-8 motion-safe:-rotate-2">
-            <span className="flex size-24 items-center justify-center rounded-full bg-lavender-tint font-serif text-4xl font-semibold text-plum-ink">
-              A
-            </span>
-            <figcaption className="hand text-2xl text-primary">that&apos;s me — Abby</figcaption>
+          <div className="paper p-3 motion-safe:-rotate-2">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] bg-muted">
+              <Image
+                src="/images/abby-portrait.jpg"
+                alt="Abby"
+                fill
+                className="object-cover object-center"
+                sizes="(min-width: 1024px) 340px, 70vw"
+              />
+            </div>
+            <figcaption className="hand mt-3 text-center text-2xl text-primary">
+              that&apos;s me — Abby
+            </figcaption>
           </div>
         </figure>
 
