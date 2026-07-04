@@ -1,12 +1,17 @@
 import Image from "next/image";
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
+import Doodle from "@/components/ui/Doodle";
 
 /* ---------------------------------------------------------------------------
  * About — the explanation. Not a "how I became a developer" story; instead,
  * how operations experience shaped the way the work gets built (per CONTENT.md).
- * Placed after the proof so it reads as explanation, not justification. The
- * portrait isn't hydrated yet, so a scrapbook monogram frame stands in.
+ * Placed after the proof so it reads as explanation, not justification.
+ *
+ * Art direction: the portrait is a keepsake — a photo mounted on stacked
+ * paper, held by two mismatched pieces of tape, with a small inked heart in
+ * the margin; the thesis heading carries a hand-drawn underline. Quietly
+ * personal, never scrapbook-noisy.
  * ------------------------------------------------------------------------- */
 
 export default function About() {
@@ -15,8 +20,9 @@ export default function About() {
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
         {/* Real portrait in a scrapbook paper mount */}
         <figure className="relative mx-auto w-full max-w-xs" aria-label="Portrait of Abby">
-          <span aria-hidden className="tape left-8 -top-3 -rotate-6 rounded-[2px]" />
-          <div className="paper p-3 shadow-lg motion-safe:-rotate-2">
+          <div className="paper-stack paper p-3 shadow-lg motion-safe:-rotate-2">
+            <span aria-hidden className="tape tape-pink left-8 -top-3 z-10 -rotate-6 rounded-[2px]" />
+            <span aria-hidden className="tape tape-cream -right-4 bottom-16 z-10 h-6 w-14 rotate-[80deg] rounded-[2px]" />
             <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] bg-muted">
               <Image
                 src="/images/abby-portrait.jpg"
@@ -30,12 +36,19 @@ export default function About() {
               that&apos;s me — Abby
             </figcaption>
           </div>
+          <Doodle
+            kind="heart"
+            className="absolute -left-5 bottom-8 size-6 -rotate-12 text-pink-deep/70"
+          />
         </figure>
 
         {/* Narrative */}
         <Stack gap="md" align="start">
           <span className="hand text-2xl sm:text-3xl">About</span>
-          <h2 id="about-heading">Operations taught me what software has to survive</h2>
+          <div>
+            <h2 id="about-heading">Operations taught me what software has to survive</h2>
+            <Doodle kind="underline" className="mt-2 w-44 text-accent" />
+          </div>
 
           <p className="text-lg text-foreground/80">
             For more than six years, I helped businesses improve operations,

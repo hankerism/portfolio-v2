@@ -1,11 +1,17 @@
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
 import Button from "@/components/ui/Button";
+import Doodle from "@/components/ui/Doodle";
 
 /* ---------------------------------------------------------------------------
  * Contact — the conversion. One clear, low-friction way to start a
  * conversation (email-first, per the IA/spec decision). This is where the
  * old scaffold's dead "Hire Me" button finally does its job — as a link.
+ *
+ * Art direction: the card is a letter left on the desk — resting at a slight
+ * angle on a second sheet, held down by two mismatched pieces of tape, with
+ * paper grain and a small inked sparkle. Warm, personal, unmistakably placed
+ * by hand.
  * ------------------------------------------------------------------------- */
 
 const EMAIL = "blujayabby@gmail.com";
@@ -13,8 +19,13 @@ const EMAIL = "blujayabby@gmail.com";
 export default function Contact() {
   return (
     <Section id="contact" tone="muted" aria-labelledby="contact-heading">
-      <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-8 text-center shadow-lg sm:p-14">
-        <span aria-hidden className="tape left-1/2 -top-3 -translate-x-1/2 -rotate-2 rounded-[2px]" />
+      <div className="paper-stack grain relative mx-auto max-w-3xl rounded-[var(--radius-2xl)] border border-border bg-card p-8 text-center shadow-lg motion-safe:-rotate-[0.5deg] sm:p-14">
+        <span aria-hidden className="tape tape-peach left-10 -top-3 z-10 -rotate-6 rounded-[2px]" />
+        <span aria-hidden className="tape right-12 -top-3 z-10 rotate-3 rounded-[2px]" />
+        <Doodle
+          kind="sparkle"
+          className="absolute -right-3 -top-4 z-10 size-7 text-accent"
+        />
         <Stack gap="md" align="center" className="text-center">
           <span className="hand text-3xl text-primary sm:text-4xl">let&apos;s make something lovely</span>
           <h2 id="contact-heading">Have a project in mind?</h2>

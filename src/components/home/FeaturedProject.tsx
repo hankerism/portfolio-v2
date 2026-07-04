@@ -36,7 +36,7 @@ export default function FeaturedProject() {
       {/* Distinct flagship band — a soft plum wash settling into aged paper */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-lavender-tint/70 via-background to-surface"
+        className="grain pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-lavender-tint/70 via-background to-surface"
       />
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="absolute right-[8%] top-16 hidden size-72 rounded-full bg-lavender/20 blur-3xl lg:block" />
@@ -118,9 +118,9 @@ export default function FeaturedProject() {
                 </div>
               </div>
 
-              {/* Live homepage — the star, in a browser frame */}
-              <div className="absolute bottom-0 left-0 z-10 w-[82%] motion-safe:-rotate-1">
-                <span aria-hidden className="tape left-8 -top-3 -rotate-[4deg] rounded-[2px]" />
+              {/* Live homepage — the star, in a browser frame on stacked paper */}
+              <div className="paper-stack absolute bottom-0 left-0 z-10 w-[82%] rounded-[var(--radius-xl)] motion-safe:-rotate-1">
+                <span aria-hidden className="tape left-8 -top-3 z-10 -rotate-[4deg] rounded-[2px]" />
                 <BrowserFrame url="katha-sigma.vercel.app" className="shadow-lg">
                   <div className="relative aspect-[16/11] w-full bg-muted">
                     <Image
@@ -159,6 +159,14 @@ export default function FeaturedProject() {
                 className="absolute -left-2 bottom-16 z-20 hidden w-12 rotate-[8deg] text-primary/60 lg:block"
               />
             </div>
+
+            {/* Exhibition plate — a handwritten gallery caption under the scene */}
+            <figcaption
+              aria-hidden
+              className="hand mt-10 text-center text-2xl text-primary/70 motion-safe:-rotate-1"
+            >
+              the homepage, the reader — and Table for Two ✦
+            </figcaption>
           </figure>
         </div>
       </Container>
