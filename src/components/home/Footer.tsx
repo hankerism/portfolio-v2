@@ -1,0 +1,68 @@
+import Container from "@/components/layout/Container";
+
+/* ---------------------------------------------------------------------------
+ * Footer — a clean landing. Brand echo, real links only (section anchors +
+ * email), and a build-time year. Nothing renders after it. Social links are
+ * intentionally omitted until real handles are available (no invented URLs).
+ * ------------------------------------------------------------------------- */
+
+const NAV = [
+  { href: "#work", label: "Work" },
+  { href: "#automation", label: "Automation" },
+  { href: "#projects", label: "Projects" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+];
+
+const EMAIL = "debzj17@gmail.com";
+
+export default function Footer() {
+  const year = new Date().getFullYear();
+
+  return (
+    <footer className="mt-auto border-t border-border bg-surface">
+      <Container size="lg">
+        <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="max-w-xs">
+            <a href="#top" className="font-serif text-2xl font-semibold text-primary no-underline">
+              Abby<span className="text-accent">.</span>
+            </a>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Product engineer &amp; automation specialist — building complete
+              digital products and business systems.
+            </p>
+          </div>
+
+          <nav aria-label="Footer">
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Explore
+            </h2>
+            <ul className="grid gap-2">
+              {NAV.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="text-sm text-foreground/80 no-underline hover:text-primary">
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Get in touch
+            </h2>
+            <a href={`mailto:${EMAIL}`} className="text-sm font-semibold text-primary no-underline hover:underline">
+              {EMAIL}
+            </a>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-border py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <p>© {year} Abby. All rights reserved.</p>
+          <p>Built with Next.js &amp; Tailwind CSS.</p>
+        </div>
+      </Container>
+    </footer>
+  );
+}
