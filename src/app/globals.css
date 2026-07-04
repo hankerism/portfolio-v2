@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Portfolio v2.0 — Global Design System
+   Product Engineer · Automation Specialist · Operations Professional
+
+   Stack: Next.js 16 · TypeScript · Tailwind CSS v4 (App Router)
+
+   Aesthetic: warm scrapbook / editorial. Cream paper, plum ink, hand-torn
+   accents. Derived from the GHL homepage reference (docs/reference/
+   ghl-homepage.html) — Fraunces + Nunito Sans + Caveat, cream/lavender/
+   peach palette, paper-lifted shadows. Engineering structure mirrors KATHA's
+   design system (docs/design/*, katha/app/globals.css) for parity of quality.
+
+   Structure
+   1. Imports + content sources
+   2. Static theme tokens (palette, fonts, radii, spacing, motion, animation)
+   3. Semantic tokens (:root — single light editorial theme)
+   4. Theme mapping (@theme inline → Tailwind utilities)
+   5. Base layer (reset, typography, focus, selection, reduced-motion)
+   6. Components layer (scrapbook helpers: paper, tape, ornament)
+   7. Keyframes
+
+   NOTE: This phase (2) builds the design system only. No page/section markup
+   here — primitives live in React under src/components/**.
+   ========================================================================== */
+
+/* 1 · IMPORTS + CONTENT SOURCES ------------------------------------------- */
+/* Typefaces load via next/font in src/app/layout.tsx (self-hosted, no render-
+   blocking request); it sets --font-fraunces / --font-nunito / --font-caveat
+   on <html>, consumed by the --font-* role tokens below.                    */
+@import "tailwindcss";
+
+/* Register the app + component trees so every utility class is compiled,
+   including responsive variants that may live only inside a component file.
+   Additive to Tailwind v4's automatic detection. Paths are relative to this
+   file (src/app/globals.css → src/app and src/components are siblings). */
+@source "../app/**/*.{ts,tsx,js,jsx,mdx}";
+@source "../components/**/*.{ts,tsx,js,jsx,mdx}";
+
+/* 2 · STATIC THEME TOKENS ------------------------------------------------- */
+/* Values that never change between contexts. They generate Tailwind utilities
+   directly (bg-plum, font-hand, rounded-xl, animate-fade-up …).            */
+@theme {
+  /* — Raw brand palette (exact values from the GHL reference) —————————— */
+  --color-cream:          #FDFBF6;  /* page paper — warm white            */
+  --color-cream-warm:     #F7F1E9;  /* secondary surface — aged paper     */
+  --color-lavender:       #B6A1D9;  /* soft plum — decorative             */
+  --color-lavender-deep:  #7E63AC;  /* primary plum — buttons, links      */
+  --color-lavender-tint:  #EFE9F7;  /* wash — quiet plum background        */
+  --color-plum-ink:       #6D52A0;  /* deepest plum — strong emphasis      */
+  --color-pink:           #F6D3DC;  /* blush — decorative                  */
+  --color-pink-deep:      #E7A3B6;  /* rose — decorative accent            */
+  --color-peach:          #F2A55C;  /* peach — warm accent, highlights     */
+  --color-peach-deep:     #E8954A;  /* deeper peach — accent hover         */
+  --color-sage:           #5FBF8A;  /* green — success / positive          */
+  --color-ink:            #4B4257;  /* plum-grey — primary text            */
+  --color-ink-soft:       #8A8295;  /* muted plum-grey — secondary text    */
+
+  /* — Typeface roles (families arrive from next/font via layout.tsx) ————— */
+  --font-serif:  var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans:   var(--font-nunito), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-hand:   var(--font-caveat), "Segoe Script", cursive;
+  --font-mono:   ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+
+  /* — Radius scale (soft, hand-cut — not sharp) ———————————————————————— */
+  --radius:     1rem;                          /* base — rounded, friendly */
+  --radius-xs:  calc(var(--radius) - 0.75rem);
+  --radius-sm:  calc(var(--radius) - 0.5rem);
+  --radius-md:  calc(var(--radius) - 0.25rem);
+  --radius-lg:  var(--radius);
+  --radius-xl:  calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+  --radius-full: 9999px;
+
+  /* — Fluid, viewport-aware spacing ————————————————————————————————————— */
+  --spacing-gutter:  clamp(1.25rem, 4vw, 4rem);   /* page side padding    */
+  --spacing-section: clamp(3.5rem, 8vw, 7.5rem);  /* vertical rhythm      */
+  --spacing-measure: 65ch;                        /* ideal reading width  */
+
+  /* — Motion easings ————————————————————————————————————————————————————— */
+  --ease-paper: cubic-bezier(0.16, 1, 0.3, 1);    /* settle, don't snap   */
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* — Named animations (→ animate-fade-in, animate-fade-up, …) —————————— */
+  --animate-fade-in:  fade-in 0.5s var(--ease-paper) both;
+  --animate-fade-up:  fade-up 0.6s var(--ease-paper) both;
+  --animate-scale-in: scale-in 0.4s var(--ease-paper) both;
+  --animate-float:    float 6s ease-in-out infinite;
+}
+
+/* 3 · SEMANTIC TOKENS ----------------------------------------------------- */
+/* One warm editorial theme. Semantic names decouple components from raw hues,
+   so a future dark/alt theme only overrides values here — components never
+   change. (Matches KATHA's semantic-token discipline.)                     */
+:root {
+  color-scheme: light;
+
+  /* Surfaces & text */
+  --background:           var(--color-cream);
+  --foreground:           var(--color-ink);
+  --card:                 #FFFFFF;
+  --card-foreground:      var(--color-ink);
+  --surface:              var(--color-cream-warm);   /* wells, grouped areas */
+
+  /* Interactive — plum primary, peach accent */
+  --primary:              var(--color-lavender-deep);
+  --primary-foreground:   #FFFFFF;
+  --primary-hover:        var(--color-plum-ink);
+  --secondary:            var(--color-cream-warm);
+  --secondary-foreground: var(--color-ink);
+  --accent:               var(--color-peach);
+  --accent-foreground:    #3A2A18;
+  --accent-hover:         var(--color-peach-deep);
+  --muted:                var(--color-lavender-tint);
+  --muted-foreground:     var(--color-ink-soft);
+
+  /* Status */
+  --success:              var(--color-sage);
+  --success-foreground:   #06301D;
+
+  /* Lines & form */
+  --border:               #EAE2D6;                   /* warm hairline        */
+  --border-strong:        #DccFbE;
+  --ring:                 var(--color-lavender-deep); /* focus ring           */
+
+  /* Decorative scrapbook accents */
+  --tape:                 rgba(182, 161, 217, 0.45); /* translucent lavender */
+  --highlight:            rgba(242, 165, 92, 0.30);  /* peach marker         */
+
+  /* Elevation — soft, plum-tinted (the reference's paper lift) */
+  --ds-shadow-xs:    0 1px 2px rgba(75, 66, 87, 0.06);
+  --ds-shadow-sm:    0 2px 6px -2px rgba(75, 66, 87, 0.12);
+  --ds-shadow-paper: 0 14px 30px -14px rgba(75, 66, 87, 0.32);   /* from ref */
+  --ds-shadow:       0 18px 40px -24px rgba(126, 99, 172, 0.45); /* from ref */
+  --ds-shadow-lg:    0 26px 54px -22px rgba(126, 99, 172, 0.55); /* from ref */
+  --ds-shadow-glow:  0 0 0 1px rgba(242, 165, 92, 0.35), 0 8px 24px rgba(242, 165, 92, 0.22);
+
+  /* Transitions */
+  --transition-fast: 120ms var(--ease-soft);
+  --transition:      200ms var(--ease-soft);
+  --transition-slow: 320ms var(--ease-paper);
+}
+
+/* 4 · THEME MAPPING ------------------------------------------------------- */
+/* `inline` keeps the generated utilities pointing at the live variables, so a
+   future theme switch flips them automatically.                            */
+@theme inline {
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-surface:              var(--surface);
+
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-success:              var(--success);
+  --color-success-foreground:   var(--success-foreground);
+
+  --color-border:               var(--border);
+  --color-border-strong:        var(--border-strong);
+  --color-ring:                 var(--ring);
+
+  /* Elevation utilities: shadow-paper, shadow-glow, plus tuned defaults */
+  --shadow-xs:    var(--ds-shadow-xs);
+  --shadow-sm:    var(--ds-shadow-sm);
+  --shadow-paper: var(--ds-shadow-paper);
+  --shadow-soft:  var(--ds-shadow);
+  --shadow-lg:    var(--ds-shadow-lg);
+  --shadow-glow:  var(--ds-shadow-glow);
+}
+
+/* 5 · BASE LAYER ---------------------------------------------------------- */
+@layer base {
+
+  /* Warm default border for any utility-bordered element */
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern", "liga", "calt";
+    tab-size: 4;
+    accent-color: var(--accent);
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  /* — Headings — Fraunces, editorial, optical-sized ————————————————————— */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--foreground);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+  h1 { font-size: clamp(2.5rem, 1.6rem + 3.8vw, 4rem);    font-weight: 600; }
+  h2 { font-size: clamp(1.9rem, 1.3rem + 2.4vw, 2.75rem); font-weight: 600; }
+  h3 { font-size: clamp(1.4rem, 1.1rem + 1.3vw, 1.9rem); }
+  h4 { font-size: clamp(1.15rem, 1rem + 0.7vw, 1.4rem); }
+  h5 { font-size: 1.125rem; }
+  h6 {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  p { text-wrap: pretty; }
+  small { font-size: 0.8125rem; color: var(--muted-foreground); }
+
+  /* — Links ————————————————————————————————————————————————————————————— */
+  a {
+    color: var(--primary);
+    text-decoration: none;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: 1.5px;
+    text-decoration-color: color-mix(in oklab, var(--primary) 30%, transparent);
+  }
+  a:hover {
+    text-decoration-line: underline;
+    text-decoration-color: var(--primary);
+  }
+
+  ::marker { color: var(--accent); }
+
+  blockquote {
+    border-inline-start: 3px solid var(--accent);
+    padding-inline-start: 1.15rem;
+    margin-inline: 0;
+    font-family: var(--font-serif);
+    font-style: italic;
+    color: var(--muted-foreground);
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+    margin-block: 2rem;
+  }
+
+  /* — Media + form defaults ————————————————————————————————————————————— */
+  img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  button { cursor: pointer; background: none; border: none; }
+  :disabled { cursor: not-allowed; }
+  textarea { resize: vertical; }
+
+  /* — Selection — warm peach editorial highlight ————————————————————————— */
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: inherit;
+    text-shadow: none;
+  }
+
+  /* — Focus — visible, on-brand, keyboard-only —————————————————————————— */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+  :focus:not(:focus-visible) { outline: none; }
+
+  /* — Respect reduced-motion ———————————————————————————————————————————— */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* 6 · COMPONENTS LAYER — scrapbook helpers -------------------------------- */
+/* Small, composable primitives the React components lean on. Kept in CSS so
+   they stay declarative and themeable; the React layer owns structure/props. */
+@layer components {
+
+  /* Handwritten label — the scrapbook voice (eyebrows, captions, doodles) */
+  .hand {
+    font-family: var(--font-hand);
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1;
+  }
+
+  /* Paper — a lifted card surface with the reference's soft plum shadow */
+  .paper {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--ds-shadow-paper);
+  }
+
+  /* A strip of washi tape — decorative, pinned to a corner of a .paper card.
+     Purely ornamental, so it is aria-hidden at the markup level.           */
+  .tape {
+    position: absolute;
+    width: 5.5rem;
+    height: 1.75rem;
+    background: var(--tape);
+    box-shadow: var(--ds-shadow-xs);
+    /* torn, slightly translucent edges */
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+
+  /* Peach marker highlight behind inline text (editorial emphasis) */
+  .marker {
+    background: linear-gradient(to bottom, transparent 55%, var(--highlight) 55%);
+    padding-inline: 0.1em;
+  }
+
+  /* Scroll-reveal — paired with the <Reveal> client component. Ships hidden,
+     gains .is-visible when it enters the viewport. Reduced-motion users (and
+     the no-observer fallback) get the content shown with no transform, handled
+     entirely in CSS so the component's only state change is observer-driven. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 14px));
+    transition: opacity 0.6s var(--ease-paper), transform 0.6s var(--ease-paper);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  /* Torn editorial divider */
+  .ornament {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--accent);
+  }
+  .ornament::before,
+  .ornament::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-strong), transparent);
+  }
+}
+
+/* 7 · KEYFRAMES ----------------------------------------------------------- */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50%      { transform: translateY(-8px) rotate(var(--rot, 0deg)); }
+}

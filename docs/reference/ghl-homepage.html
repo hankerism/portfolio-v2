@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hankerism — Abby | Web Design, Automation &amp; Virtual Assistance</title>
+<meta name="description" content="Hankerism is the studio of Abby — web designer, automation builder and virtual assistant helping small brands look beautiful online and run on autopilot.">
+
+<!--
+  ===========================================================================
+  HANKERISM — SCRAPBOOK EDITION  (homepage / source of truth)
+  ---------------------------------------------------------------------------
+  IDEA     A polished editorial site with a cozy scrapbook layer on top:
+           taped polaroids, handwritten margin notes, doodled stars, washi
+           tape, push-pins and a laptop mockup — all kept disciplined by a
+           calm grid, generous whitespace and glassmorphism cards.
+  COLORS   Cream #FDFBF6 · Lavender #B6A1D9 · Deep Lavender #7E63AC ·
+           Soft Pink #F6D3DC · Deep Pink #E7A3B6 · Peach #F2A55C · Ink #4B4257
+  TYPE     Fraunces (display) · Nunito Sans (body/UI) · Caveat (handwritten)
+  SIGNATURE  The scrapbook collage — overlapping taped polaroids + laptop
+             mockup + handwritten "hi, I'm Abby" note in the hero.
+  ===========================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Nunito+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================ TOKENS ============================ */
+  :root{
+    --cream:#FDFBF6;
+    --cream-warm:#F7F1E9;
+    --lavender:#B6A1D9;
+    --lavender-deep:#7E63AC;
+    --lavender-tint:#EFE9F7;
+    --lavender-tint2:#E3D8F2;
+    --pink:#F6D3DC;
+    --pink-deep:#E7A3B6;
+    --peach:#F2A55C;
+    --ink:#4B4257;
+    --ink-soft:#8A8295;
+
+    --line:rgba(75,66,87,.14);
+    --line-light:rgba(253,251,246,.22);
+
+    --serif:"Fraunces",Georgia,serif;
+    --sans:"Nunito Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --hand:"Caveat",cursive;
+
+    --maxw:1180px;
+    --gutter:clamp(20px,5vw,64px);
+    --header-h:74px;
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --shadow:0 18px 40px -24px rgba(126,99,172,.45);
+    --shadow-lg:0 26px 54px -22px rgba(126,99,172,.55);
+    --shadow-paper:0 14px 30px -14px rgba(75,66,87,.32);
+
+    /* glassmorphism */
+    --glass-bg:rgba(255,255,255,.55);
+    --glass-bg-strong:rgba(255,255,255,.72);
+    --glass-border:rgba(255,255,255,.6);
+    --glass-blur:saturate(160%) blur(14px);
+  }
+
+  /* ============================ RESET ============================ */
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.7;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative}
+  /* faint paper grain across the whole page */
+  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:radial-gradient(rgba(126,99,172,.05) 1px,transparent 1px);
+    background-size:22px 22px}
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.13;letter-spacing:-.01em;color:var(--lavender-deep)}
+
+  .grad-text{background:linear-gradient(100deg,var(--lavender-deep),var(--pink-deep) 45%,var(--peach));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .shimmer{background-size:220% auto;animation:shine 5s linear infinite}
+  @keyframes shine{to{background-position:220% center}}
+
+  /* ============================ HELPERS ============================ */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);position:relative;z-index:2}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--sans);font-size:.76rem;font-weight:800;
+    letter-spacing:.2em;text-transform:uppercase;color:var(--lavender-deep)}
+  .eyebrow.on-dark{color:#E9D9F5}
+  .eyebrow .idx{color:var(--peach);font-weight:800}
+  .bloom{display:inline-grid;grid-template-columns:repeat(3,4px);grid-template-rows:repeat(3,4px);gap:3px;flex:none}
+  .bloom i{background:var(--pink-deep);border-radius:50%;display:block}
+  .bloom.on-dark i{background:#F4C6D3}
+
+  .btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.5ch;
+    font-family:var(--sans);font-weight:800;font-size:.92rem;letter-spacing:.01em;
+    padding:14px 30px;border-radius:999px;cursor:pointer;border:2px solid transparent;
+    transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .btn::before{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);transition:left .6s var(--ease)}
+  .btn:hover::before{left:150%}
+  .btn-primary{background:var(--lavender-deep);color:#fff;box-shadow:var(--shadow)}
+  .btn-primary:hover{background:#6d52a0;transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.6)}
+  .btn-ghost:hover{background:#fff;color:var(--lavender-deep);border-color:#fff;transform:translateY(-3px)}
+  .btn-outline{background:rgba(255,255,255,.7);color:var(--lavender-deep);border-color:var(--lavender-tint2);backdrop-filter:var(--glass-blur)}
+  .btn-outline:hover{background:var(--lavender-tint);border-color:var(--lavender);transform:translateY(-3px)}
+
+  .section{padding-block:clamp(64px,9vw,120px);position:relative}
+  .section-head{max-width:660px;margin-bottom:clamp(38px,5vw,58px)}
+  .section-head h2{font-size:clamp(2rem,3.6vw,3rem);margin-top:16px}
+  .section-head p{color:var(--ink-soft);margin-top:14px;font-size:1.06rem}
+  .section-head.center{margin-inline:auto;text-align:center}
+  .section-head.center .eyebrow{justify-content:center}
+
+  .more{font-weight:800;font-size:.9rem;color:var(--lavender-deep);display:inline-flex;gap:.4ch;align-items:center;
+    transition:gap .25s var(--ease)}
+  .more:hover{gap:.85ch}
+
+  /* ---- handwritten note ---- */
+  .note{font-family:var(--hand);font-weight:600;color:var(--lavender-deep);line-height:1.15}
+  .note.peachy{color:var(--peach)}
+  .note.pinky{color:var(--pink-deep)}
+
+  /* ---- doodles (decorative svg/glyphs) ---- */
+  .doodle{position:absolute;z-index:3;pointer-events:none;color:var(--pink-deep);opacity:.85}
+  .doodle.star{color:var(--peach)}
+
+  /* ---- washi tape ---- */
+  .tape{position:absolute;width:84px;height:26px;z-index:4;
+    background:repeating-linear-gradient(45deg,rgba(246,211,220,.85) 0 9px,rgba(231,163,182,.85) 9px 18px);
+    box-shadow:0 4px 10px -6px rgba(75,66,87,.4);opacity:.92}
+  .tape.lav{background:repeating-linear-gradient(45deg,rgba(227,216,242,.9) 0 9px,rgba(182,161,217,.85) 9px 18px)}
+  .tape.peachy{background:repeating-linear-gradient(-45deg,rgba(251,226,203,.92) 0 9px,rgba(242,165,92,.8) 9px 18px)}
+
+  /* ---- push pin ---- */
+  .pin{position:absolute;width:18px;height:18px;border-radius:50%;z-index:5;
+    background:radial-gradient(circle at 35% 30%,#fff 0 2px,var(--pink-deep) 3px 100%);
+    box-shadow:0 3px 6px -2px rgba(75,66,87,.5)}
+  .pin.lav{background:radial-gradient(circle at 35% 30%,#fff 0 2px,var(--lavender) 3px 100%)}
+  .pin.peach{background:radial-gradient(circle at 35% 30%,#fff 0 2px,var(--peach) 3px 100%)}
+
+  /* ---- polaroid ---- */
+  .polaroid{background:#fff;padding:12px 12px 0;border-radius:6px;box-shadow:var(--shadow-paper);
+    transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+  .polaroid img{border-radius:3px;width:100%;display:block;object-fit:cover}
+  .polaroid .cap{font-family:var(--hand);font-weight:600;font-size:1.34rem;text-align:center;color:var(--ink);
+    padding:8px 4px 12px;line-height:1}
+  .polaroid:hover{transform:rotate(0deg) translateY(-6px) scale(1.02)!important;box-shadow:var(--shadow-lg)}
+  /* photo-free polaroid fillers */
+  .pola-swatch{aspect-ratio:1/1;border-radius:3px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+  .pola-swatch span{display:block}
+  .pola-hello{aspect-ratio:1/1;border-radius:3px;position:relative;overflow:hidden;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--lavender-tint),var(--pink))}
+  .pola-hello .ph-word{font-family:var(--hand);font-weight:700;font-size:2.5rem;color:var(--lavender-deep);line-height:1}
+  .pola-hello .ph-heart{position:absolute;bottom:10px;right:12px;color:var(--pink-deep);font-size:1.1rem}
+  .pola-hello .ph-star{position:absolute;top:10px;left:12px;color:var(--peach);font-size:1rem}
+
+  /* ---- glass card ---- */
+  .glass{background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+    border:1px solid var(--glass-border);border-radius:24px;box-shadow:var(--shadow)}
+
+  /* ============================ PROGRESS BAR ============================ */
+  .progress-bar{position:fixed;top:0;left:0;height:3px;width:0;z-index:200;
+    background:linear-gradient(90deg,var(--pink-deep),var(--lavender),var(--peach))}
+
+  /* ============================ HEADER ============================ */
+  .site-header{position:fixed;inset:0 0 auto 0;z-index:100;height:var(--header-h);display:flex;align-items:center;
+    background:rgba(126,99,172,.82);backdrop-filter:saturate(150%) blur(12px);-webkit-backdrop-filter:saturate(150%) blur(12px);
+    border-bottom:1px solid var(--line-light);transition:background .4s var(--ease),box-shadow .4s var(--ease)}
+  .site-header.scrolled{background:rgba(109,82,160,.94);box-shadow:0 10px 30px rgba(126,99,172,.28)}
+  .header-inner{width:100%;max-width:var(--maxw);margin:0 auto;padding-inline:var(--gutter);
+    display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .logo{font-family:var(--serif);font-size:1.32rem;font-weight:600;color:var(--cream);
+    display:inline-flex;align-items:center;gap:.45ch;white-space:nowrap}
+  .logo .petal{color:var(--pink);font-size:1.1em;line-height:1;transition:transform .5s var(--ease)}
+  .logo:hover .petal{transform:rotate(90deg)}
+  .logo-img{height:42px;width:auto;display:block;transition:transform .5s var(--ease)}
+  .logo:hover .logo-img{transform:rotate(-3deg) scale(1.04)}
+  .nav{display:flex;align-items:center;gap:30px}
+  .nav a{font-size:.86rem;font-weight:700;letter-spacing:.02em;color:rgba(253,251,246,.82);
+    position:relative;padding:6px 0;transition:color .3s var(--ease)}
+  .nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2.5px;border-radius:2px;
+    background:var(--peach);transition:width .3s var(--ease)}
+  .nav a:hover,.nav a[aria-current="page"]{color:#fff}
+  .nav a:hover::after,.nav a[aria-current="page"]::after{width:100%}
+  .header-cta{display:flex;align-items:center;gap:16px}
+  .header-cta .btn{padding:10px 22px}
+  .header-cta .btn-primary{background:var(--peach);box-shadow:none}
+  .header-cta .btn-primary:hover{background:#e8954a}
+  .nav-toggle{display:none;background:none;border:0;cursor:pointer;width:30px;height:24px;position:relative}
+  .nav-toggle span{position:absolute;left:0;height:2.5px;width:100%;background:var(--cream);border-radius:2px;
+    transition:transform .35s var(--ease),opacity .35s var(--ease)}
+  .nav-toggle span:nth-child(1){top:2px}.nav-toggle span:nth-child(2){top:11px}.nav-toggle span:nth-child(3){top:20px}
+  body.nav-open .nav-toggle span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+  body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+  body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+
+  /* ============================ HERO ============================ */
+  .hero{position:relative;isolation:isolate;min-height:100svh;display:flex;align-items:center;
+    padding-top:calc(var(--header-h) + 34px);padding-bottom:clamp(56px,8vw,90px);overflow:hidden;background:var(--cream)}
+  .hero-aurora{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+  .hero-aurora span{position:absolute;border-radius:50%;filter:blur(64px);opacity:.55}
+  .hero-aurora .a1{width:46vw;height:46vw;background:radial-gradient(circle at 30% 30%,var(--pink),transparent 68%);top:-12%;right:-8%;animation:drift1 19s var(--ease) infinite alternate}
+  .hero-aurora .a2{width:42vw;height:42vw;background:radial-gradient(circle at 30% 30%,var(--lavender-tint2),transparent 70%);bottom:-20%;left:-12%;animation:drift2 23s var(--ease) infinite alternate}
+  .hero-aurora .a3{width:30vw;height:30vw;background:radial-gradient(circle at 30% 30%,#FBE2CB,transparent 70%);top:18%;left:20%;animation:drift3 17s var(--ease) infinite alternate}
+  @keyframes drift1{to{transform:translate(40px,-34px) scale(1.16)}}
+  @keyframes drift2{to{transform:translate(-44px,30px) scale(1.2)}}
+  @keyframes drift3{to{transform:translate(30px,40px) scale(1.1)}}
+
+  .petals{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .petals i{position:absolute;bottom:-30px;color:var(--pink-deep);opacity:.8;animation:floatUp linear infinite}
+  @keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:0}10%{opacity:.82}72%{opacity:.82}100%{transform:translateY(-118vh) rotate(360deg);opacity:0}}
+
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr 1.05fr;align-items:center;gap:clamp(28px,4vw,56px)}
+
+  .hero-copy>*{opacity:0;transform:translateY(22px);animation:rise .85s var(--ease) forwards}
+  .hero-copy .avail{animation-delay:.06s}
+  .hero-copy .eyebrow{animation-delay:.14s}
+  .hero-copy h1{animation-delay:.26s}
+  .hero-copy .hero-lead{animation-delay:.42s}
+  .hero-copy .hero-actions{animation-delay:.56s}
+  .hero-copy .hero-stats{animation-delay:.70s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  .avail{display:inline-flex;align-items:center;gap:8px;background:var(--glass-bg-strong);backdrop-filter:blur(6px);
+    border:1px solid var(--lavender-tint2);border-radius:999px;padding:6px 14px;font-size:.78rem;font-weight:800;
+    color:var(--lavender-deep);margin-bottom:18px}
+  .avail .dot{width:8px;height:8px;border-radius:50%;background:#5fbf8a;box-shadow:0 0 0 0 rgba(95,191,138,.6);animation:ping 2s ease-out infinite}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(95,191,138,.5)}100%{box-shadow:0 0 0 10px rgba(95,191,138,0)}}
+
+  .hero h1{font-size:clamp(2.6rem,5.8vw,4.5rem);margin:6px 0 20px}
+
+  /* ---- rotating headline — fixed-size slot so nothing reflows ---- */
+  .rot-slot{display:inline-grid;align-items:baseline;vertical-align:baseline;text-align:left}
+  .rot-slot .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .rot-slot>.rot-word{
+    grid-area:1/1;            /* every phrase stacks in the SAME cell */
+    justify-self:start;
+    white-space:nowrap;        /* a phrase never wraps internally */
+    font-style:italic;
+    background:linear-gradient(100deg,var(--lavender-deep),var(--pink-deep) 55%,var(--peach));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    opacity:0;filter:blur(8px);transform:translateY(.16em);
+    transition:opacity .6s var(--ease),filter .6s var(--ease),transform .6s var(--ease);
+    pointer-events:none}
+  .rot-slot>.rot-word.is-active{opacity:1;filter:blur(0);transform:none;pointer-events:auto}
+
+  .hero-lead{font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--ink);max-width:48ch;margin-bottom:28px}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:16px}
+
+  .hero-stats{display:flex;margin-top:34px;width:fit-content;max-width:100%;
+    border:1px solid var(--lavender-tint2);border-radius:18px;background:var(--glass-bg);
+    backdrop-filter:var(--glass-blur);overflow:hidden;box-shadow:var(--shadow)}
+  .hero-stats .stat{padding:14px 22px;border-right:1px solid var(--lavender-tint2)}
+  .hero-stats .stat:last-child{border-right:0}
+  .hero-stats .stat strong{font-family:var(--serif);font-size:1.7rem;color:var(--lavender-deep);display:block;line-height:1}
+  .hero-stats .stat span{font-size:.78rem;color:var(--ink-soft)}
+
+  /* ---- the scrapbook collage (signature) ---- */
+  .collage{position:relative;height:min(72vh,580px);animation:cardIn 1s var(--ease) .3s both}
+  @keyframes cardIn{from{opacity:0;transform:translateY(30px) scale(.97)}to{opacity:1;transform:none}}
+
+  .collage-item{position:absolute;transition:transform .5s var(--ease),box-shadow .5s var(--ease);
+    transform:rotate(var(--rot,0deg)) translate(var(--px,0px),var(--py,0px))}
+
+  /* main portrait polaroid */
+  .c-portrait{top:4%;left:8%;width:50%;--rot:-5deg;z-index:3}
+  .c-portrait .polaroid{padding:14px 14px 0}
+  .c-portrait .pclip{aspect-ratio:4/5;overflow:hidden;border-radius:3px;
+    background:linear-gradient(165deg,var(--lavender-tint) 0%,var(--pink) 100%)}
+  .c-portrait .pclip img{width:100%;height:100%;object-fit:cover;object-position:50% 8%;
+    transform:scale(1.04);transform-origin:50% 8%}
+
+  /* laptop mockup */
+  .c-laptop{top:30%;right:0;width:52%;z-index:4;--rot:3deg}
+  .laptop{background:#fff;border:1px solid var(--lavender-tint2);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+  .laptop .lbar{height:26px;background:var(--lavender-tint);display:flex;align-items:center;gap:6px;padding:0 12px;border-bottom:1px solid var(--lavender-tint2)}
+  .laptop .lbar i{width:9px;height:9px;border-radius:50%;background:var(--pink-deep);display:block}
+  .laptop .lbar i:nth-child(2){background:var(--peach)}
+  .laptop .lbar i:nth-child(3){background:var(--lavender)}
+  .laptop .lscreen{aspect-ratio:16/10;background:
+      linear-gradient(135deg,var(--lavender-tint) 0%,var(--pink) 120%);
+    position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+  .laptop .lscreen .blob{position:absolute;width:120px;height:120px;border-radius:50%;filter:blur(8px);opacity:.6}
+  .laptop .lscreen .blob.b1{background:var(--peach);top:-30px;right:-20px}
+  .laptop .lscreen .blob.b2{background:var(--lavender);bottom:-40px;left:-10px}
+  .laptop .lscreen h4{position:relative;font-family:var(--serif);color:#fff;font-size:1.1rem;line-height:1.1;text-shadow:0 2px 8px rgba(75,66,87,.3)}
+  .laptop .lscreen .lrow{position:relative;display:flex;gap:6px;margin-top:8px}
+  .laptop .lscreen .lrow b{height:8px;border-radius:4px;background:rgba(255,255,255,.85);display:block}
+  .laptop .lbase{height:10px;background:linear-gradient(#E3D8F2,#C9B8E4);border-radius:0 0 8px 8px;
+    width:118%;margin-left:-9%;box-shadow:var(--shadow)}
+
+  /* small square polaroid */
+  .c-mini{bottom:2%;left:0;width:33%;--rot:6deg;z-index:5}
+  .c-mini img{aspect-ratio:1/1}
+  .c-mini .cap{font-size:1.15rem;padding:6px 2px 10px}
+
+  /* handwritten hi note card */
+  .c-note{top:-2%;right:6%;z-index:6;background:#fff;border-radius:10px;padding:14px 18px;
+    box-shadow:var(--shadow-paper);--rot:4deg;text-align:center}
+  .c-note .note{font-size:1.7rem}
+  .c-note small{display:block;font-family:var(--sans);font-size:.62rem;font-weight:800;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+
+  /* spinning badge sticker */
+  .badge-spin{position:absolute;z-index:7;right:30%;bottom:-4%;width:104px;height:104px;background:#fff;
+    border-radius:50%;display:grid;place-items:center;box-shadow:var(--shadow)}
+  .badge-spin svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 16s linear infinite}
+  .badge-spin text{font-family:var(--sans);font-size:8.5px;font-weight:800;letter-spacing:2.2px;fill:var(--lavender-deep)}
+  .badge-core{font-size:1.4rem;color:var(--pink-deep)}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  .scroll-hint{position:absolute;z-index:2;left:50%;bottom:14px;transform:translateX(-50%);
+    font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;color:var(--lavender-deep);
+    display:flex;flex-direction:column;align-items:center;gap:9px;opacity:.72}
+  .scroll-hint::after{content:"";width:1.5px;height:30px;background:var(--lavender);animation:hintPulse 2s var(--ease) infinite}
+  @keyframes hintPulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ============================ MARQUEE ============================ */
+  .marquee{background:var(--lavender-deep);color:#fff;overflow:hidden;white-space:nowrap;position:relative;z-index:2;
+    margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+  .marquee .track{display:inline-flex;will-change:transform;animation:scrollX 26s linear infinite}
+  .marquee .grp{display:inline-flex;align-items:center;gap:28px;padding:15px 28px 15px 0}
+  .marquee .grp span{font-family:var(--serif);font-style:italic;font-size:1.12rem;opacity:.94}
+  .marquee .grp b{color:var(--peach);font-style:normal}
+  @keyframes scrollX{to{transform:translateX(-50%)}}
+  .marquee:hover .track{animation-play-state:paused}
+
+  /* ============================ ABOUT PREVIEW ============================ */
+  .about-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(36px,5vw,72px);align-items:center}
+  .about-media{position:relative;min-height:440px}
+  .about-media .polaroid{position:absolute}
+  .about-media .am-1{top:0;left:6%;width:62%;transform:rotate(-4deg);z-index:2}
+  .about-media .am-1 img{aspect-ratio:4/5}
+  .about-media .am-2{bottom:0;right:2%;width:48%;transform:rotate(5deg);z-index:3}
+  .about-media .am-2 img{aspect-ratio:1/1}
+  .about-media .am-note{position:absolute;z-index:4;bottom:14%;left:-2%;font-size:1.9rem;transform:rotate(-8deg)}
+  .about-body h2{font-size:clamp(1.9rem,3.4vw,2.85rem);margin:16px 0 18px}
+  .about-body p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:16px;max-width:48ch}
+  .about-body .mini-list{list-style:none;display:grid;gap:11px;margin:6px 0 26px}
+  .about-body .mini-list li{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-weight:600}
+  .about-body .mini-list li::before{content:"✿";color:var(--pink-deep);flex:none}
+
+  /* ---- career journey strip (scrapbook stepped path) ---- */
+  .journey{display:flex;flex-wrap:wrap;align-items:center;gap:9px 11px;margin:4px 0 26px}
+  .journey .j-step{font-weight:800;font-size:.8rem;color:var(--lavender-deep);
+    background:var(--glass-bg-strong);border:1px solid var(--lavender-tint2);border-radius:999px;
+    padding:.44em 1.05em;transition:transform .28s var(--ease),background .28s var(--ease),border-color .28s var(--ease),box-shadow .28s var(--ease)}
+  .journey .j-step:hover{transform:translateY(-2px) rotate(-1deg);background:#fff;border-color:var(--lavender)}
+  .journey .j-step.now{color:#fff;background:var(--lavender-deep);border-color:var(--lavender-deep);box-shadow:var(--shadow)}
+  .journey .j-step.now:hover{background:#6d52a0;border-color:#6d52a0}
+  .journey .j-arrow{font-family:var(--hand);font-weight:700;font-size:1.4rem;color:var(--peach);line-height:1}
+
+  /* ============================ HOW I HELP ============================ */
+  .help{background:linear-gradient(180deg,var(--cream) 0%,var(--lavender-tint) 100%)}
+  .help-blocks{display:grid;gap:clamp(26px,3.5vw,42px)}
+  .help-block{display:grid;grid-template-columns:1fr 1.08fr;gap:clamp(28px,4vw,56px);align-items:center;
+    padding:clamp(26px,3.2vw,46px);border-radius:32px;position:relative;overflow:hidden;
+    background:var(--glass-bg);backdrop-filter:var(--glass-blur);-webkit-backdrop-filter:var(--glass-blur);
+    border:1px solid var(--glass-border);box-shadow:var(--shadow);
+    transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+  .help-block:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .help-block::before{content:"";position:absolute;width:46%;height:140%;border-radius:50%;filter:blur(60px);
+    opacity:.5;z-index:0;pointer-events:none;top:-20%;right:-10%;
+    background:radial-gradient(circle,var(--pink),transparent 70%)}
+  .help-block.b2::before{background:radial-gradient(circle,var(--lavender-tint2),transparent 70%)}
+  .help-block.b3::before{background:radial-gradient(circle,#FBE2CB,transparent 70%)}
+  .help-block.flip .hb-text{order:2}
+  .help-block.flip .hb-media{order:1}
+  .help-block.flip::before{right:auto;left:-10%}
+  .hb-text,.hb-media{position:relative;z-index:1}
+
+  .hb-kicker{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:.78rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--lavender-deep);background:var(--glass-bg-strong);
+    border:1px solid var(--lavender-tint2);border-radius:999px;padding:7px 15px;margin-bottom:16px}
+  .hb-kicker b{font-size:1rem;line-height:1}
+  .hb-text h3{font-size:clamp(1.5rem,2.6vw,2.15rem);margin-bottom:13px;line-height:1.15}
+  .hb-text>p{color:var(--ink-soft);font-size:1.02rem;margin-bottom:22px;max-width:46ch}
+  .hb-tags{list-style:none;display:flex;flex-wrap:wrap;gap:9px}
+  .hb-tags li{display:inline-flex;align-items:center;gap:8px;background:var(--glass-bg-strong);
+    border:1px solid var(--lavender-tint2);color:var(--lavender-deep);font-weight:700;font-size:.85rem;
+    border-radius:999px;padding:.46em 1.05em;transition:transform .25s var(--ease),background .25s var(--ease)}
+  .hb-tags li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pink-deep);flex:none}
+  .help-block:hover .hb-tags li{background:#fff}
+  .hb-tags li:hover{transform:translateY(-2px)}
+
+  /* ---- shared mockup shell ---- */
+  .mock{border-radius:16px;overflow:hidden;background:#fff;border:1px solid var(--lavender-tint2);
+    box-shadow:var(--shadow-lg);transition:transform .6s var(--ease)}
+  .help-block:hover .mock{transform:translateY(-4px) scale(1.012)}
+  .m-bar{height:30px;background:var(--lavender-tint);display:flex;align-items:center;gap:6px;padding:0 12px;
+    border-bottom:1px solid var(--lavender-tint2)}
+  .m-bar i{width:9px;height:9px;border-radius:50%;background:var(--pink-deep);display:block;flex:none}
+  .m-bar i:nth-child(2){background:var(--peach)}.m-bar i:nth-child(3){background:var(--lavender)}
+  .m-url{margin-left:8px;background:#fff;border-radius:6px;height:16px;flex:1;max-width:170px;
+    font-size:.6rem;color:var(--ink-soft);display:flex;align-items:center;padding:0 9px;font-weight:700;letter-spacing:.02em}
+  .m-l{height:8px;border-radius:5px;background:var(--lavender-tint2);display:block}
+  .m-l.w80{width:80%}.m-l.w70{width:70%}.m-l.w60{width:60%}.m-l.w50{width:50%}.m-l.w40{width:40%}.m-l.thin{height:6px;opacity:.7}
+
+  /* ---- mockup 1: website ---- */
+  .site-page{padding:14px}
+  .site-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .site-nav .brand{width:34px;height:10px;border-radius:5px;background:var(--lavender-deep)}
+  .site-nav .links{display:flex;gap:8px}
+  .site-nav .links i{width:22px;height:7px;border-radius:4px;background:var(--lavender-tint2);display:block}
+  .site-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:12px;align-items:center;margin-bottom:12px}
+  .site-hero .htxt{display:grid;gap:8px}
+  .site-hero .htxt .m-btn{width:64px;height:20px;border-radius:999px;background:var(--peach);margin-top:4px}
+  .site-hero .himg{aspect-ratio:4/3;border-radius:12px;background:linear-gradient(150deg,var(--lavender),var(--pink-deep));position:relative;overflow:hidden}
+  .site-hero .himg::after{content:"✿";position:absolute;inset:0;display:grid;place-items:center;color:rgba(255,255,255,.85);font-size:1.4rem}
+  .site-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .site-cards span{aspect-ratio:1/.82;border-radius:10px;background:var(--lavender-tint);display:block;
+    border:1px solid var(--lavender-tint2)}
+  .site-cards span:nth-child(2){background:var(--pink);border-color:var(--pink)}
+  .site-cards span:nth-child(3){background:#FBE2CB;border-color:#FBE2CB}
+
+  /* ---- mockup 2: dashboard / inbox ---- */
+  .dash{display:grid;grid-template-columns:46px 1fr;min-height:236px}
+  .dash-side{background:var(--lavender-deep);padding:14px 0;display:flex;flex-direction:column;align-items:center;gap:11px}
+  .dash-side b{width:20px;height:20px;border-radius:7px;background:rgba(255,255,255,.22);display:block}
+  .dash-side b:first-child{background:#fff}
+  .dash-main{padding:14px 16px}
+  .dash-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .dash-pill{background:var(--lavender-tint);color:var(--lavender-deep);font-weight:800;font-size:.62rem;
+    padding:4px 9px;border-radius:999px;letter-spacing:.04em}
+  .inbox{list-style:none;display:grid;gap:10px}
+  .inbox li{display:flex;align-items:center;gap:11px}
+  .inbox .av{width:30px;height:30px;border-radius:50%;flex:none;
+    background:linear-gradient(150deg,var(--lavender),var(--pink-deep))}
+  .inbox li:nth-child(2) .av{background:linear-gradient(150deg,var(--peach),var(--pink-deep))}
+  .inbox li:nth-child(3) .av{background:linear-gradient(150deg,var(--lavender-deep),var(--lavender))}
+  .inbox .ib{flex:1;display:grid;gap:6px}
+  .inbox .unread{width:8px;height:8px;border-radius:50%;background:var(--peach);flex:none}
+  .dash-cal{position:absolute;bottom:-14px;right:-12px;width:128px;background:#fff;border-radius:14px;
+    border:1px solid var(--lavender-tint2);box-shadow:var(--shadow);padding:11px;z-index:2}
+  .dash-cal h5{font-family:var(--sans);font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-soft);margin-bottom:8px}
+  .dash-cal .week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .dash-cal .week i{aspect-ratio:1;border-radius:4px;background:var(--lavender-tint);display:block}
+  .dash-cal .week i.on{background:var(--peach)}
+
+  /* ---- mockup 3: workflow ---- */
+  .wf{background:
+      radial-gradient(rgba(126,99,172,.12) 1.2px,transparent 1.2px) 0 0/18px 18px,
+      linear-gradient(160deg,#fff,var(--lavender-tint));
+    padding:18px;min-height:240px}
+  .wf svg{width:100%;height:auto;display:block}
+  .wf .wf-card{fill:#fff;stroke:var(--lavender-tint2);stroke-width:1}
+  .wf .wf-label{font-family:var(--sans);font-weight:800;font-size:11px;fill:var(--ink)}
+  .wf .wf-sub{font-family:var(--sans);font-weight:700;font-size:8.5px;fill:var(--ink-soft)}
+  .wf .wf-flow{fill:none;stroke:var(--lavender);stroke-width:2.2;stroke-linecap:round;
+    stroke-dasharray:5 7;animation:wfdash 1.3s linear infinite}
+  @keyframes wfdash{to{stroke-dashoffset:-24}}
+
+  /* ============================ FEATURED PROJECTS ============================ */
+  .featured{background:linear-gradient(180deg,var(--lavender-tint) 0%,var(--cream) 70%)}
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:28px}
+  .proj{position:relative;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+  .proj:hover{transform:translateY(-8px);box-shadow:0 34px 64px -26px rgba(126,99,172,.5)}
+  .proj .thumb{aspect-ratio:16/10;position:relative;overflow:hidden;border-radius:24px 24px 0 0}
+  .proj .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+  .proj:hover .thumb img{transform:scale(1.06)}
+  .proj .tag{position:absolute;top:14px;left:14px;z-index:2;background:var(--glass-bg-strong);backdrop-filter:blur(6px);
+    border:1px solid var(--glass-border);color:var(--lavender-deep);font-weight:800;font-size:.72rem;letter-spacing:.05em;
+    text-transform:uppercase;padding:6px 13px;border-radius:999px}
+  .proj-body{padding:26px 24px 26px;position:relative}
+  .proj-body h3{font-size:1.5rem;margin-bottom:1px;letter-spacing:-.015em}
+  .proj-sub{display:block;font-size:.82rem;font-weight:600;color:var(--ink-soft);letter-spacing:.01em;margin-bottom:13px}
+  .proj-body p{color:var(--ink-soft);font-size:.95rem;margin-bottom:15px}
+  .proj-body .tape{position:absolute;top:-12px;left:50%;margin-left:-42px}
+
+  /* compact outcomes checklist */
+  .proj-outcomes{list-style:none;display:grid;gap:6px;margin:0 0 17px}
+  .proj-outcomes li{display:flex;align-items:flex-start;gap:8px;font-size:.85rem;font-weight:600;color:var(--ink);line-height:1.35}
+  .proj-outcomes li::before{content:"✓";color:var(--lavender-deep);font-weight:800;font-size:.8rem;flex:none;margin-top:1px}
+
+  /* featured project badge (glass pill, matches .tag) */
+  .proj.is-featured{border-color:var(--lavender)}
+  .proj-feat{position:absolute;top:14px;right:14px;z-index:2;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;
+    background:var(--glass-bg-strong);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border:1px solid var(--glass-border);color:var(--lavender-deep);font-weight:800;font-size:.65rem;letter-spacing:.06em;
+    text-transform:uppercase;padding:6px 11px;border-radius:999px;box-shadow:var(--shadow-paper)}
+  .proj-feat .st{color:var(--peach);font-size:.8rem;line-height:1}
+
+  /* project thumbnails use real images via .proj .thumb img */
+
+  .proj-tech{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px}
+  .proj-tech li{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;letter-spacing:.02em;
+    color:var(--lavender-deep);background:var(--lavender-tint);border:1px solid var(--lavender-tint2);border-radius:8px;
+    padding:.34em .72em;transition:transform .22s var(--ease),box-shadow .22s var(--ease),background .22s var(--ease)}
+  .proj-tech li::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--lavender);flex:none}
+  /* subtle category tinting, all within the existing palette */
+  .proj-tech li.t-host{color:#b56a83;background:#FBEAF0;border-color:#F3CBD7}
+  .proj-tech li.t-host::before{background:var(--pink-deep)}
+  .proj-tech li.t-auto{color:#b07636;background:#FBEFE0;border-color:#F3D9BC}
+  .proj-tech li.t-auto::before{background:var(--peach)}
+  .proj-tech li:hover{transform:translateY(-2px);box-shadow:var(--shadow-paper)}
+  .proj-foot{margin-top:36px;text-align:center}
+
+  /* ============================ SOCIAL DESIGNS PREVIEW ============================ */
+  .social-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,64px);align-items:center}
+  .social-copy h2{font-size:clamp(1.9rem,3.4vw,2.85rem);margin:16px 0 18px}
+  .social-copy p{color:var(--ink-soft);font-size:1.05rem;margin-bottom:22px;max-width:42ch}
+  .swatches{display:flex;gap:10px;margin-bottom:26px}
+  .swatches b{width:34px;height:34px;border-radius:10px;display:block;box-shadow:var(--shadow-paper)}
+  .post-stack{position:relative;min-height:420px}
+  .post{position:absolute;width:50%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg);
+    border:5px solid #fff;transition:transform .5s var(--ease)}
+  .post img{width:100%;height:100%;object-fit:cover}
+  .post.p1{top:0;left:4%;transform:rotate(-5deg);z-index:2}
+  .post.p2{top:8%;right:2%;transform:rotate(4deg);z-index:3}
+  .post.p3{bottom:0;left:24%;transform:rotate(2deg);z-index:4}
+  .post-stack:hover .p1{transform:rotate(-7deg) translateY(-5px)}
+  .post-stack:hover .p2{transform:rotate(6deg) translateY(-5px)}
+  .post-stack:hover .p3{transform:rotate(0deg) translateY(-5px)}
+  /* photo-free "design sample" mockups inside the stack */
+  .pmock{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:9px;padding:16px;overflow:hidden}
+  .pmock.lav{background:linear-gradient(150deg,var(--lavender),var(--lavender-deep))}
+  .pmock.peach{background:linear-gradient(150deg,#FBE2CB,var(--peach))}
+  .pmock.pink{background:linear-gradient(150deg,var(--pink),var(--pink-deep))}
+  .pmock .pl{height:9px;border-radius:5px;background:rgba(255,255,255,.9);display:block}
+  .pmock .w70{width:70%}.pmock .w55{width:55%}.pmock .w40{width:40%}
+  .pmock .pq{position:absolute;top:2px;left:14px;font-family:var(--serif);font-size:3.6rem;color:rgba(255,255,255,.55);line-height:1}
+  .pmock .ptag{font-family:var(--hand);font-weight:700;font-size:1.4rem;color:#fff;line-height:1}
+  .pmock .pbadge{position:absolute;top:12px;right:12px;background:#fff;color:var(--peach);font-weight:800;font-size:.6rem;
+    letter-spacing:.12em;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  .pmock .pdots{display:flex;gap:5px;align-items:center}
+  .pmock .pdots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.55);display:block}
+  .pmock .pdots i:first-child{background:#fff;width:16px;border-radius:3px}
+  .pmock .pswipe{position:absolute;top:14px;right:14px;font-family:var(--hand);font-weight:700;font-size:1.05rem;color:#fff;opacity:.9}
+
+  /* ============================ AUTOMATIONS PREVIEW ============================ */
+  .auto{background:var(--lavender-deep);color:#fff;position:relative;overflow:hidden}
+  .auto .section-head h2{color:#fff}
+  .auto .section-head p{color:rgba(253,251,246,.82)}
+  .auto-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,64px);align-items:center}
+  .flow{display:flex;flex-direction:column;gap:16px}
+  .flow-node{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.1);
+    border:1px solid var(--line-light);border-radius:18px;padding:16px 20px;backdrop-filter:blur(6px);
+    transition:transform .4s var(--ease),background .4s var(--ease)}
+  .flow-node:hover{transform:translateX(6px);background:rgba(255,255,255,.16)}
+  .flow-node .fic{width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.16);display:grid;place-items:center;
+    font-size:1.25rem;flex:none}
+  .flow-node h4{font-family:var(--sans);font-weight:800;font-size:1rem;color:#fff;margin-bottom:2px}
+  .flow-node p{font-size:.85rem;color:rgba(253,251,246,.78);margin:0}
+  .flow-arrow{text-align:center;color:var(--peach);font-size:1.1rem;line-height:.4;opacity:.8}
+  .auto-copy .mini-list{list-style:none;display:grid;gap:12px;margin:20px 0 26px}
+  .auto-copy .mini-list li{display:flex;gap:10px;align-items:flex-start;color:rgba(253,251,246,.94);font-weight:600}
+  .auto-copy .mini-list li::before{content:"✦";color:var(--peach);flex:none}
+  .auto .btn-outline{background:rgba(255,255,255,.92)}
+
+  /* ============================ CTA BAND ============================ */
+  .cta-band{background:var(--peach);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta-band::before{content:"";position:absolute;width:60vw;height:60vw;border-radius:50%;top:-30vw;left:-10vw;
+    background:radial-gradient(circle,rgba(255,255,255,.22),transparent 65%)}
+  .cta-band .wrap{position:relative;z-index:1}
+  .cta-band h2{color:#fff;font-size:clamp(2rem,4vw,3.1rem);margin-bottom:10px}
+  .cta-band .note{color:#fff;font-size:1.7rem;margin-bottom:10px;display:block;opacity:.95}
+  .cta-band p{max-width:520px;margin:0 auto 28px;color:rgba(255,255,255,.95)}
+  .cta-band .btn-ghost{border-color:rgba(255,255,255,.85)}
+  .cta-band .btn-ghost:hover{background:#fff;color:var(--peach)}
+
+  /* ============================ FOOTER ============================ */
+  .site-footer{background:var(--lavender-deep);color:rgba(253,251,246,.8);padding-top:clamp(54px,7vw,82px);position:relative;z-index:2}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1.2fr 1fr;gap:40px;
+    padding-bottom:clamp(40px,6vw,60px);border-bottom:1px solid var(--line-light)}
+  .footer-brand .logo{margin-bottom:14px}
+  .footer-brand p{font-size:.94rem;max-width:32ch;color:rgba(253,251,246,.78)}
+  .footer-col h4{font-family:var(--sans);font-size:.76rem;font-weight:800;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--cream);margin-bottom:16px}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .footer-col a{font-size:.94rem;transition:color .3s var(--ease)}
+  .footer-col a:hover{color:var(--pink)}
+  .footer-col .contact-line{font-size:.94rem;margin-bottom:10px;display:flex;gap:9px}
+  .social-row{display:flex;gap:10px;margin-top:4px}
+  .social-row a{width:40px;height:40px;display:grid;place-items:center;border-radius:50%;
+    background:rgba(255,255,255,.12);transition:background .25s var(--ease),transform .25s var(--ease)}
+  .social-row a:hover{background:var(--pink-deep);transform:translateY(-3px)}
+  .social-row svg{width:18px;height:18px;fill:#fff}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    padding-block:24px;font-size:.84rem;color:rgba(253,251,246,.62)}
+
+  /* ============================ REVEAL ============================ */
+  .reveal{opacity:0;transform:translateY(28px);filter:blur(5px);
+    transition:opacity .8s var(--ease),transform .8s var(--ease),filter .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none;filter:none}
+  .stagger>.reveal:nth-child(2){transition-delay:.08s}
+  .stagger>.reveal:nth-child(3){transition-delay:.16s}
+  .stagger>.reveal:nth-child(4){transition-delay:.24s}
+
+  /* full-bleed bands */
+  .hero,.help,.auto,.cta-band,.site-footer{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+  .help .wrap,.auto .wrap,.cta-band .wrap,.site-footer .wrap{max-width:var(--maxw);margin-inline:auto}
+
+  /* ============================ RESPONSIVE ============================ */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:40px}
+    .collage{order:-1;max-width:480px;margin-inline:auto;width:100%;height:min(64vh,520px)}
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .about-media{max-width:460px;margin-inline:auto;width:100%}
+    .help-block{grid-template-columns:1fr;gap:30px}
+    .help-block .hb-text,.help-block.flip .hb-text{order:2}
+    .help-block .hb-media,.help-block.flip .hb-media{order:1}
+    .dash-cal{right:0}
+    .proj-grid{gap:22px}
+    .social-wrap{grid-template-columns:1fr;gap:48px}
+    .post-stack{max-width:440px;margin-inline:auto;width:100%}
+    .auto-grid{grid-template-columns:1fr;gap:40px}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:34px}
+  }
+  @media (max-width:620px){
+    .nav-toggle{display:block;z-index:120}
+    .nav{position:fixed;top:0;left:0;width:100vw;height:100vh;height:100dvh;z-index:110;overflow-y:auto;flex-direction:column;justify-content:center;gap:30px;
+      background:#6d52a0;transform:translateX(100%);transition:transform .45s var(--ease)}
+    body.nav-open{overflow:hidden}
+    body.nav-open .nav{transform:none}
+    .nav a{font-size:1.2rem;color:#fff}.nav a::after{display:none}
+    .header-cta .btn{display:none}
+    .hero-stats{width:100%}.hero-stats .stat{flex:1;padding:14px 14px}
+    .journey{gap:7px 8px}
+    .journey .j-step{font-size:.74rem}
+    .footer-grid{grid-template-columns:1fr;gap:28px}
+    .collage{height:430px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+    .reveal{opacity:1;transform:none;filter:none}
+    .hero-copy>*{opacity:1;transform:none}
+    .petals{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="/" class="logo"><span class="petal">✿</span>Hankerism</a>
+    <nav class="nav" id="nav">
+      <a href="/" aria-current="page">Home</a>
+      <a href="/about">About</a>
+      <a href="/skills">Skills</a>
+      <a href="/projects">Projects</a>
+      <a href="/designs">Social Media Designs</a>
+      <a href="/automations">Automations</a>
+    </nav>
+    <div class="header-cta">
+      <a href="/contact" class="btn btn-primary">Contact Me</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO / PORTFOLIO INTRO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <div class="petals" aria-hidden="true">
+    <i style="left:7%;font-size:27px;animation-duration:16s">✿</i>
+    <i style="left:22%;font-size:19px;animation-duration:21s;animation-delay:3s">✦</i>
+    <i style="left:39%;font-size:24px;animation-duration:18s;animation-delay:6s">✿</i>
+    <i style="left:57%;font-size:17px;animation-duration:24s;animation-delay:1.5s">✦</i>
+    <i style="left:72%;font-size:26px;animation-duration:19s;animation-delay:4.5s">✿</i>
+    <i style="left:88%;font-size:20px;animation-duration:22s;animation-delay:8s">✦</i>
+  </div>
+
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="avail"><span class="dot"></span>Available for projects</span>
+      <span class="eyebrow"><span class="bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>Web Design · Automation · Virtual Assistance</span>
+      <h1>Hi, I'm <span class="grad-text shimmer">Abby</span> — I help small brands look good online and run <span class="rot-slot">
+        <span class="sr-only">on autopilot</span>
+        <span aria-hidden="true" class="rot-word is-active">on autopilot</span>
+        <span aria-hidden="true" class="rot-word">with ease</span>
+        <span aria-hidden="true" class="rot-word">beautifully</span>
+        <span aria-hidden="true" class="rot-word">like clockwork</span>
+      </span></h1>
+      <p class="hero-lead">I'm a web designer and automation builder with a virtual-assistant background — so I don't just make pretty websites, I build the booking flows, auto-replies and systems that save founders real hours every week. One calm point of contact for design, development, and everything behind the scenes.</p>
+      <div class="hero-actions">
+        <a href="/projects" class="btn btn-primary">View My Work</a>
+        <a href="/contact" class="btn btn-outline">Say Hello</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong data-count="6" data-suffix="+">6+</strong><span>Years experience</span></div>
+        <div class="stat"><strong data-count="3">3</strong><span>Portfolio Websites</span></div>
+        <div class="stat"><strong>3-in-1</strong><span>Design · Auto · VA</span></div>
+      </div>
+    </div>
+
+    <!-- SCRAPBOOK COLLAGE (signature) -->
+    <div class="collage" id="collage" aria-label="A scrapbook collage of Abby's work">
+      <!-- main portrait polaroid -->
+      <div class="collage-item c-portrait tilt">
+        <span class="tape lav" style="top:-13px;left:30%;transform:rotate(-6deg)"></span>
+        <div class="polaroid">
+          <div class="pclip"><img src="https://assets.cdn.filesafe.space/IZA5KmJ907pADwnjL7pz/media/6a31c9dd1b95dbb2c240ea81.png" alt="Abby — Hankerism"></div>
+          <div class="cap">that's me ♡</div>
+        </div>
+      </div>
+
+      <!-- laptop mockup -->
+      <div class="collage-item c-laptop tilt">
+        <div class="laptop">
+          <div class="lbar"><i></i><i></i><i></i></div>
+          <div class="lscreen">
+            <span class="blob b1"></span><span class="blob b2"></span>
+            <h4>built with<br>care &amp; calm</h4>
+            <div class="lrow"><b style="width:46px"></b><b style="width:30px"></b><b style="width:20px"></b></div>
+          </div>
+          <div class="lbase"></div>
+        </div>
+      </div>
+
+      <!-- mini palette polaroid (no photo) -->
+      <div class="collage-item c-mini tilt">
+        <span class="pin peach" style="top:-7px;left:50%;margin-left:-9px"></span>
+        <div class="polaroid">
+          <div class="pola-swatch">
+            <span style="background:var(--lavender)"></span>
+            <span style="background:var(--pink-deep)"></span>
+            <span style="background:var(--peach)"></span>
+            <span style="background:var(--lavender-deep)"></span>
+          </div>
+          <div class="cap">my palette ✿</div>
+        </div>
+      </div>
+
+      <!-- handwritten hi note -->
+      <div class="collage-item c-note">
+        <span class="pin lav" style="top:-7px;left:50%;margin-left:-9px"></span>
+        <span class="note pinky">hi there!</span>
+        <small>welcome ✿</small>
+      </div>
+
+      <!-- spinning badge sticker -->
+      <div class="collage-item badge-spin" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <defs><path id="cpath" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"></path></defs>
+          <text><textPath href="#cpath">HANKERISM ✿ ABBY ✿ PORTFOLIO ✿ </textPath></text>
+        </svg>
+        <span class="badge-core">✿</span>
+      </div>
+
+      <!-- doodles -->
+      <svg class="doodle star" style="top:6%;right:30%;width:30px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.5L20 10l-6.4 1.5L12 18l-1.6-6.5L4 10l6.4-1.5z"/></svg>
+      <svg class="doodle" style="bottom:18%;right:38%;width:24px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.3-9C1.2 9.1 2.6 6 5.7 6c1.9 0 3.1 1.1 3.8 2.2C10.2 7.1 11.4 6 13.3 6c3.1 0 4.5 3.1 3 6-2.3 4.5-9.3 9-4.3 9z" transform="translate(-1 0)"/></svg>
+      <svg class="doodle" style="top:46%;left:-4%;width:34px;color:var(--lavender)" viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 18 C 10 4, 18 4, 24 12 M24 12 l-5 -1 M24 12 l-1 -5" /></svg>
+    </div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <div class="grp"><span>Websites</span><b>✿</b><span>Automations</span><b>✿</b><span>Virtual Assistance</span><b>✿</b><span>Social Designs</span><b>✿</b><span>Booking Flows</span><b>✿</b><span>Branding</span><b>✿</b></div>
+    <div class="grp"><span>Websites</span><b>✿</b><span>Automations</span><b>✿</b><span>Virtual Assistance</span><b>✿</b><span>Social Designs</span><b>✿</b><span>Booking Flows</span><b>✿</b><span>Branding</span><b>✿</b></div>
+  </div>
+</div>
+
+<!-- ============ ABOUT PREVIEW ============ -->
+<section class="section">
+  <div class="wrap about-grid">
+    <div class="about-media reveal">
+      <div class="polaroid am-1 tilt">
+        <span class="tape" style="top:-13px;left:28%;transform:rotate(-5deg)"></span>
+        <img src="https://assets.cdn.filesafe.space/IZA5KmJ907pADwnjL7pz/media/6a31cac10a683b64fe9addbd.jpg" alt="Abby">
+        <div class="cap">this is me ♡</div>
+      </div>
+      <div class="polaroid am-2 tilt">
+        <span class="pin" style="top:-7px;left:50%;margin-left:-9px"></span>
+        <div class="pola-hello">
+          <span class="ph-star">✦</span>
+          <span class="ph-word">hello!</span>
+          <span class="ph-heart">♡</span>
+        </div>
+        <div class="cap">nice to meet you</div>
+      </div>
+      <span class="note am-note">a lil' about me →</span>
+    </div>
+
+    <div class="about-body reveal">
+      <span class="eyebrow"><span class="bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">01</span> About</span>
+      <h2>A little order, a lot of <span class="grad-text">heart</span></h2>
+      <p>I'm Abby — the one-woman team behind Hankerism. I started out as a virtual assistant, grew into marketing support, taught myself web design, and now build the automations that tie it all together. Six years of keeping founders organised, now paired with a designer's eye and a developer's toolkit.</p>
+      <p>The result: your brand feels cared for, top to bottom — organised behind the scenes and lovely out front.</p>
+
+      <div class="journey" aria-label="Abby's career journey">
+        <span class="j-step">Virtual Assistant</span>
+        <span class="j-arrow">→</span>
+        <span class="j-step">Marketing Support</span>
+        <span class="j-arrow">→</span>
+        <span class="j-step">Web Designer</span>
+        <span class="j-arrow">→</span>
+        <span class="j-step now">Automation Builder</span>
+      </div>
+
+      <ul class="mini-list">
+        <li>Organised, dependable, and genuinely easy to work with</li>
+        <li>Pretty, on-brand designs that still convert</li>
+        <li>Automations that quietly handle the busywork</li>
+      </ul>
+      <a href="/about" class="btn btn-outline">More about me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW I HELP ============ -->
+<section class="section help" id="help">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="eyebrow"><span class="bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">02</span> What I offer</span>
+      <h2>How I help</h2>
+      <p>From building websites to streamlining operations and automating workflows, I help businesses create smoother digital experiences.</p>
+    </div>
+
+    <div class="help-blocks">
+
+      <!-- BLOCK 1 · BUILD -->
+      <article class="help-block b1 reveal">
+        <div class="hb-text">
+          <span class="hb-kicker"><b>💻</b> Build</span>
+          <h3>Websites &amp; Digital Experiences</h3>
+          <p>I design and build responsive websites, landing pages, booking systems, and portfolio sites that are both beautiful and functional.</p>
+          <ul class="hb-tags">
+            <li>Website Design</li><li>Landing Pages</li><li>Booking Systems</li>
+            <li>Portfolio Websites</li><li>Responsive Development</li>
+          </ul>
+        </div>
+        <div class="hb-media">
+          <div class="mock" aria-hidden="true">
+            <div class="m-bar"><i></i><i></i><i></i><span class="m-url">yourbrand.com</span></div>
+            <div class="site-page">
+              <div class="site-nav"><span class="brand"></span><span class="links"><i></i><i></i><i></i></span></div>
+              <div class="site-hero">
+                <div class="htxt">
+                  <span class="m-l w80"></span><span class="m-l w60"></span><span class="m-l w70 thin"></span>
+                  <span class="m-btn"></span>
+                </div>
+                <div class="himg"></div>
+              </div>
+              <div class="site-cards"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- BLOCK 2 · MANAGE -->
+      <article class="help-block b2 flip reveal">
+        <div class="hb-text">
+          <span class="hb-kicker"><b>📋</b> Manage</span>
+          <h3>Virtual Assistance &amp; Operations</h3>
+          <p>I help keep day-to-day operations organized through calendar management, inbox support, content scheduling, and administrative assistance.</p>
+          <ul class="hb-tags">
+            <li>Email Management</li><li>Calendar Management</li><li>Content Support</li>
+            <li>Scheduling</li><li>Administrative Tasks</li>
+          </ul>
+        </div>
+        <div class="hb-media">
+          <div class="mock" aria-hidden="true">
+            <div class="m-bar"><i></i><i></i><i></i><span class="m-url">inbox · today</span></div>
+            <div class="dash">
+              <aside class="dash-side"><b></b><b></b><b></b><b></b></aside>
+              <div class="dash-main">
+                <div class="dash-head"><span class="m-l w40"></span><span class="dash-pill">12 new</span></div>
+                <ul class="inbox">
+                  <li><span class="av"></span><span class="ib"><span class="m-l w60"></span><span class="m-l w80 thin"></span></span><span class="unread"></span></li>
+                  <li><span class="av"></span><span class="ib"><span class="m-l w50"></span><span class="m-l w70 thin"></span></span><span class="unread"></span></li>
+                  <li><span class="av"></span><span class="ib"><span class="m-l w70"></span><span class="m-l w60 thin"></span></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="dash-cal" aria-hidden="true">
+            <h5>This week</h5>
+            <div class="week"><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- BLOCK 3 · AUTOMATE -->
+      <article class="help-block b3 reveal">
+        <div class="hb-text">
+          <span class="hb-kicker"><b>⚡</b> Automate</span>
+          <h3>Automation &amp; Workflows</h3>
+          <p>I create systems that reduce manual work and improve customer experiences through automated workflows and integrations.</p>
+          <ul class="hb-tags">
+            <li>GoHighLevel</li><li>Make.com</li><li>Airtable</li>
+            <li>Zapier</li><li>Telegram Notifications</li><li>Email Automations</li>
+          </ul>
+        </div>
+        <div class="hb-media">
+          <div class="mock wf" aria-hidden="true">
+            <svg viewBox="0 0 384 240" role="img" aria-label="Automated workflow diagram">
+              <defs>
+                <marker id="wfarrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="var(--lavender)"/>
+                </marker>
+              </defs>
+              <!-- connectors -->
+              <path class="wf-flow" d="M132,119 H150" marker-end="url(#wfarrow)"/>
+              <path class="wf-flow" d="M262,119 C 274,119 270,52 280,52" marker-end="url(#wfarrow)"/>
+              <path class="wf-flow" d="M262,119 C 274,119 270,186 280,186" marker-end="url(#wfarrow)"/>
+
+              <!-- node A: form -->
+              <g class="wf-node">
+                <rect class="wf-card" x="12" y="96" width="118" height="46" rx="12"/>
+                <rect x="22" y="107" width="24" height="24" rx="7" fill="var(--lavender)"/>
+                <text class="wf-label" x="54" y="116">New enquiry</text>
+                <text class="wf-sub" x="54" y="129">form submitted</text>
+              </g>
+              <!-- node B: airtable -->
+              <g class="wf-node">
+                <rect class="wf-card" x="150" y="96" width="112" height="46" rx="12"/>
+                <rect x="160" y="107" width="24" height="24" rx="7" fill="var(--peach)"/>
+                <text class="wf-label" x="192" y="116">Airtable</text>
+                <text class="wf-sub" x="192" y="129">logged &amp; sorted</text>
+              </g>
+              <!-- node C: email -->
+              <g class="wf-node">
+                <rect class="wf-card" x="280" y="29" width="100" height="46" rx="12"/>
+                <rect x="290" y="40" width="24" height="24" rx="7" fill="var(--pink-deep)"/>
+                <text class="wf-label" x="322" y="49">Email</text>
+                <text class="wf-sub" x="322" y="62">auto-sent</text>
+              </g>
+              <!-- node D: telegram -->
+              <g class="wf-node">
+                <rect class="wf-card" x="280" y="163" width="100" height="46" rx="12"/>
+                <rect x="290" y="174" width="24" height="24" rx="7" fill="var(--lavender-deep)"/>
+                <text class="wf-label" x="322" y="183">Telegram</text>
+                <text class="wf-sub" x="322" y="196">you're pinged</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECTS ============ -->
+<section class="section featured" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow"><span class="bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">03</span> Selected work</span>
+      <h2>A few things I've built lately</h2>
+      <p>Thoughtfully crafted portfolio projects inspired by real businesses — each designed, developed, and structured like a client project.</p>
+    </div>
+
+    <div class="proj-grid stagger">
+
+      <!-- Bahay Liwanag -->
+      <article class="proj glass reveal is-featured">
+        <div class="thumb">
+          <span class="tag">Website · Resort</span>
+          <span class="proj-feat"><span class="st">★</span> Featured Project</span>
+          <img src="https://assets.cdn.filesafe.space/IZA5KmJ907pADwnjL7pz/media/6a32ff18bc828629fa7befcc.jpg" alt="Bahay Liwanag — boutique resort website" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <span class="tape lav" style="transform:rotate(-3deg)"></span>
+          <h3>Bahay Liwanag</h3>
+          <span class="proj-sub">Luxury Resort Website</span>
+          <p>A serene portfolio site for a boutique resort — paired with a Make + Airtable pipeline that turns enquiries into booked reservations automatically.</p>
+          <ul class="proj-outcomes">
+            <li>Multi-page website</li>
+            <li>Booking system</li>
+            <li>Make.com automation</li>
+            <li>Airtable integration</li>
+          </ul>
+          <ul class="proj-tech"><li class="t-core">HTML</li><li class="t-core">CSS</li><li class="t-core">JavaScript</li><li class="t-host">GitHub Pages</li><li class="t-auto">Make.com</li><li class="t-auto">Airtable</li></ul>
+          <a href="/website/bahay-liwanag" class="more">View project →</a>
+        </div>
+      </article>
+
+      <!-- Casa Kape -->
+      <article class="proj glass reveal">
+        <div class="thumb">
+          <span class="tag">Landing Page · Café</span>
+          <img src="https://assets.cdn.filesafe.space/IZA5KmJ907pADwnjL7pz/media/6a32ff181c5d711b35463131.jpg" alt="Casa Kape — neighbourhood café landing page" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <span class="tape peachy" style="transform:rotate(2deg)"></span>
+          <h3>Casa Kape</h3>
+          <span class="proj-sub">Café Landing Page</span>
+          <p>A warm one-page site for a local café — menu, story, and a tap-to-message enquiry form that lands straight in the owner's inbox.</p>
+          <ul class="proj-outcomes">
+            <li>Responsive landing page</li>
+            <li>Menu showcase</li>
+            <li>Contact workflow</li>
+          </ul>
+          <ul class="proj-tech"><li class="t-core">HTML</li><li class="t-core">CSS</li><li class="t-core">JavaScript</li><li class="t-auto">Formspree</li></ul>
+          <a href="/website/casakape/home" class="more">View project →</a>
+        </div>
+      </article>
+
+      <!-- Purr Heaven -->
+      <article class="proj glass reveal">
+        <div class="thumb">
+          <span class="tag">Website · Pet Rescue</span>
+          <img src="https://assets.cdn.filesafe.space/IZA5KmJ907pADwnjL7pz/media/6a32ff181c5d711b3546312c.jpg" alt="Purr Heaven — cat adoption and rescue website" loading="lazy">
+        </div>
+        <div class="proj-body">
+          <span class="tape" style="transform:rotate(-2deg)"></span>
+          <h3>Purr Heaven</h3>
+          <span class="proj-sub">Pet Rescue Website</span>
+          <p>A playful multi-page site for a cat adoption &amp; rescue group — an adoptable-cat gallery, adoption enquiry forms, and friendly auto-replies handled through GoHighLevel.</p>
+          <ul class="proj-outcomes">
+            <li>Adoption-focused design</li>
+            <li>Inquiry forms</li>
+            <li>GoHighLevel integration</li>
+          </ul>
+          <ul class="proj-tech"><li class="t-core">HTML</li><li class="t-core">CSS</li><li class="t-core">JavaScript</li><li class="t-auto">GoHighLevel</li></ul>
+          <a href="/website/purrheaven/home" class="more">View project →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="proj-foot reveal">
+      <a href="/projects" class="btn btn-primary">View Full Portfolio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOMATIONS PREVIEW ============ -->
+<section class="section auto">
+  <div class="wrap auto-grid">
+    <div class="auto-copy reveal">
+      <span class="eyebrow on-dark"><span class="bloom on-dark"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">04</span> Automations</span>
+      <h2>Set it once, let it run</h2>
+      <p>This is where I save you the most time. Little workflows that catch a new enquiry, reply, book it in, and let you know — all while you're doing something else.</p>
+      <ul class="mini-list">
+        <li>Reservation &amp; booking pipelines</li>
+        <li>Auto-replies and friendly follow-ups</li>
+        <li>Make, Zapier &amp; Airtable connected neatly</li>
+      </ul>
+      <a href="/automations" class="btn btn-outline">See how it works</a>
+    </div>
+
+    <div class="flow reveal" aria-label="Example automation flow">
+      <div class="flow-node tilt"><div class="fic">📩</div><div><h4>New enquiry arrives</h4><p>A form fill or DM lands in the inbox</p></div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node tilt"><div class="fic">🗂️</div><div><h4>Saved &amp; sorted</h4><p>Details logged neatly in Airtable</p></div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node tilt"><div class="fic">📅</div><div><h4>Booked in</h4><p>Calendar invite sent automatically</p></div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-node tilt"><div class="fic">💌</div><div><h4>You're notified</h4><p>A tidy summary pings your phone</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SOCIAL MEDIA DESIGNS PREVIEW ============ -->
+<section class="section">
+  <div class="wrap social-wrap">
+    <div class="social-copy reveal">
+      <span class="eyebrow"><span class="bloom"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">05</span> Social designs</span>
+      <h2>Posts that look like <span class="grad-text">you</span></h2>
+      <p>Instagram posts, carousels and promo graphics that keep your feed polished, consistent, and unmistakably on-brand.</p>
+      <div class="swatches" aria-hidden="true">
+        <b style="background:var(--lavender)"></b>
+        <b style="background:var(--pink-deep)"></b>
+        <b style="background:var(--peach)"></b>
+        <b style="background:var(--lavender-deep)"></b>
+        <b style="background:var(--cream-warm)"></b>
+      </div>
+      <a href="/designs" class="btn btn-outline">Browse designs</a>
+    </div>
+
+    <div class="post-stack reveal">
+      <div class="post p1 tilt">
+        <div class="pmock lav">
+          <span class="pq">&ldquo;</span>
+          <span class="ptag">quote post</span>
+          <b class="pl w70"></b><b class="pl w55"></b>
+        </div>
+      </div>
+      <div class="post p2 tilt">
+        <div class="pmock peach">
+          <span class="pbadge">New</span>
+          <b class="pl w55"></b><b class="pl w70"></b>
+          <span class="ptag">promo graphic</span>
+        </div>
+      </div>
+      <div class="post p3 tilt">
+        <div class="pmock pink">
+          <span class="pswipe">swipe →</span>
+          <span class="ptag">carousel</span>
+          <span class="pdots"><i></i><i></i><i></i><i></i></span>
+        </div>
+      </div>
+      <svg class="doodle star" style="top:-4%;right:8%;width:28px" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.6 6.5L20 10l-6.4 1.5L12 18l-1.6-6.5L4 10l6.4-1.5z"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section class="section cta-band">
+  <div class="wrap reveal">
+    <span class="note">let's make something lovely ♡</span>
+    <h2>Have a project in mind?</h2>
+    <p>Whether you need a website, fresh social designs, or an automation that finally takes a task off your plate — I'd love to help.</p>
+    <a href="/contact" class="btn btn-ghost">Start a project</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo"><span class="petal">✿</span>Hankerism</a>
+        <p>Web designer, automation builder &amp; virtual assistant crafting calm, beautiful systems and sites. Hi, I'm Abby — let's make something lovely.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/skills">Skills</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/designs">Social Media Designs</a></li>
+          <li><a href="/automations">Automations</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="contact-line">📧 <a href="mailto:blujayabby@gmail.com">blujayabby@gmail.com</a></div>
+        <div class="contact-line">📍 Philippines · working worldwide</div>
+      </div>
+      <div class="footer-col">
+        <h4>Follow</h4>
+        <div class="social-row">
+          <a href="https://www.instagram.com/am.abbyyy/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.36 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .36-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.36-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.36 2.2-.42C8.4 2.21 8.8 2.2 12 2.2Zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.32-.4.16-.7.35-1 .65-.3.3-.5.6-.65 1-.12.3-.28.8-.32 1.7C3.6 8.5 3.6 8.9 3.6 12s0 3.5.07 4.7c.04.9.2 1.4.32 1.7.16.4.35.7.65 1 .3.3.6.5 1 .65.3.12.8.28 1.7.32 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.32.4-.16.7-.35 1-.65.3-.3.5-.6.65-1 .12-.3.28-.8.32-1.7.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.32-1.7-.16-.4-.35-.7-.65-1-.3-.3-.6-.5-1-.65-.3-.12-.8-.28-1.7-.32C15.5 4 15.1 4 12 4Zm0 3.05A4.95 4.95 0 1 1 7.05 12 4.95 4.95 0 0 1 12 7.05Zm0 1.8A3.15 3.15 0 1 0 15.15 12 3.15 3.15 0 0 0 12 8.85Zm5.15-3.3a1.15 1.15 0 1 1-1.15 1.15 1.15 1.15 0 0 1 1.15-1.15Z"/></svg></a>
+          <a href="https://www.linkedin.com/in/abigailmarte/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm6 0h3.8v1.7h.05c.53-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9V9Z"/></svg></a>
+          <a href="https://www.facebook.com/hankerism" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.29-.04-1.28-.13-2.43-.13-2.4 0-4.04 1.47-4.04 4.17v2.33H7.5V13h2.27v8h3.73Z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Hankerism · Designed &amp; built by Abby 💜</span>
+      <span>Web Design · Automation · Virtual Assistance</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* header scroll state */
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* progress bar */
+  const bar = document.getElementById('progressBar');
+  const updBar = () => { const h = document.documentElement.scrollHeight - innerHeight; bar.style.width = (h>0 ? scrollY/h*100 : 0) + '%'; };
+  updBar(); window.addEventListener('scroll', updBar, {passive:true});
+
+  /* mobile nav */
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('nav');
+  toggle.addEventListener('click', () => { const open = document.body.classList.toggle('nav-open'); toggle.setAttribute('aria-expanded', open); });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { document.body.classList.remove('nav-open'); toggle.setAttribute('aria-expanded', false); }));
+
+  /* scroll reveal */
+  const io = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* count up */
+  document.querySelectorAll('[data-count]').forEach(el => {
+    if (reduce) return;
+    const target = +el.dataset.count, suffix = el.dataset.suffix || '';
+    let n = 0; const step = Math.max(1, Math.round(target/36));
+    const t = setInterval(() => { n += step; if (n>=target){ n=target; clearInterval(t);} el.textContent = n + suffix; }, 30);
+  });
+
+  /* rotating headline — crossfade between fixed, pre-rendered phrases (no reflow) */
+  const rotWords = document.querySelectorAll('.rot-slot .rot-word');
+  if (rotWords.length > 1 && !reduce){
+    let i = 0;
+    setInterval(() => {
+      rotWords[i].classList.remove('is-active');
+      i = (i + 1) % rotWords.length;
+      rotWords[i].classList.add('is-active');
+    }, 2600);
+  }
+
+  /* gentle parallax tilt on collage items (desktop, fine pointer) */
+  const collage = document.getElementById('collage');
+  if (collage && !reduce && window.matchMedia('(pointer:fine)').matches){
+    const items = collage.querySelectorAll('.collage-item');
+    collage.addEventListener('mousemove', (e) => {
+      const r = collage.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width/2)) / r.width;
+      const dy = (e.clientY - (r.top + r.height/2)) / r.height;
+      items.forEach((it,idx) => {
+        const depth = (idx % 3 + 1) * 6;
+        it.style.setProperty('--px', (dx*depth).toFixed(1) + 'px');
+        it.style.setProperty('--py', (dy*depth).toFixed(1) + 'px');
+      });
+    });
+    collage.addEventListener('mouseleave', () => {
+      items.forEach(it => { it.style.setProperty('--px','0px'); it.style.setProperty('--py','0px'); });
+    });
+  }
+</script>
+</body>
+</html>
