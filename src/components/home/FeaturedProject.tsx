@@ -45,7 +45,7 @@ export default function FeaturedProject() {
           </ul>
 
           <Stack direction="row" gap="sm" wrap className="pt-1">
-            <Button href="https://katha.ph" target="_blank" rel="noreferrer" variant="primary">
+            <Button href="https://katha-sigma.vercel.app/" target="_blank" rel="noreferrer" variant="primary">
               Visit KATHA
             </Button>
           </Stack>

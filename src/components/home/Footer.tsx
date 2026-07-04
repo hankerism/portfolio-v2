@@ -14,7 +14,7 @@ const NAV = [
   { href: "#contact", label: "Contact" },
 ];
 
-const EMAIL = "debzj17@gmail.com";
+const EMAIL = "blujayabby@gmail.com";
 
 export default function Footer() {
   const year = new Date().getFullYear();

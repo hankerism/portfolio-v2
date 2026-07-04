@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
  * old scaffold's dead "Hire Me" button finally does its job — as a link.
  * ------------------------------------------------------------------------- */
 
-const EMAIL = "debzj17@gmail.com";
+const EMAIL = "blujayabby@gmail.com";
 
 export default function Contact() {
   return (
