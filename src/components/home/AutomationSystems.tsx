@@ -34,7 +34,12 @@ export default function AutomationSystems() {
           <Reveal as="li" key={step.n} delay={i * 90} className="list-none">
             <Card padding="lg" tilt={i % 2 === 0 ? "left" : "right"} className="h-full">
               <Stack gap="sm" align="start">
-                <span className="hand text-3xl text-accent">{step.n}</span>
+                <span
+                  aria-hidden
+                  className="mb-1 flex size-12 items-center justify-center rounded-full bg-accent/15"
+                >
+                  <span className="hand text-2xl text-accent">{step.n}</span>
+                </span>
                 <h3 className="text-xl">{step.title}</h3>
                 <p className="text-foreground/75">{step.body}</p>
               </Stack>

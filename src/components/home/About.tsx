@@ -16,7 +16,7 @@ export default function About() {
         {/* Real portrait in a scrapbook paper mount */}
         <figure className="relative mx-auto w-full max-w-xs" aria-label="Portrait of Abby">
           <span aria-hidden className="tape left-8 -top-3 -rotate-6 rounded-[2px]" />
-          <div className="paper p-3 motion-safe:-rotate-2">
+          <div className="paper p-3 shadow-lg motion-safe:-rotate-2">
             <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-md)] bg-muted">
               <Image
                 src="/images/abby-portrait.jpg"

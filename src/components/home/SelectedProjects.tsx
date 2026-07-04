@@ -63,13 +63,14 @@ export default function SelectedProjects() {
         intro="Thoughtfully crafted projects inspired by real businesses — each designed, developed, and structured like a client engagement."
       />
 
-      <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {PROJECTS.map((p, i) => (
           <Reveal as="li" key={p.name} delay={(i % 3) * 90} className="list-none">
             <Card
               as="article"
               padding="none"
-              className="h-full overflow-hidden"
+              tilt={i % 2 === 0 ? "left" : "right"}
+              className="group h-full overflow-hidden"
               interactive
             >
               <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-muted">
@@ -77,7 +78,7 @@ export default function SelectedProjects() {
                   src={p.image}
                   alt={`${p.name} — website homepage`}
                   fill
-                  className="object-cover object-top"
+                  className="object-cover object-top transition-transform duration-500 ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
                   sizes="(min-width: 1024px) 360px, (min-width: 640px) 45vw, 100vw"
                 />
               </div>

@@ -1,11 +1,10 @@
-import Stack from "@/components/layout/Stack";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
  * SectionHeading — the shared editorial header used by every homepage section.
- * A handwritten eyebrow (Caveat), a Fraunces title, and an optional intro.
- * The title carries an id so each <section> can be labelled by it via
- * aria-labelledby, keeping the landmark structure accessible.
+ * A handwritten eyebrow (Caveat) sits tight above a Fraunces title like a
+ * kicker, with the optional intro given room to breathe. The title carries an
+ * id so each <section> can be labelled by it via aria-labelledby.
  * ------------------------------------------------------------------------- */
 
 export interface SectionHeadingProps {
@@ -28,14 +27,14 @@ export default function SectionHeading({
   className,
 }: SectionHeadingProps) {
   return (
-    <Stack
-      gap="sm"
-      align={align === "center" ? "center" : "start"}
-      className={cx(align === "center" && "text-center", "max-w-2xl", align === "center" && "mx-auto", className)}
-    >
-      <span className="hand text-2xl sm:text-3xl">{eyebrow}</span>
-      <h2 id={id}>{title}</h2>
-      {intro && <p className="text-lg text-foreground/80">{intro}</p>}
-    </Stack>
+    <div className={cx("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
+      <span className="hand block text-2xl leading-none sm:text-3xl">{eyebrow}</span>
+      <h2 id={id} className="mt-2">
+        {title}
+      </h2>
+      {intro && (
+        <p className="mt-4 text-lg leading-relaxed text-foreground/80">{intro}</p>
+      )}
+    </div>
   );
 }

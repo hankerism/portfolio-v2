@@ -13,7 +13,7 @@ const EMAIL = "blujayabby@gmail.com";
 export default function Contact() {
   return (
     <Section id="contact" tone="muted" aria-labelledby="contact-heading">
-      <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-2xl)] bg-card p-8 text-center shadow-paper sm:p-14">
+      <div className="relative mx-auto max-w-3xl overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-8 text-center shadow-lg sm:p-14">
         <span aria-hidden className="tape left-1/2 -top-3 -translate-x-1/2 -rotate-2 rounded-[2px]" />
         <Stack gap="md" align="center" className="text-center">
           <span className="hand text-3xl text-primary sm:text-4xl">let&apos;s make something lovely</span>

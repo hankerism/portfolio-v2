@@ -72,7 +72,7 @@ export default function FeaturedProject() {
           <div className="absolute right-0 top-12 z-0 w-[52%] motion-safe:rotate-6">
             <div className="paper relative aspect-[3/4] overflow-hidden">
               <Image
-                src="/images/katha/katha-reader-mode.png"
+                src="/images/katha/katha-book-details.png"
                 alt=""
                 aria-hidden="true"
                 fill
@@ -83,9 +83,9 @@ export default function FeaturedProject() {
           </div>
 
           {/* Front — the hero */}
-          <div className="absolute left-1/2 top-0 z-10 w-[66%] -translate-x-1/2 motion-safe:-rotate-1">
+          <div className="absolute left-1/2 top-0 z-10 w-[66%] -translate-x-1/2 motion-safe:-rotate-2">
             <span aria-hidden className="tape left-1/2 -top-3 -translate-x-1/2 -rotate-2 rounded-[2px]" />
-            <div className="paper relative aspect-[3/4] overflow-hidden">
+            <div className="paper relative aspect-[3/4] overflow-hidden shadow-lg">
               <Image
                 src="/images/katha/katha-homepage.png"
                 alt="The KATHA homepage — a calm, editorial reading experience"

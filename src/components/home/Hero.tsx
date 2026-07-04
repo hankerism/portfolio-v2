@@ -28,7 +28,7 @@ export default function Hero() {
             <span className="marker">business systems</span>.
           </h1>
 
-          <p className="max-w-2xl text-lg text-foreground/80 sm:text-xl">
+          <p className="max-w-2xl text-lg leading-relaxed text-foreground/80 sm:text-xl">
             Product engineer and automation specialist with 6+ years in operations.
             I design, build, and automate the things businesses run on — organised
             behind the scenes, lovely out front.
@@ -43,8 +43,11 @@ export default function Hero() {
             </Button>
           </Stack>
 
-          {/* Tooling — quiet credibility strip */}
-          <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4" aria-label="Core tools">
+          {/* Tooling — quiet credibility strip, set off by a hairline */}
+          <ul
+            className="mt-2 flex w-full max-w-2xl flex-wrap items-center gap-x-5 gap-y-2 border-t border-border/70 pt-6"
+            aria-label="Core tools"
+          >
             {STACK.map((tool) => (
               <li key={tool} className="text-sm font-semibold text-muted-foreground">
                 {tool}
