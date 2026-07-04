@@ -11,7 +11,7 @@ import Stack from "@/components/layout/Stack";
 
 export default function About() {
   return (
-    <Section id="about" tone="default" aria-labelledby="about-heading">
+    <Section id="about" tone="surface" aria-labelledby="about-heading">
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
         {/* Real portrait in a scrapbook paper mount */}
         <figure className="relative mx-auto w-full max-w-xs" aria-label="Portrait of Abby">

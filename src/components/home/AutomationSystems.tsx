@@ -21,7 +21,7 @@ const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "CRM & pipelines"];
 
 export default function AutomationSystems() {
   return (
-    <Section id="automation" tone="default" aria-labelledby="automation-heading">
+    <Section id="automation" tone="surface" aria-labelledby="automation-heading">
       <SectionHeading
         id="automation-heading"
         eyebrow="Automation & systems"

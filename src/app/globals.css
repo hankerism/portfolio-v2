@@ -320,16 +320,42 @@
   }
 
   /* A strip of washi tape — decorative, pinned to a corner of a .paper card.
-     Purely ornamental, so it is aria-hidden at the markup level.           */
+     Purely ornamental, so it is aria-hidden at the markup level. The matte
+     sheen (fine vertical banding + a soft top highlight) sells it as tape
+     rather than a flat rectangle. Colour is swappable via --tape-color so a
+     composition can vary tape hue without new elements (see .tape-* below).  */
   .tape {
     position: absolute;
     width: 5.5rem;
     height: 1.75rem;
-    background: var(--tape);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 45%),
+      repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 7px),
+      var(--tape-color, var(--tape));
     box-shadow: var(--ds-shadow-xs);
     /* torn, slightly translucent edges */
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  }
+  /* Tape hues — vary placement AND colour so the collage never looks stamped. */
+  .tape-peach { --tape-color: rgba(242, 165, 92, 0.40); }
+  .tape-pink  { --tape-color: rgba(231, 163, 182, 0.44); }
+  .tape-sage  { --tape-color: rgba(95, 191, 138, 0.34); }
+  .tape-cream { --tape-color: rgba(247, 241, 233, 0.85); }
+
+  /* Two-layer paper: a faint offset sheet behind a .paper card, giving the
+     hand-stacked "more than one page" depth without extra markup weight. Set
+     on a wrapper; the ::before is the sheet peeking out behind.              */
+  .paper-stack::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--card);
+    border: 1px solid var(--border);
+    box-shadow: var(--ds-shadow-sm);
+    transform: rotate(-2.4deg) translate(-0.6rem, 0.7rem);
   }
 
   /* Peach marker highlight behind inline text (editorial emphasis) */
