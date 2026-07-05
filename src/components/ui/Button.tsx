@@ -56,9 +56,14 @@ export type ButtonProps = ButtonOwnProps &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonOwnProps> &
   Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "target" | "rel" | "download" | "hrefLang">;
 
+/* Note: the base sets only the border WIDTH. Each variant declares its own
+ * border-color — including explicit `border-transparent` for filled styles —
+ * because two border-color utilities on one element resolve by stylesheet
+ * order, not class order (this previously erased the outline variant's
+ * border entirely). */
 const base = cx(
   "relative inline-flex items-center justify-center gap-2 whitespace-nowrap select-none align-middle",
-  "font-sans font-bold leading-none rounded-[var(--radius-lg)] border border-transparent no-underline",
+  "font-sans font-bold leading-none rounded-[var(--radius-lg)] border no-underline",
   "transition-[color,background-color,border-color,box-shadow,transform,filter] duration-200",
   "ease-[var(--ease-soft)] cursor-pointer outline-none",
   "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
@@ -69,12 +74,12 @@ const base = cx(
 
 const variants: Record<ButtonVariant, string> = {
   primary: cx(
-    "bg-primary text-primary-foreground shadow-sm",
+    "border-transparent bg-primary text-primary-foreground shadow-sm",
     "motion-safe:hover:-translate-y-px hover:brightness-[1.08] hover:shadow-soft",
     "active:translate-y-0 active:brightness-100",
   ),
   accent: cx(
-    "bg-accent text-accent-foreground shadow-sm",
+    "border-transparent bg-accent text-accent-foreground shadow-sm",
     "motion-safe:hover:-translate-y-px hover:brightness-105 hover:shadow-glow",
     "active:translate-y-0 active:brightness-100",
   ),
@@ -87,7 +92,7 @@ const variants: Record<ButtonVariant, string> = {
     "bg-transparent text-foreground border-border-strong",
     "hover:bg-muted hover:border-primary",
   ),
-  ghost: cx("bg-transparent text-foreground", "hover:bg-muted"),
+  ghost: cx("border-transparent bg-transparent text-foreground", "hover:bg-muted"),
 };
 
 const sizes: Record<ButtonSize, string> = {

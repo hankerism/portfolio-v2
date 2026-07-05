@@ -39,13 +39,15 @@ export default function Contact() {
             Whether you need a website, an automation that finally takes a task
             off your plate, or a full product built end to end — I&apos;d love to help.
           </p>
-          <Stack direction="row" gap="sm" wrap justify="center" className="pt-2">
+          {/* One conversion action; the address itself stays visible as a
+              quiet, copyable text link rather than a competing second button */}
+          <Stack direction="row" gap="sm" wrap justify="center" align="center" className="pt-2">
             <Button href={`mailto:${EMAIL}`} size="lg" variant="primary">
               Say hello
             </Button>
-            <Button href={`mailto:${EMAIL}`} size="lg" variant="outline">
+            <a href={`mailto:${EMAIL}`} className="px-2 py-2 font-semibold">
               {EMAIL}
-            </Button>
+            </a>
           </Stack>
         </Stack>
       </div>

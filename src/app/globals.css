@@ -53,7 +53,9 @@
   --color-peach-deep:     #E8954A;  /* deeper peach — accent hover         */
   --color-sage:           #5FBF8A;  /* green — success / positive          */
   --color-ink:            #4B4257;  /* plum-grey — primary text            */
-  --color-ink-soft:       #8A8295;  /* muted plum-grey — secondary text    */
+  --color-ink-soft:       #6E6779;  /* muted plum-grey — secondary text; deep
+                                       enough for WCAG AA (≥4.5:1) on cream
+                                       and aged-paper surfaces              */
 
   /* — Typeface roles (families arrive from next/font via layout.tsx) ————— */
   --font-serif:  var(--font-fraunces), Georgia, "Times New Roman", serif;
