@@ -98,9 +98,11 @@ function BahayLiwanag() {
   return (
     <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-surface p-6 sm:p-10 lg:p-14">
       {/* Right-margin ephemera: passport stamp, one pressed leaf beneath it */}
+      {/* pressed into the page, not printed on it — multiply blends the ink
+          into the paper grain beneath */}
       <span
         aria-hidden
-        className="absolute right-6 top-12 hidden rotate-[8deg] rounded-md border-2 border-dashed border-primary/35 p-1.5 lg:block"
+        className="absolute right-6 top-12 hidden rotate-[8deg] rounded-md border-2 border-dashed border-primary/35 p-1.5 opacity-90 mix-blend-multiply lg:block"
       >
         <Doodle kind="mountains" className="w-10 text-primary/45" />
       </span>
@@ -137,9 +139,11 @@ function BahayLiwanag() {
               />
             </a>
           </div>
+          {/* a lighter pen than the other notes — not everything is written
+              with the same marker */}
           <p
             aria-hidden
-            className="hand absolute bottom-0 right-6 rotate-[-3deg] text-2xl"
+            className="hand absolute bottom-0 right-6 rotate-[-3deg] text-2xl font-medium"
           >
             wish you were here!
           </p>
@@ -365,9 +369,10 @@ function StephanieCenter() {
               />
             </div>
           </div>
+          {/* pencil, not marker — the softest note on the page */}
           <p
             aria-hidden
-            className="hand absolute -bottom-1 right-8 rotate-[-2deg] text-xl text-muted-foreground"
+            className="hand absolute -bottom-1 right-8 rotate-[-2deg] text-xl font-medium text-muted-foreground"
           >
             a quiet one — for now
           </p>
@@ -391,18 +396,20 @@ export default function SelectedProjects() {
         />
       </Reveal>
 
-      {/* Each piece settles onto the page with its own slight tilt */}
-      <ul className="mt-16 space-y-20 sm:space-y-24">
+      {/* Each piece settles onto the page with its own slight tilt. The gaps
+          are curated, not metronomic: extra air before the dense Casa spread,
+          and the longest exhale before the calm closing page. */}
+      <ul className="mt-16">
         <Reveal as="li" rot={-1.2} y={20} className="list-none">
           <BahayLiwanag />
         </Reveal>
-        <Reveal as="li" delay={100} rot={1.2} y={20} className="list-none">
+        <Reveal as="li" delay={100} rot={1.2} y={20} className="mt-20 list-none sm:mt-28">
           <CasaKape />
         </Reveal>
-        <Reveal as="li" rot={-1.4} y={20} className="list-none">
+        <Reveal as="li" rot={-1.4} y={20} className="mt-20 list-none sm:mt-24">
           <PurrHeaven />
         </Reveal>
-        <Reveal as="li" delay={100} rot={1} y={20} className="list-none">
+        <Reveal as="li" delay={100} rot={1} y={20} className="mt-24 list-none sm:mt-32">
           <StephanieCenter />
         </Reveal>
       </ul>
