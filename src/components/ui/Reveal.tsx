@@ -31,6 +31,9 @@ export interface RevealProps {
   delay?: number;
   /** Vertical travel distance in px. @default 14 */
   y?: number;
+  /** Initial tilt in degrees — the content "settles" straight, like paper
+   *  being laid down. Keep within ±3 for a natural touch. @default 0 */
+  rot?: number;
   /** Reveal only once (stay visible after leaving view). @default true */
   once?: boolean;
   /** Fraction of the element visible before triggering. @default 0.15 */
@@ -43,6 +46,7 @@ export default function Reveal({
   as: Tag = "div",
   delay = 0,
   y = 14,
+  rot = 0,
   once = true,
   threshold = 0.15,
   className,
@@ -82,6 +86,7 @@ export default function Reveal({
   // Static per-instance tuning passed as CSS custom properties (not state).
   const style = {
     "--reveal-y": `${y}px`,
+    "--reveal-rot": `${rot}deg`,
     "--reveal-delay": `${delay}ms`,
   } as CSSProperties;
 

@@ -35,17 +35,32 @@ const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "CRM & pipelines"];
 export default function AutomationSystems() {
   return (
     <Section id="automation" tone="surface" aria-labelledby="automation-heading">
-      <SectionHeading
-        id="automation-heading"
-        eyebrow="Automation & systems"
-        title="Set it once, let it run"
-        intro="This is where I save the most time — little workflows that catch a new enquiry, reply, book it in, and let you know, all while you're doing something else."
-      />
+      <Reveal>
+        <SectionHeading
+          id="automation-heading"
+          eyebrow="Automation & systems"
+          title="Set it once, let it run"
+          intro="This is where I save the most time — little workflows that catch a new enquiry, reply, book it in, and let you know, all while you're doing something else."
+        />
+      </Reveal>
 
       <ol className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
         {STEPS.map((step, i) => (
-          <Reveal as="li" key={step.n} delay={i * 90} className="relative list-none">
-            <div className={cx("sticky-note h-full p-6 pt-8", NOTES[i].color, NOTES[i].tilt)}>
+          <Reveal
+            as="li"
+            key={step.n}
+            delay={i * 110}
+            rot={i % 2 === 0 ? -3 : 3}
+            y={18}
+            className="relative list-none"
+          >
+            <div
+              className={cx(
+                "sticky-note h-full p-6 pt-8 transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:hover:-translate-y-1",
+                NOTES[i].color,
+                NOTES[i].tilt,
+              )}
+            >
               <span aria-hidden className={cx("hand text-3xl", NOTES[i].num)}>
                 {step.n}
               </span>
@@ -55,6 +70,7 @@ export default function AutomationSystems() {
             {i < STEPS.length - 1 && (
               <Doodle
                 kind="arrow"
+                draw
                 className={cx(
                   "absolute top-1/2 -right-9 z-10 hidden w-11 text-primary/40 lg:block",
                   i % 2 === 0 ? "-rotate-6" : "rotate-[14deg] -scale-y-100",
@@ -75,6 +91,11 @@ export default function AutomationSystems() {
             {tool}
           </span>
         ))}
+        {/* one small reward in the leftover space */}
+        <Doodle
+          kind="flower"
+          className="ml-1 size-4 text-lavender motion-safe:animate-drift" style={{ animationDelay: "1s" }}
+        />
       </div>
     </Section>
   );

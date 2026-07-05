@@ -90,11 +90,17 @@ function Tags({ tags }: { tags: string[] }) {
 function BahayLiwanag() {
   return (
     <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-surface p-6 sm:p-10 lg:p-14">
-      <div className="relative grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      {/* A dashed travel route wandering the journal's margin */}
+      <Doodle
+        kind="route"
+        className="absolute bottom-8 right-10 hidden w-28 -rotate-6 text-primary/25 xl:block"
+      />
+
+      <div className="relative grid items-center gap-12 lg:grid-cols-[1.16fr_0.84fr] lg:gap-14">
         {/* Postcard spread */}
         <figure className="relative pb-14 pr-4 sm:pr-8">
           {/* The postcard — main screenshot, links to the live site */}
-          <div className="paper relative p-3 motion-safe:-rotate-1">
+          <div className="paper relative p-3 transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:-rotate-1 motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-0">
             <span aria-hidden className="tape tape-cream left-6 -top-3 -rotate-6 rounded-[2px]" />
             <a
               href={LINKS.bahay}
@@ -170,7 +176,7 @@ function BahayLiwanag() {
 function CasaKape() {
   return (
     <article className="relative">
-      <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div className="grid items-center gap-12 lg:grid-cols-[0.84fr_1.16fr] lg:gap-16">
         {/* Note from the notebook */}
         <div className="flex flex-col gap-4">
           <span aria-hidden className="hand text-2xl text-accent-hover">
@@ -192,11 +198,11 @@ function CasaKape() {
           <span aria-hidden className="stain -left-8 -top-9 hidden sm:block" />
           <Doodle
             kind="steam"
-            className="absolute right-12 -top-7 w-7 text-muted-foreground/70"
+            className="absolute right-12 -top-7 w-7 text-muted-foreground/70 motion-safe:animate-float" style={{ animationDuration: "5s" }}
           />
 
           {/* Main screenshot — taped photo on the page, links to the live site */}
-          <div className="paper relative p-3 shadow-lg motion-safe:rotate-1">
+          <div className="paper relative p-3 shadow-lg transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:rotate-1 motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-0">
             <span aria-hidden className="tape tape-peach right-8 -top-3 rotate-3 rounded-[2px]" />
             <a
               href={LINKS.casa}
@@ -247,11 +253,11 @@ function CasaKape() {
 function PurrHeaven() {
   return (
     <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-pink-deep/25 bg-pink/20 p-6 sm:p-10 lg:p-14">
-      <div className="relative grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+      <div className="relative grid items-center gap-12 lg:grid-cols-[1.12fr_0.88fr] lg:gap-14">
         {/* Polaroid stack */}
         <figure className="relative pb-12">
           {/* Behind — the residents */}
-          <div className="paper absolute right-0 top-6 z-0 w-[46%] p-2 pb-6 motion-safe:rotate-6">
+          <div className="paper absolute right-0 top-6 z-0 w-[50%] p-2 pb-6 motion-safe:rotate-6">
             <div className="relative aspect-square overflow-hidden rounded-[2px] bg-muted">
               <Image
                 src="/images/purr-heaven/purr-heaven-adoption.png"
@@ -265,7 +271,7 @@ function PurrHeaven() {
           </div>
 
           {/* Front — the poster polaroid */}
-          <div className="paper relative z-10 w-[74%] p-3 pb-2 shadow-lg motion-safe:-rotate-2">
+          <div className="paper relative z-10 w-[78%] p-3 pb-2 shadow-lg transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:-rotate-2 motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-0">
             <span aria-hidden className="tape tape-pink left-1/2 -top-3 -translate-x-1/2 rotate-2 rounded-[2px]" />
             <a
               href={LINKS.purr}
@@ -282,15 +288,21 @@ function PurrHeaven() {
                 sizes="(min-width: 1024px) 420px, 74vw"
               />
             </a>
-            <p aria-hidden className="hand py-2 text-center text-2xl leading-none text-pink-deep">
+            <p aria-hidden className="hand relative py-2 text-center text-2xl leading-none text-pink-deep">
               adopt, don&apos;t shop
             </p>
+            {/* a drawn heart beside the caption */}
+            <Doodle
+              kind="heart"
+              draw
+              className="absolute -right-2 bottom-1 size-5 rotate-12 text-pink-deep/70"
+            />
           </div>
 
-          {/* Paw trail wandering off the poster */}
-          <Doodle kind="paw" className="absolute -bottom-1 left-10 size-5 rotate-12 text-pink-deep/80" />
-          <Doodle kind="paw" className="absolute -bottom-5 left-24 size-4 -rotate-6 text-pink-deep/60" />
-          <Doodle kind="paw" className="absolute -bottom-8 left-36 size-3.5 rotate-6 text-pink-deep/40" />
+          {/* Paw trail wandering off the poster — an occasional playful wiggle */}
+          <Doodle kind="paw" className="absolute -bottom-1 left-10 size-5 rotate-12 text-pink-deep/80 motion-safe:animate-wiggle" />
+          <Doodle kind="paw" className="absolute -bottom-5 left-24 size-4 -rotate-6 text-pink-deep/60 motion-safe:animate-wiggle" style={{ animationDelay: "1.2s" }} />
+          <Doodle kind="paw" className="absolute -bottom-8 left-36 size-3.5 rotate-6 text-pink-deep/40 motion-safe:animate-wiggle" style={{ animationDelay: "2.4s" }} />
         </figure>
 
         {/* Poster copy */}
@@ -317,9 +329,14 @@ function PurrHeaven() {
 function StephanieCenter() {
   return (
     <article className="ruled grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-6 sm:p-10 lg:p-14">
-      {/* Botanical margin marks */}
-      <Doodle kind="leaf" className="absolute right-8 top-8 size-8 rotate-12 text-sage/70" />
-      <Doodle kind="leaf" className="absolute bottom-10 left-8 size-6 -rotate-45 text-sage/50" />
+      {/* Botanical margin marks — the leaves ink themselves in on arrival,
+          and a pressed blossom rests near the page corner */}
+      <Doodle kind="leaf" draw className="absolute right-8 top-8 size-8 rotate-12 text-sage/70" />
+      <Doodle kind="leaf" draw className="absolute bottom-10 left-8 size-6 -rotate-45 text-sage/50 [--draw-delay:0.9s]" />
+      <Doodle
+        kind="blossom"
+        className="absolute bottom-8 right-12 hidden w-8 rotate-12 text-pink-deep/45 lg:block"
+      />
 
       <div className="relative grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
         {/* Journal entry */}
@@ -341,7 +358,7 @@ function StephanieCenter() {
 
         {/* Pressed page — softened while it grows */}
         <figure className="relative pb-8">
-          <div className="paper relative p-3 motion-safe:rotate-[0.8deg]">
+          <div className="paper relative p-3 transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:rotate-[0.8deg] motion-safe:hover:-translate-y-1 motion-safe:hover:rotate-0">
             <span aria-hidden className="tape tape-sage left-8 -top-3 -rotate-3 rounded-[2px]" />
             <div className="relative aspect-[16/11] overflow-hidden rounded-[var(--radius-sm)] bg-muted">
               <Image
@@ -370,24 +387,27 @@ function StephanieCenter() {
 export default function SelectedProjects() {
   return (
     <Section id="projects" tone="default" aria-labelledby="projects-heading">
-      <SectionHeading
-        id="projects-heading"
-        eyebrow="Selected work"
-        title="A few things I've built lately"
-        intro="Thoughtfully crafted projects inspired by real businesses — each designed, developed, and structured like a client engagement."
-      />
+      <Reveal>
+        <SectionHeading
+          id="projects-heading"
+          eyebrow="Selected work"
+          title="A few things I've built lately"
+          intro="Thoughtfully crafted projects inspired by real businesses — each designed, developed, and structured like a client engagement."
+        />
+      </Reveal>
 
+      {/* Each piece settles onto the page with its own slight tilt */}
       <ul className="mt-16 space-y-20 sm:space-y-24">
-        <Reveal as="li" className="list-none">
+        <Reveal as="li" rot={-1.2} y={20} className="list-none">
           <BahayLiwanag />
         </Reveal>
-        <Reveal as="li" delay={100} className="list-none">
+        <Reveal as="li" delay={100} rot={1.2} y={20} className="list-none">
           <CasaKape />
         </Reveal>
-        <Reveal as="li" className="list-none">
+        <Reveal as="li" rot={-1.4} y={20} className="list-none">
           <PurrHeaven />
         </Reveal>
-        <Reveal as="li" delay={100} className="list-none">
+        <Reveal as="li" delay={100} rot={1} y={20} className="list-none">
           <StephanieCenter />
         </Reveal>
       </ul>

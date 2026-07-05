@@ -1,12 +1,18 @@
+import type { CSSProperties } from "react";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * Doodle — tiny hand-drawn ink marks (sparkle, arrow, underline, circle).
+ * Doodle — tiny hand-drawn ink marks (sparkles, arrows, flowers, paws…).
  *
  * The scrapbook "drawn by hand" voice, kept as SVG so it inherits currentColor
  * and stays crisp. Purely decorative (aria-hidden, focusable=false). Used
  * sparingly — a mark or two per section — to imply a human placed things, never
  * as clutter. No words, so it adds no copy.
+ *
+ * `draw` pairs with <Reveal>: the stroke stays invisible until the wrapping
+ * reveal fires, then draws itself in like a pen finishing a margin note
+ * (see .doodle-draw in globals.css). Stroke paths carry pathLength=1 so the
+ * dash animation is unit-normal. Only meaningful on stroked kinds.
  * ------------------------------------------------------------------------- */
 
 export type DoodleKind =
@@ -18,10 +24,18 @@ export type DoodleKind =
   | "leaf"
   | "steam"
   | "heart"
-  | "waves";
+  | "waves"
+  | "flower"
+  | "star"
+  | "blossom"
+  | "route";
 
 export interface DoodleProps {
   kind: DoodleKind;
+  /** Draw the stroke in when a wrapping <Reveal> becomes visible. */
+  draw?: boolean;
+  /** Per-instance motion tuning (animation duration/delay overrides). */
+  style?: CSSProperties;
   className?: string;
 }
 
@@ -45,6 +59,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        pathLength={1}
       />
     ),
   },
@@ -57,6 +72,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
+        pathLength={1}
       />
     ),
   },
@@ -69,6 +85,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         stroke="currentColor"
         strokeWidth="2.5"
         strokeLinecap="round"
+        pathLength={1}
       />
     ),
   },
@@ -94,6 +111,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
+        pathLength={1}
       />
     ),
   },
@@ -106,6 +124,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
+        pathLength={1}
       />
     ),
   },
@@ -119,6 +138,7 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
+        pathLength={1}
       />
     ),
   },
@@ -131,19 +151,66 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
+        pathLength={1}
       />
+    ),
+  },
+  flower: {
+    viewBox: "0 0 24 24",
+    node: (
+      <g fill="currentColor">
+        <circle cx="12" cy="5.2" r="3" />
+        <circle cx="18.5" cy="9.9" r="3" />
+        <circle cx="16" cy="17.6" r="3" />
+        <circle cx="8" cy="17.6" r="3" />
+        <circle cx="5.5" cy="9.9" r="3" />
+        <circle cx="12" cy="12" r="2.4" opacity="0.45" />
+      </g>
+    ),
+  },
+  star: {
+    viewBox: "0 0 24 24",
+    node: (
+      <path
+        d="M12 2l2.4 6.2 6.6.3-5.2 4.2 1.8 6.4L12 15.4 6.4 19l1.8-6.4L3 8.5l6.6-.3Z"
+        fill="currentColor"
+      />
+    ),
+  },
+  blossom: {
+    viewBox: "0 0 32 48",
+    node: (
+      <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+        <circle cx="16" cy="6" r="4" />
+        <circle cx="24" cy="11.5" r="4" />
+        <circle cx="21" cy="20" r="4" />
+        <circle cx="11" cy="20" r="4" />
+        <circle cx="8" cy="11.5" r="4" />
+        <circle cx="16" cy="13.5" r="2.6" />
+        <path d="M16 24c-1 8 2 14-2 22M14 34c-3-2-6-2.5-9-2M15 40c2.5-2 5-3 8.5-3" />
+      </g>
+    ),
+  },
+  route: {
+    viewBox: "0 0 64 40",
+    node: (
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <path d="M4 34C18 30 22 12 34 12s18 8 24-2" strokeDasharray="4 5" />
+        <path d="M55 4l7 7M62 4l-7 7" />
+      </g>
     ),
   },
 };
 
-export default function Doodle({ kind, className }: DoodleProps) {
+export default function Doodle({ kind, draw = false, style, className }: DoodleProps) {
   const { viewBox, node } = paths[kind];
   return (
     <svg
       viewBox={viewBox}
       aria-hidden="true"
       focusable="false"
-      className={cx("pointer-events-none", className)}
+      style={style}
+      className={cx("pointer-events-none", draw && "doodle-draw", className)}
     >
       {node}
     </svg>

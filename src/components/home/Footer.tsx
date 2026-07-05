@@ -1,4 +1,5 @@
 import Container from "@/components/layout/Container";
+import Doodle from "@/components/ui/Doodle";
 
 /* ---------------------------------------------------------------------------
  * Footer — a clean landing. Brand echo, real links only (section anchors +
@@ -60,7 +61,10 @@ export default function Footer() {
 
         <div className="flex flex-col gap-2 border-t border-border py-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} Abby. All rights reserved.</p>
-          <p>Built with Next.js &amp; Tailwind CSS.</p>
+          <p className="flex items-center gap-1.5">
+            Built with Next.js &amp; Tailwind CSS.
+            <Doodle kind="heart" className="size-3.5 text-pink-deep/70" />
+          </p>
         </div>
       </Container>
     </footer>
