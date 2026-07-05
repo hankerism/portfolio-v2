@@ -49,12 +49,9 @@ export default function FeaturedProject() {
           {/* Copy */}
           <Reveal>
             <Stack gap="md" align="start">
-            <span className="inline-flex items-center gap-3">
-              <span className="flex size-9 items-center justify-center rounded-full border border-border-strong bg-card font-serif text-sm font-semibold text-primary shadow-xs">
-                01
-              </span>
-              <span className="hand text-2xl text-primary sm:text-3xl">The flagship</span>
-            </span>
+            {/* No "01" chip: it implied a numbered series that never continues,
+                and clashed with the projects' "№ n" hand style */}
+            <span className="hand text-2xl text-primary sm:text-3xl">The flagship</span>
 
             <h2 id="work-heading" className="relative">
               KATHA — a production-grade reading &amp; publishing platform
@@ -166,14 +163,19 @@ export default function FeaturedProject() {
               />
             </div>
 
-            {/* Exhibition plate — a handwritten gallery caption under the scene */}
+            </Reveal>
+
+            {/* Exhibition plate — a handwritten gallery caption under the scene.
+                Direct child of <figure> (figcaption must be first/last child);
+                the inner Reveal span keeps its fade-in choreography. */}
             <figcaption
               aria-hidden
               className="hand mt-10 text-center text-2xl text-primary/70 motion-safe:-rotate-1"
             >
-              the homepage, the reader — and Table for Two ✦
+              <Reveal as="span" delay={320} className="inline-block">
+                the homepage, the reader — and Table for Two ✦
+              </Reveal>
             </figcaption>
-            </Reveal>
           </figure>
         </div>
       </Container>

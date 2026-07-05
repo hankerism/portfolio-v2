@@ -67,12 +67,14 @@ export default function AutomationSystems() {
               <h3 className="mt-2 text-xl">{step.title}</h3>
               <p className="mt-2 text-foreground/75">{step.body}</p>
             </div>
+            {/* No z-index on the arrow: its head tucks beneath the next
+                note's edge instead of drawing over it */}
             {i < STEPS.length - 1 && (
               <Doodle
                 kind="arrow"
                 draw
                 className={cx(
-                  "absolute top-1/2 -right-9 z-10 hidden w-11 text-primary/40 lg:block",
+                  "absolute top-1/2 -right-8 hidden w-10 text-primary/40 lg:block",
                   i % 2 === 0 ? "-rotate-6" : "rotate-[14deg] -scale-y-100",
                 )}
               />

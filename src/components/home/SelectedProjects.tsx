@@ -326,9 +326,10 @@ function StephanieCenter() {
   return (
     <article className="ruled grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-6 sm:p-12 lg:p-16">
       {/* Planner furniture: bookmark ribbon, one leaf, one pressed blossom */}
+      {/* h-12 keeps the ribbon's tail clear of the photo mat's top edge */}
       <span
         aria-hidden
-        className="absolute right-14 top-0 h-16 w-7 bg-lavender-deep/50 shadow-sm"
+        className="absolute right-14 top-0 h-12 w-7 bg-lavender-deep/50 shadow-sm"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%)" }}
       />
       <Doodle kind="leaf" draw className="absolute left-8 top-8 size-6 -rotate-12 text-sage/60" />

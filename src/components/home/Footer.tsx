@@ -34,10 +34,12 @@ export default function Footer() {
             </p>
           </div>
 
+          {/* Column labels are styled text, not headings — they'd otherwise
+              rank beside the page's section headings in the document outline */}
           <nav aria-label="Footer">
-            <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Explore
-            </h2>
+            </p>
             <ul className="grid gap-2">
               {NAV.map((l) => (
                 <li key={l.href}>
@@ -50,9 +52,9 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Get in touch
-            </h2>
+            </p>
             <a href={`mailto:${EMAIL}`} className="text-sm font-semibold text-primary no-underline hover:underline">
               {EMAIL}
             </a>

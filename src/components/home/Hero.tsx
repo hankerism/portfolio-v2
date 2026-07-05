@@ -36,9 +36,11 @@ export default function Hero() {
       <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-[var(--spacing-gutter)] lg:grid-cols-[1.04fr_0.96fr] lg:gap-8">
         {/* The claim — staggered soft entrance */}
         <div className="relative z-10 max-w-2xl">
+          {/* lg-only: below that the collage is gone and the star would float
+              orphaned in empty whitespace */}
           <Doodle
             kind="star"
-            className="absolute right-2 top-0 hidden size-4 text-accent/80 motion-safe:animate-twinkle sm:block" style={{ animationDelay: "1.2s" }}
+            className="absolute right-2 top-0 hidden size-4 text-accent/80 motion-safe:animate-twinkle lg:block" style={{ animationDelay: "1.2s" }}
           />
           <Stack gap="md" align="start">
             <span className="hand animate-fade-up text-3xl text-primary sm:text-4xl">
