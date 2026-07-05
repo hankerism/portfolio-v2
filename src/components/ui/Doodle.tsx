@@ -28,7 +28,10 @@ export type DoodleKind =
   | "flower"
   | "star"
   | "blossom"
-  | "route";
+  | "route"
+  | "mountains"
+  | "paperclip"
+  | "sprig";
 
 export interface DoodleProps {
   kind: DoodleKind;
@@ -197,6 +200,52 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
       <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
         <path d="M4 34C18 30 22 12 34 12s18 8 24-2" strokeDasharray="4 5" />
         <path d="M55 4l7 7M62 4l-7 7" />
+      </g>
+    ),
+  },
+  mountains: {
+    viewBox: "0 0 36 22",
+    node: (
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2 19 10 7l5 6 4-6 6 8 3-4 4 8" pathLength={1} />
+        <circle cx="30" cy="5" r="2.4" />
+      </g>
+    ),
+  },
+  paperclip: {
+    viewBox: "0 0 20 40",
+    node: (
+      <path
+        d="M14 10v20a4 4 0 0 1-8 0V8a6 6 0 0 1 12 0v24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        pathLength={1}
+      />
+    ),
+  },
+  sprig: {
+    viewBox: "0 0 20 44",
+    node: (
+      <g>
+        <path
+          d="M10 42C10 30 10 18 10 6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          pathLength={1}
+        />
+        <g fill="currentColor">
+          <circle cx="10" cy="5" r="2.2" />
+          <circle cx="6.5" cy="10" r="2" />
+          <circle cx="13.5" cy="11" r="2" />
+          <circle cx="6" cy="16" r="2" />
+          <circle cx="14" cy="17" r="2" />
+          <circle cx="7.5" cy="22" r="1.9" />
+          <circle cx="12.5" cy="23" r="1.9" />
+        </g>
       </g>
     ),
   },

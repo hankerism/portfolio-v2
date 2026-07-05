@@ -347,6 +347,50 @@
   .tape-sage  { --tape-color: rgba(95, 191, 138, 0.34); }
   .tape-cream { --tape-color: rgba(247, 241, 233, 0.85); }
 
+  /* Tape settles into place a beat after its spread reveals — pressed on by
+     hand, not printed with the page. Scale/rotate are independent transform
+     properties, so the resting -rotate-* utilities are untouched.           */
+  .reveal .tape {
+    opacity: 0;
+    scale: 1.35;
+    transition: opacity 0.35s var(--ease-paper), scale 0.35s var(--ease-paper);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 480ms);
+  }
+  .reveal.is-visible .tape {
+    opacity: 1;
+    scale: 1;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal .tape {
+      opacity: 1;
+      scale: 1;
+      transition: none;
+    }
+  }
+
+  /* Receipt slip — a strip of thermal paper with faint print lines and a
+     torn zigzag foot (the Casa Kape coffee-journal prop).                   */
+  .receipt {
+    background-color: #fff;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--color-ink) 16%, transparent) 7px,
+      color-mix(in srgb, var(--color-ink) 16%, transparent) 8px
+    );
+    background-size: 64% auto;
+    background-position: 18% 10px;
+    background-repeat: no-repeat;
+    clip-path: polygon(
+      0 0, 100% 0, 100% calc(100% - 5px), 92% 100%, 84% calc(100% - 5px),
+      76% 100%, 68% calc(100% - 5px), 60% 100%, 52% calc(100% - 5px),
+      44% 100%, 36% calc(100% - 5px), 28% 100%, 20% calc(100% - 5px),
+      12% 100%, 4% calc(100% - 5px), 0 100%
+    );
+    filter: drop-shadow(0 6px 10px rgba(75, 66, 87, 0.14));
+  }
+
   /* Two-layer paper: a faint offset sheet behind a .paper card, giving the
      hand-stacked "more than one page" depth without extra markup weight. Set
      on a wrapper; the ::before is the sheet peeking out behind. `isolation`
