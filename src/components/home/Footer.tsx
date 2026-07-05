@@ -55,9 +55,35 @@ export default function Footer() {
             <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
               Get in touch
             </p>
-            <a href={`mailto:${EMAIL}`} className="text-sm font-semibold text-primary no-underline hover:underline">
-              {EMAIL}
-            </a>
+            <ul className="grid gap-2">
+              <li>
+                <a href={`mailto:${EMAIL}`} className="text-sm font-semibold text-primary no-underline hover:underline">
+                  {EMAIL}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/hankerism"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-foreground/80 no-underline hover:text-primary"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-foreground/80 no-underline hover:text-primary"
+                >
+                  Resume
+                </a>
+              </li>
+              {/* LinkedIn joins here the moment the real URL is provided —
+                  no invented links (Phase 8A working rule). */}
+            </ul>
           </div>
         </div>
 

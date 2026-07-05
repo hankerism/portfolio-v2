@@ -60,6 +60,16 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-2">
+            {/* Resume — the one evidence link recruiters reflex-scan the header
+                for. (The PDF ships separately; see Phase 8A.1 notes.) */}
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noreferrer"
+              className="hidden text-sm font-semibold text-foreground/80 no-underline transition-colors hover:text-primary md:block"
+            >
+              Resume
+            </a>
             <div className="hidden md:block">
               <Button href="#contact" size="sm" variant="primary">
                 Get in touch
@@ -105,6 +115,17 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            <li>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => setOpen(false)}
+                className="block rounded-[var(--radius-sm)] px-3 py-2 font-semibold text-foreground no-underline hover:bg-muted"
+              >
+                Resume
+              </a>
+            </li>
             <li className="mt-2 px-1">
               <Button href="#contact" fullWidth onClick={() => setOpen(false)}>
                 Get in touch

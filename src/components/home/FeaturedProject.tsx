@@ -73,12 +73,17 @@ export default function FeaturedProject() {
               ))}
             </ul>
 
-            <Stack direction="row" gap="sm" wrap className="pt-1">
+            {/* Proof-first CTA order: the case study is the conversion for
+                engineering reviewers; the live product and source back it up */}
+            <Stack direction="row" gap="sm" wrap align="center" className="pt-1">
+              <Button href="/work/katha" variant="primary">
+                Read the case study
+              </Button>
               <Button
                 href="https://katha-sigma.vercel.app/"
                 target="_blank"
                 rel="noreferrer"
-                variant="primary"
+                variant="outline"
                 rightIcon={
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path
@@ -93,6 +98,28 @@ export default function FeaturedProject() {
               >
                 Visit KATHA
               </Button>
+              <a
+                href="https://github.com/hankerism/katha"
+                target="_blank"
+                rel="noreferrer"
+                className="group/src inline-flex items-center gap-1.5 px-1 text-sm font-bold no-underline"
+              >
+                <span className="underline-offset-4 group-hover/src:underline">Source</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  className="size-4 transition-transform group-hover/src:-translate-y-0.5 group-hover/src:translate-x-0.5"
+                >
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </Stack>
             </Stack>
           </Reveal>
