@@ -6,26 +6,25 @@ import SectionHeading from "./SectionHeading";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * SelectedProjects — four collectible scrapbook spreads, not portfolio cards.
+ * SelectedProjects — an exhibition wall of four magazine spreads.
  *
- * Every piece is its own page from a different notebook, with the screenshot
- * as the hero (60–70% of each composition) physically attached to paper —
- * taped, clipped, or polaroid-mounted — never floating in a plain rectangle.
- * No two layouts repeat:
+ * Composition first, decoration second: in every spread the FIRST thing the
+ * eye lands on is the screenshot; the props are supporting actors placed in
+ * the margins. No two layouts repeat, and the rhythm alternates —
  *
- *   № 1  Bahay Liwanag    — travel journal SPREAD: photo column leads wide;
- *                           postcard + snapshot + postage stamp + passport
- *                           stamp + route + pressed leaf
- *   № 2  Casa Kape        — coffee journal OVERSIZE: near-full-bleed photo
- *                           with the copy on a recipe notecard overlapping
- *                           it; receipt slip, paperclipped menu, coffee ring,
- *                           steam, handwritten recommendation
- *   № 3  Purr Heaven      — adoption BOARD: layered polaroids on blush paper,
- *                           heart sticker, pink tape, paw trail
- *   № 4  Stephanie Center — wellness PLANNER: ruled page with a bookmark
- *                           ribbon, lavender sprig, leaves, pressed blossom
+ *   № 1  Bahay Liwanag    — CINEMATIC: a full-width 16:9 postcard crowns the
+ *                           spread, copy tucked low-right; passport stamp +
+ *                           one pressed leaf in the right margin, the route
+ *                           wandering the bottom-left whitespace
+ *   № 2  Casa Kape        — DENSE (the strongest): oversized taped photo,
+ *                           recipe notecard overlapping it, receipt tucked
+ *                           behind, paperclipped menu, coffee ring, steam
+ *   № 3  Purr Heaven      — SIMPLE: two big polaroids on blush paper, one
+ *                           note, an elegant paw trail — nothing else
+ *   № 4  Stephanie Center — CALM: the most breathing room; ruled paper,
+ *                           bookmark ribbon, one leaf, one pressed blossom
  *
- * Copy (names, blurbs, tags) is unchanged; the only words added are the tiny
+ * Copy (names, blurbs, tags) is unchanged; the only added words are the tiny
  * handwritten margin notes. All flourishes are decorative (aria-hidden /
  * empty alt) and every animation respects prefers-reduced-motion.
  * ------------------------------------------------------------------------- */
@@ -93,87 +92,61 @@ function Tags({ tags }: { tags: string[] }) {
 const MAT_HOVER =
   "transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-0";
 
-/* № 1 — Bahay Liwanag · travel journal spread ------------------------------ */
+/* № 1 — Bahay Liwanag · cinematic travel journal ---------------------------- */
 
 function BahayLiwanag() {
   return (
     <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-surface p-6 sm:p-10 lg:p-14">
-      {/* Journal margins: passport stamp, travel route, pressed leaf */}
+      {/* Right-margin ephemera: passport stamp, one pressed leaf beneath it */}
       <span
         aria-hidden
-        className="absolute right-8 top-6 hidden rotate-[8deg] rounded-md border-2 border-dashed border-primary/35 p-1.5 sm:block"
+        className="absolute right-6 top-12 hidden rotate-[8deg] rounded-md border-2 border-dashed border-primary/35 p-1.5 lg:block"
       >
         <Doodle kind="mountains" className="w-10 text-primary/45" />
       </span>
       <Doodle
-        kind="route"
-        className="absolute bottom-8 right-10 hidden w-28 -rotate-6 text-primary/25 xl:block"
-      />
-      <Doodle
         kind="leaf"
         draw
-        className="absolute bottom-6 left-8 hidden size-7 rotate-45 text-sage/50 sm:block"
+        className="absolute right-9 top-32 hidden size-7 rotate-45 text-sage/50 lg:block"
+      />
+      {/* The route wanders the bottom-left whitespace */}
+      <Doodle
+        kind="route"
+        className="absolute bottom-16 left-12 hidden w-32 -rotate-3 text-primary/25 xl:block"
       />
 
-      <div className="relative grid items-center gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
-        {/* Postcard spread — the hero */}
-        <figure className="relative pb-14 pr-4 sm:pr-8">
-          {/* The postcard — main screenshot, links to the live site */}
-          <div className={cx("paper relative p-3 motion-safe:-rotate-1", MAT_HOVER)}>
-            <span aria-hidden className="tape tape-cream left-6 -top-3 -rotate-6 rounded-[2px]" />
+      <div className="relative">
+        {/* The postcard — a cinematic 16:9 hero crowning the spread */}
+        <figure className="relative pb-9 lg:w-[86%]">
+          <div className={cx("paper curl relative p-3 motion-safe:-rotate-[0.6deg]", MAT_HOVER)}>
+            <span aria-hidden className="tape tape-cream left-10 -top-3 -rotate-6 rounded-[2px]" />
+            <span aria-hidden className="tape tape-cream -right-6 top-24 hidden rotate-[84deg] rounded-[2px] sm:block" />
             <a
               href={LINKS.bahay}
               target="_blank"
               rel="noreferrer"
               aria-label="Visit the Bahay Liwanag website"
-              className="group relative block aspect-[16/10] overflow-hidden rounded-[var(--radius-sm)] bg-muted"
+              className="group relative block aspect-[16/9] overflow-hidden rounded-[var(--radius-sm)] bg-muted"
             >
               <Image
                 src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
                 alt="Bahay Liwanag — website homepage"
                 fill
                 className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
-                sizes="(min-width: 1024px) 680px, 92vw"
+                sizes="(min-width: 1024px) 860px, 92vw"
               />
             </a>
-            {/* Postage stamp + postmark */}
-            <div aria-hidden className="stamp -right-3 -top-6 w-14 rotate-6 sm:w-16">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src="/images/bahay-liwanag/bahay-liwanag-booking-page.png"
-                  alt=""
-                  fill
-                  className="object-cover object-top"
-                  sizes="64px"
-                />
-              </div>
-            </div>
-            <Doodle
-              kind="waves"
-              className="absolute -right-6 top-12 hidden w-10 rotate-12 text-primary/40 sm:block"
-            />
           </div>
-
-          {/* Snapshot tucked over the corner */}
-          <div className="paper absolute bottom-0 right-0 w-[42%] p-2 pb-1 shadow-soft motion-safe:rotate-3">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2px] bg-muted">
-              <Image
-                src="/images/bahay-liwanag/bahay-liwanag-experiences.png"
-                alt=""
-                aria-hidden="true"
-                fill
-                className="object-cover object-top"
-                sizes="280px"
-              />
-            </div>
-            <p aria-hidden className="hand py-1.5 text-center text-xl leading-none">
-              wish you were here!
-            </p>
-          </div>
+          <p
+            aria-hidden
+            className="hand absolute bottom-0 right-6 rotate-[-3deg] text-2xl"
+          >
+            wish you were here!
+          </p>
         </figure>
 
-        {/* Journal entry */}
-        <div className="flex flex-col gap-4">
+        {/* Journal entry — tucked low-right; the margin breathes */}
+        <div className="mt-6 flex flex-col gap-4 lg:ml-auto lg:mt-8 lg:w-[52%]">
           <span aria-hidden className="hand text-2xl">№ 1 — from the travel journal</span>
           <h3 className="text-3xl">Bahay Liwanag</h3>
           <p className="text-lg text-foreground/80">
@@ -190,13 +163,13 @@ function BahayLiwanag() {
   );
 }
 
-/* № 2 — Casa Kape · coffee journal, oversized photo ------------------------ */
+/* № 2 — Casa Kape · editorial food magazine, oversized photo ---------------- */
 
 function CasaKape() {
   return (
     <article className="relative">
       {/* The kitchen table — a near-full-bleed photo the notecard rests on */}
-      <figure className="relative pb-12 lg:ml-auto lg:w-[70%]">
+      <figure className="relative pb-12 lg:ml-auto lg:w-[72%]">
         <span aria-hidden className="stain -left-8 -top-9 hidden sm:block" />
         <Doodle
           kind="steam"
@@ -204,7 +177,7 @@ function CasaKape() {
         />
 
         {/* Main screenshot — taped photo, links to the live site */}
-        <div className={cx("paper relative p-3 shadow-lg motion-safe:rotate-1", MAT_HOVER)}>
+        <div className={cx("paper curl relative p-3 shadow-lg motion-safe:rotate-1", MAT_HOVER)}>
           <span aria-hidden className="tape tape-peach right-8 -top-3 rotate-3 rounded-[2px]" />
           <a
             href={LINKS.casa}
@@ -218,7 +191,7 @@ function CasaKape() {
               alt="Casa Kape — website homepage"
               fill
               className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
-              sizes="(min-width: 1024px) 760px, 92vw"
+              sizes="(min-width: 1024px) 780px, 92vw"
             />
           </a>
         </div>
@@ -251,7 +224,7 @@ function CasaKape() {
       </figure>
 
       {/* Recipe notecard — overlaps the photo's edge on lg */}
-      <div className="mt-10 lg:absolute lg:left-0 lg:top-1/2 lg:z-10 lg:mt-0 lg:w-[36%] lg:-translate-y-1/2">
+      <div className="mt-10 lg:absolute lg:left-0 lg:top-1/2 lg:z-10 lg:mt-0 lg:w-[34%] lg:-translate-y-1/2">
         <div className="paper-stack paper relative flex flex-col gap-4 p-6 motion-safe:-rotate-1 sm:p-8">
           {/* Receipt slip tucked behind the card corner */}
           <span aria-hidden className="receipt absolute -right-7 -top-9 hidden h-24 w-16 rotate-6 lg:block" />
@@ -273,16 +246,16 @@ function CasaKape() {
   );
 }
 
-/* № 3 — Purr Heaven · adoption board ---------------------------------------- */
+/* № 3 — Purr Heaven · adoption board, simplified ----------------------------- */
 
 function PurrHeaven() {
   return (
     <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-pink-deep/25 bg-pink/20 p-6 sm:p-10 lg:p-14">
-      <div className="relative grid items-center gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-14">
-        {/* Polaroid stack — the hero */}
+      <div className="relative grid items-center gap-12 lg:grid-cols-[1.62fr_1fr] lg:gap-14">
+        {/* Polaroid pair — big, layered, nothing else on them */}
         <figure className="relative pb-12">
           {/* Behind — the residents */}
-          <div className="paper absolute right-0 top-4 z-0 w-[52%] p-2 pb-6 motion-safe:rotate-6">
+          <div className="paper absolute right-0 top-2 z-0 w-[56%] p-2 pb-6 motion-safe:rotate-6">
             <div className="relative aspect-square overflow-hidden rounded-[2px] bg-muted">
               <Image
                 src="/images/purr-heaven/purr-heaven-adoption.png"
@@ -290,21 +263,14 @@ function PurrHeaven() {
                 aria-hidden="true"
                 fill
                 className="object-cover object-top"
-                sizes="320px"
+                sizes="340px"
               />
             </div>
           </div>
 
           {/* Front — the poster polaroid */}
-          <div className={cx("paper relative z-10 w-[82%] p-3 pb-2 shadow-lg motion-safe:-rotate-2", MAT_HOVER)}>
+          <div className={cx("paper relative z-10 w-[86%] p-3 pb-2 shadow-lg motion-safe:-rotate-2", MAT_HOVER)}>
             <span aria-hidden className="tape tape-pink left-1/2 -top-3 -translate-x-1/2 rotate-2 rounded-[2px]" />
-            {/* Heart sticker on the corner */}
-            <span
-              aria-hidden
-              className="absolute -right-3 -top-3 z-20 flex size-9 rotate-6 items-center justify-center rounded-full bg-white shadow-sm"
-            >
-              <Doodle kind="heart" className="size-5 text-pink-deep" />
-            </span>
             <a
               href={LINKS.purr}
               target="_blank"
@@ -317,24 +283,18 @@ function PurrHeaven() {
                 alt="Purr Heaven — website homepage"
                 fill
                 className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
-                sizes="(min-width: 1024px) 540px, 82vw"
+                sizes="(min-width: 1024px) 560px, 86vw"
               />
             </a>
             <p aria-hidden className="hand relative py-2 text-center text-2xl leading-none text-pink-deep">
               adopt, don&apos;t shop
             </p>
-            {/* a drawn heart beside the caption */}
-            <Doodle
-              kind="heart"
-              draw
-              className="absolute -right-2 bottom-1 size-5 rotate-12 text-pink-deep/70"
-            />
           </div>
 
-          {/* Paw trail wandering off the poster — an occasional playful wiggle */}
-          <Doodle kind="paw" className="absolute -bottom-1 left-10 size-5 rotate-12 text-pink-deep/80 motion-safe:animate-wiggle" />
-          <Doodle kind="paw" className="absolute -bottom-5 left-24 size-4 -rotate-6 text-pink-deep/60 motion-safe:animate-wiggle" style={{ animationDelay: "1.2s" }} />
-          <Doodle kind="paw" className="absolute -bottom-8 left-36 size-3.5 rotate-6 text-pink-deep/40 motion-safe:animate-wiggle" style={{ animationDelay: "2.4s" }} />
+          {/* An elegant paw trail, arcing quietly toward the words */}
+          <Doodle kind="paw" className="absolute -bottom-2 left-[46%] size-5 rotate-12 text-pink-deep/70 motion-safe:animate-wiggle" />
+          <Doodle kind="paw" className="absolute -bottom-6 left-[62%] size-4 -rotate-3 text-pink-deep/50 motion-safe:animate-wiggle" style={{ animationDelay: "1.2s" }} />
+          <Doodle kind="paw" className="absolute -bottom-8 left-[78%] size-3.5 rotate-12 text-pink-deep/35 motion-safe:animate-wiggle" style={{ animationDelay: "2.4s" }} />
         </figure>
 
         {/* Poster copy */}
@@ -356,20 +316,16 @@ function PurrHeaven() {
   );
 }
 
-/* № 4 — Stephanie Center · wellness planner --------------------------------- */
+/* № 4 — Stephanie Center · wellness planner, calmest page -------------------- */
 
 function StephanieCenter() {
   return (
-    <article className="ruled grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-6 sm:p-10 lg:p-14">
-      {/* Planner furniture: bookmark ribbon, botanicals, pressed blossom */}
+    <article className="ruled grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-card p-6 sm:p-12 lg:p-16">
+      {/* Planner furniture: bookmark ribbon, one leaf, one pressed blossom */}
       <span
         aria-hidden
         className="absolute right-14 top-0 h-16 w-7 bg-lavender-deep/50 shadow-sm"
         style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 50% 84%, 0 100%)" }}
-      />
-      <Doodle
-        kind="sprig"
-        className="absolute right-24 top-8 hidden w-5 rotate-[20deg] text-lavender-deep/45 sm:block"
       />
       <Doodle kind="leaf" draw className="absolute left-8 top-8 size-6 -rotate-12 text-sage/60" />
       <Doodle
@@ -377,7 +333,7 @@ function StephanieCenter() {
         className="absolute bottom-8 left-10 hidden w-8 -rotate-12 text-pink-deep/45 lg:block"
       />
 
-      <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+      <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-16">
         {/* Journal entry */}
         <div className="flex flex-col gap-4">
           <span aria-hidden className="hand text-2xl text-sage">
@@ -405,7 +361,7 @@ function StephanieCenter() {
                 alt="Stephanie Center Wellness — website homepage"
                 fill
                 className="object-cover object-top opacity-[0.92] saturate-[0.85]"
-                sizes="(min-width: 1024px) 640px, 92vw"
+                sizes="(min-width: 1024px) 660px, 92vw"
               />
             </div>
           </div>
