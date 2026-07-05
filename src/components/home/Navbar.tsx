@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import { cx } from "@/lib/cx";
@@ -14,11 +15,13 @@ import { cx } from "@/lib/cx";
  * on navigation). The Contact CTA stays visible at every width.
  * ------------------------------------------------------------------------- */
 
+/* Root-anchored (/#…) so the nav works from any route (e.g. /work/katha),
+ * not just the homepage. */
 const LINKS = [
-  { href: "#work", label: "Work" },
-  { href: "#automation", label: "Automation" },
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
+  { href: "/#work", label: "Work" },
+  { href: "/#automation", label: "Automation" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#about", label: "About" },
 ] as const;
 
 export default function Navbar() {
@@ -41,9 +44,9 @@ export default function Navbar() {
     >
       <Container size="lg">
         <div className="flex h-16 items-center justify-between gap-4">
-          <a href="#top" className="logo-link font-serif text-2xl font-semibold text-primary no-underline">
+          <Link href="/" className="logo-link font-serif text-2xl font-semibold text-primary no-underline">
             Abby<span className="text-accent">.</span>
-          </a>
+          </Link>
 
           {/* Desktop links */}
           <ul className="hidden items-center gap-8 md:flex">
@@ -71,7 +74,7 @@ export default function Navbar() {
               Resume
             </a>
             <div className="hidden md:block">
-              <Button href="#contact" size="sm" variant="primary">
+              <Button href="/#contact" size="sm" variant="primary">
                 Get in touch
               </Button>
             </div>
@@ -127,7 +130,7 @@ export default function Navbar() {
               </a>
             </li>
             <li className="mt-2 px-1">
-              <Button href="#contact" fullWidth onClick={() => setOpen(false)}>
+              <Button href="/#contact" fullWidth onClick={() => setOpen(false)}>
                 Get in touch
               </Button>
             </li>

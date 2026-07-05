@@ -1,4 +1,5 @@
 import Container from "@/components/layout/Container";
+import Link from "next/link";
 import Doodle from "@/components/ui/Doodle";
 
 /* ---------------------------------------------------------------------------
@@ -8,11 +9,11 @@ import Doodle from "@/components/ui/Doodle";
  * ------------------------------------------------------------------------- */
 
 const NAV = [
-  { href: "#work", label: "Work" },
-  { href: "#automation", label: "Automation" },
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#work", label: "Work" },
+  { href: "/#automation", label: "Automation" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 const EMAIL = "blujayabby@gmail.com";
@@ -25,9 +26,9 @@ export default function Footer() {
       <Container size="lg">
         <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
           <div className="max-w-xs">
-            <a href="#top" className="font-serif text-2xl font-semibold text-primary no-underline">
+            <Link href="/" className="font-serif text-2xl font-semibold text-primary no-underline">
               Abby<span className="text-accent">.</span>
-            </a>
+            </Link>
             <p className="mt-3 text-sm text-muted-foreground">
               Product engineer &amp; automation specialist — building complete
               digital products and business systems.
