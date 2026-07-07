@@ -17,9 +17,7 @@ import { cx } from "@/lib/cx";
  * Contact CTA stays visible at every width.
  *
  * Interim states (per IA v2 phasing): About points at its homepage section
- * until /about (Phase D) ships. The Resume link returns with the /resume
- * page once real resume content exists — the old /resume.pdf href was a
- * dead link.
+ * until /about (Phase D) ships. Resume is now a real page (/resume).
  * ------------------------------------------------------------------------- */
 
 const LINKS = [
@@ -27,6 +25,7 @@ const LINKS = [
   { href: "/projects", label: "Projects" },
   { href: "/business-systems", label: "Business Systems" },
   { href: "/#about", label: "About" },
+  { href: "/resume", label: "Résumé" },
 ] as const;
 
 /** Route links highlight on their own subtree; anchor links never highlight. */

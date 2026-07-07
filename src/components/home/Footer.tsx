@@ -15,6 +15,7 @@ const NAV = [
   { href: "/projects", label: "Projects" },
   { href: "/business-systems", label: "Business Systems" },
   { href: "/#about", label: "About" },
+  { href: "/resume", label: "Résumé" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -74,10 +75,16 @@ export default function Footer() {
                   GitHub
                 </a>
               </li>
-              {/* Resume rejoins as /resume once real resume content lands
-                  (IA v2 §8 input 1) — the old /resume.pdf href was dead.
-                  LinkedIn joins the moment the real URL is provided —
-                  no invented links (Phase 8A working rule). */}
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/abigailmarte/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-foreground/80 no-underline hover:text-primary"
+                >
+                  LinkedIn
+                </a>
+              </li>
             </ul>
           </div>
         </div>

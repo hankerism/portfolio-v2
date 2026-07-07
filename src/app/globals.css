@@ -622,3 +622,83 @@
 @keyframes draw {
   to { stroke-dashoffset: 0; }
 }
+
+/* 8 · PRINT ---------------------------------------------------------------- */
+/* The /resume page prints as one clean A4 sheet: chrome, decoration, and
+   colour drop away; typography and the editorial rhythm stay. Scoped mostly to
+   .resume so printing any other page just loses nav/footer and prints plainly.
+   Colour is remapped by overriding the semantic tokens within .resume, so the
+   existing utilities (text-foreground/80, bg-surface, …) become ink-on-white
+   with no per-element rules. */
+@media print {
+  /* Anything explicitly screen-only (nav, footer, CTAs, decorative doodles) */
+  .no-print { display: none !important; }
+
+  html, body {
+    background: #fff !important;
+    font-size: 8pt;
+  }
+
+  @page {
+    size: A4;
+    margin: 8mm 11mm;
+  }
+
+  /* Ink-friendly palette + zero page gutter (the @page margin owns the edge). */
+  .resume {
+    --background: #fff;
+    --surface: #fff;
+    --card: #fff;
+    --foreground: #1b1b1b;
+    --primary: #1b1b1b;
+    --muted-foreground: #4a4a4a;
+    --border: #d7d7d7;
+    --border-strong: #c6c6c6;
+    --accent-hover: #7a3d16;   /* deep enough to read as ink */
+    --spacing-gutter: 0;
+  }
+
+  /* Flatten decorative surfaces + let the sheet be pure white. */
+  .resume,
+  .resume-hero,
+  .resume-section {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  /* Handwritten eyebrows are decorative flourish — drop them for a crisp sheet;
+     the mono section number + serif title carry the hierarchy. */
+  .resume .hand { display: none !important; }
+
+  /* Links print as plain ink (URLs already shown as readable handles). */
+  .resume a { color: inherit !important; text-decoration: none !important; }
+
+  /* Type scale tuned for print (pt), overriding the fluid clamp() sizes.
+     8pt body with tight leading fits all six sections on one A4 sheet with a
+     safety margin (measured ~267mm of 281mm printable). */
+  .resume h1 { font-size: 16pt !important; margin: 0 !important; }
+  .resume h2 { font-size: 10pt !important; }
+  .resume h3 { font-size: 9.25pt !important; }
+  .resume p, .resume li, .resume dd, .resume dt { font-size: 8pt !important; line-height: 1.25 !important; }
+  .resume .font-mono { font-size: 6.5pt !important; }
+  .resume-hero p:first-of-type { font-size: 10pt !important; }  /* the role line */
+
+  /* Collapse the generous editorial whitespace to a single page. The screen
+     rhythm is built from section padding, space-y stacks, and mt-* utilities —
+     each is dialled down here rather than restyled. */
+  .resume-hero > * { padding-top: 0 !important; padding-bottom: 3pt !important; }
+  .resume-section { padding-top: 3pt !important; padding-bottom: 3pt !important; border-top-color: #d7d7d7 !important; }
+  .resume .space-y-8 > * + * { margin-top: 2.5pt !important; }
+  .resume .space-y-4 > * + * { margin-top: 2pt !important; }
+  .resume .mt-7 { margin-top: 2.5pt !important; }
+  .resume .mt-5 { margin-top: 2pt !important; }
+  .resume .mt-2 { margin-top: 1pt !important; }
+  .resume [class*="gap-y-7"] { row-gap: 3pt !important; }
+  .resume-section li { padding-top: 1.5pt !important; padding-bottom: 1.5pt !important; }
+
+  /* Keep each entry and section whole across the (single) page. */
+  .resume-section,
+  .resume-section li,
+  .resume-hero { break-inside: avoid; }
+  .resume h1, .resume h2, .resume h3 { break-after: avoid; }
+}
