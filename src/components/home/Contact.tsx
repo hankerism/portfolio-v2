@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Section from "@/components/layout/Section";
 import Stack from "@/components/layout/Stack";
 import Button from "@/components/ui/Button";
@@ -40,7 +41,9 @@ export default function Contact() {
             off your plate, or a full product built end to end — I&apos;d love to help.
           </p>
           {/* One conversion action; the address itself stays visible as a
-              quiet, copyable text link rather than a competing second button */}
+              quiet, copyable text link rather than a competing second button.
+              mailto: stays primary — /contact adds options, never a step
+              (IA v2 §4.7 friction rule). */}
           <Stack direction="row" gap="sm" wrap justify="center" align="center" className="pt-2">
             <Button href={`mailto:${EMAIL}`} size="lg" variant="primary">
               Say hello
@@ -49,6 +52,12 @@ export default function Contact() {
               {EMAIL}
             </a>
           </Stack>
+          <Link
+            href="/contact"
+            className="text-sm font-semibold text-muted-foreground underline-offset-4 hover:text-primary hover:underline"
+          >
+            All contact options →
+          </Link>
         </Stack>
       </div>
       </Reveal>

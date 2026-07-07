@@ -1,28 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
 import Section from "@/components/layout/Section";
+import Button from "@/components/ui/Button";
 import Reveal from "@/components/ui/Reveal";
 import Doodle from "@/components/ui/Doodle";
 import SectionHeading from "./SectionHeading";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * SelectedProjects — an exhibition wall of four magazine spreads.
+ * SelectedProjects — the Featured Projects Preview (IA v2 §4.1): a curated
+ * sample of three magazine spreads that teases the collection and hands off
+ * to /projects. (Bahay Liwanag's spread was promoted to the Featured
+ * Business System section in Phase B; KATHA has the flagship band.)
  *
  * Composition first, decoration second: in every spread the FIRST thing the
  * eye lands on is the screenshot; the props are supporting actors placed in
  * the margins. No two layouts repeat, and the rhythm alternates —
  *
- *   № 1  Bahay Liwanag    — CINEMATIC: a full-width 16:9 postcard crowns the
- *                           spread, copy tucked low-right; passport stamp +
- *                           one pressed leaf in the right margin, the route
- *                           wandering the bottom-left whitespace
- *   № 2  Casa Kape        — DENSE (the strongest): oversized taped photo,
+ *   № 1  Casa Kape        — DENSE (the strongest): oversized taped photo,
  *                           recipe notecard overlapping it, receipt tucked
  *                           behind, paperclipped menu, coffee ring, steam
- *   № 3  Purr Heaven      — SIMPLE: two big polaroids on blush paper, one
+ *   № 2  Purr Heaven      — SIMPLE: two big polaroids on blush paper, one
  *                           note, an elegant paw trail — nothing else
- *   № 4  Stephanie Center — CALM: the most breathing room; ruled paper,
+ *   № 3  Stephanie Center — CALM: the most breathing room; ruled paper,
  *                           bookmark ribbon, one leaf, one pressed blossom
  *
  * Copy (names, blurbs, tags) is unchanged; the only added words are the tiny
@@ -33,7 +33,6 @@ import { cx } from "@/lib/cx";
 /* Live sites --------------------------------------------------------------- */
 
 const LINKS = {
-  bahay: "https://heyitsabby.space/website/bahay-liwanag",
   casa: "https://heyitsabby.space/casa-kape",
   purr: "https://heyitsabby.space/website/purrheaven/home",
 } as const;
@@ -93,95 +92,7 @@ function Tags({ tags }: { tags: string[] }) {
 const MAT_HOVER =
   "transition-transform duration-300 ease-[var(--ease-paper)] motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-0";
 
-/* № 1 — Bahay Liwanag · cinematic travel journal ---------------------------- */
-
-function BahayLiwanag() {
-  return (
-    <article className="grain relative overflow-hidden rounded-[var(--radius-2xl)] border border-border bg-surface p-6 sm:p-10 lg:p-14">
-      {/* Right-margin ephemera: passport stamp, one pressed leaf beneath it */}
-      {/* pressed into the page, not printed on it — multiply blends the ink
-          into the paper grain beneath */}
-      <span
-        aria-hidden
-        className="absolute right-6 top-12 hidden rotate-[8deg] rounded-md border-2 border-dashed border-primary/35 p-1.5 opacity-90 mix-blend-multiply lg:block"
-      >
-        <Doodle kind="mountains" className="w-10 text-primary/45" />
-      </span>
-      <Doodle
-        kind="leaf"
-        draw
-        className="absolute right-9 top-32 hidden size-7 rotate-45 text-sage/50 lg:block"
-      />
-      {/* The route wanders the bottom-left whitespace */}
-      <Doodle
-        kind="route"
-        className="absolute bottom-16 left-12 hidden w-32 -rotate-3 text-primary/25 xl:block"
-      />
-
-      <div className="relative">
-        {/* The postcard — a cinematic 16:9 hero crowning the spread */}
-        <figure className="relative pb-9 lg:w-[86%]">
-          <div className={cx("paper curl relative p-3 motion-safe:-rotate-[0.6deg]", MAT_HOVER)}>
-            <span aria-hidden className="tape tape-cream left-10 -top-3 -rotate-6 rounded-[2px]" />
-            <span aria-hidden className="tape tape-cream -right-6 top-24 hidden rotate-[84deg] rounded-[2px] sm:block" />
-            <a
-              href={LINKS.bahay}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Visit the Bahay Liwanag website"
-              className="group relative block aspect-[16/9] overflow-hidden rounded-[var(--radius-sm)] bg-muted"
-            >
-              <Image
-                src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
-                alt="Bahay Liwanag — website homepage"
-                fill
-                className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
-                sizes="(min-width: 1024px) 860px, 92vw"
-              />
-            </a>
-          </div>
-          {/* a lighter pen than the other notes — not everything is written
-              with the same marker */}
-          <p
-            aria-hidden
-            className="hand absolute bottom-0 right-6 rotate-[-3deg] text-2xl font-medium"
-          >
-            wish you were here!
-          </p>
-        </figure>
-
-        {/* Journal entry — tucked low-right; the margin breathes */}
-        <div className="mt-6 flex flex-col gap-4 lg:ml-auto lg:mt-8 lg:w-[52%]">
-          <span aria-hidden className="hand text-2xl">№ 1 — from the travel journal</span>
-          <h3 className="text-3xl">Bahay Liwanag</h3>
-          <p className="text-lg text-foreground/80">
-            A serene site for a boutique resort — paired with a Make + Airtable
-            pipeline that turns enquiries into booked reservations automatically.
-          </p>
-          <Tags tags={["Boutique resort", "GoHighLevel", "Make + Airtable"]} />
-          <div className="flex flex-wrap items-center gap-x-6">
-            <Link
-              href="/projects/bahay-liwanag"
-              className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-primary no-underline"
-            >
-              <span className="underline-offset-4 group-hover/cs:underline">
-                Read the case study
-              </span>
-              <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
-                →
-              </span>
-            </Link>
-            <VisitLink href={LINKS.bahay} className="text-primary">
-              Visit Bahay Liwanag
-            </VisitLink>
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* № 2 — Casa Kape · editorial food magazine, oversized photo ---------------- */
+/* № 1 — Casa Kape · editorial food magazine, oversized photo ---------------- */
 
 function CasaKape() {
   return (
@@ -247,7 +158,7 @@ function CasaKape() {
           {/* Receipt slip tucked behind the card corner */}
           <span aria-hidden className="receipt absolute -right-7 -top-9 hidden h-24 w-16 rotate-6 lg:block" />
           <span aria-hidden className="hand text-2xl text-accent-hover">
-            № 2 — from the recipe notebook
+            № 1 — from the recipe notebook
           </span>
           <h3 className="text-3xl">Casa Kape</h3>
           <p className="text-lg text-foreground/80">
@@ -264,7 +175,7 @@ function CasaKape() {
   );
 }
 
-/* № 3 — Purr Heaven · adoption board, simplified ----------------------------- */
+/* № 2 — Purr Heaven · adoption board, simplified ----------------------------- */
 
 function PurrHeaven() {
   return (
@@ -317,7 +228,7 @@ function PurrHeaven() {
 
         {/* Poster copy */}
         <div className="flex flex-col gap-4">
-          <span aria-hidden className="hand text-2xl text-pink-deep">№ 3 — the adoption poster</span>
+          <span aria-hidden className="hand text-2xl text-pink-deep">№ 2 — the adoption poster</span>
           <h3 className="text-3xl">Purr Heaven</h3>
           <p className="text-lg text-foreground/80">
             A playful multi-page site for a cat adoption &amp; rescue group — an
@@ -334,7 +245,7 @@ function PurrHeaven() {
   );
 }
 
-/* № 4 — Stephanie Center · wellness planner, calmest page -------------------- */
+/* № 3 — Stephanie Center · wellness planner, calmest page -------------------- */
 
 function StephanieCenter() {
   return (
@@ -356,7 +267,7 @@ function StephanieCenter() {
         {/* Journal entry */}
         <div className="flex flex-col gap-4">
           <span aria-hidden className="hand text-2xl text-sage">
-            № 4 — from the wellness journal
+            № 3 — from the wellness journal
           </span>
           <div className="flex flex-wrap items-center gap-3">
             <h3 className="text-3xl">Stephanie Center Wellness</h3>
@@ -407,27 +318,37 @@ export default function SelectedProjects() {
           id="projects-heading"
           eyebrow="Selected work"
           title="A few things I've built lately"
-          intro="Thoughtfully crafted projects inspired by real businesses — each designed, developed, and structured like a client engagement."
+          intro="A curated sample from the collection — each project designed, developed, and structured like a client engagement."
         />
       </Reveal>
 
       {/* Each piece settles onto the page with its own slight tilt. The gaps
-          are curated, not metronomic: extra air before the dense Casa spread,
+          are curated, not metronomic: extra air after the dense Casa spread,
           and the longest exhale before the calm closing page. */}
       <ul className="mt-16">
-        <Reveal as="li" rot={-1.2} y={20} className="list-none">
-          <BahayLiwanag />
-        </Reveal>
-        <Reveal as="li" delay={100} rot={1.2} y={20} className="mt-20 list-none sm:mt-28">
+        <Reveal as="li" rot={1.2} y={20} className="list-none">
           <CasaKape />
         </Reveal>
-        <Reveal as="li" rot={-1.4} y={20} className="mt-20 list-none sm:mt-24">
+        <Reveal as="li" delay={100} rot={-1.4} y={20} className="mt-20 list-none sm:mt-24">
           <PurrHeaven />
         </Reveal>
-        <Reveal as="li" delay={100} rot={1} y={20} className="mt-24 list-none sm:mt-32">
+        <Reveal as="li" rot={1} y={20} className="mt-24 list-none sm:mt-32">
           <StephanieCenter />
         </Reveal>
       </ul>
+
+      {/* The hand-off — this wall is the preview; /projects is the collection
+          (IA v2 §4.1: tease the portfolio, never replace it) */}
+      <Reveal delay={80} y={16}>
+        <div className="mt-16 flex flex-col items-center gap-3 text-center sm:mt-20">
+          <p aria-hidden className="hand text-2xl text-muted-foreground">
+            there&rsquo;s more where these came from
+          </p>
+          <Button href="/projects" as={Link} variant="primary">
+            View all projects
+          </Button>
+        </div>
+      </Reveal>
     </Section>
   );
 }
