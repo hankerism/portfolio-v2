@@ -154,6 +154,16 @@ export default function FeaturedSystem() {
                 Airtable pipeline that turns enquiries into booked reservations
                 automatically.
               </p>
+              <p className="text-base text-foreground/70">
+                It&rsquo;s one example of how I think about business systems —{" "}
+                <Link
+                  href="/business-systems"
+                  className="font-semibold text-primary underline-offset-4 hover:underline"
+                >
+                  the whole approach lives here
+                </Link>
+                .
+              </p>
               <ul className="flex flex-wrap gap-2 pt-1" aria-label="Project details">
                 {["Boutique resort", "GoHighLevel", "Make + Airtable"].map((t) => (
                   <li

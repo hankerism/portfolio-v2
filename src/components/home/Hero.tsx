@@ -59,14 +59,12 @@ export default function Hero() {
             </p>
 
             {/* The two journey entrances (IA v2 §6): products and systems.
-                Contact stays one click away via the persistent navbar button.
-                The systems CTA points at the homepage preview until
-                /business-systems ships (Phase C). */}
+                Contact stays one click away via the persistent navbar button. */}
             <Stack direction="row" gap="sm" wrap className="animate-fade-up pt-2" style={{ animationDelay: "270ms" }}>
               <Button href="/projects" size="lg" variant="primary">
                 See my work
               </Button>
-              <Button href="#automation" size="lg" variant="outline">
+              <Button href="/business-systems" size="lg" variant="outline">
                 How I build systems
               </Button>
             </Stack>

@@ -1,16 +1,24 @@
 # Business Systems — Philosophy (Source of Truth)
 
-**Status:** ✅ Approved (2026-07-07) — canonical copy for the `/business-systems` page (IA v2 §4.4, Phase C)
+**Status:** ✅ Approved (2026-07-07) — canonical copy for the `/business-systems` page (IA v2 §4.4, Phase C). Opening story supplied by Abby 2026-07-07.
 **Voice:** first person, warm, plain-spoken. Lessons learned from six years in operations — not automation advice, not consultant vocabulary. If a line sounds like it belongs on a SaaS landing page, it's wrong.
 **Rule (unchanged):** every principle stays tied to real work. Nothing here claims a system, a client, or an outcome that didn't happen.
 
 ---
 
-## 1. The philosophy — canonical copy
+## 1. The opening story
 
-> This is the approved text. It is what the page's philosophy section renders. Edit here first; the page follows the doc, never the other way around.
+> Abby's own words — the lived experience the principles come from. This opens the page, before the philosophy begins. (This was the one open input; it is now supplied.)
 
-*Six years running operations before I wrote a line of code taught me most of this the slow way.*
+Before I became a web developer, I spent more than six years working in operations and as a virtual assistant. I noticed I was spending a lot of time moving the same information between emails, spreadsheets, CRMs, and different tools. None of it was difficult — it was just repetitive. That's what made me interested in automation.
+
+Today, I build systems that take care of that repetitive work, so people can spend more time making decisions, helping customers, and running their business.
+
+---
+
+## 2. The philosophy — canonical copy
+
+> This is the approved text. It is what the page's philosophy section renders. Edit here first; the page follows the doc, never the other way around. **The seven principles below are approved and must not change.**
 
 **Start with the work you do over and over.**
 The small stuff — copying details from an email into a spreadsheet, retyping the same reply — never feels big in the moment. But it's where the hours actually go. That's the first place I look.
@@ -35,13 +43,13 @@ I don't start from "what can GoHighLevel do." I start with how the business actu
 
 ---
 
-## 2. Grounding — where each principle comes from
+## 3. Grounding — where each principle comes from
 
 So the page (and any future edit) never drifts from real work:
 
 | Principle | The real decision behind it |
 |---|---|
-| Start with repetitive work | The whole automation framing — "catch a new enquiry, reply, book it in, and let you know" — targets the recurring manual loop, not a one-off. |
+| Start with repetitive work | The opening story, and the automation framing — "catch a new enquiry, reply, book it in, and let you know" — target the recurring manual loop, not a one-off. |
 | Take the busywork, not the decisions | Bahay Liwanag: capture / acknowledge / log are automated; the availability call ("we review your dates") is deliberately left to a person. |
 | Ask once | Bahay's single intake form with five custom fields — one path, captured once, no re-typing. |
 | Keep it findable | The "saved & sorted — details logged neatly in Airtable" step; one durable record per enquiry. |
@@ -51,21 +59,14 @@ So the page (and any future edit) never drifts from real work:
 
 ---
 
-## 3. Still needed from Abby (open input — do not invent)
-
-- **One real operations memory** to open the page: a specific manual grind from the operations/VA years — the thing done a hundred times that made "this should run itself" obvious. This becomes the opening beat and turns the principles from statements into lessons. Until it exists, the page opens on the intro line above; the memory slots in ahead of it when supplied.
-
----
-
 ## 4. How this feeds the `/business-systems` page (IA v2 §4.4)
 
-The philosophy above is **§1** of the page. The rest of the page, to be written in the same voice at build time:
-
-- **§1 — Philosophy.** The canonical copy in §1 of this doc.
+- **Opening.** The story in §1 of this doc is the page's lead — before the philosophy begins.
+- **§1 — Philosophy.** The seven principles in §2 of this doc, verbatim.
 - **§2 — The capabilities, as jobs not logos.** Same plain voice: GoHighLevel (the front desk + the customer list), pipelines & workflow (the steps a job moves through), Make (the runner that carries things between tools), Airtable (the tidy list you actually work from). Framed as roles in how a business runs, grounded in the Bahay build — not a tool showcase.
 - **§3 — Systems I've built.** Each in plain "here's what was slow → here's what I built → here's what it took off their plate" form, deep-linking into the project that proves it:
   - Bahay Liwanag booking system → `/projects/bahay-liwanag` (its automation and CRM chapters).
   - Stephanie Center quiz funnel → its future case study, once real evidence exists (held back until then — no claim without proof).
 - **§4 — Close.** Products need systems, systems need products → `/projects` and contact.
 
-Evidence rule holds: §1–2 are Abby's thinking (safe to write). §3 claims only what a linked case study can back up.
+Evidence rule holds: the story, philosophy, and capability roles are Abby's thinking (safe to write). §3 claims only what a linked case study can back up.

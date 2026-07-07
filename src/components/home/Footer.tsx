@@ -8,12 +8,12 @@ import Doodle from "@/components/ui/Doodle";
  * intentionally omitted until real handles are available (no invented URLs).
  * ------------------------------------------------------------------------- */
 
-/* Route-based sitemap column (IA v2 §5). Business Systems and About point at
- * their homepage sections until their routes ship (Phases C and D). */
+/* Route-based sitemap column (IA v2 §5). About points at its homepage
+ * section until its route ships (Phase D). */
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/#automation", label: "Business Systems" },
+  { href: "/business-systems", label: "Business Systems" },
   { href: "/#about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];

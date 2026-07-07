@@ -16,16 +16,16 @@ import { cx } from "@/lib/cx";
  * (aria-expanded/controls, Escape to close, closes on navigation). The
  * Contact CTA stays visible at every width.
  *
- * Interim states (per IA v2 phasing): Business Systems and About point at
- * their homepage sections until /business-systems (Phase C) and /about
- * (Phase D) ship. The Resume link returns with the /resume page once real
- * resume content exists — the old /resume.pdf href was a dead link.
+ * Interim states (per IA v2 phasing): About points at its homepage section
+ * until /about (Phase D) ships. The Resume link returns with the /resume
+ * page once real resume content exists — the old /resume.pdf href was a
+ * dead link.
  * ------------------------------------------------------------------------- */
 
 const LINKS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/#automation", label: "Business Systems" },
+  { href: "/business-systems", label: "Business Systems" },
   { href: "/#about", label: "About" },
 ] as const;
 
