@@ -1,232 +1,316 @@
-# Portfolio v2.0 — Information Architecture & Content Strategy
+# Portfolio v2.0 — Information Architecture, Version 2
 
-**Phase:** 1 (Blueprint — no implementation)
-**Date:** 2026-07-04
-**Author role:** UX strategy / product design
-**Status:** Draft for review — contains open inputs (see "Input Gaps" and "Open Questions")
-
----
-
-## Inputs Used — and Input Gaps
-
-This document was asked to draw on four inputs. Their actual state at time of writing:
-
-| Input | State | How it was used |
-|---|---|---|
-| `docs/AUDIT.md` | ✅ Complete (Phase 0) | Primary input — findings, positioning goals, and roadmap constraints are carried forward. |
-| `docs/PROJECT.md` | ⚠️ **Empty file (0 bytes)** | Not usable. Positioning is taken from the Phase 0 brief instead. |
-| `docs/ROADMAP.md` | ⚠️ **Empty file (0 bytes)** | Not usable. Phase mapping follows the roadmap proposed in AUDIT.md. |
-| `docs/reference/ghl-homepage.html` | ⚠️ **Empty file (0 bytes)** — the export captured no content | Not usable. Decisions that depend on the current GoHighLevel homepage (what copy/sections/testimonials already exist and perform) are explicitly marked **[GHL input needed]** below. Re-export the page (e.g., browser → View Source → Save, or GHL funnel export) and this document should be revisited in one pass. |
-
-Nothing in this blueprint is invented from the missing files. Where a decision needs a fact that isn't verifiable yet (metrics, testimonials, exact copy from the current site), it is marked as an open input rather than assumed.
+**Status:** ✅ Approved direction (2026-07-07) — implementation gated on final sign-off of this document
+**Supersedes:** IA Version 1 (2026-07-04, the one-page-site blueprint — preserved in git history)
+**Author role:** UX architecture
+**Scope:** Sitemap, navigation, user journeys, internal linking, page responsibilities. No visual redesign; no implementation in this phase.
 
 ---
 
-## 1. Strategic Foundation
+## 0. Why a Version 2 exists
 
-### The one-sentence positioning
+Version 1 designed a **landing page with one case study**. That site shipped, and then outgrew the premise: the homepage now carries two complete case studies' worth of teasers, four editorial project spreads, and a capability section — destination content living inline. The portfolio has evolved from a landing page into a **portfolio application**.
+
+The governing shift in one line:
+
+> **The homepage is no longer the destination. It is the introduction. Every major section leads to deeper evidence.**
+
+Version 1's core assets are carried forward unchanged: the positioning sentence, the audiences, the claim → proof → explanation → conversion arc, and the evidence discipline (nothing published that can't be verified). What changes is *where things live* and *how visitors move*.
+
+---
+
+## 1. Strategic foundation (carried forward, journey-first)
+
+### Positioning (unchanged)
 
 > **Abby builds complete digital products and business systems — the product, the operations behind it, and the automation that connects them.**
 
-Everything in this IA exists to make a visitor believe that sentence within 30 seconds, then prove it within 3 minutes.
+### The primary goal: two recruiter journeys
 
-### The narrative arc (why this ordering works)
-
-Most developer portfolios say "I write code." Most VA/ops profiles say "I support businesses." The rare, valuable position is the intersection: **someone who has run business operations for 6+ years and can now engineer the systems she used to operate.** The IA is built as a story in three beats:
-
-1. **Claim** — "I build complete products and business systems" (Hero)
-2. **Proof** — KATHA (a real, complete product) + systems/automation work (real business infrastructure)
-3. **Explanation** — the operations→engineering background that makes the combination credible (About)
-
-…closing with a single, unambiguous conversion point (Contact).
-
-### Audiences, in priority order
-
-| # | Audience | What they need to see | Deciding moment |
-|---|---|---|---|
-| 1 | **Recruiters / hiring managers** (product engineer, automation, ops-technical roles) | Real shipped work, modern stack, engineering discipline | "Would a recruiter immediately understand what I actually build?" — answered by Hero + first proof section, above the fold or one scroll below it |
-| 2 | **SMB owners / founders** (freelance systems & automation work) | Business fluency: CRM, workflows, GHL — someone who speaks operator, not just developer | The systems section + plain-language copy throughout |
-| 3 | **Peers / collaborators** | Craft, taste, writing | Case study depth |
-
-The homepage must serve audience 1 and 2 simultaneously **without splitting into two websites**. The unifying frame: *products* (what gets built) and *systems* (what makes them run). Recruiters read it as range; founders read it as full-service capability.
-
-### Primary conversion goal
-
-One goal per page: **start a conversation** (contact). Secondary goal: **read the KATHA case study**. Every section's CTA must point at one of these two — no competing CTAs (newsletter, socials-first, etc.).
-
----
-
-## 2. Site Map (v2 scope)
+The entire IA is judged by whether these two paths feel natural — every navigation and linking decision below exists to serve one or both:
 
 ```
-/                      Homepage (Phase 2)
-/work/katha            Flagship case study (Phase 3)
-/work/[future]         Case study template — future automation/systems studies (Phase 4)
-/about                 Optional standalone — only if homepage About outgrows itself (Phase 4, decide later)
+Engineering Manager                    Founder / Operations Leader
+
+Home                                   Home
+ ↓                                      ↓
+Projects                               Business Systems
+ ↓                                      ↓
+KATHA Case Study                       Automation Philosophy
+ ↓                                      ↓
+GitHub                                 Bahay Liwanag System
+ ↓                                      ↓
+Interview                              Interview
 ```
 
-Deliberately small. A portfolio earns depth per page, not page count. Navigation therefore stays flat: **Work · About · Contact** (About and Contact may be homepage anchors until/unless they become routes).
+Journey 1 travels the **Projects** pillar; journey 2 travels the **Business Systems** pillar. The two pillars cross-reference each other (§7.4) because the intersection *is* the positioning.
+
+### Naming decisions (approved)
+
+| Old name | New name | Why |
+|---|---|---|
+| Work / Projects (split) | **Projects** (single) | One word, one container, one nav item. The v1 split ("Work" = KATHA anchor, "Projects" = the other four) cost a nav slot and blurred the site's cleanest word. |
+| Automation | **Business Systems** | The value is broader than automation: Abby designs *systems*; automation is one capability inside systems thinking. The page name should claim the larger territory. |
 
 ---
 
-## 3. Homepage — Section-by-Section Blueprint
+## 2. Route audit — current state vs. target
 
-Order is intentional and load-bearing. Rationale follows each section.
+### As of 2026-07-07
 
----
+| Route | State | Disposition |
+|---|---|---|
+| `/` | 6 anchor-linked sections; nav is `/#anchor`-based | Slims to a curated overview (§4.1); nav becomes route-based |
+| `/work/katha` | ✅ Complete engineering case study | **Moves to `/projects/katha`** — permanent redirect from `/work/katha` |
+| `/work/bahay-liwanag` | ✅ Complete business-systems case study | **Moves to `/projects/bahay-liwanag`** — permanent redirect |
+| `/resume.pdf` | ⛔ **Broken** — linked from header + footer on every page, file does not exist | Fixed in the same phase: real PDF + `/resume` page |
+| `/style-guide` | Internal design reference | Keep, unlisted |
 
-### 3.1 Navbar
+### Known internal references to migrate (implementation checklist, not IA)
 
-- **Purpose:** Orientation and one-click access to conversion. Establish the brand mark ("Abby.") as identity, not decoration.
-- **Key message:** "This is a designed product, and you can reach the important things from anywhere."
-- **Visitor takeaway:** *I know where I am and how to act.*
-- **Suggested components:** `Navbar` (exists — needs real links per AUDIT H6), brand mark as link-to-top (not a heading), anchor links (Work, Systems, About), one visually distinct `Button` (variant: primary) for **Contact**. Mobile: collapse to minimal menu — with only 3–4 links, prefer a compact inline row over a hamburger if space allows.
-- **Future improvements:** Active-section indication on scroll; hide-on-scroll-down/reveal-on-scroll-up behavior; command-palette style quick nav (only if it demonstrably serves the "I build products" story — resist gimmicks).
+- Navbar links (4 anchor links → route links; Resume link target)
+- Hero CTAs (`#work`, `#contact` → the two journey entrances, §4.1)
+- `FeaturedProject` → `/work/katha` → `/projects/katha`
+- `SelectedProjects` Bahay spread → `/work/bahay-liwanag` → `/projects/bahay-liwanag`
+- Bahay case study internals: link to `/work/katha`, "← Back to all work" → `/#projects`
+- KATHA case study internals: "← Back to all work" → `/#projects`
+- Footer link set
+- `docs/BAHAY_LIWANAG_EVIDENCE.md` references `/work/bahay-liwanag`
 
-*Rationale:* AUDIT H6 flagged the current `<nav>` as an empty landmark with an `<h2>` brand. This section fixes purpose, not just markup.
-
----
-
-### 3.2 Hero — The Claim
-
-- **Purpose:** Land the positioning sentence and filter the visitor into the right proof path within one viewport.
-- **Key message:** *"I build complete digital products and business systems."* Explicitly **not** "I build beautiful websites with code" (current copy — the exact framing the project brief retires; AUDIT H3).
-- **Visitor takeaway:** *This person ships whole things — product, operations, automation — not just pages.* A recruiter should be able to repeat back what Abby does after reading only this section.
-- **Suggested components:**
-  - `Hero` (exists — full rewrite of content)
-  - Headline: the claim, in plain words, no jargon, no "passionate about"
-  - Subhead: the credibility compression — product engineering × 6+ years operations & automation (exact phrasing is CONTENT.md work)
-  - Two CTAs max: `Button` primary → "See KATHA" (anchor/route to flagship proof); `Button` secondary → "Get in touch". Note AUDIT H7: CTAs are navigation — render as links styled as buttons, not `<button>` elements.
-  - Optional supporting element: a restrained visual token of "systems" (e.g., a small diagram motif or product screenshot) — decide in Phase 2 design, not here.
-- **Future improvements:** Rotating or context-aware subhead (recruiter vs. founder phrasing) — only after analytics exist; subtle motion on entry respecting `prefers-reduced-motion`.
-
-*Rationale:* The claim must come before any proof, because proof without a frame reads as "misc projects."
+Redirect rule: `/work/:slug → /projects/:slug` (permanent). No `/work` index ever shipped, so only the two case-study URLs need redirects.
 
 ---
 
-### 3.3 Credibility Strip (optional, small)
+## 3. Sitemap (approved)
 
-- **Purpose:** Sub-second scan of scope: core stack and systems tooling in one quiet row. Bridges the claim to the proof without a full section's weight.
-- **Key message:** "The toolbox spans both worlds — Next.js/TypeScript *and* CRM/workflow/automation platforms."
-- **Visitor takeaway:** *She's fluent in my world's tools* (whichever world the visitor is from).
-- **Suggested components:** `CredibilityStrip` or extend `Hero` footer area — text-only list or small monochrome logo row (Next.js, TypeScript, Tailwind, GoHighLevel, [CRM/automation tools — **to confirm from resume, do not guess**]). No progress bars, no percentage skills — those undermine senior positioning.
-- **Future improvements:** Replace tool names with outcome numbers when they exist (years, projects shipped, workflows automated) — **[data needed, do not invent]**.
+```
+/                          Homepage — curated overview & introduction
+/projects                  Index of everything built — editorial table of contents
+  /projects/katha            ✅ Engineering case study (exists; migrates from /work/)
+  /projects/bahay-liwanag    ✅ Business-systems case study (exists; migrates from /work/)
+  /projects/casa-kape        Future — created only when real evidence exists
+  /projects/purr-heaven      Future — created only when real evidence exists
+  /projects/stephanie-center Future — created only when real evidence exists
+/business-systems          Capability page — systems thinking (NOT a project page)
+/about                     The full story
+/resume                    Resume page + Download PDF (/resume.pdf)
+/contact                   Contact options
+```
 
-*Rationale:* Optional because it must stay one line tall; if it grows, it's doing the Skills section's job badly and should be cut.
-
----
-
-### 3.4 Flagship Work — KATHA (Proof #1)
-
-- **Purpose:** The single strongest, fully verifiable proof of "builds complete digital products." One project, treated like a product launch — not a grid of six thumbnails.
-- **Key message:** "KATHA is a complete publishing platform — designed, engineered, and shipped end to end."
-- **Visitor takeaway:** *This is real production work with real engineering depth — and there's a full case study if I want it.*
-- **Suggested components:**
-  - `FeaturedWork` section wrapper with editorial-style header
-  - `CaseStudyCard` (large format): cover imagery from the product, one-paragraph summary, 3–4 fact bullets drawn from verifiable build history (e.g., full-stack Next.js bookstore/publishing platform; authentication with user/author roles; client-side search engine with result highlighting; cover-management studio and editorial design system — all verifiable in the KATHA repo)
-  - `Button` secondary → "Read the case study" (`/work/katha`)
-- **Future improvements:** Second and third `CaseStudyCard` instances as more product work ships; light interaction preview (short looping capture of the product) once performance budget is set.
-
-*Rationale:* AUDIT identified KATHA as the flagship asset. Leading proof with the deepest artifact sets the quality bar for everything below it.
+**Empty-page rule (approved):** future project routes are **not created** until a verifiable case study exists. Until then, those projects appear on `/projects` with honest link states (§4.2). No dead routes, no placeholder pages, no fabricated content — ever.
 
 ---
 
-### 3.5 What I Build — Capabilities Frame
+## 4. Page responsibilities
 
-- **Purpose:** Generalize from one flagship to a repeatable offering. This is the section that makes the two audiences converge: it names the *categories* of work.
-- **Key message:** "Three connected capabilities: **digital products** (web apps, platforms), **business systems** (CRM, pipelines, client operations), **automation** (workflows that remove manual work)."
-- **Visitor takeaway:** Recruiter: *range beyond feature tickets.* Founder: *she can own my whole stack, not one slice.*
-- **Suggested components:** `Capabilities` section with three `CapabilityCard`s — each: name, two-sentence plain-language description, representative tools/examples. No prices, no service-menu tone; framed as "what I build," not "what you can buy."
-- **Future improvements:** Each card links to a filtered work listing or relevant case study as the portfolio grows; micro-illustrations per capability in the site's design language.
+Each page has one job, a defined content set, and defined exits. "Exits" are the internal-linking contract (§7).
 
-*Rationale:* Placed after the flagship, not before — categories are believable once one concrete example has been seen.
+### 4.1 `/` — Homepage: the introduction
+
+**Job:** introduce who Abby is and convince the visitor to keep exploring. Tease the portfolio; never replace it.
+
+**Sections (approved order):**
+
+1. **Hero** — the claim. Two CTAs = the two journey entrances: primary → `/projects`, secondary → `/business-systems`. (Contact stays one click away via the persistent navbar button.)
+2. **Featured Project — KATHA** — flagship product proof. Exits: Read the case study → `/projects/katha`; quiet "All projects →" → `/projects`.
+3. **Featured Business System — Bahay Liwanag** — flagship systems proof, elevated out of the old Selected Projects wall to mirror the KATHA section (the homepage now *shows* both pillars, in order). Exits: Read the case study → `/projects/bahay-liwanag`; "How I think about systems →" → `/business-systems`.
+4. **Featured Projects Preview** — 2–3 of the remaining spreads (Casa Kape, Purr Heaven, Stephanie Center) in the existing scrapbook style, **kept visually rich** — this is a curated sample, not the collection. Exit: **"View all projects" CTA → `/projects`**.
+5. **About Preview** — photo/thesis + 2–3 sentences. Exit: "More about me →" → `/about`.
+6. **Contact Preview** — the existing CTA band, **direct email intact** (§4.7). Exit: `/contact` for options, `mailto:` for action.
+
+**What leaves the homepage:** destination-weight content only — the full four-spread project wall (its weight moves to `/projects`), the full automation flow detail (moves to `/business-systems`), long-form about (moves to `/about`). The visual identity of every section stays.
+
+### 4.2 `/projects` — the index of everything built
+
+**Job:** the evidence index. Everything Abby has built, one page, scannable in under a minute.
+
+**Form (approved):** *not* a typical portfolio grid — an **editorial table of contents**: magazine contents page / museum exhibition guide / curated collection. Numbered entries, generous whitespace, the scrapbook language (paper, tape, handwritten margin notes) doing wayfinding work: the page should read like the contents spread of the book the case studies are chapters of.
+
+**Every entry carries:**
+
+- Title
+- Category (e.g., "Product engineering" / "Business system" / "Website")
+- Short description (existing verified blurbs)
+- Technologies
+- **Available links only, stated honestly:**
+  - `Read case study →` (KATHA, Bahay Liwanag)
+  - `Live demo →` / `Live site →` (where a live URL exists)
+  - `Source →` (KATHA's public repo; others have no public source — the link simply doesn't appear)
+  - Projects without a case study yet carry a quiet, honest marker (the existing "case study in progress" pattern) — **never a dead link, never a fabricated one**
+
+**Order:** KATHA first, Bahay Liwanag second (the two pillars, matching homepage order), then the rest.
+
+**Exits:** each entry → its case study / live site; end-of-page → contact band ("seen enough to talk?").
+
+### 4.3 `/projects/katha` and `/projects/bahay-liwanag` — existing case studies
+
+**Job:** unchanged — the deep evidence. Content does not change in this phase; only the URL (with redirects) and the connective tissue:
+
+- Breadcrumb: `← All projects` → `/projects` (top of page, consistent position)
+- End-of-page adds **Next project →** (the lateral ring, §7.3)
+- **Approved constraint:** Bahay Liwanag's automation content **remains a chapter inside the project case study**. `/business-systems` deep-links into it (e.g., `#automation`, `#crm`); it is not moved or duplicated.
+
+### 4.4 `/business-systems` — the capability page
+
+**Job:** demonstrate how Abby thinks about business systems. This is **not another project page** — it is the systems-thinking hub of the second journey.
+
+**Content (approved scope):**
+
+1. **Philosophy / operational thinking** — the principles (in Abby's words — input needed, §8): automate around the human decision, capture everything as structured data, one source of truth, systems the owner can actually run.
+2. **The capabilities, as architecture roles** — CRM architecture, pipelines, workflow design; GoHighLevel (surface + CRM), Make.com (the courier between tools), Airtable (the operational log). Explained as *roles in a system*, not a logo wall.
+3. **Systems I've built** — each in operations-native format (Problem → System built → What it removed), and each **deep-linking into the project where it's proven**:
+   - Bahay Liwanag booking system → `/projects/bahay-liwanag` (→ `#automation`, `#crm` chapters) — *"Read the full project case study"*
+   - Stephanie Center quiz funnel → its future case study, once evidence exists (until then: described only to the extent verifiable, or held back)
+4. **Cross-pillar close** — products need systems, systems need products → `/projects` + contact.
+
+**Evidence constraint:** sections 1–2 are Abby's thinking (safe to author with her input). Section 3 claims only what a linked case study evidences — the case studies remain the single source of proof.
+
+### 4.5 `/about` — the full story
+
+**Job:** expand the homepage preview into the real narrative: 6+ years operations → workflow/CRM → automation → product engineering, and why that arc makes the two pillars one practice. Content authored from Abby's input (§8) — not invented.
+
+**Exits:** "See it in practice" → `/projects` · `/resume` · contact.
+
+### 4.6 `/resume` — the credentials page
+
+**Job:** the recruiter's reflex-scan destination. HTML resume (scannable, linkable, SEO-visible) + **Download PDF** → a real `/resume.pdf` (fixing today's broken header/footer link). Content from Abby's actual resume — dates, titles, tools confirmed, none guessed.
+
+**Exits:** Download PDF · contact.
+
+### 4.7 `/contact` — the conversion page
+
+**Job:** make starting a conversation easy, and set expectations. Email first and biggest, then LinkedIn/GitHub; later, optionally, a GHL-powered form (itself portfolio-worthy — "this form runs on a pipeline I built").
+
+**Approved friction rule:** the homepage keeps its contact preview, and **no extra click is ever forced before contacting** — every existing `mailto:` stays a `mailto:`. `/contact` adds options and context; it does not interpose a step.
+
+**Exits:** none. This page is the terminal — email, LinkedIn, GitHub only.
 
 ---
 
-### 3.6 Systems & Automation in Practice (Proof #2)
+## 5. Navigation (approved)
 
-- **Purpose:** Prove the second half of the claim with operational work: the GoHighLevel builds, CRM configurations, and workflow automations. This is the section recruiters for automation/ops-technical roles and founder-clients weight most heavily.
-- **Key message:** "Business systems are built product work too — here's real infrastructure I've designed and run."
-- **Visitor takeaway:** *She has actually operated and automated businesses — this isn't theoretical.*
-- **Suggested components:**
-  - `SystemsShowcase` section; 1–3 `SystemCard`s, each structured as **Problem → System built → What it removed/enabled** (an operations-native format that doubles as case-study seeds)
-  - Candidate content: the GoHighLevel funnel/quiz build (form logic, scoring workflow, automated follow-up) — **[GHL input needed:** re-export `ghl-homepage.html` and gather workflow specifics so this content is documented, not remembered**]**
-  - Outcome numbers only where real — **do not fabricate metrics; mark gaps in CONTENT.md**
-- **Future improvements:** Promote the strongest system into a full `/work/` case study with diagrams (Phase 4); anonymized architecture diagrams for client work that can't be shown directly.
+```
+[Abby.]        Home · Projects · Business Systems · About · Resume        [Get in touch]
+```
 
-*Rationale:* Separating product proof (3.4) from systems proof (3.6) keeps each sharp; the capabilities frame (3.5) between them explains why both belong on one site.
+- **Items:** Home, Projects, Business Systems, About, Resume, Contact — all real routes. Contact renders as the persistent primary button (existing pattern); the brand mark also links home.
+- **No dropdowns.** Six items is within scan range; the `/projects` index does the disclosure work a dropdown would badly.
+- **Active-route indication** — the strongest single "this is an application" signal, now possible because items are routes, not anchors. (The v1 anchor nav threw visitors back to the homepage from any case study; that failure mode disappears.)
+- **Mobile:** same set in the existing disclosure menu, Contact button included.
+- **Footer:** brand + email/GitHub/LinkedIn + a compact sitemap column (the six routes) — the safety net for footer-navigators. Resume link points at `/resume` (page), which offers the PDF.
 
----
+### Breadcrumbs
 
-### 3.7 About — The Explanation
+Depth-aware, minimal:
 
-- **Purpose:** Resolve the "how does one person do both?" question with the actual story: 6+ years in operations and virtual assistance → workflow design → automation → modern web development. The narrative *is* the differentiator; this section makes the unusual combination feel inevitable rather than scattered.
-- **Key message:** "I engineer systems well because I've run them. Operations taught me what software has to survive."
-- **Visitor takeaway:** *The breadth is coherent — and I'd want to work with this person.*
-- **Suggested components:** `About` section — short first-person narrative (3–5 short paragraphs max, written in CONTENT.md phase), one real photo (not stock), optionally a compact `Timeline` (Ops → Workflow/CRM → Automation → Product engineering). CTA at end: quiet link to Contact.
-- **Future improvements:** Expand to `/about` route if the story needs more room (Phase 4 decision); pull-quote styling for the thesis line.
-
-*Rationale:* Placed after all proof deliberately — biography before proof reads as justification; after proof it reads as explanation.
+- Top-level pages (`/projects`, `/business-systems`, `/about`, `/resume`, `/contact`): **no breadcrumb** — at depth 1 the navbar *is* the breadcrumb.
+- Case studies (depth 2): a single consistent `← All projects` at the top of the page (formalizing the existing "back to all work" courtesy link into a location convention).
+- Full `Home / Projects / KATHA` trails: **no** in the UI (chrome without orientation gain at this scale); **yes** as BreadcrumbList structured data at implementation time (SEO only).
 
 ---
 
-### 3.8 Contact — The Conversion
+## 6. User journeys — mapped to mechanisms
 
-- **Purpose:** One clear, low-friction way to start a conversation. The page has been building to exactly one action; this is it.
-- **Key message:** "If you're building something — a product, a system, or both — let's talk."
-- **Visitor takeaway:** *Reaching out is easy and will be answered.*
-- **Suggested components:** `ContactCTA` section — headline, one sentence of invitation, primary `Button` (mailto or contact form), plus plain-text email and LinkedIn/GitHub links for people who won't click buttons. If a form is used later, keep it ≤3 fields; forms are a Phase 4+ enhancement, `mailto:`/direct email is v2-sufficient. (AUDIT H7: this is where the old "Hire Me" dead button's job actually gets done — as a link.)
-- **Future improvements:** Scheduling link (Calendly-style) if inbound volume justifies it; a GHL-powered form + workflow — which would itself be portfolio-worthy ("this contact form runs on a pipeline I built") **[GHL input needed]**.
+Every step of both journeys names the UI that carries it. If a mechanism is missing at build time, the journey is broken — this table is the acceptance test.
 
-*Rationale:* Single conversion point at the bottom, echoed by the persistent navbar Contact button — standard, effective, honest.
+### Journey 1 — Engineering Manager
 
----
-
-### 3.9 Footer
-
-- **Purpose:** Clean landing. Identity echo, minimal link set, no surprises below it (the Phase 0 audit of the GHL site found stray UI below the footer — the v2 rule is: **nothing renders after the footer, ever**).
-- **Key message:** "Finished product, down to the last pixel."
-- **Visitor takeaway:** *Complete and cared-for.*
-- **Suggested components:** `Footer` (exists) — brand mark, computed year (AUDIT M4), links: email, GitHub, LinkedIn. Optionally a quiet "Built with Next.js — view source" link (engineering-discipline signal).
-- **Future improvements:** Colophon line (typefaces, stack) as a craft signal.
-
----
-
-## 4. KATHA Case Study Page (`/work/katha`) — IA Preview
-
-Full treatment is Phase 3; the IA skeleton is fixed now so the homepage card links into a known structure:
-
-1. **Hero** — product name, one-line definition, role ("designed & built end-to-end"), stack line
-2. **Context** — what KATHA is and why it was built
-3. **The build** — 3–5 subsections matching real engineering arcs from the repo history (auth & user/author model; search engine & highlighting; cover studio & editorial system; polish/production pass)
-4. **Design system** — the editorial visual language, with artifacts
-5. **What I'd do next** — honest forward look (senior signal)
-6. **Next/Contact footer** — route to conversation or next case study
-
-Each future case study (including a GHL systems study) reuses this template — **Purpose: consistency compounds credibility.**
-
----
-
-## 5. What This Blueprint Feeds
-
-| Downstream doc/phase | What it takes from here |
+| Step | Carried by |
 |---|---|
-| `docs/CONTENT.md` (next) | Section-by-section copy briefs: headline + subhead per section, About narrative, KATHA fact bullets, capability descriptions. Also owns the **fact-checklist** (years, tools, metrics — all to be confirmed, none invented). |
-| Phase 2 (Homepage build) | Section order 3.1–3.9 is the build order; component names here are the component inventory. |
-| Phase 3 (KATHA case study) | Section 4 skeleton. |
-| `docs/PROJECT.md` (empty — should be written) | The Strategic Foundation (§1) is a draft of what PROJECT.md should ratify: positioning sentence, audiences, conversion goal. |
-| `docs/ROADMAP.md` (empty — should be written) | AUDIT.md's phase plan + this doc's phase notes are the raw material. |
+| Home → Projects | Hero primary CTA · nav "Projects" · KATHA section's "All projects →" · Featured Projects Preview's "View all projects" |
+| Projects → KATHA | First entry in the table of contents, `Read case study →` |
+| KATHA → GitHub | In-page proof buttons (hero + closing section — already exist) |
+| GitHub → Interview | Case-study closing contact CTA · navbar "Get in touch" (persistent, so the return path from GitHub lands anywhere and still converts) |
+
+### Journey 2 — Founder / Operations Leader
+
+| Step | Carried by |
+|---|---|
+| Home → Business Systems | Hero secondary CTA · nav "Business Systems" · Featured Business System section's "How I think about systems →" |
+| Business Systems → Philosophy | It's the page's opening chapter — no navigation needed |
+| Philosophy → Bahay Liwanag system | "Systems I've built" card → `/projects/bahay-liwanag` (deep-link into `#automation`/`#crm`) |
+| Bahay Liwanag → Interview | Case-study closing contact CTA · navbar button |
+
+### Secondary paths (supported, not optimized)
+
+- Curiosity path: Home → About → Projects → Resume → Contact (§7 chains)
+- Direct-evaluation path: `/resume` reached from the header at any depth
+- Cross-pillar hop: KATHA ↔ Bahay Liwanag ("the other side of the trade" links — §7.4)
 
 ---
 
-## 6. Open Questions & Required Inputs
+## 7. Internal linking strategy
 
-1. **Re-export the GoHighLevel homepage** — `docs/reference/ghl-homepage.html` is an empty file. Until it exists, the v2 IA cannot honor the "keep what is already strong" principle against the current production site: existing copy, testimonials, section order, and any performing elements are unknown here. *(Also worth capturing while in GHL: the quiz funnel structure — form → scoring → workflow → redirect — both as a systems case-study source and because it's active production work.)*
-2. **Fact inventory** — exact tools (CRMs, automation platforms), years per skill area, any real metrics (workflows built, hours saved, clients served). Needed before CONTENT.md; nothing in this blueprint assumes them.
-3. **Contact channel decision** — direct email vs. form (recommendation: email for v2 launch; form later).
-4. **Photo/visual identity assets** — does a personal photo / logo mark beyond "Abby." exist?
-5. **Domain & deployment target** — unresolved from AUDIT (TD5); affects metadata and OG work in Phase 5, not this IA.
+### 7.1 The rule
+
+**Every page ends by suggesting the next step. No dead ends anywhere except `/contact` (the terminal).**
+
+### 7.2 Next-step blocks, per page
+
+| Page | End-of-page exits |
+|---|---|
+| `/` | Sections exit to their pillars throughout; final section is the contact preview |
+| `/projects` | Contact band ("seen enough to talk?") |
+| Case studies | Proof buttons (GitHub / live) · **Next project →** · contact CTA |
+| `/business-systems` | Deep links into evidencing case studies · contact |
+| `/about` | → `/projects` · → `/resume` · contact |
+| `/resume` | Download PDF · contact |
+| `/contact` | Terminal — email, LinkedIn, GitHub |
+
+Which mirrors the approved chains: Home → Projects → Business Systems → Contact · Projects → Case study → GitHub → Next project → Contact · Business Systems → Relevant project → Contact · About → Projects → Resume → Contact.
+
+### 7.3 The lateral ring
+
+Case studies link to the **next project** (…→ KATHA → Bahay Liwanag → KATHA… while there are two; future studies join the ring in `/projects` order). Purpose: a visitor who finishes one chapter never has to climb back up to descend again.
+
+### 7.4 Cross-pillar bridges
+
+KATHA and Bahay Liwanag explicitly reference each other as the two sides of one trade (custom code vs. platform — the links already exist in both studies and are kept deliberate). `/business-systems` bridges into `/projects/*`; project pages with systems content mention `/business-systems` as the thinking behind them. These bridges are the positioning sentence expressed as links.
+
+### 7.5 Honesty rules for links (approved)
+
+- A link renders only if its destination exists (no dead `Source →` on closed-source projects; no case-study links before the case study).
+- Missing evidence is stated, not styled around ("case study in progress" — the existing Stephanie Center pattern).
+- External links (GitHub, live sites) are visibly external; internal navigation stays client-side.
 
 ---
 
-*Blueprint ends. No source files were modified; this document and its analysis are the complete Phase 1 deliverable pending the open inputs above.*
+## 8. Required inputs before the dependent pages are written
+
+Per the standing evidence rule (nothing invented), these pages block on Abby's input:
+
+1. **`/resume`** — the actual resume: dates, titles, tools, education. Also unblocks the broken `/resume.pdf`.
+2. **`/about`** — the long-form story beats; whether a personal photo exists.
+3. **`/business-systems` §1–2** — the philosophy in Abby's words (bullets suffice; structure is my job, principles are hers).
+4. **Next case study** — decision + evidence for Casa Kape / Purr Heaven / Stephanie Center. Recommendation: **Stephanie Center** next — its quiz-funnel assets (quiz page, landing page screenshots already in the repo) make it the strongest future anchor for the Business Systems pillar, using the `docs/BAHAY_LIWANAG_EVIDENCE.md` capture-checklist pattern.
+
+Pages that need **no** new input: `/projects` (verified blurbs + links exist), route/nav migration, homepage restructure (reuses existing content as previews), `/contact` (email/LinkedIn/GitHub exist — plus, optional, a response-time expectation line from Abby).
+
+---
+
+## 9. Design continuity (approved constraints)
+
+- **No homepage redesign.** Sections become previews; their visual identity is untouched.
+- **The scrapbook/editorial language is the system:** paper, tape, grain, handwritten notes, pressed leaves, editorial layouts, premium whitespace.
+- **New pages are chapters of the same book, not separate websites.** `/projects` reads as a contents spread; `/business-systems`, `/about`, `/resume`, `/contact` inherit the case studies' established chapter anatomy (hand-written eyebrow, serif display, evidence blocks, generous margins).
+- Case-study pages already share an anatomy (hero → fact strip → contents → numbered sections → closing links); new top-level pages adopt compatible rhythm without cargo-culting the fact strip where no facts exist.
+
+---
+
+## 10. Phasing (build order after sign-off)
+
+| Phase | Scope | Why this order |
+|---|---|---|
+| **A — Skeleton & migration** | `/projects` index · `/work/* → /projects/*` redirects · route-based nav with active states · fix `/resume.pdf` + `/resume` (needs input #1) · `/contact` | The moment nav items are routes, the application feel lands; the broken resume link dies the same day |
+| **B — Homepage as introduction** | Featured Business System section · Featured Projects Preview (2–3 + View all) · About/Contact previews slimmed | Homepage can only become a teaser once `/projects` exists to receive the weight |
+| **C — Business Systems page** | `/business-systems` (needs input #3) | Journey 2's hub; deep-links into the already-migrated Bahay study |
+| **D — About** | `/about` (needs input #2) | Lowest journey-criticality of the new pages |
+| **E — Next case study** | `/projects/stephanie-center` (recommended; needs input #4) | Grows the Business Systems pillar with its second proof |
+
+Each phase runs the standing workflow: Plan → Research → Implement → Build → Lint → Browser verification → Commit → Stop.
+
+---
+
+## 11. Approval gate
+
+This document is the Version 2 contract. **No implementation begins until it is signed off.** On approval, Phase A starts; changes after sign-off amend this document first, code second.
