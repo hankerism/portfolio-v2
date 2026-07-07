@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Section from "@/components/layout/Section";
 import Reveal from "@/components/ui/Reveal";
 import Doodle from "@/components/ui/Doodle";
@@ -157,10 +158,23 @@ function BahayLiwanag() {
             A serene site for a boutique resort — paired with a Make + Airtable
             pipeline that turns enquiries into booked reservations automatically.
           </p>
-          <Tags tags={["Boutique resort", "Website", "Make + Airtable"]} />
-          <VisitLink href={LINKS.bahay} className="text-primary">
-            Visit Bahay Liwanag
-          </VisitLink>
+          <Tags tags={["Boutique resort", "GoHighLevel", "Make + Airtable"]} />
+          <div className="flex flex-wrap items-center gap-x-6">
+            <Link
+              href="/work/bahay-liwanag"
+              className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-primary no-underline"
+            >
+              <span className="underline-offset-4 group-hover/cs:underline">
+                Read the case study
+              </span>
+              <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
+                →
+              </span>
+            </Link>
+            <VisitLink href={LINKS.bahay} className="text-primary">
+              Visit Bahay Liwanag
+            </VisitLink>
+          </div>
         </div>
       </div>
     </article>
