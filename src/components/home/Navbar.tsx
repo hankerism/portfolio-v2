@@ -97,7 +97,7 @@ export default function Navbar() {
             {/* Mobile toggle */}
             <button
               type="button"
-              className="inline-flex size-10 items-center justify-center rounded-[var(--radius-sm)] text-foreground hover:bg-muted md:hidden"
+              className="inline-flex size-11 items-center justify-center rounded-[var(--radius-sm)] text-foreground hover:bg-muted md:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? "Close menu" : "Open menu"}

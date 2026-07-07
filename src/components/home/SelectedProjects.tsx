@@ -102,7 +102,7 @@ function CasaKape() {
         <span aria-hidden className="stain -left-8 -top-9 hidden sm:block" />
         <Doodle
           kind="steam"
-          className="absolute right-12 -top-7 w-7 text-muted-foreground/70 motion-safe:animate-float" style={{ animationDuration: "5s" }}
+          className="absolute right-12 -top-7 w-7 text-muted-foreground/70"
         />
 
         {/* Main screenshot — taped photo, links to the live site */}
@@ -221,9 +221,9 @@ function PurrHeaven() {
           </div>
 
           {/* An elegant paw trail, arcing quietly toward the words */}
-          <Doodle kind="paw" className="absolute -bottom-2 left-[46%] size-5 rotate-12 text-pink-deep/70 motion-safe:animate-wiggle" />
-          <Doodle kind="paw" className="absolute -bottom-6 left-[62%] size-4 -rotate-3 text-pink-deep/50 motion-safe:animate-wiggle" style={{ animationDelay: "1.2s" }} />
-          <Doodle kind="paw" className="absolute -bottom-8 left-[78%] size-3.5 rotate-12 text-pink-deep/35 motion-safe:animate-wiggle" style={{ animationDelay: "2.4s" }} />
+          <Doodle kind="paw" className="absolute -bottom-2 left-[46%] size-5 rotate-12 text-pink-deep/70" />
+          <Doodle kind="paw" className="absolute -bottom-6 left-[62%] size-4 -rotate-3 text-pink-deep/50" />
+          <Doodle kind="paw" className="absolute -bottom-8 left-[78%] size-3.5 rotate-12 text-pink-deep/35" />
         </figure>
 
         {/* Poster copy */}

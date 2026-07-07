@@ -138,13 +138,13 @@ export default function FeaturedProject() {
             </Stack>
           </Reveal>
 
-          {/* Cinematic layered scene — settles into place, then drifts gently */}
+          {/* Cinematic layered scene — settles into place on reveal, then rests */}
           <figure className="relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none" aria-label="KATHA product screenshots">
             <Reveal delay={140} rot={1.2} y={22}>
             {/* reserve height for the absolutely-placed layers */}
             <div className="relative aspect-[7/6] w-full sm:aspect-[8/6]">
               {/* Reader view — peeking up from behind, right */}
-              <div className="absolute -right-1 top-0 z-0 w-[42%] motion-safe:rotate-3 motion-safe:animate-float sm:w-[40%]" style={{ animationDuration: "10s", animationDelay: "2s" }}>
+              <div className="absolute -right-1 top-0 z-0 w-[42%] rotate-3 sm:w-[40%]">
                 <span aria-hidden className="tape tape-sage left-1/2 -top-2.5 h-6 w-16 -translate-x-1/2 rotate-2 rounded-[2px]" />
                 <div className="paper overflow-hidden p-2 shadow-paper">
                   <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-sm)] bg-muted">
@@ -160,9 +160,8 @@ export default function FeaturedProject() {
                 </div>
               </div>
 
-              {/* Live homepage — the star, in a browser frame on stacked paper,
-                  adrift on the slowest clock like a window floating in thought */}
-              <div className="paper-stack absolute bottom-0 left-0 z-10 w-[85%] rounded-[var(--radius-xl)] motion-safe:-rotate-1 motion-safe:animate-float" style={{ animationDuration: "12s" }}>
+              {/* Live homepage — the star, in a browser frame on stacked paper */}
+              <div className="paper-stack absolute bottom-0 left-0 z-10 w-[85%] rounded-[var(--radius-xl)] -rotate-1">
                 <span aria-hidden className="tape left-8 -top-3 z-10 -rotate-[4deg] rounded-[2px]" />
                 <BrowserFrame url="katha-sigma.vercel.app" className="shadow-lg">
                   <div className="relative aspect-[16/11] w-full bg-muted">
@@ -177,8 +176,8 @@ export default function FeaturedProject() {
                 </BrowserFrame>
               </div>
 
-              {/* Book cover — floating free, bottom-right, its own tempo */}
-              <div className="absolute -bottom-4 right-3 z-20 w-[30%] motion-safe:rotate-6 motion-safe:animate-float sm:w-[27%]" style={{ animationDuration: "7s", animationDelay: "1s" }}>
+              {/* Book cover — pinned free, bottom-right */}
+              <div className="absolute -bottom-4 right-3 z-20 w-[30%] rotate-6 sm:w-[27%]">
                 <div className="paper overflow-hidden rounded-[var(--radius-lg)] p-1.5 shadow-lg">
                   <Image
                     src="/images/katha/katha-cover.png"
@@ -195,7 +194,7 @@ export default function FeaturedProject() {
               {/* Drawn marks — a little human hand on the composition */}
               <Doodle
                 kind="sparkle"
-                className="absolute left-2 top-2 z-20 size-6 text-accent motion-safe:animate-twinkle" style={{ animationDelay: "0.6s" }}
+                className="absolute left-2 top-2 z-20 size-6 text-accent"
               />
               <Doodle
                 kind="arrow"

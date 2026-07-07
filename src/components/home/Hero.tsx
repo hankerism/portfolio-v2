@@ -40,7 +40,7 @@ export default function Hero() {
               orphaned in empty whitespace */}
           <Doodle
             kind="star"
-            className="absolute right-2 top-0 hidden size-4 text-accent/80 motion-safe:animate-twinkle lg:block" style={{ animationDelay: "1.2s" }}
+            className="absolute right-2 top-0 hidden size-4 text-accent/80 lg:block"
           />
           <Stack gap="md" align="start">
             <span className="hand animate-fade-up text-3xl text-primary sm:text-4xl">
@@ -86,8 +86,8 @@ export default function Hero() {
         {/* Product peek — a hand-pinned collage of the flagship (lg+ only) */}
         <div aria-hidden className="relative hidden animate-fade-in lg:block" style={{ animationDelay: "300ms" }}>
           <div className="relative mx-auto aspect-square w-full max-w-md">
-            {/* Book-cover token, tucked behind and up-right — its own slow clock */}
-            <div className="absolute right-2 top-0 z-0 w-[40%] motion-safe:rotate-6 motion-safe:animate-float" style={{ animationDuration: "7s", animationDelay: "1.5s" }}>
+            {/* Book-cover token, tucked behind and up-right */}
+            <div className="absolute right-2 top-0 z-0 w-[40%] rotate-6">
               <span className="tape tape-peach left-1/2 -top-2.5 h-6 w-16 -translate-x-1/2 rotate-3 rounded-[2px]" />
               <div className="paper overflow-hidden rounded-[var(--radius-lg)] p-1.5 shadow-soft">
                 <Image
@@ -101,8 +101,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Library polaroid — the star, pinned front-left, drifting gently */}
-            <div className="absolute bottom-2 left-0 z-10 w-[82%] motion-safe:-rotate-2 motion-safe:animate-float" style={{ animationDuration: "9s" }}>
+            {/* Library polaroid — the star, pinned front-left */}
+            <div className="absolute bottom-2 left-0 z-10 w-[82%] -rotate-2">
               <span className="tape left-10 -top-3 -rotate-6 rounded-[2px]" />
               <div className="paper p-3 shadow-lg">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] bg-muted">
@@ -119,14 +119,14 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Hand-placed warmth: a twinkling sparkle, a drifting flower */}
+            {/* Hand-placed warmth: a sparkle, a pressed flower — at rest */}
             <Doodle
               kind="sparkle"
-              className="absolute -right-1 bottom-10 z-20 size-7 text-accent motion-safe:animate-twinkle"
+              className="absolute -right-1 bottom-10 z-20 size-7 text-accent"
             />
             <Doodle
               kind="flower"
-              className="absolute -left-5 bottom-8 z-20 size-5 text-pink-deep/60 motion-safe:animate-drift"
+              className="absolute -left-5 bottom-8 z-20 size-5 text-pink-deep/60"
             />
           </div>
         </div>

@@ -56,7 +56,7 @@ export default function About() {
             <Doodle kind="underline" draw className="mt-2 w-44 text-accent" />
             <Doodle
               kind="flower"
-              className="absolute -bottom-2 left-48 size-4 text-pink-deep/50 motion-safe:animate-drift" style={{ animationDelay: "2s" }}
+              className="absolute -bottom-2 left-48 size-4 text-pink-deep/50"
             />
           </div>
 

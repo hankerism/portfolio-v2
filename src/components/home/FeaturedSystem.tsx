@@ -230,7 +230,7 @@ export default function FeaturedSystem() {
         {/* one small reward in the leftover space */}
         <Doodle
           kind="flower"
-          className="ml-1 size-4 text-lavender motion-safe:animate-drift" style={{ animationDelay: "1s" }}
+          className="ml-1 size-4 text-lavender"
         />
       </div>
     </Section>

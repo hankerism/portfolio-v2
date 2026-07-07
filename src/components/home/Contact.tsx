@@ -27,11 +27,11 @@ export default function Contact() {
         <span aria-hidden className="tape right-12 -top-3 z-10 rotate-3 rounded-[2px]" />
         <Doodle
           kind="sparkle"
-          className="absolute -right-3 -top-4 z-10 size-7 text-accent motion-safe:animate-twinkle"
+          className="absolute -right-3 -top-4 z-10 size-7 text-accent"
         />
         <Doodle
           kind="star"
-          className="absolute -left-10 bottom-4 hidden size-4 text-primary/40 motion-safe:animate-twinkle lg:block" style={{ animationDelay: "1.6s" }}
+          className="absolute -left-10 bottom-4 hidden size-4 text-primary/40 lg:block"
         />
         <Stack gap="md" align="center" className="text-center">
           <span className="hand text-3xl text-primary sm:text-4xl">let&apos;s make something lovely</span>

@@ -86,11 +86,10 @@
   --animate-fade-in:  fade-in 0.5s var(--ease-paper) both;
   --animate-fade-up:  fade-up 0.6s var(--ease-paper) both;
   --animate-scale-in: scale-in 0.4s var(--ease-paper) both;
-  --animate-float:    float 6s ease-in-out infinite;
-  --animate-twinkle:  twinkle 3.4s ease-in-out infinite;
-  --animate-drift:    drift 9s ease-in-out infinite;
+  /* Ambient only. Foreground decorations stay still — a scrapbook prop reads as
+     more premium at rest than in perpetual motion (Phase F polish). Entrance
+     reveals and hover transitions carry the life instead. */
   --animate-breathe:  breathe 8s ease-in-out infinite;
-  --animate-wiggle:   wiggle 7s ease-in-out infinite;
 }
 
 /* 3 · SEMANTIC TOKENS ----------------------------------------------------- */
@@ -115,7 +114,10 @@
   --secondary-foreground: var(--color-ink);
   --accent:               var(--color-peach);
   --accent-foreground:    #3A2A18;
-  --accent-hover:         var(--color-peach-deep);
+  /* Text-role accent: a deeper terracotta-peach so kickers, section numerals,
+     and hand labels punctuate the plum without failing contrast — ≈4.5:1 on
+     cream (WCAG AA). Distinct from the brighter --accent used for fills. */
+  --accent-hover:         #B05E27;
   --muted:                var(--color-lavender-tint);
   --muted-foreground:     var(--color-ink-soft);
 
@@ -163,6 +165,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-accent:               var(--accent);
   --color-accent-foreground:    var(--accent-foreground);
+  --color-accent-hover:         var(--accent-hover);
   --color-muted:                var(--muted);
   --color-muted-foreground:     var(--muted-foreground);
   --color-success:              var(--success);
@@ -611,29 +614,10 @@
   from { opacity: 0; transform: scale(0.97); }
   to   { opacity: 1; transform: scale(1); }
 }
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-  50%      { transform: translateY(-8px) rotate(var(--rot, 0deg)); }
-}
-/* Decorative micro-motion. All transform-based, so Tailwind v4's rotate-*
-   utilities (the independent `rotate` property) keep their resting tilts. */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.35; transform: scale(0.85); }
-  50%      { opacity: 1;    transform: scale(1.08); }
-}
-@keyframes drift {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  50%      { transform: translate(4px, -8px) rotate(6deg); }
-}
+/* Ambient background only — a slow, blurred breath behind the hero. */
 @keyframes breathe {
   0%, 100% { transform: scale(1);    opacity: 0.7; }
   50%      { transform: scale(1.08); opacity: 1; }
-}
-@keyframes wiggle {
-  0%, 86%, 100% { transform: rotate(0deg); }
-  90%           { transform: rotate(4deg); }
-  94%           { transform: rotate(-3deg); }
-  97%           { transform: rotate(2deg); }
 }
 @keyframes draw {
   to { stroke-dashoffset: 0; }
