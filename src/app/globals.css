@@ -636,7 +636,7 @@
 
   html, body {
     background: #fff !important;
-    font-size: 8pt;
+    font-size: 8.5pt;
   }
 
   @page {
@@ -674,27 +674,27 @@
   .resume a { color: inherit !important; text-decoration: none !important; }
 
   /* Type scale tuned for print (pt), overriding the fluid clamp() sizes.
-     8pt body with tight leading fits all six sections on one A4 sheet with a
-     safety margin (measured ~267mm of 281mm printable). */
-  .resume h1 { font-size: 16pt !important; margin: 0 !important; }
-  .resume h2 { font-size: 10pt !important; }
-  .resume h3 { font-size: 9.25pt !important; }
-  .resume p, .resume li, .resume dd, .resume dt { font-size: 8pt !important; line-height: 1.25 !important; }
-  .resume .font-mono { font-size: 6.5pt !important; }
-  .resume-hero p:first-of-type { font-size: 10pt !important; }  /* the role line */
+     8.5pt body with tight leading fits the whole résumé on one A4 sheet with a
+     comfortable margin (measured ~256mm of 281mm printable). */
+  .resume h1 { font-size: 17pt !important; margin: 0 !important; }
+  .resume h2 { font-size: 10.5pt !important; }
+  .resume h3 { font-size: 9.75pt !important; }
+  .resume p, .resume li, .resume dd, .resume dt { font-size: 8.5pt !important; line-height: 1.28 !important; }
+  .resume .font-mono { font-size: 7pt !important; }
+  .resume-hero p:first-of-type { font-size: 10.5pt !important; }  /* the role line */
 
   /* Collapse the generous editorial whitespace to a single page. The screen
      rhythm is built from section padding, space-y stacks, and mt-* utilities —
      each is dialled down here rather than restyled. */
-  .resume-hero > * { padding-top: 0 !important; padding-bottom: 3pt !important; }
-  .resume-section { padding-top: 3pt !important; padding-bottom: 3pt !important; border-top-color: #d7d7d7 !important; }
-  .resume .space-y-8 > * + * { margin-top: 2.5pt !important; }
+  .resume-hero > * { padding-top: 0 !important; padding-bottom: 4pt !important; }
+  .resume-section { padding-top: 4pt !important; padding-bottom: 4pt !important; border-top-color: #d7d7d7 !important; }
+  .resume .space-y-8 > * + * { margin-top: 3pt !important; }
   .resume .space-y-4 > * + * { margin-top: 2pt !important; }
-  .resume .mt-7 { margin-top: 2.5pt !important; }
+  .resume .mt-7 { margin-top: 3pt !important; }
   .resume .mt-5 { margin-top: 2pt !important; }
   .resume .mt-2 { margin-top: 1pt !important; }
-  .resume [class*="gap-y-7"] { row-gap: 3pt !important; }
-  .resume-section li { padding-top: 1.5pt !important; padding-bottom: 1.5pt !important; }
+  .resume [class*="gap-y-7"] { row-gap: 3.5pt !important; }
+  .resume-section li { padding-top: 2pt !important; padding-bottom: 2pt !important; }
 
   /* Keep each entry and section whole across the (single) page. */
   .resume-section,

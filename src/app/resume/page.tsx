@@ -15,13 +15,11 @@ import Doodle from "@/components/ui/Doodle";
  * the tokens and spacing scale. No new visual vocabulary.
  *
  * Evidence discipline holds here too — it's a resume. Every line traces to a
- * verified source: name (repo/git author), title (client brief), summary
- * (Abby's own approved homepage/Business Systems copy), the career arc
- * (verbatim from her published Hankerism bio — role progression only; no
- * employer names or per-role years are invented — those are flagged for her
- * to supply), the tech list (the portfolio's real stack), Selected Work (the
- * three shipped case studies), and Education (client brief). Contact URLs are
- * her real, published handles.
+ * verified source: name (repo/git author), title, summary (Abby's own approved
+ * copy), work history (employers + dates supplied by Abby; responsibilities
+ * adapted only from the portfolio and verified info, never invented), the tech
+ * list (the portfolio's real stack), Selected Work (the three shipped case
+ * studies), and Education. Contact URLs are her real, published handles.
  *
  * "Download PDF" prints the page; the print stylesheet (globals.css §8)
  * renders one clean A4 page with nav, footer, and decoration stripped.
@@ -105,34 +103,33 @@ function ResumeSection({
 
 /* ── Content (verified sources only) ──────────────────────────────────────── */
 
-/* Career progression — verbatim arc from Abby's published Hankerism bio.
- * Role phases only; employer names and per-role year ranges are intentionally
- * NOT invented (flagged for Abby to supply). "Present" is the one defensible
- * time anchor (the shipped 2026 work). */
+/* Verified work history (employers + dates supplied by Abby). Descriptions are
+ * adapted only from the portfolio and previously verified information — no
+ * invented responsibilities, metrics, or specifics. One tight line each. */
 const EXPERIENCE = [
   {
-    when: "Present",
+    when: "2026–Present",
     role: "Web Developer & GoHighLevel Specialist",
-    note: "Independent",
-    body: "Design, build, and automate complete digital products and business systems — from production web apps in Next.js and TypeScript to full GoHighLevel funnels, CRM structures, and Make + Airtable pipelines for real businesses.",
+    org: "Independent Projects",
+    body: "Building complete digital products and business systems — Next.js and TypeScript web apps, and GoHighLevel funnels wired to Make and Airtable.",
   },
   {
-    when: "Earlier",
-    role: "Web Designer",
-    note: "Self-taught transition",
-    body: "Taught myself modern web design and began building on-brand, responsive sites for founders — the bridge from operating systems to building them.",
+    when: "2024–2026",
+    role: "Operations & Executive Virtual Assistant",
+    org: "Control Your Audience",
+    body: "Running systems, workflows, and executive operations across the business.",
   },
   {
-    when: "Earlier",
-    role: "Marketing & Operations Support",
-    note: "",
-    body: "Grew from assisting into marketing and operations support, keeping founders' campaigns, tools, and day-to-day systems running.",
+    when: "2022–Present",
+    role: "Project Manager",
+    org: "Wedding PostHouse",
+    body: "Coordinating projects, timelines, and communication to keep deliverables on track.",
   },
   {
-    when: "6+ years",
-    role: "Virtual Assistant",
-    note: "The foundation",
-    body: "Started out managing systems, workflows, and the behind-the-scenes operations businesses depend on every day — the operations grounding the rest is built on.",
+    when: "2020–2023",
+    role: "Scheduling & Operations Assistant",
+    org: "Element Talent Agency",
+    body: "Managing scheduling, coordination, and day-to-day operations.",
   },
 ];
 
@@ -140,19 +137,19 @@ const SELECTED_WORK = [
   {
     title: "KATHA",
     href: "/projects/katha",
-    desc: "A production-grade reading and publishing platform for Filipino literature — designed, engineered, and shipped end to end.",
+    desc: "A production reading and publishing platform for Filipino literature, designed and engineered end to end.",
     tech: "Next.js · TypeScript · Tailwind CSS",
   },
   {
     title: "Stephanie Center Wellness",
     href: "/projects/stephanie-center",
-    desc: "A functional-medicine practice's education-first funnel, rebuilt inside GoHighLevel while preserving its existing marketing stack.",
+    desc: "A functional-medicine practice's funnel, rebuilt in GoHighLevel around its existing AWeber and Practice Better stack.",
     tech: "GoHighLevel · AWeber · Practice Better",
   },
   {
     title: "Bahay Liwanag",
     href: "/projects/bahay-liwanag",
-    desc: "A boutique resort's booking system — a serene site paired with a Make + Airtable pipeline that turns enquiries into reservations.",
+    desc: "A boutique resort's booking system — a site paired with a Make + Airtable pipeline that turns enquiries into reservations.",
     tech: "GoHighLevel · Make · Airtable",
   },
 ];
@@ -197,6 +194,12 @@ export default function ResumePage() {
               systems I used to run.
             </p>
 
+            {/* Featured technologies — a two-second scan of the core stack. */}
+            <p className="mt-4 text-sm font-semibold text-foreground/70">
+              Next.js · React · TypeScript · Tailwind CSS · GoHighLevel ·
+              Make.com · Airtable
+            </p>
+
             {/* Contact — readable handles so the printed page carries them too */}
             <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
               <li>
@@ -223,27 +226,11 @@ export default function ResumePage() {
           </Container>
         </header>
 
-        {/* ── 01 About ─────────────────────────────────────────────────────── */}
-        <ResumeSection id="about" index="01" eyebrow="in short" title="About">
-          <div className="max-w-2xl space-y-4 text-lg text-foreground/80">
-            <p>
-              My background is operations: for more than six years I helped
-              businesses manage systems, streamline workflows, and stay
-              organised behind the scenes. As my responsibilities grew, I wanted
-              to build the tools I was managing rather than only operate them —
-              which led me into web development and automation.
-            </p>
-            <p>
-              Today I combine that operations grounding with software
-              engineering, building products and business systems that are
-              technically sound and genuinely practical for the people who run
-              them.
-            </p>
-          </div>
-        </ResumeSection>
-
-        {/* ── 02 Experience ────────────────────────────────────────────────── */}
-        <ResumeSection id="experience" index="02" eyebrow="the path here" title="Experience" tone="surface">
+        {/* ── 01 Experience ────────────────────────────────────────────────── */}
+        {/* The standalone "About" section was cut in the final review — it
+            restated the hero summary almost verbatim. The summary above now
+            carries that job alone, so the page opens straight into evidence. */}
+        <ResumeSection id="experience" index="01" eyebrow="the path here" title="Experience" tone="surface">
           <ol className="space-y-0">
             {EXPERIENCE.map((e) => (
               <li
@@ -254,12 +241,8 @@ export default function ResumePage() {
                   {e.when}
                 </p>
                 <div className="max-w-2xl">
-                  <div className="flex flex-wrap items-baseline gap-x-3">
-                    <h3 className="text-xl sm:text-2xl">{e.role}</h3>
-                    {e.note && (
-                      <span className="text-sm font-semibold text-muted-foreground">{e.note}</span>
-                    )}
-                  </div>
+                  <h3 className="text-xl sm:text-2xl">{e.role}</h3>
+                  <p className="mt-0.5 text-sm font-semibold text-foreground/70">{e.org}</p>
                   <p className="mt-2 text-foreground/80">{e.body}</p>
                 </div>
               </li>
@@ -267,8 +250,8 @@ export default function ResumePage() {
           </ol>
         </ResumeSection>
 
-        {/* ── 03 Selected Work ─────────────────────────────────────────────── */}
-        <ResumeSection id="work" index="03" eyebrow="a few things I've built" title="Selected work">
+        {/* ── 02 Selected Work ─────────────────────────────────────────────── */}
+        <ResumeSection id="work" index="02" eyebrow="a few things I've built" title="Selected work">
           <ol className="space-y-0">
             {SELECTED_WORK.map((w) => (
               <li
@@ -292,8 +275,8 @@ export default function ResumePage() {
           </ol>
         </ResumeSection>
 
-        {/* ── 04 Technologies ──────────────────────────────────────────────── */}
-        <ResumeSection id="tech" index="04" eyebrow="the toolbox" title="Technologies" tone="surface">
+        {/* ── 03 Technologies ──────────────────────────────────────────────── */}
+        <ResumeSection id="tech" index="03" eyebrow="the toolbox" title="Technologies" tone="surface">
           <dl className="grid gap-x-8 gap-y-7 sm:grid-cols-2">
             {TECH.map((group) => (
               <div key={group.cat}>
@@ -308,8 +291,8 @@ export default function ResumePage() {
           </dl>
         </ResumeSection>
 
-        {/* ── 05 Education ─────────────────────────────────────────────────── */}
-        <ResumeSection id="education" index="05" eyebrow="where it started" title="Education">
+        {/* ── 04 Education ─────────────────────────────────────────────────── */}
+        <ResumeSection id="education" index="04" eyebrow="where it started" title="Education">
           <div className="max-w-2xl">
             <h3 className="text-xl sm:text-2xl">Bachelor of Science in Business Management</h3>
             <p className="mt-1.5 text-foreground/80">Cavite State University</p>
