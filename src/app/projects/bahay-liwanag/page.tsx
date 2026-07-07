@@ -10,10 +10,10 @@ import BrowserFrame from "@/components/ui/BrowserFrame";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * /work/bahay-liwanag — the Bahay Liwanag business-systems case study.
+ * /projects/bahay-liwanag — the Bahay Liwanag business-systems case study.
  *
  * Written as an operations design document for engineering reviewers, in the
- * same evidence discipline as /work/katha. Every claim on this page is
+ * same evidence discipline as /projects/katha. Every claim on this page is
  * sourced from the live system itself: the published funnel pages
  * (heyitsabby.space/website/bahay-liwanag), the form definition served by
  * GoHighLevel's public widget endpoint, and copy published on the booking
@@ -225,7 +225,14 @@ export default function BahayLiwanagCaseStudy() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <header className="border-b border-border bg-gradient-to-b from-lavender-tint/50 to-background">
           <Container size="md" className="py-16 sm:py-20">
-            <p className="hand text-2xl text-primary sm:text-3xl">Case study</p>
+            {/* Breadcrumb — the one depth-2 wayfinding link (IA v2 §5) */}
+            <Link
+              href="/projects"
+              className="text-sm font-semibold text-foreground/70 no-underline hover:text-primary"
+            >
+              ← All projects
+            </Link>
+            <p className="hand mt-6 text-2xl text-primary sm:text-3xl">Case study</p>
             <h1 className="mt-2 text-balance">
               Bahay Liwanag — engineering a booking operation on GoHighLevel
             </h1>
@@ -309,7 +316,7 @@ export default function BahayLiwanagCaseStudy() {
                 the resort is a demonstration.
               </p>
               <p>
-                Where the <Link href="/work/katha">KATHA case study</Link>{" "}
+                Where the <Link href="/projects/katha">KATHA case study</Link>{" "}
                 proves product engineering in code, this one proves the second
                 pillar: designing an <strong>operational system</strong> — CRM,
                 intake, and automations — that reduces manual work. Everything
@@ -805,16 +812,21 @@ export default function BahayLiwanagCaseStudy() {
                 <Button href={LIVE} target="_blank" rel="noreferrer" variant="primary">
                   Visit the live site
                 </Button>
-                <Button href="/work/katha" as={Link} variant="outline">
+                <Button href="/projects/katha" as={Link} variant="outline">
                   Read the KATHA case study
                 </Button>
                 <Button href="/#contact" variant="ghost">
                   Get in touch
                 </Button>
               </div>
-              <Link href="/#projects" className="text-sm font-semibold">
-                ← Back to all work
-              </Link>
+              <div className="flex w-full flex-wrap items-center justify-between gap-3">
+                <Link href="/projects" className="text-sm font-semibold">
+                  ← All projects
+                </Link>
+                <Link href="/projects/katha" className="text-sm font-semibold">
+                  Next project: KATHA →
+                </Link>
+              </div>
             </div>
           </Container>
         </section>

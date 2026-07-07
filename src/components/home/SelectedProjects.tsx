@@ -161,7 +161,7 @@ function BahayLiwanag() {
           <Tags tags={["Boutique resort", "GoHighLevel", "Make + Airtable"]} />
           <div className="flex flex-wrap items-center gap-x-6">
             <Link
-              href="/work/bahay-liwanag"
+              href="/projects/bahay-liwanag"
               className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-primary no-underline"
             >
               <span className="underline-offset-4 group-hover/cs:underline">

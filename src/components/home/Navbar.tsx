@@ -2,30 +2,43 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * Navbar — sticky top navigation.
- * Semantic <nav> landmark with a real link set (fixes the audit's empty-nav
- * finding). The brand is a link to top, NOT a heading, so the page keeps a
- * single <h1> in the hero. On small screens the links collapse into an
- * accessible disclosure menu (aria-expanded/controls, Escape to close, closes
- * on navigation). The Contact CTA stays visible at every width.
+ * Navbar — sticky top navigation (IA v2 §5: route-based, application-grade).
+ * Semantic <nav> landmark; the brand is a link home, NOT a heading, so every
+ * page keeps a single <h1>. Route items get active-route indication via
+ * usePathname + aria-current — the clearest "this is an application" signal.
+ * On small screens the links collapse into an accessible disclosure menu
+ * (aria-expanded/controls, Escape to close, closes on navigation). The
+ * Contact CTA stays visible at every width.
+ *
+ * Interim states (per IA v2 phasing): Business Systems and About point at
+ * their homepage sections until /business-systems (Phase C) and /about
+ * (Phase D) ship. The Resume link returns with the /resume page once real
+ * resume content exists — the old /resume.pdf href was a dead link.
  * ------------------------------------------------------------------------- */
 
-/* Root-anchored (/#…) so the nav works from any route (e.g. /work/katha),
- * not just the homepage. */
 const LINKS = [
-  { href: "/#work", label: "Work" },
-  { href: "/#automation", label: "Automation" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/#automation", label: "Business Systems" },
   { href: "/#about", label: "About" },
 ] as const;
 
+/** Route links highlight on their own subtree; anchor links never highlight. */
+function isActive(pathname: string, href: string): boolean {
+  if (href.includes("#")) return false;
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   // Close the mobile menu on Escape.
   useEffect(() => {
@@ -50,31 +63,33 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <ul className="hidden items-center gap-8 md:flex">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="relative text-sm font-semibold text-foreground/80 no-underline transition-colors hover:text-primary after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:rounded-full after:bg-accent after:transition-all after:duration-300 hover:after:w-full"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
+            {LINKS.map((l) => {
+              const active = isActive(pathname, l.href);
+              const Tag = l.href.includes("#") ? "a" : Link;
+              return (
+                <li key={l.href}>
+                  <Tag
+                    href={l.href}
+                    aria-current={active ? "page" : undefined}
+                    className={cx(
+                      "relative text-sm font-semibold no-underline transition-colors hover:text-primary after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:rounded-full after:bg-accent after:transition-all after:duration-300 hover:after:w-full",
+                      active
+                        ? "text-primary after:w-full"
+                        : "text-foreground/80 after:w-0",
+                    )}
+                  >
+                    {l.label}
+                  </Tag>
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex items-center gap-2">
-            {/* Resume — the one evidence link recruiters reflex-scan the header
-                for. (The PDF ships separately; see Phase 8A.1 notes.) */}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noreferrer"
-              className="hidden text-sm font-semibold text-foreground/80 no-underline transition-colors hover:text-primary md:block"
-            >
-              Resume
-            </a>
+            {/* Resume returns here as /resume when real resume content lands
+                (IA v2 §8 input 1) — the previous /resume.pdf href was dead. */}
             <div className="hidden md:block">
-              <Button href="/#contact" size="sm" variant="primary">
+              <Button href="/contact" as={Link} size="sm" variant="primary">
                 Get in touch
               </Button>
             </div>
@@ -107,30 +122,27 @@ export default function Navbar() {
       >
         <Container size="lg">
           <ul className="flex flex-col gap-1 border-t border-border py-4">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  className="block rounded-[var(--radius-sm)] px-3 py-2 font-semibold text-foreground no-underline hover:bg-muted"
-                >
-                  {l.label}
-                </a>
-              </li>
-            ))}
-            <li>
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => setOpen(false)}
-                className="block rounded-[var(--radius-sm)] px-3 py-2 font-semibold text-foreground no-underline hover:bg-muted"
-              >
-                Resume
-              </a>
-            </li>
+            {LINKS.map((l) => {
+              const active = isActive(pathname, l.href);
+              const Tag = l.href.includes("#") ? "a" : Link;
+              return (
+                <li key={l.href}>
+                  <Tag
+                    href={l.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cx(
+                      "block rounded-[var(--radius-sm)] px-3 py-2 font-semibold no-underline hover:bg-muted",
+                      active ? "bg-muted text-primary" : "text-foreground",
+                    )}
+                  >
+                    {l.label}
+                  </Tag>
+                </li>
+              );
+            })}
             <li className="mt-2 px-1">
-              <Button href="/#contact" fullWidth onClick={() => setOpen(false)}>
+              <Button href="/contact" as={Link} fullWidth onClick={() => setOpen(false)}>
                 Get in touch
               </Button>
             </li>

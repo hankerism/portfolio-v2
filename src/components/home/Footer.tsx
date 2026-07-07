@@ -8,12 +8,14 @@ import Doodle from "@/components/ui/Doodle";
  * intentionally omitted until real handles are available (no invented URLs).
  * ------------------------------------------------------------------------- */
 
+/* Route-based sitemap column (IA v2 §5). Business Systems and About point at
+ * their homepage sections until their routes ship (Phases C and D). */
 const NAV = [
-  { href: "/#work", label: "Work" },
-  { href: "/#automation", label: "Automation" },
-  { href: "/#projects", label: "Projects" },
+  { href: "/", label: "Home" },
+  { href: "/projects", label: "Projects" },
+  { href: "/#automation", label: "Business Systems" },
   { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const EMAIL = "blujayabby@gmail.com";
@@ -72,17 +74,9 @@ export default function Footer() {
                   GitHub
                 </a>
               </li>
-              <li>
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-sm text-foreground/80 no-underline hover:text-primary"
-                >
-                  Resume
-                </a>
-              </li>
-              {/* LinkedIn joins here the moment the real URL is provided —
+              {/* Resume rejoins as /resume once real resume content lands
+                  (IA v2 §8 input 1) — the old /resume.pdf href was dead.
+                  LinkedIn joins the moment the real URL is provided —
                   no invented links (Phase 8A working rule). */}
             </ul>
           </div>

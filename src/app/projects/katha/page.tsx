@@ -10,7 +10,7 @@ import BrowserFrame from "@/components/ui/BrowserFrame";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * /work/katha — the KATHA engineering case study.
+ * /projects/katha — the KATHA engineering case study.
  *
  * Written as a design document for engineering reviewers, not a portfolio
  * splash. Every claim on this page is sourced from the public repository
@@ -153,7 +153,14 @@ export default function KathaCaseStudy() {
         {/* ── Hero ─────────────────────────────────────────────────────────── */}
         <header className="border-b border-border bg-gradient-to-b from-lavender-tint/50 to-background">
           <Container size="md" className="py-16 sm:py-20">
-            <p className="hand text-2xl text-primary sm:text-3xl">Case study</p>
+            {/* Breadcrumb — the one depth-2 wayfinding link (IA v2 §5) */}
+            <Link
+              href="/projects"
+              className="text-sm font-semibold text-foreground/70 no-underline hover:text-primary"
+            >
+              ← All projects
+            </Link>
+            <p className="hand mt-6 text-2xl text-primary sm:text-3xl">Case study</p>
             <h1 className="mt-2 text-balance">
               KATHA — engineering a reading &amp; publishing platform end to end
             </h1>
@@ -741,9 +748,14 @@ export default function KathaCaseStudy() {
                   Get in touch
                 </Button>
               </div>
-              <Link href="/#projects" className="text-sm font-semibold">
-                ← Back to all work
-              </Link>
+              <div className="flex w-full flex-wrap items-center justify-between gap-3">
+                <Link href="/projects" className="text-sm font-semibold">
+                  ← All projects
+                </Link>
+                <Link href="/projects/bahay-liwanag" className="text-sm font-semibold">
+                  Next project: Bahay Liwanag →
+                </Link>
+              </div>
             </div>
           </Container>
         </section>

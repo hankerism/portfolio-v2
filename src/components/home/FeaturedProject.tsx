@@ -76,7 +76,7 @@ export default function FeaturedProject() {
             {/* Proof-first CTA order: the case study is the conversion for
                 engineering reviewers; the live product and source back it up */}
             <Stack direction="row" gap="sm" wrap align="center" className="pt-1">
-              <Button href="/work/katha" variant="primary">
+              <Button href="/projects/katha" variant="primary">
                 Read the case study
               </Button>
               <Button

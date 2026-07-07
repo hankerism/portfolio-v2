@@ -1,6 +1,6 @@
 # Bahay Liwanag Case Study — Evidence Capture Checklist
 
-**Page:** `/work/bahay-liwanag` (Phase 8B)
+**Page:** `/projects/bahay-liwanag` (Phase 8B; moved from `/work/bahay-liwanag` in Phase A)
 **Rule:** the case study publishes nothing it cannot prove. Everything already on the page is sourced from the live funnel, the public form definition, or published page copy. The items below are the back-office artefacts that live behind logins — they must be captured by Abby from the real workspaces. **Do not reconstruct these from memory or invent placeholders.**
 
 Each item lists where it slots into the page (the dashed `PendingCapture` blocks) so a capture can be dropped in with a one-line edit.
@@ -54,4 +54,4 @@ Slot: §06 `PendingCapture`.
 
 ## When a capture arrives
 
-Annotate before publishing (arrows/labels on the screenshot itself or via the page's callout pattern), export PNG at 1920px width to `public/images/bahay-liwanag/`, name it `bahay-liwanag-<tool>-<subject>.png`, and replace the corresponding `PendingCapture` items in `src/app/work/bahay-liwanag/page.tsx` with a `Shot`/annotated figure. Update the §03 architecture diagram node from dashed to solid once its subsystem is evidenced.
+Annotate before publishing (arrows/labels on the screenshot itself or via the page's callout pattern), export PNG at 1920px width to `public/images/bahay-liwanag/`, name it `bahay-liwanag-<tool>-<subject>.png`, and replace the corresponding `PendingCapture` items in `src/app/projects/bahay-liwanag/page.tsx` with a `Shot`/annotated figure. Update the §03 architecture diagram node from dashed to solid once its subsystem is evidenced.
