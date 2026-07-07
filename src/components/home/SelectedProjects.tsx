@@ -269,38 +269,45 @@ function StephanieCenter() {
           <span aria-hidden className="hand text-2xl text-sage">
             № 3 — from the wellness journal
           </span>
-          <div className="flex flex-wrap items-center gap-3">
-            <h3 className="text-3xl">Stephanie Center Wellness</h3>
-            <span aria-hidden className="hand text-xl text-muted-foreground">
-              <span className="marker">In progress</span>
-            </span>
-          </div>
+          <h3 className="text-3xl">Stephanie Center Wellness</h3>
           <p className="text-lg text-foreground/80">
-            Case study in progress — write-up coming soon.
+            A women&rsquo;s hair-health practice — its education-first funnel
+            rebuilt inside GoHighLevel, preserving the brand and the existing
+            AWeber &amp; Practice Better stack.
           </p>
-          <Tags tags={["Wellness studio"]} />
+          <Tags tags={["Functional medicine", "GoHighLevel", "Business system"]} />
+          <Link
+            href="/projects/stephanie-center"
+            className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-sage no-underline"
+          >
+            <span className="underline-offset-4 group-hover/cs:underline">
+              Read the case study
+            </span>
+            <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
+              →
+            </span>
+          </Link>
         </div>
 
-        {/* Pressed page — softened while it grows */}
+        {/* Pressed page */}
         <figure className="relative pb-8">
           <div className={cx("paper relative p-3 motion-safe:rotate-[0.8deg]", MAT_HOVER)}>
             <span aria-hidden className="tape tape-sage left-8 -top-3 -rotate-3 rounded-[2px]" />
             <div className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-sm)] bg-muted">
               <Image
                 src="/images/stephanie-center/steph-homepage.png"
-                alt="Stephanie Center Wellness — website homepage"
+                alt="Stephanie Center Wellness — website homepage rebuilt in GoHighLevel"
                 fill
-                className="object-cover object-top opacity-[0.92] saturate-[0.85]"
+                className="object-cover object-top"
                 sizes="(min-width: 1024px) 660px, 92vw"
               />
             </div>
           </div>
-          {/* pencil, not marker — the softest note on the page */}
           <p
             aria-hidden
             className="hand absolute -bottom-1 right-8 rotate-[-2deg] text-xl font-medium text-muted-foreground"
           >
-            a quiet one — for now
+            systems, in healthcare
           </p>
         </figure>
       </div>

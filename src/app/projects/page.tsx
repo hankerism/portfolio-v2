@@ -101,11 +101,13 @@ const ENTRIES: Entry[] = [
   {
     n: "05",
     title: "Stephanie Center Wellness",
-    category: "Wellness studio",
-    description: "Case study in progress — write-up coming soon.",
-    tech: ["Wellness studio"],
-    pending: true,
-    accent: "text-muted-foreground",
+    category: "Business system · Functional medicine",
+    description:
+      "A women's hair-health practice, its education-first funnel rebuilt inside GoHighLevel — preserving the brand and the existing AWeber and Practice Better stack, and connecting lead capture to the CRM.",
+    tech: ["GoHighLevel", "AWeber", "Practice Better"],
+    caseStudy: "/projects/stephanie-center",
+    note: "systems, in healthcare",
+    accent: "text-sage",
   },
 ];
 

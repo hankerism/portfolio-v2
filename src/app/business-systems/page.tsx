@@ -233,14 +233,14 @@ export default function BusinessSystemsPage() {
           </Container>
         </section>
 
-        {/* ── 03 A system I built — Bahay Liwanag ──────────────────────────── */}
+        {/* ── 03 Systems I've built ────────────────────────────────────────── */}
         <section className="border-t border-border py-16 sm:py-20">
           <Container size="md" className="space-y-10">
             <SectionHeader
               id="systems"
               index="03"
               eyebrow="from statements to something real"
-              title="A system I built"
+              title="Systems I've built"
             >
               <p>
                 The clearest way to show what all of that looks like in practice
@@ -327,6 +327,32 @@ export default function BusinessSystemsPage() {
                 </figure>
               </Reveal>
             </div>
+
+            {/* Second example — same thinking, a different industry */}
+            <Reveal y={16} className="rounded-[var(--radius-lg)] border border-border bg-card p-6 sm:p-8">
+              <p className="hand text-xl text-sage">and in a different industry</p>
+              <h3 className="mt-1 text-2xl">Stephanie Center Wellness</h3>
+              <p className="mt-2 max-w-2xl text-lg text-foreground/80">
+                A functional-medicine practice for women&rsquo;s hair health. I
+                rebuilt its education-first funnel inside GoHighLevel — and the
+                sharpest decision was what <em>not</em> to touch: the email tool
+                and the consultation software the practice already ran on stayed
+                exactly where they were. Same spine as the resort — teach,
+                capture once, and route to the human at the right moment — fitted
+                to a very different business.
+              </p>
+              <Link
+                href="/projects/stephanie-center"
+                className="group/cs mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-sage no-underline"
+              >
+                <span className="underline-offset-4 group-hover/cs:underline">
+                  Read the full case study
+                </span>
+                <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
+                  →
+                </span>
+              </Link>
+            </Reveal>
           </Container>
         </section>
 

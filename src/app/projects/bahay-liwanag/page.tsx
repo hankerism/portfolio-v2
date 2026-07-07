@@ -823,8 +823,8 @@ export default function BahayLiwanagCaseStudy() {
                 <Link href="/projects" className="text-sm font-semibold">
                   ← All projects
                 </Link>
-                <Link href="/projects/katha" className="text-sm font-semibold">
-                  Next project: KATHA →
+                <Link href="/projects/stephanie-center" className="text-sm font-semibold">
+                  Next project: Stephanie Center →
                 </Link>
               </div>
             </div>
