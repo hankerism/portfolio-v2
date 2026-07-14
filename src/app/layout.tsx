@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Nunito_Sans, Caveat } from "next/font/google";
+import Clarity from "@/components/Clarity";
 import "./globals.css";
 
 /* Brand typefaces, self-hosted via next/font (no render-blocking @import).
@@ -56,7 +57,10 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${nunito.variable} ${caveat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <Clarity />
+      </body>
     </html>
   );
 }
