@@ -142,11 +142,11 @@ export default function FeaturedRsvp() {
             </h2>
 
             <p className="text-lg text-foreground/80">
-              A luxury guest experience for a real wedding: an editorial,
-              single-page invitation with a two-step reply card out front — and
-              a private couple&rsquo;s dashboard behind it, where RSVPs are
-              reviewed, confirmed, and answered by email. Live on Vercel,
-              taking real RSVPs today.
+              It replaced spreadsheet-and-DM RSVP tracking with one secure
+              system: an editorial, single-page invitation with a two-step
+              reply card out front, and a private couple&rsquo;s dashboard
+              behind it — where RSVPs are reviewed, confirmed, and answered by
+              email. Live on Vercel, taking real RSVPs today.
             </p>
 
             <ul className="grid gap-2.5 sm:grid-cols-2">

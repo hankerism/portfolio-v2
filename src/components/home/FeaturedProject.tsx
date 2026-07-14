@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import Section from "@/components/layout/Section";
 import Container from "@/components/layout/Container";
 import Stack from "@/components/layout/Stack";
@@ -123,18 +122,8 @@ export default function FeaturedProject() {
               </a>
             </Stack>
 
-            {/* Quiet exit to the full collection (IA v2 §4.1) */}
-            <Link
-              href="/projects"
-              className="group/all inline-flex items-center gap-1.5 text-sm font-bold text-foreground/70 no-underline hover:text-primary"
-            >
-              <span className="underline-offset-4 group-hover/all:underline">
-                All projects
-              </span>
-              <span aria-hidden className="transition-transform group-hover/all:translate-x-0.5">
-                →
-              </span>
-            </Link>
+            {/* The "All projects" exit lives on the RSVP band directly below —
+                one quiet door at the end of the products chapter, not two. */}
             </Stack>
           </Reveal>
 

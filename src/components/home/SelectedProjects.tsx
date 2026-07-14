@@ -327,7 +327,7 @@ export default function SelectedProjects() {
           id="projects-heading"
           eyebrow="Client websites"
           title="Built for real businesses"
-          intro="Websites shipped for real clients — each with the branding, forms, and quiet automations a small business actually needs, and nothing it doesn't."
+          intro="Websites shipped for clients — each with the branding, forms, and quiet automations a small business actually needs, and nothing it doesn't."
         />
       </Reveal>
 

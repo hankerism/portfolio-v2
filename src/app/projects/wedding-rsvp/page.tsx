@@ -622,7 +622,7 @@ export default function WeddingRsvpCaseStudy() {
               {[
                 <>The platform is <strong>live in production</strong>, collecting real RSVPs for a real wedding ahead of the November 2026 date — deployed on Vercel with Supabase as the system of record.</>,
                 <>Guests reply <strong>without accounts</strong>, on their phones, and get an instant personalized confirmation plus a calendar file; duplicates are impossible by database constraint.</>,
-                <>The couple runs the entire wedding — guest list, statuses, every content section, email — <strong>without a developer in the loop</strong>. The caterer's list is one CSV export away.</>,
+                <>The couple runs the entire wedding — guest list, statuses, every content section, email — <strong>without a developer in the loop</strong>. The caterer&rsquo;s list is one CSV export away.</>,
                 <>Operationally quiet by design: email failures cannot lose data, error messages never leak secrets, and content edits go live within the hour without a deploy.</>,
               ].map((r, i) => (
                 <li key={i} className="flex items-start gap-3">

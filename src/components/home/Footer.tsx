@@ -22,20 +22,28 @@ const NAV = [
 const EMAIL = "blujayabby@gmail.com";
 const LIVE_PORTFOLIO = "https://hankerism.vercel.app/";
 
+/* Latest updates — understated, newest first, never a blog. */
+const RECENTLY = [
+  { when: "Jul 2026", what: "Wedding RSVP Platform case study published" },
+  { when: "Jul 2026", what: "Portfolio v3 — final presentation pass" },
+  { when: "Jul 2026", what: "KATHA v2.0 released" },
+  { when: "Jul 2026", what: "Microsoft Clarity analytics added" },
+];
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="mt-auto border-t border-border bg-surface">
       <Container size="lg">
-        <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="max-w-xs">
             <Link href="/" className="font-serif text-2xl font-semibold text-primary no-underline">
               Abby<span className="text-accent">.</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Web developer &amp; AI automation builder — designing, building,
-              and automating complete digital products.
+              Web developer &amp; AI automation builder — from polished web
+              apps to the CRM systems working behind them.
             </p>
           </div>
 
@@ -98,6 +106,20 @@ export default function Footer() {
                   hankerism.vercel.app
                 </a>
               </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="mb-3 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              Recently
+            </p>
+            <ul className="grid gap-2">
+              {RECENTLY.map((r) => (
+                <li key={r.what} className="text-sm text-foreground/80">
+                  {r.what}
+                  <span className="ml-1.5 text-xs text-muted-foreground">· {r.when}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

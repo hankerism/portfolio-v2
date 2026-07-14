@@ -5,6 +5,7 @@ import FeaturedRsvp from "@/components/home/FeaturedRsvp";
 import FeaturedSystem from "@/components/home/FeaturedSystem";
 import SelectedProjects from "@/components/home/SelectedProjects";
 import About from "@/components/home/About";
+import HowIWork from "@/components/home/HowIWork";
 import CurrentlyExploring from "@/components/home/CurrentlyExploring";
 import Contact from "@/components/home/Contact";
 import Footer from "@/components/home/Footer";
@@ -13,7 +14,7 @@ import Footer from "@/components/home/Footer";
  * Homepage — the introduction, not the destination (IA v2 §4.1):
  * claim (Hero) → featured products (KATHA, the wedding RSVP platform) →
  * business systems (Bahay Liwanag) → client websites → explanation (About)
- * → trajectory (Currently Exploring) → conversion (Contact).
+ * → method (How I Work) → direction (Current Focus) → conversion (Contact).
  * Every section hands off to its deeper page. Metadata comes from the root
  * layout's defaults, which already describe the homepage.
  * ------------------------------------------------------------------------- */
@@ -37,6 +38,7 @@ export default function Home() {
         <FeaturedSystem />
         <SelectedProjects />
         <About />
+        <HowIWork />
         <CurrentlyExploring />
         <Contact />
       </main>

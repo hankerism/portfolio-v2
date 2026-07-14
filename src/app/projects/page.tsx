@@ -31,10 +31,14 @@ type Entry = {
   title: string;
   category: string;
   description: string;
+  /** Ownership + status, always honest — e.g. ["Personal product", "Live in production"]. */
+  meta: string[];
   tech: string[];
   caseStudy?: string;
   live?: { href: string; label: string };
   source?: string;
+  /** Shown where a source link would sit when no public repository exists. */
+  sourceNote?: string;
   /** Honest status marker when the write-up doesn't exist yet. */
   pending?: boolean;
   /** Handwritten margin note (decorative). */
@@ -51,6 +55,7 @@ const ENTRIES: Entry[] = [
     category: "Product engineering · Publishing platform",
     description:
       "A complete publishing platform for Filipino literature — an immersive reader with typography controls, membership, an author studio with a full draft-to-published workflow, custom search, paragraph-precise bookmarks, and reading history, headlined by the serialized novel Table for Two. Built end to end to prove one thing: I can design, engineer, and ship a whole product, not just pages.",
+    meta: ["Personal product", "Live in production"],
     tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4"],
     caseStudy: "/projects/katha",
     live: { href: "https://katha-sigma.vercel.app/", label: "Live product" },
@@ -63,7 +68,8 @@ const ENTRIES: Entry[] = [
     title: "Wedding RSVP Platform",
     category: "Product engineering · Built for Hazel & Jhonel",
     description:
-      "A premium wedding RSVP platform, live for a real wedding: a luxury single-page invitation with a config-driven, two-step reply card — validation, duplicate protection, meal options — and a Supabase-authenticated couple's dashboard with live stats, a guest status workflow, CSV export, content editors, and tracked confirmation emails.",
+      "It replaced spreadsheet-and-DM RSVP tracking with one secure guest-management system: a luxury single-page invitation with a config-driven, two-step reply card, and a Supabase-authenticated couple's dashboard — live stats, a guest status workflow, CSV export for the caterer, and tracked confirmation emails. The couple runs their entire guest list without a developer in the loop.",
+    meta: ["Client product", "Live in production"],
     tech: ["Next.js 16", "TypeScript", "Supabase", "Nodemailer"],
     caseStudy: "/projects/wedding-rsvp",
     live: { href: "https://hazel-and-jhonel.vercel.app/", label: "Live site" },
@@ -77,7 +83,9 @@ const ENTRIES: Entry[] = [
     category: "Business system · Functional medicine",
     description:
       "A women's hair-health practice moved onto GoHighLevel — landing pages, education-first funnels, CRM and pipelines, and automations integrated with the existing AWeber and Practice Better stack. It mattered because the practice kept its brand and its tools, and gained one system that captures and nurtures every lead.",
+    meta: ["Client system", "Delivered"],
     tech: ["GoHighLevel", "AWeber", "Practice Better"],
+    sourceNote: "Built in GoHighLevel — no code repository",
     caseStudy: "/projects/stephanie-center",
     note: "systems, in healthcare",
     accent: "text-sage",
@@ -88,7 +96,9 @@ const ENTRIES: Entry[] = [
     category: "Business system · Hospitality",
     description:
       "A serene site for a boutique resort — paired with a Make + Airtable pipeline that turns enquiries into booked reservations automatically, so the owners respond in minutes without ever touching a spreadsheet.",
+    meta: ["Client system", "Live"],
     tech: ["GoHighLevel", "Make", "Airtable"],
+    sourceNote: "Built in GoHighLevel + Make — no code repository",
     caseStudy: "/projects/bahay-liwanag",
     live: {
       href: "https://heyitsabby.space/website/bahay-liwanag",
@@ -103,7 +113,9 @@ const ENTRIES: Entry[] = [
     category: "Café website",
     description:
       "A warm one-page site for a local café — menu, story, and a tap-to-message enquiry form that lands straight in the owner's inbox, giving a small business a real web presence without tools it doesn't need.",
+    meta: ["Client website", "Live"],
     tech: ["GoHighLevel", "One-page", "Enquiry form"],
+    sourceNote: "Built in GoHighLevel — no code repository",
     live: { href: "https://heyitsabby.space/casa-kape", label: "Live site" },
     pending: true,
     accent: "text-pink-deep",
@@ -114,7 +126,9 @@ const ENTRIES: Entry[] = [
     category: "Community website",
     description:
       "A playful multi-page site for a cat adoption & rescue group — an adoptable-cat gallery, enquiry forms, and friendly auto-replies through GoHighLevel, so every adoption enquiry gets an answer even when the volunteers are busy.",
+    meta: ["Client website", "Live"],
     tech: ["GoHighLevel", "Multi-page", "Auto-replies"],
+    sourceNote: "Built in GoHighLevel — no code repository",
     live: {
       href: "https://heyitsabby.space/website/purrheaven/home",
       label: "Live site",
@@ -184,6 +198,10 @@ function EntryLinks({ e }: { e: Entry }) {
           <span className="underline-offset-4 group-hover/plink:underline">Source</span>
           <ExtArrow />
         </a>
+      )}
+      {/* Source transparency: when there's no repository, say so plainly. */}
+      {e.sourceNote && (
+        <span className="text-sm font-semibold text-muted-foreground">{e.sourceNote}</span>
       )}
       {e.pending && (
         <span aria-hidden className="hand text-lg text-muted-foreground">
@@ -275,7 +293,17 @@ export default function ProjectsIndex() {
 
                         <p className="text-foreground/80">{e.description}</p>
 
-                        <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+                        {/* One chip row: ownership + status first (accent-tinted),
+                            then the stack — metadata a recruiter scans in a second. */}
+                        <ul className="flex flex-wrap gap-2" aria-label="Project status and technologies">
+                          {e.meta.map((m) => (
+                            <li
+                              key={m}
+                              className="rounded-full border border-accent/50 bg-peach/15 px-2.5 py-0.5 text-xs font-bold text-accent-hover"
+                            >
+                              {m}
+                            </li>
+                          ))}
                           {e.tech.map((t) => (
                             <li
                               key={t}

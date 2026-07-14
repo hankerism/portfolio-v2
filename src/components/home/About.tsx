@@ -72,10 +72,10 @@ export default function About() {
             engineering meet.
           </p>
           <p className="text-lg text-foreground/80">
-            Today I build real products: web applications like KATHA, client
-            systems on GoHighLevel, and AI-assisted workflows that change how
-            fast I can design, code, and ship. The operations years are why
-            everything I build survives contact with a real business.
+            Today I build products end to end: web applications like KATHA,
+            client systems on GoHighLevel, and AI-assisted workflows that
+            change how fast I can design, code, and ship. The operations years
+            are why everything I build survives contact with a real business.
           </p>
         </Stack>
         </Reveal>

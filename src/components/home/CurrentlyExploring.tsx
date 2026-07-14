@@ -5,9 +5,11 @@ import SectionHeading from "./SectionHeading";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * CurrentlyExploring — the open notebook page. Sits between About (the story
- * so far) and Contact (the invitation): what's on the desk right now, told in
- * the same torn sticky notes as the Featured System's four-step flow.
+ * CurrentlyExploring — the "Current focus" section: the open notebook page.
+ * Sits after How I Work: the method, then the direction. The intro carries
+ * where the work is heading (production apps on Next.js + Supabase, systems
+ * for real businesses, AI-assisted engineering as daily practice); the torn
+ * sticky notes carry the curiosity feeding it.
  *
  * Honesty rule holds: these are things actively being learned and used, not
  * claimed expertise — the copy says so out loud.
@@ -47,13 +49,15 @@ const NOTES = [
 
 export default function CurrentlyExploring() {
   return (
-    <Section id="exploring" tone="default" aria-labelledby="exploring-heading">
+    // surface tone keeps the About → method → focus → contact rhythm
+    // alternating: surface / default / surface / muted
+    <Section id="exploring" tone="surface" aria-labelledby="exploring-heading">
       <Reveal>
         <SectionHeading
           id="exploring-heading"
           eyebrow="on my desk right now"
-          title="Currently exploring"
-          intro="The learning never stopped when the portfolio shipped. These are the notes pinned above my desk this season — things I'm actively studying and already folding into how I build."
+          title="Current focus"
+          intro="The direction is set: production-grade applications on Next.js and Supabase, systems that run real businesses, and AI-assisted engineering as a daily practice rather than a novelty. These notes are what's feeding that — things I'm actively studying and already folding into how I build."
         />
       </Reveal>
 
