@@ -17,7 +17,7 @@ import Doodle from "@/components/ui/Doodle";
  * drifts. All CSS-driven, all silenced by prefers-reduced-motion.
  * ------------------------------------------------------------------------- */
 
-const STACK = ["Next.js", "TypeScript", "GoHighLevel", "Make", "Claude Code"];
+const STACK = ["Next.js", "TypeScript", "Supabase", "GoHighLevel", "Claude Code"];
 
 export default function Hero() {
   return (

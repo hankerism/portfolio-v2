@@ -325,9 +325,9 @@ export default function SelectedProjects() {
       <Reveal>
         <SectionHeading
           id="projects-heading"
-          eyebrow="Selected work"
-          title="A few things I've built lately"
-          intro="A curated sample from the collection — each project designed, developed, and structured like a client engagement."
+          eyebrow="Client websites"
+          title="Built for real businesses"
+          intro="Websites shipped for real clients — each with the branding, forms, and quiet automations a small business actually needs, and nothing it doesn't."
         />
       </Reveal>
 

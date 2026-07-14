@@ -37,7 +37,7 @@ const NOTES = [
   { color: "sticky-sage", tilt: "motion-safe:rotate-2", num: "text-sage" },
 ] as const;
 
-const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "CRM & pipelines"];
+const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "AWeber", "Supabase", "CRM & pipelines"];
 
 const LIVE = "https://heyitsabby.space/website/bahay-liwanag";
 
@@ -47,9 +47,9 @@ export default function FeaturedSystem() {
       <Reveal>
         <SectionHeading
           id="automation-heading"
-          eyebrow="Business systems"
+          eyebrow="Automation & CRM"
           title="Set it once, let it run"
-          intro="This is where I save the most time — little workflows that catch a new enquiry, reply, book it in, and let you know, all while you're doing something else."
+          intro="CRM architecture, marketing automations, and email workflows — the systems work behind the products. Little workflows that catch a new enquiry, reply, book it in, and let you know, all while you're doing something else."
         />
       </Reveal>
 

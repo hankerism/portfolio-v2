@@ -24,7 +24,7 @@ const TOPICS = [
   },
   {
     title: "Supabase",
-    body: "The backend KATHA is architected for — real accounts, Postgres, and auth.",
+    body: "Shipped for the wedding platform — Postgres, Auth, RLS. KATHA's backend is next.",
   },
   {
     title: "Advanced Next.js",

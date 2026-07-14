@@ -21,7 +21,7 @@ import { cx } from "@/lib/cx";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Everything I've built: a complete publishing platform, business systems on GoHighLevel, and client sites with the automations behind them — with full case studies where they exist.",
+    "Everything I've built: a complete publishing platform, a premium wedding RSVP platform on Supabase, business systems on GoHighLevel, and client sites with the automations behind them — with full case studies where they exist.",
 };
 
 const EMAIL = "blujayabby@gmail.com";
@@ -60,6 +60,19 @@ const ENTRIES: Entry[] = [
   },
   {
     n: "02",
+    title: "Hazel & Jhonel",
+    category: "Product engineering · RSVP platform",
+    description:
+      "A premium wedding RSVP platform, live for a real wedding: a luxury single-page invitation with a config-driven, two-step reply card — validation, duplicate protection, meal options — and a Supabase-authenticated couple's dashboard with live stats, a guest status workflow, CSV export, content editors, and tracked confirmation emails.",
+    tech: ["Next.js 16", "TypeScript", "Supabase", "Nodemailer"],
+    live: { href: "https://hazel-and-jhonel.vercel.app/", label: "Live site" },
+    source: "https://github.com/hankerism/hazel-and-jhonel",
+    pending: true,
+    note: "the newest product",
+    accent: "text-accent-hover",
+  },
+  {
+    n: "03",
     title: "Stephanie Center Wellness",
     category: "Business system · Functional medicine",
     description:
@@ -70,7 +83,7 @@ const ENTRIES: Entry[] = [
     accent: "text-sage",
   },
   {
-    n: "03",
+    n: "04",
     title: "Bahay Liwanag",
     category: "Business system · Hospitality",
     description:
@@ -85,7 +98,7 @@ const ENTRIES: Entry[] = [
     accent: "text-accent-hover",
   },
   {
-    n: "04",
+    n: "05",
     title: "Casa Kape",
     category: "Café website",
     description:
@@ -96,7 +109,7 @@ const ENTRIES: Entry[] = [
     accent: "text-pink-deep",
   },
   {
-    n: "05",
+    n: "06",
     title: "Purr Heaven",
     category: "Community website",
     description:
@@ -202,11 +215,12 @@ export default function ProjectsIndex() {
             <p className="hand text-2xl text-primary sm:text-3xl">The collection</p>
             <h1 className="mt-2 text-balance">Projects</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-foreground/80">
-              Everything I&rsquo;ve built, in one place — a complete publishing
-              platform, two business systems on GoHighLevel, and the client
-              sites with automations working quietly behind them. Read this
-              page like a table of contents: three chapters are written in
-              full, the rest are live and linkable.
+              Everything I&rsquo;ve built, in one place — two complete products
+              (a publishing platform and a wedding RSVP platform), two business
+              systems on GoHighLevel, and the client sites with automations
+              working quietly behind them. Read this page like a table of
+              contents: three chapters are written in full, the rest are live
+              and linkable.
             </p>
           </Container>
         </header>

@@ -135,12 +135,26 @@ const EXPERIENCE = [
   },
 ];
 
-const SELECTED_WORK = [
+const SELECTED_WORK: {
+  title: string;
+  href: string;
+  desc: string;
+  tech: string;
+  /** External live-site link (no case study yet) — opens in a new tab. */
+  external?: boolean;
+}[] = [
   {
     title: "KATHA",
     href: "/projects/katha",
     desc: "A complete publishing platform for Filipino literature — reader, membership, author studio, search, bookmarks, and reading history — designed and engineered end to end.",
     tech: "Next.js · TypeScript · Tailwind CSS",
+  },
+  {
+    title: "Hazel & Jhonel — Wedding RSVP Platform",
+    href: "https://hazel-and-jhonel.vercel.app/",
+    external: true,
+    desc: "A premium wedding RSVP platform, live for a real wedding — Supabase auth and row-level security, a config-driven RSVP flow, a couple's dashboard with live stats and CSV export, and tracked confirmation emails.",
+    tech: "Next.js · TypeScript · Supabase · Nodemailer",
   },
   {
     title: "Stephanie Center Wellness",
@@ -158,10 +172,10 @@ const SELECTED_WORK = [
 
 const TECH = [
   { cat: "Frontend", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive design"] },
-  { cat: "Backend", items: ["Next.js App Router", "API routes & webhooks", "Data modelling", "Supabase (exploring)"] },
+  { cat: "Backend", items: ["Next.js App Router", "Supabase (Postgres · Auth · RLS)", "API routes & webhooks", "Data modelling"] },
   { cat: "AI & Automation", items: ["Claude Code", "AI-assisted development", "Make.com", "Zapier", "Workflow design"] },
   { cat: "CRM & Marketing", items: ["GoHighLevel", "CRM architecture", "Pipelines", "Funnels & landing pages", "Email automation"] },
-  { cat: "Integrations", items: ["Airtable", "AWeber", "Practice Better", "Webhooks & API connections"] },
+  { cat: "Integrations", items: ["Airtable", "AWeber", "Practice Better", "Transactional email (Nodemailer)", "Webhooks & API connections"] },
   { cat: "Developer Tools", items: ["Git & GitHub", "Vercel", "VS Code"] },
 ];
 
@@ -271,13 +285,25 @@ export default function ResumePage() {
                   <p className="mt-1.5 text-foreground/80">{w.desc}</p>
                   <p className="mt-2 font-mono text-xs text-muted-foreground">{w.tech}</p>
                 </div>
-                <Link
-                  href={w.href}
-                  className="group/cs no-print inline-flex h-fit items-center gap-1.5 self-center text-sm font-bold text-primary no-underline"
-                >
-                  <span className="underline-offset-4 group-hover/cs:underline">View case study</span>
-                  <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">→</span>
-                </Link>
+                {w.external ? (
+                  <a
+                    href={w.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group/cs no-print inline-flex h-fit items-center gap-1.5 self-center text-sm font-bold text-primary no-underline"
+                  >
+                    <span className="underline-offset-4 group-hover/cs:underline">Visit live site</span>
+                    <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">↗</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={w.href}
+                    className="group/cs no-print inline-flex h-fit items-center gap-1.5 self-center text-sm font-bold text-primary no-underline"
+                  >
+                    <span className="underline-offset-4 group-hover/cs:underline">View case study</span>
+                    <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">→</span>
+                  </Link>
+                )}
               </li>
             ))}
           </ol>
