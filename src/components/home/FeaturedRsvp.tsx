@@ -138,7 +138,7 @@ export default function FeaturedRsvp() {
             <span className="hand text-2xl text-primary sm:text-3xl">The second product</span>
 
             <h2 id="rsvp-heading" className="relative">
-              Hazel &amp; Jhonel — a premium wedding RSVP platform
+              Wedding RSVP Platform — built for Hazel &amp; Jhonel
             </h2>
 
             <p className="text-lg text-foreground/80">
@@ -159,11 +159,14 @@ export default function FeaturedRsvp() {
             </ul>
 
             <Stack direction="row" gap="sm" wrap align="center" className="pt-1">
+              <Button href="/projects/wedding-rsvp" variant="primary">
+                Read the case study
+              </Button>
               <Button
                 href={LIVE}
                 target="_blank"
                 rel="noreferrer"
-                variant="primary"
+                variant="outline"
                 rightIcon={
                   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <path
@@ -200,10 +203,6 @@ export default function FeaturedRsvp() {
                   />
                 </svg>
               </a>
-              <span aria-hidden className="hand text-lg text-muted-foreground">
-                <span className="marker">case study in progress</span>
-              </span>
-              <span className="sr-only">Case study in progress.</span>
             </Stack>
 
             {/* Quiet exit to the full collection, mirroring the flagship band */}

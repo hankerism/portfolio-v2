@@ -60,14 +60,14 @@ const ENTRIES: Entry[] = [
   },
   {
     n: "02",
-    title: "Hazel & Jhonel",
-    category: "Product engineering · RSVP platform",
+    title: "Wedding RSVP Platform",
+    category: "Product engineering · Built for Hazel & Jhonel",
     description:
       "A premium wedding RSVP platform, live for a real wedding: a luxury single-page invitation with a config-driven, two-step reply card — validation, duplicate protection, meal options — and a Supabase-authenticated couple's dashboard with live stats, a guest status workflow, CSV export, content editors, and tracked confirmation emails.",
     tech: ["Next.js 16", "TypeScript", "Supabase", "Nodemailer"],
+    caseStudy: "/projects/wedding-rsvp",
     live: { href: "https://hazel-and-jhonel.vercel.app/", label: "Live site" },
     source: "https://github.com/hankerism/hazel-and-jhonel",
-    pending: true,
     note: "the newest product",
     accent: "text-accent-hover",
   },
@@ -219,7 +219,7 @@ export default function ProjectsIndex() {
               (a publishing platform and a wedding RSVP platform), two business
               systems on GoHighLevel, and the client sites with automations
               working quietly behind them. Read this page like a table of
-              contents: three chapters are written in full, the rest are live
+              contents: four chapters are written in full, the rest are live
               and linkable.
             </p>
           </Container>

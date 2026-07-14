@@ -752,8 +752,8 @@ export default function KathaCaseStudy() {
                 <Link href="/projects" className="text-sm font-semibold">
                   ← All projects
                 </Link>
-                <Link href="/projects/bahay-liwanag" className="text-sm font-semibold">
-                  Next project: Bahay Liwanag →
+                <Link href="/projects/wedding-rsvp" className="text-sm font-semibold">
+                  Next project: Wedding RSVP Platform →
                 </Link>
               </div>
             </div>

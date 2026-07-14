@@ -150,10 +150,9 @@ const SELECTED_WORK: {
     tech: "Next.js · TypeScript · Tailwind CSS",
   },
   {
-    title: "Hazel & Jhonel — Wedding RSVP Platform",
-    href: "https://hazel-and-jhonel.vercel.app/",
-    external: true,
-    desc: "A premium wedding RSVP platform, live for a real wedding — Supabase auth and row-level security, a config-driven RSVP flow, a couple's dashboard with live stats and CSV export, and tracked confirmation emails.",
+    title: "Wedding RSVP Platform",
+    href: "/projects/wedding-rsvp",
+    desc: "A premium wedding RSVP platform, live for a real wedding (Hazel & Jhonel) — Supabase auth and row-level security, a config-driven RSVP flow, a couple's dashboard with live stats and CSV export, and tracked confirmation emails.",
     tech: "Next.js · TypeScript · Supabase · Nodemailer",
   },
   {
