@@ -6,8 +6,9 @@ import Doodle from "@/components/ui/Doodle";
 
 /* ---------------------------------------------------------------------------
  * Hero — the claim. Carries the page's single <h1>.
- * Leads with the elevated Product-Engineer positioning (per CONTENT.md) in the
- * warm GHL voice, and filters visitors toward the work or a conversation. At
+ * Leads with the product-builder positioning (web developer · AI automation
+ * builder · GoHighLevel specialist) in the warm voice, and filters visitors
+ * toward the work or a conversation. At
  * lg+ a restrained scrapbook collage of the flagship (KATHA) sits alongside,
  * so "I build products" is proven the instant the page loads.
  *
@@ -16,7 +17,7 @@ import Doodle from "@/components/ui/Doodle";
  * drifts. All CSS-driven, all silenced by prefers-reduced-motion.
  * ------------------------------------------------------------------------- */
 
-const STACK = ["Next.js", "TypeScript", "GoHighLevel", "Make", "Airtable"];
+const STACK = ["Next.js", "TypeScript", "GoHighLevel", "Make", "Claude Code"];
 
 export default function Hero() {
   return (
@@ -48,14 +49,15 @@ export default function Hero() {
             </span>
 
             <h1 className="animate-fade-up text-balance" style={{ animationDelay: "90ms" }}>
-              I build complete digital products and{" "}
-              <span className="marker">business systems</span>.
+              I design, build, and automate{" "}
+              <span className="marker">complete digital products</span>.
             </h1>
 
             <p className="max-w-2xl animate-fade-up text-lg leading-relaxed text-foreground/80 sm:text-xl" style={{ animationDelay: "180ms" }}>
-              Product engineer and automation specialist with 6+ years in operations.
-              I design, build, and automate the things businesses run on — organised
-              behind the scenes, lovely out front.
+              Web developer, AI automation builder, and GoHighLevel specialist —
+              with 6+ years in operations behind it all. I ship real products,
+              from polished web apps to CRM automations — organised behind the
+              scenes, lovely out front.
             </p>
 
             {/* The two journey entrances (IA v2 §6): products and systems.

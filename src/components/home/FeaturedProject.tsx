@@ -18,12 +18,12 @@ import Reveal from "@/components/ui/Reveal";
  * ------------------------------------------------------------------------- */
 
 const HIGHLIGHTS = [
-  "Full-stack Next.js 16 App Router · TypeScript · Tailwind v4",
-  "Immersive reader with type controls, bookmarks & progress",
-  "Client-side search engine with highlighted results",
-  "Author studio for publishing, with cover management",
-  "Role-based access for readers and authors",
-  "Accessible, responsive, editorial design system",
+  "Immersive reader — type size, width & light/sepia/dark themes",
+  "Membership with free previews and a reader → author path",
+  "Author Studio: drafts, autosave & a full publishing workflow",
+  "Custom search engine with fuzzy matching & highlighted results",
+  "Paragraph-precise bookmarks, reading history & continue reading",
+  "Next.js 16 App Router · TypeScript · Tailwind v4 design system",
 ];
 
 export default function FeaturedProject() {
@@ -55,14 +55,14 @@ export default function FeaturedProject() {
             <span className="hand text-2xl text-primary sm:text-3xl">The flagship</span>
 
             <h2 id="work-heading" className="relative">
-              KATHA — a production-grade reading &amp; publishing platform
+              KATHA — a complete reading &amp; publishing platform
             </h2>
 
             <p className="text-lg text-foreground/80">
-              A calm, premium home for Filipino literature: novels, serials, and
-              short fiction, beautifully typeset for slow, unhurried reading.
-              Designed, engineered, and shipped end to end — from the reading
-              experience to the author studio behind it.
+              A calm, premium home for Filipino literature — headlined by the
+              serialized novel Table for Two. Designed, engineered, and shipped
+              end to end: the reading experience, the membership, and the
+              author studio where drafts become published books.
             </p>
 
             <ul className="grid gap-2.5 sm:grid-cols-2">

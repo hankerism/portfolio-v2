@@ -17,17 +17,18 @@ import { cx } from "@/lib/cx";
  * eye lands on is the screenshot; the props are supporting actors placed in
  * the margins. No two layouts repeat, and the rhythm alternates —
  *
- *   № 1  Casa Kape        — DENSE (the strongest): oversized taped photo,
- *                           recipe notecard overlapping it, receipt tucked
- *                           behind, paperclipped menu, coffee ring, steam
- *   № 2  Purr Heaven      — SIMPLE: two big polaroids on blush paper, one
+ *   № 1  Stephanie Center — CALM: the most breathing room; ruled paper,
+ *                           bookmark ribbon, one leaf, one pressed blossom.
+ *                           Leads the wall — it's the strongest client
+ *                           system (the full GHL build, not just a site)
+ *   № 2  Casa Kape        — DENSE: oversized taped photo, recipe notecard
+ *                           overlapping it, receipt tucked behind,
+ *                           paperclipped menu, coffee ring, steam
+ *   № 3  Purr Heaven      — SIMPLE: two big polaroids on blush paper, one
  *                           note, an elegant paw trail — nothing else
- *   № 3  Stephanie Center — CALM: the most breathing room; ruled paper,
- *                           bookmark ribbon, one leaf, one pressed blossom
  *
- * Copy (names, blurbs, tags) is unchanged; the only added words are the tiny
- * handwritten margin notes. All flourishes are decorative (aria-hidden /
- * empty alt) and every animation respects prefers-reduced-motion.
+ * All flourishes are decorative (aria-hidden / empty alt) and every
+ * animation respects prefers-reduced-motion.
  * ------------------------------------------------------------------------- */
 
 /* Live sites --------------------------------------------------------------- */
@@ -158,7 +159,7 @@ function CasaKape() {
           {/* Receipt slip tucked behind the card corner */}
           <span aria-hidden className="receipt absolute -right-7 -top-9 hidden h-24 w-16 rotate-6 lg:block" />
           <span aria-hidden className="hand text-2xl text-accent-hover">
-            № 1 — from the recipe notebook
+            № 2 — from the recipe notebook
           </span>
           <h3 className="text-3xl">Casa Kape</h3>
           <p className="text-lg text-foreground/80">
@@ -228,7 +229,7 @@ function PurrHeaven() {
 
         {/* Poster copy */}
         <div className="flex flex-col gap-4">
-          <span aria-hidden className="hand text-2xl text-pink-deep">№ 2 — the adoption poster</span>
+          <span aria-hidden className="hand text-2xl text-pink-deep">№ 3 — the adoption poster</span>
           <h3 className="text-3xl">Purr Heaven</h3>
           <p className="text-lg text-foreground/80">
             A playful multi-page site for a cat adoption &amp; rescue group — an
@@ -267,15 +268,16 @@ function StephanieCenter() {
         {/* Journal entry */}
         <div className="flex flex-col gap-4">
           <span aria-hidden className="hand text-2xl text-sage">
-            № 3 — from the wellness journal
+            № 1 — from the wellness journal
           </span>
           <h3 className="text-3xl">Stephanie Center Wellness</h3>
           <p className="text-lg text-foreground/80">
-            A women&rsquo;s hair-health practice — its education-first funnel
-            rebuilt inside GoHighLevel, preserving the brand and the existing
-            AWeber &amp; Practice Better stack.
+            A women&rsquo;s hair-health practice, moved whole onto GoHighLevel —
+            landing pages, education-first funnels, CRM and pipelines, and
+            automations integrated with the existing AWeber &amp; Practice
+            Better stack. Not just a website: the system behind the practice.
           </p>
-          <Tags tags={["Functional medicine", "GoHighLevel", "Business system"]} />
+          <Tags tags={["GoHighLevel", "CRM & automations", "Funnels", "Integrations"]} />
           <Link
             href="/projects/stephanie-center"
             className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-sage no-underline"
@@ -330,17 +332,18 @@ export default function SelectedProjects() {
       </Reveal>
 
       {/* Each piece settles onto the page with its own slight tilt. The gaps
-          are curated, not metronomic: extra air after the dense Casa spread,
-          and the longest exhale before the calm closing page. */}
+          are curated, not metronomic: the calm Stephanie system opens the
+          wall, extra air after the dense Casa spread, and the simplest
+          poster closes it. */}
       <ul className="mt-16">
-        <Reveal as="li" rot={1.2} y={20} className="list-none">
+        <Reveal as="li" rot={1} y={20} className="list-none">
+          <StephanieCenter />
+        </Reveal>
+        <Reveal as="li" delay={100} rot={1.2} y={20} className="mt-24 list-none sm:mt-32">
           <CasaKape />
         </Reveal>
-        <Reveal as="li" delay={100} rot={-1.4} y={20} className="mt-20 list-none sm:mt-24">
+        <Reveal as="li" rot={-1.4} y={20} className="mt-20 list-none sm:mt-24">
           <PurrHeaven />
-        </Reveal>
-        <Reveal as="li" rot={1} y={20} className="mt-24 list-none sm:mt-32">
-          <StephanieCenter />
         </Reveal>
       </ul>
 

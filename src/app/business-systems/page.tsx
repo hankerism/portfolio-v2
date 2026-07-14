@@ -21,7 +21,7 @@ import Reveal from "@/components/ui/Reveal";
  * ------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
-  title: "Business Systems — Abby",
+  title: "Business Systems",
   description:
     "How I think about business systems: take the busywork not the decisions, capture information once, keep it findable, and build something the owner can actually run — lessons from six years in operations.",
 };

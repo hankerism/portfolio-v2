@@ -19,9 +19,9 @@ import { cx } from "@/lib/cx";
  * ------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
-  title: "Projects — Abby",
+  title: "Projects",
   description:
-    "Everything I've built: a production reading platform, a resort booking system on GoHighLevel, and client sites with the automations behind them — with full case studies where they exist.",
+    "Everything I've built: a complete publishing platform, business systems on GoHighLevel, and client sites with the automations behind them — with full case studies where they exist.",
 };
 
 const EMAIL = "blujayabby@gmail.com";
@@ -48,9 +48,9 @@ const ENTRIES: Entry[] = [
   {
     n: "01",
     title: "KATHA",
-    category: "Product engineering",
+    category: "Product engineering · Publishing platform",
     description:
-      "A quiet, premium home for Filipino literature: a reading experience, a searchable catalogue, and an author studio — designed, built, and shipped as one product.",
+      "A complete publishing platform for Filipino literature — an immersive reader with typography controls, membership, an author studio with a full draft-to-published workflow, custom search, paragraph-precise bookmarks, and reading history, headlined by the serialized novel Table for Two. Built end to end to prove one thing: I can design, engineer, and ship a whole product, not just pages.",
     tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4"],
     caseStudy: "/projects/katha",
     live: { href: "https://katha-sigma.vercel.app/", label: "Live product" },
@@ -60,10 +60,21 @@ const ENTRIES: Entry[] = [
   },
   {
     n: "02",
-    title: "Bahay Liwanag",
-    category: "Business system",
+    title: "Stephanie Center Wellness",
+    category: "Business system · Functional medicine",
     description:
-      "A serene site for a boutique resort — paired with a Make + Airtable pipeline that turns enquiries into booked reservations automatically.",
+      "A women's hair-health practice moved onto GoHighLevel — landing pages, education-first funnels, CRM and pipelines, and automations integrated with the existing AWeber and Practice Better stack. It mattered because the practice kept its brand and its tools, and gained one system that captures and nurtures every lead.",
+    tech: ["GoHighLevel", "AWeber", "Practice Better"],
+    caseStudy: "/projects/stephanie-center",
+    note: "systems, in healthcare",
+    accent: "text-sage",
+  },
+  {
+    n: "03",
+    title: "Bahay Liwanag",
+    category: "Business system · Hospitality",
+    description:
+      "A serene site for a boutique resort — paired with a Make + Airtable pipeline that turns enquiries into booked reservations automatically, so the owners respond in minutes without ever touching a spreadsheet.",
     tech: ["GoHighLevel", "Make", "Airtable"],
     caseStudy: "/projects/bahay-liwanag",
     live: {
@@ -74,39 +85,28 @@ const ENTRIES: Entry[] = [
     accent: "text-accent-hover",
   },
   {
-    n: "03",
+    n: "04",
     title: "Casa Kape",
     category: "Café website",
     description:
-      "A warm one-page site for a local café — menu, story, and a tap-to-message enquiry form that lands straight in the owner's inbox.",
+      "A warm one-page site for a local café — menu, story, and a tap-to-message enquiry form that lands straight in the owner's inbox, giving a small business a real web presence without tools it doesn't need.",
     tech: ["GoHighLevel", "One-page", "Enquiry form"],
     live: { href: "https://heyitsabby.space/casa-kape", label: "Live site" },
     pending: true,
     accent: "text-pink-deep",
   },
   {
-    n: "04",
+    n: "05",
     title: "Purr Heaven",
     category: "Community website",
     description:
-      "A playful multi-page site for a cat adoption & rescue group — an adoptable-cat gallery, enquiry forms, and friendly auto-replies through GoHighLevel.",
+      "A playful multi-page site for a cat adoption & rescue group — an adoptable-cat gallery, enquiry forms, and friendly auto-replies through GoHighLevel, so every adoption enquiry gets an answer even when the volunteers are busy.",
     tech: ["GoHighLevel", "Multi-page", "Auto-replies"],
     live: {
       href: "https://heyitsabby.space/website/purrheaven/home",
       label: "Live site",
     },
     pending: true,
-    accent: "text-sage",
-  },
-  {
-    n: "05",
-    title: "Stephanie Center Wellness",
-    category: "Business system · Functional medicine",
-    description:
-      "A women's hair-health practice, its education-first funnel rebuilt inside GoHighLevel — preserving the brand and the existing AWeber and Practice Better stack, and connecting lead capture to the CRM.",
-    tech: ["GoHighLevel", "AWeber", "Practice Better"],
-    caseStudy: "/projects/stephanie-center",
-    note: "systems, in healthcare",
     accent: "text-sage",
   },
 ];
@@ -202,11 +202,11 @@ export default function ProjectsIndex() {
             <p className="hand text-2xl text-primary sm:text-3xl">The collection</p>
             <h1 className="mt-2 text-balance">Projects</h1>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-foreground/80">
-              Everything I&rsquo;ve built, in one place — a production reading
-              platform, a resort booking system, and the client sites with
-              automations working quietly behind them. Read this page like a
-              table of contents: two chapters are written in full, the rest are
-              live and linkable.
+              Everything I&rsquo;ve built, in one place — a complete publishing
+              platform, two business systems on GoHighLevel, and the client
+              sites with automations working quietly behind them. Read this
+              page like a table of contents: three chapters are written in
+              full, the rest are live and linkable.
             </p>
           </Container>
         </header>

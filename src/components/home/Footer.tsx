@@ -33,8 +33,8 @@ export default function Footer() {
               Abby<span className="text-accent">.</span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground">
-              Product engineer &amp; automation specialist — building complete
-              digital products and business systems.
+              Web developer &amp; AI automation builder — designing, building,
+              and automating complete digital products.
             </p>
           </div>
 

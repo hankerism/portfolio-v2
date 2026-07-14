@@ -27,8 +27,9 @@ import Doodle from "@/components/ui/Doodle";
 
 export const metadata: Metadata = {
   title: "Résumé — Abigail Marte",
+  // Template appends "· Abby", so the full name reads as the distinguisher.
   description:
-    "Abigail Marte — Web Developer & GoHighLevel Specialist. Six years in operations, now designing and building complete digital products and business systems.",
+    "Abigail Marte — Web Developer, AI Automation Builder & GoHighLevel Specialist. Six years in operations, now designing and building complete digital products.",
 };
 
 const LINKS = {
@@ -109,9 +110,9 @@ function ResumeSection({
 const EXPERIENCE = [
   {
     when: "2026–Present",
-    role: "Web Developer & GoHighLevel Specialist",
+    role: "Web Developer & AI Automation Builder",
     org: "Independent Projects",
-    body: "Building complete digital products and business systems — Next.js and TypeScript web apps, and GoHighLevel funnels wired to Make and Airtable.",
+    body: "Building complete digital products with AI-assisted workflows — Next.js and TypeScript web apps like KATHA, and GoHighLevel systems wired to Make and Airtable.",
   },
   {
     when: "2024–2026",
@@ -137,13 +138,13 @@ const SELECTED_WORK = [
   {
     title: "KATHA",
     href: "/projects/katha",
-    desc: "A production reading and publishing platform for Filipino literature, designed and engineered end to end.",
+    desc: "A complete publishing platform for Filipino literature — reader, membership, author studio, search, bookmarks, and reading history — designed and engineered end to end.",
     tech: "Next.js · TypeScript · Tailwind CSS",
   },
   {
     title: "Stephanie Center Wellness",
     href: "/projects/stephanie-center",
-    desc: "A functional-medicine practice's funnel, rebuilt in GoHighLevel around its existing AWeber and Practice Better stack.",
+    desc: "A functional-medicine practice's full client journey in GoHighLevel — landing pages, funnels, CRM, and automations integrated with AWeber and Practice Better.",
     tech: "GoHighLevel · AWeber · Practice Better",
   },
   {
@@ -156,9 +157,11 @@ const SELECTED_WORK = [
 
 const TECH = [
   { cat: "Frontend", items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Responsive design"] },
-  { cat: "Business systems", items: ["GoHighLevel", "CRM architecture", "Pipelines", "Funnels & landing pages"] },
-  { cat: "Automation", items: ["Make.com", "Zapier", "Airtable", "Workflow design"] },
-  { cat: "Tools", items: ["Git & GitHub", "Vercel", "AWeber", "Practice Better"] },
+  { cat: "Backend", items: ["Next.js App Router", "API routes & webhooks", "Data modelling", "Supabase (exploring)"] },
+  { cat: "AI & Automation", items: ["Claude Code", "AI-assisted development", "Make.com", "Zapier", "Workflow design"] },
+  { cat: "CRM & Marketing", items: ["GoHighLevel", "CRM architecture", "Pipelines", "Funnels & landing pages", "Email automation"] },
+  { cat: "Integrations", items: ["Airtable", "AWeber", "Practice Better", "Webhooks & API connections"] },
+  { cat: "Developer Tools", items: ["Git & GitHub", "Vercel", "VS Code"] },
 ];
 
 /* ── Page ─────────────────────────────────────────────────────────────────── */
@@ -184,12 +187,14 @@ export default function ResumePage() {
             <p className="hand text-2xl text-primary sm:text-3xl">Résumé</p>
             <h1 className="mt-2">Abigail Marte</h1>
             <p className="mt-2 font-serif text-xl text-foreground/80 sm:text-2xl">
-              Web Developer <span className="text-border-strong">·</span> GoHighLevel Specialist
+              Web Developer <span className="text-border-strong">·</span> AI
+              Automation Builder <span className="text-border-strong">·</span>{" "}
+              GoHighLevel Specialist
             </p>
             <p className="mt-5 max-w-2xl text-lg leading-relaxed text-foreground/80">
-              I design, build, and automate complete digital products and
-              business systems. After more than six years in operations and
-              virtual assistance, I moved into modern web development — so I
+              I design, build, and automate complete digital products. After
+              more than six years in operations and virtual assistance, I moved
+              into modern web development and AI-assisted engineering — so I
               understand a business before I build for it, and I engineer the
               systems I used to run.
             </p>
@@ -197,7 +202,7 @@ export default function ResumePage() {
             {/* Featured technologies — a two-second scan of the core stack. */}
             <p className="mt-4 text-sm font-semibold text-foreground/70">
               Next.js · React · TypeScript · Tailwind CSS · GoHighLevel ·
-              Make.com · Airtable
+              Make.com · Claude Code
             </p>
 
             {/* Contact — readable handles so the printed page carries them too */}

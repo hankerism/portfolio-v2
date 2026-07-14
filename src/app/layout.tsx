@@ -39,11 +39,11 @@ const caveat = Caveat({
  * ------------------------------------------------------------------------- */
 export const metadata: Metadata = {
   title: {
-    default: "Abby — Product Engineer & Automation Specialist",
+    default: "Abby — Web Developer & AI Automation Builder",
     template: "%s · Abby",
   },
   description:
-    "I design, engineer, and automate complete digital products and business systems — combining 6+ years in operations with modern web development.",
+    "I design, build, and automate complete digital products — modern web apps, AI-powered workflows, and CRM automations on GoHighLevel — combining 6+ years in operations with modern web development.",
 };
 
 export default function RootLayout({

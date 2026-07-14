@@ -61,19 +61,21 @@ export default function About() {
           </div>
 
           <p className="text-lg text-foreground/80">
-            For more than six years, I helped businesses improve operations,
-            manage systems, and streamline workflows — living inside the tools
+            I spent more than six years as an operations specialist — managing
+            CRM systems, streamlining workflows, and living inside the tools
             teams depend on every day.
           </p>
           <p className="text-lg text-foreground/80">
             As my responsibilities grew, I wanted to build the tools I was
             managing, not just operate them. That led me into modern web
-            development and automation.
+            development — and into GoHighLevel, where operations and
+            engineering meet.
           </p>
           <p className="text-lg text-foreground/80">
-            Today I combine that operations experience with software engineering
-            to build products that are both technically sound and genuinely
-            practical for real businesses.
+            Today I build real products: web applications like KATHA, client
+            systems on GoHighLevel, and AI-assisted workflows that change how
+            fast I can design, code, and ship. The operations years are why
+            everything I build survives contact with a real business.
           </p>
         </Stack>
         </Reveal>

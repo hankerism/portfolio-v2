@@ -16,7 +16,7 @@ import Doodle from "@/components/ui/Doodle";
  * ------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
-  title: "Contact — Abby",
+  title: "Contact",
   description:
     "Start a conversation about a product, a business system, or both. Email reaches me directly.",
 };

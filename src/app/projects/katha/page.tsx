@@ -23,7 +23,7 @@ import { cx } from "@/lib/cx";
 export const metadata: Metadata = {
   title: "KATHA — Engineering Case Study",
   description:
-    "How KATHA, a production-grade reading and publishing platform, was designed and built end to end: architecture, data layer, identity model, search engine, and the trade-offs accepted along the way.",
+    "How KATHA, a complete reading and publishing platform, was designed and built end to end: architecture, data layer, identity model, search engine, and the trade-offs accepted along the way.",
 };
 
 const LIVE = "https://katha-sigma.vercel.app/";
