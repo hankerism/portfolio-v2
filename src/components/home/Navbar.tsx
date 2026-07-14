@@ -16,6 +16,11 @@ import { cx } from "@/lib/cx";
  * (aria-expanded/controls, Escape to close, closes on navigation). The
  * Contact CTA stays visible at every width.
  *
+ * Two states: at the very top the bar is transparent and reads as part of
+ * the page; after ~8px of scroll (or with the mobile menu open, which needs
+ * the backdrop for readability) it elevates — translucent cream, backdrop
+ * blur, hairline border — and eases back when you return to the top.
+ *
  * Interim states (per IA v2 phasing): About points at its homepage section
  * until /about (Phase D) ships. Resume is now a real page (/resume).
  * ------------------------------------------------------------------------- */
@@ -37,6 +42,7 @@ function isActive(pathname: string, href: string): boolean {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   // Close the mobile menu on Escape.
@@ -49,10 +55,26 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
+  // Elevate after a few pixels of scroll. The initial call covers loading
+  // mid-page (hash links, restored scroll positions).
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const elevated = scrolled || open;
+
   return (
     <nav
       aria-label="Primary"
-      className="sticky top-0 z-50 border-b border-border/70 bg-background/85 backdrop-blur-md"
+      className={cx(
+        "sticky top-0 z-50 border-b transition-all duration-300 ease-out",
+        elevated
+          ? "border-border/70 bg-background/85 shadow-[0_1px_10px_-6px_rgba(58,47,66,0.18)] backdrop-blur-md"
+          : "border-transparent bg-transparent shadow-none",
+      )}
     >
       <Container size="lg">
         <div className="flex h-16 items-center justify-between gap-4">

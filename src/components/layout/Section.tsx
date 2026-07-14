@@ -41,7 +41,9 @@ export default function Section({
 }: SectionProps) {
   return (
     <Tag
-      className={cx("py-[var(--spacing-section)]", tones[tone], className)}
+      /* scroll-mt clears the sticky header (h-16) when a section is an
+         anchor target (e.g. /#about), plus a breath of air. */
+      className={cx("scroll-mt-20 py-[var(--spacing-section)]", tones[tone], className)}
       {...props}
     >
       {contained ? <Container size={size}>{children}</Container> : children}
