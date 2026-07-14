@@ -20,6 +20,7 @@ const NAV = [
 ];
 
 const EMAIL = "blujayabby@gmail.com";
+const LIVE_PORTFOLIO = "https://hankerism.vercel.app/";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -83,6 +84,18 @@ export default function Footer() {
                   className="text-sm text-foreground/80 no-underline hover:text-primary"
                 >
                   LinkedIn
+                </a>
+              </li>
+              {/* The canonical live address — so shares, prints, and local
+                  copies always carry the way back to the current site. */}
+              <li>
+                <a
+                  href={LIVE_PORTFOLIO}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm text-foreground/80 no-underline hover:text-primary"
+                >
+                  hankerism.vercel.app
                 </a>
               </li>
             </ul>

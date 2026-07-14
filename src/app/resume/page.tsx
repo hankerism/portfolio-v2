@@ -33,7 +33,8 @@ export const metadata: Metadata = {
 };
 
 const LINKS = {
-  portfolio: "/",
+  portfolio: "https://hankerism.vercel.app/",
+  portfolioLabel: "hankerism.vercel.app",
   github: "https://github.com/hankerism",
   githubLabel: "github.com/hankerism",
   linkedin: "https://www.linkedin.com/in/abigailmarte/",
@@ -207,10 +208,12 @@ export default function ResumePage() {
 
             {/* Contact — readable handles so the printed page carries them too */}
             <ul className="mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+              {/* The live URL is the label: print strips link styling, so the
+                  paper copy must carry the address itself. */}
               <li>
-                <Link href={LINKS.portfolio} className="text-primary underline-offset-4 hover:underline">
-                  Portfolio
-                </Link>
+                <a href={LINKS.portfolio} target="_blank" rel="noreferrer" className="text-primary underline-offset-4 hover:underline">
+                  {LINKS.portfolioLabel}
+                </a>
               </li>
               <li>
                 <a href={LINKS.github} target="_blank" rel="noreferrer" className="text-primary underline-offset-4 hover:underline">
@@ -321,7 +324,7 @@ export default function ResumePage() {
                 </a>
               </div>
               <ul className="flex flex-wrap gap-x-6 gap-y-2 pt-1 text-sm font-semibold">
-                <li><Link href={LINKS.portfolio} className="text-foreground/70 hover:text-primary">Portfolio</Link></li>
+                <li><a href={LINKS.portfolio} target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary">Portfolio</a></li>
                 <li><a href={LINKS.github} target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary">GitHub</a></li>
                 <li><a href={LINKS.linkedin} target="_blank" rel="noreferrer" className="text-foreground/70 hover:text-primary">LinkedIn</a></li>
               </ul>
