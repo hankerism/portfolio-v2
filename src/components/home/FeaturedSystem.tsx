@@ -5,6 +5,7 @@ import Reveal from "@/components/ui/Reveal";
 import Doodle from "@/components/ui/Doodle";
 import SectionHeading from "./SectionHeading";
 import { cx } from "@/lib/cx";
+import { BAHAY_LIWANAG_LIVE } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * FeaturedSystem — "Set it once, let it run" + the flagship business system.
@@ -39,7 +40,7 @@ const NOTES = [
 
 const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "AWeber", "Supabase", "CRM & pipelines"];
 
-const LIVE = "https://heyitsabby.space/website/bahay-liwanag";
+const LIVE = BAHAY_LIWANAG_LIVE;
 
 export default function FeaturedSystem() {
   return (

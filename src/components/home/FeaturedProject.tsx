@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import Doodle from "@/components/ui/Doodle";
 import Reveal from "@/components/ui/Reveal";
+import { KATHA_LIVE } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * FeaturedProject — KATHA, the flagship. One project treated like a launch,
@@ -83,7 +84,7 @@ export default function FeaturedProject() {
                 Read the case study
               </Button>
               <Button
-                href="https://katha-sigma.vercel.app/"
+                href={KATHA_LIVE}
                 target="_blank"
                 rel="noreferrer"
                 variant="outline"

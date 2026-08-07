@@ -11,7 +11,7 @@ Each item lists where it slots into the page (the dashed `PendingCapture` blocks
 
 Sourced 2026-07-07 from the live system:
 
-- **Funnel:** 6 GHL pages — Home, Villas, Experiences, Gallery, Book Now, Thank You (`heyitsabby.space/website/bahay-liwanag/*`; LeadConnector funnel engine, media on `filesafe.space`, location `IZA5KmJ907pADwnjL7pz`).
+- **Funnel:** 6 GHL pages — Home, Villas, Experiences, Gallery, Book Now, Thank You (`hankerism.github.io/bahay-liwanag/*`; LeadConnector funnel engine, media on `filesafe.space`, location `IZA5KmJ907pADwnjL7pz`).
 - **Form:** "Bahay Liwanag Booking Form", id `7x9H9qxsWG9HkRmGMdHv`, served by `api.leadconnectorhq.com/widget/form/…`. 8 fields; email + phone required; `payment: null`; redirect to `/thank-you`; form-level `autoResponder: false`, `emailNotifications: false`.
 - **Custom fields (verbatim keys):** `contact.checkin_date` (DATE), `contact.checkout_date` (DATE), `contact.number_of_guests` (NUMERICAL), `contact.preferred_villa` (SINGLE_OPTIONS — No Preference / Sampaguita / Narra / Amihan), `contact.special_requests` (LARGE_TEXT). Each declares a `hiddenFieldQueryKey` (e.g. `villa_name`); the villa-page buttons do **not** currently use query-string prefill.
 - **Published operating model:** the 4-step "What happens next" card and the manual-confirmation disclaimer on `/book-now`.

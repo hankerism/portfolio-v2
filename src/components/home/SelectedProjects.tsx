@@ -6,6 +6,7 @@ import Reveal from "@/components/ui/Reveal";
 import Doodle from "@/components/ui/Doodle";
 import SectionHeading from "./SectionHeading";
 import { cx } from "@/lib/cx";
+import { CASA_KAPE_LIVE, PURR_HEAVEN_LIVE } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * SelectedProjects — the Featured Projects Preview (IA v2 §4.1): a curated
@@ -34,8 +35,8 @@ import { cx } from "@/lib/cx";
 /* Live sites --------------------------------------------------------------- */
 
 const LINKS = {
-  casa: "https://heyitsabby.space/casa-kape",
-  purr: "https://heyitsabby.space/website/purrheaven/home",
+  casa: CASA_KAPE_LIVE,
+  purr: PURR_HEAVEN_LIVE,
 } as const;
 
 /* Shared caption-plate bits ------------------------------------------------ */

@@ -8,6 +8,7 @@ import ShotFigure from "@/components/case-study/ShotFigure";
 import ProcessFlow from "@/components/case-study/ProcessFlow";
 import TableOfContents from "@/components/case-study/TableOfContents";
 import EvidenceGallery from "@/components/case-study/EvidenceGallery";
+import { BAHAY_LIWANAG_LIVE, BAHAY_LIWANAG_BOOK } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * /projects/bahay-liwanag — the Bahay Liwanag business-systems case study.
@@ -15,7 +16,7 @@ import EvidenceGallery from "@/components/case-study/EvidenceGallery";
  * Written as an operations design document for engineering reviewers, in the
  * same evidence discipline as /projects/katha. Every claim on this page is
  * sourced from the live system itself: the published funnel pages
- * (heyitsabby.space/website/bahay-liwanag), the form definition served by
+ * (hankerism.github.io/bahay-liwanag), the form definition served by
  * GoHighLevel's public widget endpoint, and copy published on the booking
  * page. Where a subsystem lives behind the GHL/Make/Airtable login and can't
  * be verified from outside, this page says so explicitly and marks the slot —
@@ -29,8 +30,8 @@ export const metadata: Metadata = {
     "How a boutique-resort booking operation was designed and implemented on GoHighLevel: the funnel, the form, the CRM field schema, the manual-confirmation operating model, and the Make + Airtable pipeline behind it.",
 };
 
-const LIVE = "https://heyitsabby.space/website/bahay-liwanag";
-const BOOK = "https://heyitsabby.space/website/bahay-liwanag/book-now";
+const LIVE = BAHAY_LIWANAG_LIVE;
+const BOOK = BAHAY_LIWANAG_BOOK;
 const FORM_ENDPOINT =
   "api.leadconnectorhq.com/widget/form/7x9H9qxsWG9HkRmGMdHv";
 
@@ -321,7 +322,7 @@ export default function BahayLiwanagCaseStudy() {
               <ShotFigure
                 src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
                 alt="Placeholder: landing-page screenshot to be inserted for the technical stack and intake context"
-                url="heyitsabby.space/website/bahay-liwanag"
+                url="hankerism.github.io/bahay-liwanag"
                 caption="Placeholder asset: homepage screenshot to be inserted here once the final evidence capture is ready. This is a structural placeholder, not a fabricated business metric or mockup."
               />
             </div>

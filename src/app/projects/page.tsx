@@ -7,6 +7,12 @@ import Button from "@/components/ui/Button";
 import Doodle from "@/components/ui/Doodle";
 import Reveal from "@/components/ui/Reveal";
 import { cx } from "@/lib/cx";
+import {
+  KATHA_LIVE,
+  BAHAY_LIWANAG_LIVE,
+  CASA_KAPE_LIVE,
+  PURR_HEAVEN_LIVE,
+} from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * /projects — the index of everything built (IA v2 §4.2).
@@ -58,7 +64,7 @@ const ENTRIES: Entry[] = [
     meta: ["Personal product", "Live in production"],
     tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4"],
     caseStudy: "/projects/katha",
-    live: { href: "https://katha-sigma.vercel.app/", label: "Live product" },
+    live: { href: KATHA_LIVE, label: "Live product" },
     source: "https://github.com/hankerism/katha",
     note: "start here — the flagship",
     accent: "text-primary",
@@ -101,7 +107,7 @@ const ENTRIES: Entry[] = [
     sourceNote: "Built in GoHighLevel + Make — no code repository",
     caseStudy: "/projects/bahay-liwanag",
     live: {
-      href: "https://heyitsabby.space/website/bahay-liwanag",
+      href: BAHAY_LIWANAG_LIVE,
       label: "Live site",
     },
     note: "the systems chapter",
@@ -116,7 +122,7 @@ const ENTRIES: Entry[] = [
     meta: ["Client website", "Live"],
     tech: ["GoHighLevel", "One-page", "Enquiry form"],
     sourceNote: "Built in GoHighLevel — no code repository",
-    live: { href: "https://heyitsabby.space/casa-kape", label: "Live site" },
+    live: { href: CASA_KAPE_LIVE, label: "Live site" },
     pending: true,
     accent: "text-pink-deep",
   },
@@ -130,7 +136,7 @@ const ENTRIES: Entry[] = [
     tech: ["GoHighLevel", "Multi-page", "Auto-replies"],
     sourceNote: "Built in GoHighLevel — no code repository",
     live: {
-      href: "https://heyitsabby.space/website/purrheaven/home",
+      href: PURR_HEAVEN_LIVE,
       label: "Live site",
     },
     pending: true,
