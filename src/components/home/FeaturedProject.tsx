@@ -52,16 +52,19 @@ export default function FeaturedProject() {
             {/* No "01" chip: it implied a numbered series that never continues,
                 and clashed with the projects' "№ n" hand style */}
             <span className="hand text-2xl text-primary sm:text-3xl">The flagship</span>
+            <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Product Engineering
+            </p>
 
             <h2 id="work-heading" className="relative">
               KATHA — a complete reading &amp; publishing platform
             </h2>
 
             <p className="text-lg text-foreground/80">
-              A calm, premium home for Filipino literature — headlined by the
-              serialized novel Table for Two. Designed, engineered, and shipped
-              end to end: the reading experience, the membership, and the
-              author studio where drafts become published books.
+              A premium reading and publishing product built for long-form reading,
+              reader trust, and author workflows — from content discovery and
+              membership to search, progress tracking, and the editorial tools
+              behind a modern publishing experience.
             </p>
 
             <ul className="grid gap-2.5 sm:grid-cols-2">

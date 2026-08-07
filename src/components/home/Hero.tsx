@@ -117,7 +117,7 @@ export default function Hero() {
                     sizes="(min-width: 1024px) 360px, 0px"
                   />
                 </div>
-                <p className="hand mt-2 pl-1 text-2xl text-primary">KATHA — my flagship</p>
+                <p className="hand mt-2 pl-1 text-2xl text-primary">A project I&apos;m proud of ✨</p>
               </div>
             </div>
 

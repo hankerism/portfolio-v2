@@ -1,24 +1,21 @@
-import Script from "next/script";
+﻿"use client";
 
-/* ---------------------------------------------------------------------------
- * Clarity — Microsoft Clarity analytics, rendered once from the root layout.
- * Production only: locally the component renders nothing, so dev sessions
- * never pollute recordings. afterInteractive keeps it off the critical path —
- * no render blocking, no SEO impact.
- * ------------------------------------------------------------------------- */
+import { useEffect } from "react";
+import Clarity from "@microsoft/clarity";
 
-const CLARITY_PROJECT_ID = "xm3b6g6u9w";
+let clarityInitialized = false;
 
 export default function Clarity() {
-  if (process.env.NODE_ENV !== "production") return null;
+  useEffect(() => {
+    const projectId = process.env.NEXT_PUBLIC_CLARITY_ID;
 
-  return (
-    <Script id="microsoft-clarity" strategy="afterInteractive">
-      {`(function(c,l,a,r,i,t,y){
-    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "${CLARITY_PROJECT_ID}");`}
-    </Script>
-  );
+    if (!projectId || clarityInitialized) {
+      return;
+    }
+
+    Clarity.init(projectId);
+    clarityInitialized = true;
+  }, []);
+
+  return null;
 }

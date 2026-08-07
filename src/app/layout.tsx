@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito_Sans, Caveat } from "next/font/google";
-import Clarity from "@/components/Clarity";
+import Clarity from "@/components/clarity";
 import "./globals.css";
 
 /* Brand typefaces, self-hosted via next/font (no render-blocking @import).
@@ -45,6 +45,12 @@ export const metadata: Metadata = {
   },
   description:
     "I design, build, and automate complete digital products — modern web apps, AI-powered workflows, and CRM automations on GoHighLevel — combining 6+ years in operations with modern web development.",
+};
+
+// Icon links come from the App Router's file-based metadata conventions:
+// favicon.ico, icon.png, and apple-icon.png in this directory.
+export const viewport: Viewport = {
+  themeColor: "#f8f4ec",
 };
 
 export default function RootLayout({

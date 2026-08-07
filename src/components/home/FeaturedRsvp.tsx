@@ -136,17 +136,19 @@ export default function FeaturedRsvp() {
           <Reveal className="order-1 lg:order-2">
             <Stack gap="md" align="start">
             <span className="hand text-2xl text-primary sm:text-3xl">The second product</span>
+            <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+              Full-Stack Application
+            </p>
 
             <h2 id="rsvp-heading" className="relative">
               Wedding RSVP Platform — built for Hazel &amp; Jhonel
             </h2>
 
             <p className="text-lg text-foreground/80">
-              It replaced spreadsheet-and-DM RSVP tracking with one secure
-              system: an editorial, single-page invitation with a two-step
-              reply card out front, and a private couple&rsquo;s dashboard
-              behind it — where RSVPs are reviewed, confirmed, and answered by
-              email. Live on Vercel, taking real RSVPs today.
+              A secure full-stack RSVP system designed to replace spreadsheet and
+              DM tracking with a clear guest flow and a private operational
+              dashboard for the couple — covering authentication, guest status,
+              confirmation workflows, and email updates without adding friction.
             </p>
 
             <ul className="grid gap-2.5 sm:grid-cols-2">

@@ -33,10 +33,10 @@ export default function Home() {
 
       <main id="main">
         <Hero />
+        <SelectedProjects />
+        <FeaturedSystem />
         <FeaturedProject />
         <FeaturedRsvp />
-        <FeaturedSystem />
-        <SelectedProjects />
         <About />
         <HowIWork />
         <CurrentlyExploring />

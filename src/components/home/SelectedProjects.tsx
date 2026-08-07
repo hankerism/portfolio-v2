@@ -272,23 +272,44 @@ function StephanieCenter() {
           </span>
           <h3 className="text-3xl">Stephanie Center Wellness</h3>
           <p className="text-lg text-foreground/80">
-            A women&rsquo;s hair-health practice, moved whole onto GoHighLevel —
-            landing pages, education-first funnels, CRM and pipelines, and
-            automations integrated with the existing AWeber &amp; Practice
-            Better stack. Not just a website: the system behind the practice.
+            A production client engagement that moved a wellness practice onto a
+            business-ready GoHighLevel system — public marketing pages, education
+            funnels, CRM pipelines, and automations that fit the way the clinic
+            actually works.
           </p>
-          <Tags tags={["GoHighLevel", "CRM & automations", "Funnels", "Integrations"]} />
-          <Link
-            href="/projects/stephanie-center"
-            className="group/cs mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-sage no-underline"
-          >
-            <span className="underline-offset-4 group-hover/cs:underline">
-              Read the case study
-            </span>
-            <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
-              →
-            </span>
-          </Link>
+          <Tags tags={["Client Project", "GoHighLevel", "CRM & automations", "Website development"]} />
+          <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
+            <Button
+              href="https://www.stephaniecenterwellness.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="primary"
+              rightIcon={
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M7 17 17 7M9 7h8v8"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+            >
+              Visit Live Site
+            </Button>
+            <Link
+              href="/projects/stephanie-center"
+              className="group/cs inline-flex items-center gap-1.5 self-start text-sm font-bold text-sage no-underline"
+            >
+              <span className="underline-offset-4 group-hover/cs:underline">
+                Read the case study
+              </span>
+              <span aria-hidden className="transition-transform group-hover/cs:translate-x-0.5">
+                →
+              </span>
+            </Link>
+          </div>
         </div>
 
         {/* Pressed page */}
@@ -325,9 +346,9 @@ export default function SelectedProjects() {
       <Reveal>
         <SectionHeading
           id="projects-heading"
-          eyebrow="Client websites"
-          title="Built for real businesses"
-          intro="Websites shipped for clients — each with the branding, forms, and quiet automations a small business actually needs, and nothing it doesn't."
+          eyebrow="Client work"
+          title="Selected Work"
+          intro="Real client systems and modern product work built to solve business problems — with the right mix of product thinking, automation, and polished execution."
         />
       </Reveal>
 

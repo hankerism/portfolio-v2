@@ -150,9 +150,10 @@ export default function FeaturedSystem() {
               </span>
               <h3 className="text-3xl">Bahay Liwanag</h3>
               <p className="text-lg text-foreground/80">
-                A serene site for a boutique resort — paired with a Make +
-                Airtable pipeline that turns enquiries into booked reservations
-                automatically.
+                A boutique-resort booking flow designed as a real operational system:
+                a calmer customer journey, a structured intake path, and an
+                operational workflow that keeps enquiries moving without losing
+                human review.
               </p>
               <p className="text-base text-foreground/70">
                 It&rsquo;s one example of how I think about business systems —{" "}
@@ -165,7 +166,7 @@ export default function FeaturedSystem() {
                 .
               </p>
               <ul className="flex flex-wrap gap-2 pt-1" aria-label="Project details">
-                {["Boutique resort", "GoHighLevel", "Make + Airtable"].map((t) => (
+                {["Case Study", "GoHighLevel", "Make + Airtable", "System design"].map((t) => (
                   <li
                     key={t}
                     className="rounded-full border border-border bg-surface/70 px-2.5 py-0.5 text-xs font-semibold text-muted-foreground"
