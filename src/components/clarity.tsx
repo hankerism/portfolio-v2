@@ -1,7 +1,7 @@
 ﻿"use client";
 
 import { useEffect } from "react";
-import Clarity from "@microsoft/clarity";
+import clarity from "@microsoft/clarity";
 
 let clarityInitialized = false;
 
@@ -13,7 +13,7 @@ export default function Clarity() {
       return;
     }
 
-    Clarity.init(projectId);
+    clarity.init(projectId);
     clarityInitialized = true;
   }, []);
 
