@@ -8,6 +8,7 @@ import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import { cx } from "@/lib/cx";
+import { HAZEL_AND_JHONEL_REPO } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * /projects/wedding-rsvp — the Wedding RSVP Platform case study.
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 const LIVE = "https://hazel-and-jhonel.vercel.app/";
-const REPO = "https://github.com/hankerism/hazel-and-jhonel";
+const REPO = HAZEL_AND_JHONEL_REPO;
 
 /* Verified repository facts (routes, schema, and package.json). */
 const FACTS = [

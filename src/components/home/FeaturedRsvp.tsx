@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import Doodle from "@/components/ui/Doodle";
 import Reveal from "@/components/ui/Reveal";
+import { HAZEL_AND_JHONEL_REPO } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * FeaturedRsvp — the second product band, KATHA's sibling. Same editorial
@@ -21,7 +22,7 @@ import Reveal from "@/components/ui/Reveal";
  * ------------------------------------------------------------------------- */
 
 const LIVE = "https://hazel-and-jhonel.vercel.app/";
-const REPO = "https://github.com/hankerism/hazel-and-jhonel";
+const REPO = HAZEL_AND_JHONEL_REPO;
 
 const HIGHLIGHTS = [
   "Supabase Auth — password & magic-link sign-in for the couple",

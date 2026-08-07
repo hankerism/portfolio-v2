@@ -12,6 +12,8 @@ import {
   BAHAY_LIWANAG_LIVE,
   CASA_KAPE_LIVE,
   PURR_HEAVEN_LIVE,
+  KATHA_REPO,
+  HAZEL_AND_JHONEL_REPO,
 } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
@@ -65,7 +67,7 @@ const ENTRIES: Entry[] = [
     tech: ["Next.js 16", "TypeScript", "Tailwind CSS 4"],
     caseStudy: "/projects/katha",
     live: { href: KATHA_LIVE, label: "Live product" },
-    source: "https://github.com/hankerism/katha",
+    source: KATHA_REPO,
     note: "start here — the flagship",
     accent: "text-primary",
   },
@@ -79,7 +81,7 @@ const ENTRIES: Entry[] = [
     tech: ["Next.js 16", "TypeScript", "Supabase", "Nodemailer"],
     caseStudy: "/projects/wedding-rsvp",
     live: { href: "https://hazel-and-jhonel.vercel.app/", label: "Live site" },
-    source: "https://github.com/hankerism/hazel-and-jhonel",
+    source: HAZEL_AND_JHONEL_REPO,
     note: "the newest product",
     accent: "text-accent-hover",
   },

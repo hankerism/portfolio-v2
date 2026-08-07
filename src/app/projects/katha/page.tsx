@@ -8,7 +8,7 @@ import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import { cx } from "@/lib/cx";
-import { KATHA_LIVE } from "@/lib/projectLinks";
+import { KATHA_LIVE, KATHA_REPO } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * /projects/katha — the KATHA engineering case study.
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const LIVE = KATHA_LIVE;
-const REPO = "https://github.com/hankerism/katha";
+const REPO = KATHA_REPO;
 
 /* Verified repository facts (see commit history + package.json). */
 const FACTS = [

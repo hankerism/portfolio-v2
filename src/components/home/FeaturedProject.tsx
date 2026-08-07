@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import BrowserFrame from "@/components/ui/BrowserFrame";
 import Doodle from "@/components/ui/Doodle";
 import Reveal from "@/components/ui/Reveal";
-import { KATHA_LIVE } from "@/lib/projectLinks";
+import { KATHA_LIVE, KATHA_REPO } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * FeaturedProject — KATHA, the flagship. One project treated like a launch,
@@ -103,7 +103,7 @@ export default function FeaturedProject() {
                 Visit KATHA
               </Button>
               <a
-                href="https://github.com/hankerism/katha"
+                href={KATHA_REPO}
                 target="_blank"
                 rel="noreferrer"
                 className="group/src inline-flex items-center gap-1.5 px-1 text-sm font-bold no-underline"
