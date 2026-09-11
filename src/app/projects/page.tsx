@@ -62,10 +62,10 @@ const ENTRIES: Entry[] = [
     title: "Bahay Liwanag",
     category: "Business system · Hospitality",
     description:
-      "A serene site for a boutique resort — connected to a native GoHighLevel CRM, where every reservation becomes a Contact and Opportunity that moves through a 7-stage pipeline, with lifecycle workflows sending personalised confirmation, pre-arrival, and thank-you emails.",
+      "A serene site for a boutique resort — connected to a native GoHighLevel CRM, where every reservation becomes a Contact and Opportunity that moves through a 6-stage pipeline, with lifecycle workflows sending personalised confirmation, pre-arrival, and thank-you emails.",
     meta: ["Portfolio / Concept project", "Live"],
     tech: ["GoHighLevel", "CRM", "Workflows"],
-    sourceNote: "Built in GoHighLevel — no code repository",
+    sourceNote: "Custom website + GoHighLevel booking system",
     caseStudy: "/projects/bahay-liwanag",
     live: {
       href: BAHAY_LIWANAG_LIVE,

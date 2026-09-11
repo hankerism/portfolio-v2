@@ -10,7 +10,7 @@ import CaseStudySection from "@/components/case-study/CaseStudySection";
 import ShotFigure from "@/components/case-study/ShotFigure";
 import ProcessFlow from "@/components/case-study/ProcessFlow";
 import Reveal from "@/components/ui/Reveal";
-import { BAHAY_LIWANAG_LIVE, BAHAY_LIWANAG_BOOK } from "@/lib/projectLinks";
+import { BAHAY_LIWANAG_LIVE } from "@/lib/projectLinks";
 import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
@@ -48,7 +48,6 @@ export const metadata: Metadata = {
 };
 
 const LIVE = BAHAY_LIWANAG_LIVE;
-const BOOK = BAHAY_LIWANAG_BOOK;
 
 /* ── Verified system data (re-checked directly in GHL, 2026-09-11) ───────── */
 
@@ -148,7 +147,7 @@ export default function BahayLiwanagCaseStudy() {
             { label: "Type", value: "Portfolio / Concept Project" },
           ]}
           primaryCta={{ label: "Visit the live site", href: LIVE, target: "_blank", rel: "noreferrer", variant: "primary" }}
-          secondaryCta={{ label: "Try the booking flow", href: BOOK, target: "_blank", rel: "noreferrer", variant: "outline" }}
+          secondaryCta={{ label: "Try the booking flow", href: "https://lets.controlyouraudience.com/preview/HIHrGr20tLK7zGmx2Vop", target: "_blank", rel: "noreferrer", variant: "outline" }}
         />
 
         {/* ── 02 The Challenge ────────────────────────────────────────────── */}
