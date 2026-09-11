@@ -1,117 +1,123 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
+import Container from "@/components/layout/Container";
+import Button from "@/components/ui/Button";
+import BrowserFrame from "@/components/ui/BrowserFrame";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
 import CaseStudySection from "@/components/case-study/CaseStudySection";
-import EvidenceBlock from "@/components/case-study/EvidenceBlock";
 import ShotFigure from "@/components/case-study/ShotFigure";
 import ProcessFlow from "@/components/case-study/ProcessFlow";
-import TableOfContents from "@/components/case-study/TableOfContents";
-import EvidenceGallery from "@/components/case-study/EvidenceGallery";
+import Reveal from "@/components/ui/Reveal";
 import { BAHAY_LIWANAG_LIVE, BAHAY_LIWANAG_BOOK } from "@/lib/projectLinks";
+import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
- * /projects/bahay-liwanag — the Bahay Liwanag business-systems case study.
+ * /projects/bahay-liwanag — hospitality booking experience + GoHighLevel CRM
+ * and automation case study.
  *
- * Written as an operations design document for engineering reviewers, in the
- * same evidence discipline as /projects/katha. Every claim on this page is
- * sourced from the live system itself: the published funnel pages
- * (hankerism.github.io/bahay-liwanag), the form definition served by
- * GoHighLevel's public widget endpoint, and copy published on the booking
- * page. Where a subsystem lives behind the GHL/Make/Airtable login and can't
- * be verified from outside, this page says so explicitly and marks the slot —
- * see docs/BAHAY_LIWANAG_EVIDENCE.md for the capture checklist. Nothing here
- * is invented.
+ * Every fact on this page was re-verified directly inside the live GHL
+ * sub-account on 2026-09-11 — not copied from an earlier draft. Where the
+ * verified system differs from what an earlier version of this page (or the
+ * original brief) assumed, this page follows what GHL actually shows:
+ *
+ * - The pipeline has 6 configured stages, including "Cancelled" as a real
+ *   stage (Settings → Pipelines → Bahay Liwanag Reservations), not just an
+ *   opportunity status.
+ * - The lifecycle automation is ONE workflow — "Bahay Liwanag - Life Cycle" —
+ *   with a default path plus three independent stage-triggered branches.
+ *   Several older draft workflows (BL - New Reservation, BL - Reservation
+ *   Lifecycle, Bahay Liwanag Reservation Lifecycle) exist in the account but
+ *   are unpublished precursors, not part of the live system.
+ * - The lead-welcome workflow ("BL - 10% Off Lead Welcome") is built and has
+ *   been test-run once, but is currently in Draft — not yet published. The
+ *   page says so plainly rather than implying it's live.
+ * - Reservation lifecycle emails merge in CONTACT-level custom fields
+ *   ({{contact.villa_name}}, {{contact.checkin_date}}, etc.), not opportunity
+ *   fields.
+ * - The Bahay Liwanag site itself (the booking experience) is static
+ *   HTML/CSS/JavaScript on GitHub Pages — it is not a Next.js app. Next.js
+ *   is what renders this portfolio page, not the case-study subject.
  * ------------------------------------------------------------------------- */
 
 export const metadata: Metadata = {
-  title: "Bahay Liwanag — Business Systems Case Study",
+  title: "Bahay Liwanag — Hospitality Booking, CRM & Automation System",
   description:
-    "How a boutique-resort booking operation was designed and implemented on GoHighLevel: the funnel, the form, the CRM field schema, the manual-confirmation operating model, and the Make + Airtable pipeline behind it.",
+    "A boutique-resort booking experience connected end to end to a real GoHighLevel CRM: a 6-stage reservation pipeline, a published lifecycle-automation workflow, lead capture, and four branded emails — tested and verified live.",
 };
 
 const LIVE = BAHAY_LIWANAG_LIVE;
 const BOOK = BAHAY_LIWANAG_BOOK;
-const FORM_ENDPOINT =
-  "api.leadconnectorhq.com/widget/form/7x9H9qxsWG9HkRmGMdHv";
 
-/* Verified system facts — read from the live funnel and its form payload. */
-const FACTS = [
-  { n: "6", label: "funnel pages" },
-  { n: "8", label: "form fields" },
-  { n: "5", label: "custom fields" },
-  { n: "3", label: "villas" },
-  { n: "2", label: "required fields" },
-  { n: "0", label: "on-site payments" },
+/* ── Verified system data (re-checked directly in GHL, 2026-09-11) ───────── */
+
+const PIPELINE_STAGES = [
+  { label: "New Reservation" },
+  { label: "Booking Confirmed" },
+  { label: "Awaiting Payment" },
+  { label: "Ready for Check-In" },
+  { label: "Stay Completed" },
+  { label: "Cancelled", tone: "muted" as const },
 ];
 
-const TOC = [
-  ["executive-summary", "Executive Summary"],
-  ["business-problem", "Business Problem"],
-  ["goals", "Goals"],
-  ["responsibilities", "My Responsibilities"],
-  ["discovery", "Discovery & Planning"],
-  ["architecture", "System Architecture"],
-  ["stack", "Technical Stack"],
-  ["workflow", "Workflow & Automation"],
-  ["decisions", "Design Decisions"],
-  ["challenges", "Challenges"],
-  ["solution", "Solution"],
-  ["impact", "Business Impact"],
-  ["lessons", "Lessons Learned"],
-  ["future", "Future Improvements"],
-] as const;
+const VILLAS = [
+  { name: "Villa Sampaguita", tag: "The Romantic Escape", rate: "₱8,500", sleeps: "Sleeps up to 3", included: "2 guests included" },
+  { name: "Villa Narra", tag: "The Family Retreat", rate: "₱11,000", sleeps: "Sleeps up to 5", included: "4 guests included" },
+  { name: "Villa Amihan", tag: "The Signature Stay", rate: "₱14,500", sleeps: "Sleeps up to 3", included: "2 guests included" },
+];
 
-/* The five custom fields, verbatim from the live form definition. */
-const CUSTOM_FIELDS = [
-  {
-    label: "Check-In Date",
-    key: "contact.checkin_date",
-    type: "DATE",
-    detail: "date picker · optional",
-  },
-  {
-    label: "Check-out Date",
-    key: "contact.checkout_date",
-    type: "DATE",
-    detail: "date picker · optional",
-  },
-  {
-    label: "Number of Guests",
-    key: "contact.number_of_guests",
-    type: "NUMERICAL",
-    detail: "numeric input · optional",
-  },
-  {
-    label: "Preferred Villa",
-    key: "contact.preferred_villa",
-    type: "SINGLE_OPTIONS",
-    detail:
-      "dropdown — No Preference · Villa Sampaguita · Villa Narra · Villa Amihan",
-  },
-  {
-    label: "Special Requests",
-    key: "contact.special_requests",
-    type: "LARGE_TEXT",
-    detail: "free text — preferences, celebrations, dietary requirements",
-  },
+const MERGE_TAGS = [
+  "{{contact.first_name}}",
+  "{{contact.villa_name}}",
+  "{{contact.checkin_date}}",
+  "{{contact.check_out_date}}",
+  "{{contact.number_of_guests}}",
+  "{{contact.number_of_nights}}",
+  "{{contact.booking_total}}",
+];
+
+const TEST_STEPS = [
+  "Villa selection, pricing, and promo-code math across all three villas",
+  "Date selection and guest-count controls, including extra-guest pricing",
+  "Guest Details form and data persisting through to Confirmation",
+  "GHL form submission → Contact + Opportunity created with fields populated",
+  "Pipeline stage changed manually, as staff would, for each of the three stages",
+  "Booking Confirmation, Pre-Arrival, and Thank You emails — merge tags resolved",
+  "Lead popup trigger, suppression, and the 10% Off Welcome email",
+  "Responsive layout on mobile for the booking flow and the lead popup",
 ];
 
 /* ── Local building blocks ────────────────────────────────────────────────── */
 
-function PlaceholderEvidence({
+/** A BrowserFrame placeholder for a screenshot not yet captured. */
+function ShotPlaceholder({
+  url,
   label,
-  description,
+  note,
+  aspect = "aspect-[16/10]",
 }: {
+  url: string;
   label: string;
-  description: string;
+  note?: string;
+  aspect?: string;
 }) {
   return (
-    <div className="rounded-[var(--radius-lg)] border-2 border-dashed border-border-strong/70 bg-surface/60 p-5">
-      <p className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        {label}
-      </p>
-      <p className="mt-2 text-sm text-foreground/75">{description}</p>
+    <div className="min-w-0">
+      <BrowserFrame url={url} className="shadow-soft">
+        <div className={cx("relative w-full overflow-hidden bg-surface", aspect)}>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(163,122,180,0.14),_transparent_45%),linear-gradient(135deg,_rgba(93,66,74,0.08),_transparent_68%)]" />
+          <div className="absolute inset-0 flex items-center justify-center p-6">
+            <div className="relative z-10 max-w-md rounded-[var(--radius-md)] border border-border bg-background/75 px-4 py-3 text-center shadow-xs backdrop-blur-sm">
+              <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                Placeholder
+              </p>
+              <p className="mt-1.5 text-sm font-semibold text-foreground">{label}</p>
+              {note && <p className="mt-1 text-xs text-foreground/70">{note}</p>}
+            </div>
+          </div>
+        </div>
+      </BrowserFrame>
     </div>
   );
 }
@@ -131,522 +137,545 @@ export default function BahayLiwanagCaseStudy() {
       <Navbar />
 
       <main id="main">
+        {/* ── 01 Overview ──────────────────────────────────────────────────── */}
         <CaseStudyHero
-          breadcrumbLabel="← All projects"
           eyebrow="Case study"
-          title="Bahay Liwanag — engineering a booking operation on GoHighLevel"
-          intro="A boutique three-villa resort with a single job to be done: turn a scattered, conversational booking process into one structured intake path — website, CRM, and automations built as one system. The foundation narrative explains the business need, the system design, and the technical choices behind it."
+          title="Bahay Liwanag"
+          intro="A boutique-resort booking experience connected to a real GoHighLevel CRM — a reservation pipeline, a published lifecycle-automation workflow, lead capture, and four branded guest emails. Built, connected, and tested end to end."
           meta={[
-            { label: "Role", value: "Systems design & implementation, end to end" },
-            { label: "Stack", value: "GoHighLevel · Make · Airtable" },
-            { label: "Status", value: "Live — booking flow operational" },
+            { label: "Role", value: "Web Development + GHL Automation" },
+            { label: "Platform", value: "GoHighLevel + GitHub Pages" },
+            { label: "Type", value: "Portfolio / Concept Project" },
           ]}
           primaryCta={{ label: "Visit the live site", href: LIVE, target: "_blank", rel: "noreferrer", variant: "primary" }}
           secondaryCta={{ label: "Try the booking flow", href: BOOK, target: "_blank", rel: "noreferrer", variant: "outline" }}
         />
 
-        <section aria-label="Live system facts" className="border-b border-border bg-surface">
-          <div className="mx-auto max-w-6xl px-[var(--spacing-gutter)]">
-            <dl className="grid grid-cols-3 gap-6 py-8 sm:grid-cols-6">
-              {FACTS.map((f) => (
-                <div key={f.label} className="text-center">
-                  <dt className="order-2 text-xs font-semibold text-muted-foreground">{f.label}</dt>
-                  <dd className="font-serif text-3xl font-semibold text-primary">{f.n}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </section>
-
-        <TableOfContents items={TOC.map(([id, label]) => ({ id, label }))} />
-
-        <section className="py-16 sm:py-20">
-          <CaseStudySection id="executive-summary" index="01" title="Executive Summary">
-            <p>
-              Bahay Liwanag is a built-for-purpose booking operation, not a generic brochure site. The project was designed around one hard requirement: turn a fragmented guest inquiry flow into a disciplined intake system that captures information, creates a clear next step, and keeps the human review decision in the right place.
-            </p>
-            <p>
-              The live funnel, booking form, and CRM structure all work together to reduce manual re-entry and keep the guest experience honest. The key design decision is simple: gather the inquiry, acknowledge it quickly, record it consistently, and leave the availability review to a human without creating unnecessary friction.
-            </p>
-          </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="business-problem" index="02" title="Business Problem">
-            <p>
-              Small hospitality operations usually fail not because the business lacks demand, but because the booking process is scattered across forms, messages, calls, and spreadsheets. A guest inquiry arrives in one place, details get copied elsewhere, and follow-up depends on someone remembering who was contacted, what dates were discussed, and what the next step was.
-            </p>
-            <p>
-              This is especially problematic for a boutique property with multiple room types and a human-led availability review. The project needed to create one intake path that captured the right data once, kept it visible to the team, and preserved the hospitality touch without letting the coordination work consume the whole operation.
-            </p>
-          </CaseStudySection>
-        </section>
-
+        {/* ── 02 The Challenge ────────────────────────────────────────────── */}
         <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="goals" index="03" title="Goals">
+          <CaseStudySection id="challenge" index="01" title="The Challenge">
             <p>
-              The system was designed to meet a few clear business goals:
+              A booking page that looks good but goes nowhere isn&rsquo;t a
+              booking system — it&rsquo;s a brochure. The goal was to design a
+              polished, villa-by-villa booking experience and connect every
+              submission to a structured reservation pipeline and CRM, so a
+              guest inquiry becomes a trackable record, not an email that gets
+              lost. And at each real moment in the stay — confirmed, about to
+              arrive, checked out — the guest needed the right message, sent
+              without someone having to remember to write it.
             </p>
-            <ul className="list-disc space-y-3 ps-5 text-base leading-relaxed text-foreground/80">
-              <li>
-                Create a single booking entry point that feels simple for the guest and structured for the business.
-              </li>
-              <li>
-                Store and surface the right data in the CRM without requiring manual re-entry.
-              </li>
-              <li>
-                Acknowledge the inquiry immediately and keep the human review step clear and intentional.
-              </li>
-              <li>
-                Keep the availability check human-led while automating the repetitive operational work around it.
-              </li>
-            </ul>
           </CaseStudySection>
         </section>
 
+        {/* ── 03 What I Built ─────────────────────────────────────────────── */}
         <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="responsibilities" index="04" title="My Responsibilities">
+          <CaseStudySection id="what-i-built" index="02" title="What I Built">
             <p>
-              The work covered the full decision path rather than a single surface area. My responsibilities included:
+              Three layers, working together: a custom booking interface with
+              villa selection, dynamic pricing, and promo-code handling; a
+              native GoHighLevel CRM record for every reservation; and an
+              automation layer that reacts to the guest&rsquo;s progress
+              through the stay.
             </p>
-            <ul className="list-disc space-y-3 ps-5 text-base leading-relaxed text-foreground/80">
-              <li>
-                Defining the guest journey and the operational flow behind it.
-              </li>
-              <li>
-                Designing the booking funnel so each page had a clear purpose and a single destination.
-              </li>
-              <li>
-                Structuring the GoHighLevel form and custom field schema to match the actual business use case.
-              </li>
-              <li>
-                Mapping the handoff between the booking intake and the operational layer, including how the response is logged and reviewed.
-              </li>
-              <li>
-                Choosing the stack and tooling based on the operational constraints rather than a generic “automation” preference.
-              </li>
-            </ul>
           </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="discovery" index="05" title="Discovery & Planning">
-            <p>
-              The discovery phase focused on the booking lifecycle, not the visual polish. The work started by tracing how a guest inquiry actually moved from first click to final confirmation and where information was lost or duplicated. That review surfaced three core constraints: the process needed to be easy for guests, easy for the operation to manage, and honest about where a human decision was required.
-            </p>
-            <p>
-              From there, the plan centered on one intake path, one CRM record, and a clear distinction between automation and human review. The system was designed around those responsibilities instead of around a more complex “everything is automated” model that would have been harder to trust and maintain.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              This is the starting point for the system design: the booking flow was mapped around real operational needs, not around an idealized guest experience that would later break under review.
-            </p>
-            <div className="mt-6">
-              <PlaceholderEvidence
-                label="Placeholder — screenshot pending: Discovery workbook"
-                description="Operational evidence: this location will hold the workshop notes, guest journey map, and booking flow diagram once the final evidence asset is captured."
-              />
-            </div>
-          </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="architecture" index="06" title="System Architecture">
-            <p>
-              The system architecture keeps the guest-facing experience simple while pushing the operational complexity behind the scenes. The design makes the booking funnel public, stores the lead in GoHighLevel, and then moves the inquiry into a workflow and logging layer that supports the human review stage.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              This is the foundation that makes the rest of the operating model viable: the public experience is intentionally light, while the internal process is structured enough to keep the business coherent.
-            </p>
-            <div className="mt-8">
-              <ProcessFlow
-                nodes={[
-                  { label: "Guest", description: "A visitor lands on the site and begins the booking intent" },
-                  { label: "Booking Form", description: "The guest submits structured enquiry details without a payment step" },
-                  { label: "GoHighLevel", description: "The record is captured in the CRM and stored in the right contact schema" },
-                  { label: "Workflow", description: "The inquiry is acknowledged and routed into the operational process" },
-                  { label: "Airtable", description: "The business keeps a working record for review and follow-up" },
-                  { label: "Human Review", description: "The team confirms availability and decides the next action" },
-                  { label: "Booking Confirmation", description: "The guest receives a clear follow-up and a confirmed next step" },
-                ]}
-              />
-            </div>
-          </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="stack" index="07" title="Technical Stack">
-            <p>
-              The stack was chosen to solve a business problem, not to demonstrate tool breadth. Every tool had a clear operational role:
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              The architecture above is only useful if the tooling supports the same operating model. This stack was selected to keep the public funnel simple, the CRM structured, and the business review process usable.
-            </p>
-
-            <div className="mt-8 space-y-6">
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">GoHighLevel</p>
-                <p className="mt-2 text-base leading-relaxed text-foreground/80">
-                  This was the right foundation because it combined the guest-facing funnel, form capture, and CRM in one workspace. That reduced handoff complexity and made the booking flow easier to manage without introducing a separate custom app for a small operation.
-                </p>
-              </div>
-
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Make</p>
-                <p className="mt-2 text-base leading-relaxed text-foreground/80">
-                  Make was chosen to move the lead out of the form and into the rest of the operational system without manual re-entry. It is a good match when the real goal is to create a fast, reliable handoff between a capture layer and the business workflow.
-                </p>
-              </div>
-
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Airtable</p>
-                <p className="mt-2 text-base leading-relaxed text-foreground/80">
-                  Airtable was selected as the operational log because the team needs a readable, reviewable record rather than a buried CRM detail page. It gives the business a place to track, filter, and follow up on bookings in a way that is easier to scan than a contact record alone.
-                </p>
-              </div>
-
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Editorial web pages</p>
-                <p className="mt-2 text-base leading-relaxed text-foreground/80">
-                  The public web pages are intentionally straightforward. They are designed to sell the experience, support the booking journey, and route traffic into one conversion path without overbuilding the front end. This keeps the front-end layer focused on clarity and conversion instead of becoming the business system itself.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <EvidenceBlock source="Tool-selection rationale — why these tools were chosen">
-                The design decision was to keep the system simple: one public intake layer, one CRM source of truth, one operational log, and a clearly defined human review step. Each tool does a specific job instead of trying to win the whole workflow. That keeps the system understandable, maintainable, and easier to trust.
-              </EvidenceBlock>
-            </div>
-
-            <div className="mt-8">
-              <ShotFigure
-                src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
-                alt="Placeholder: landing-page screenshot to be inserted for the technical stack and intake context"
-                url="hankerism.github.io/bahay-liwanag"
-                caption="Placeholder asset: homepage screenshot to be inserted here once the final evidence capture is ready. This is a structural placeholder, not a fabricated business metric or mockup."
-              />
-            </div>
-          </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="workflow" index="08" title="Workflow & Automation">
-            <p>
-              The booking flow is intentionally simple for the guest and disciplined behind the scenes. The public intake captures the enquiry, the CRM stores the structured record, and the workflow handles acknowledgement and routing before a human checks availability and confirms the next step.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              This is the same operating model introduced in the system architecture above, applied to the day-to-day booking process the business depends on.
-            </p>
-
-            <div className="mt-8 space-y-4">
-              <PlaceholderEvidence
-                label="Placeholder — screenshot pending: GoHighLevel Workflow Canvas"
-                description="Operational evidence: insert the workflow canvas once the final GHL evidence is captured. This slot will show the automation trigger, acknowledgement email, and internal notification flow."
-              />
-              <PlaceholderEvidence
-                label="Placeholder — screenshot pending: Make Scenario"
-                description="Operational evidence: insert the Make scenario once the automation is captured. This slot will show the route from GoHighLevel into Airtable, calendar, and notification elements."
-              />
-              <PlaceholderEvidence
-                label="Placeholder — screenshot pending: Airtable Reservation Log"
-                description="Operational evidence: insert the Airtable reservations table once the operational workspace is captured. This is the working log the team uses after the enquiry is submitted."
-              />
-              <PlaceholderEvidence
-                label="Placeholder — screenshot pending: Contact Record"
-                description="Verified in live implementation: insert the contact record once the live CRM record is captured. This slot will show how the form fields land in the contact schema."
-              />
-            </div>
-
-            <div className="mt-8 max-w-2xl text-lg text-foreground/80">
-              <p>
-                The automated pieces are the intake capture, acknowledgement, and movement of the enquiry into the operational log. The intentionally manual step is the availability review itself. That split is deliberate: it keeps the business process honest, prevents double-booking risk across multiple villas, and preserves the human judgement that boutique hospitality depends on.
-              </p>
-            </div>
-          </CaseStudySection>
-        </section>
-
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="decisions" index="09" title="Design Decisions">
-            <p>
-              These are the most important business decisions that shaped the system. Each one reflects a trade-off between simplicity, guest experience, and operational control.
-            </p>
-
-            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+          <Container size="lg" className="mt-10">
+            <div className="grid gap-6 sm:grid-cols-3">
               {[
                 {
-                  title: "Human review before payment",
-                  why: "The guest should not be charged before availability is confirmed, especially when the property is managing multiple villas and limited dates.",
-                  tradeoff: "This adds a manual step to the flow, but it protects the business from double-booking and keeps the transaction honest.",
+                  h: "Web experience",
+                  items: ["Villa selection", "Dynamic pricing", "Date + guest selection", "Promo code handling", "Responsive booking flow"],
                 },
                 {
-                  title: "Structured custom fields instead of free-text submissions",
-                  why: "The business needs fields like check-in date, preferred villa, and guest count to make follow-up and review practical.",
-                  tradeoff: "The form is a bit more structured than a chat-style inquiry, but the result is a cleaner dataset and a much easier handoff to the operational workflow.",
+                  h: "CRM",
+                  items: ["GHL reservation form", "Contact custom fields", "Opportunity pipeline (6 stages)", "One Contact + Opportunity per booking"],
                 },
                 {
-                  title: "Airtable as the operational workspace",
-                  why: "The team needed a readable log for statuses, follow-ups, and review rather than a single CRM record alone.",
-                  tradeoff: "This creates another system in the process, but it gives operations a place to work quickly and scan data without digging through contact details.",
+                  h: "Automation",
+                  items: ["Lead capture + tagging", "10% off welcome email", "Booking confirmation email", "Pre-arrival email", "Post-stay thank-you email"],
                 },
-                {
-                  title: "GoHighLevel as the CRM and intake layer",
-                  why: "The public site, form capture, and CRM lived in the same platform, which reduced friction and simplified the system boundary.",
-                  tradeoff: "It limits some flexibility compared with a fully custom app, but it fits the size and needs of the project without unnecessary complexity.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-[var(--radius-lg)] border border-border bg-card p-5 shadow-xs">
-                  <p className="font-serif text-lg font-semibold text-primary">{item.title}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-                    <span className="font-bold text-sage">Why:</span> {item.why}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-foreground/80">
-                    <span className="font-bold text-accent-hover">Trade-off:</span> {item.tradeoff}
-                  </p>
+              ].map((col) => (
+                <div key={col.h} className="rounded-[var(--radius-lg)] border border-border bg-card p-5 shadow-xs">
+                  <p className="font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">{col.h}</p>
+                  <ul className="mt-3 space-y-2 text-sm text-foreground/80">
+                    {col.items.map((it) => (
+                      <li key={it} className="flex gap-2">
+                        <span className="text-primary">·</span>
+                        <span>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
-          </CaseStudySection>
+          </Container>
         </section>
 
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="challenges" index="10" title="Challenges">
+        {/* ── 04 Booking Flow ──────────────────────────────────────────────── */}
+        <section className="border-t border-border py-20 sm:py-24">
+          <CaseStudySection id="booking-flow" index="03" title="Booking Flow">
             <p>
-              The project faced a few practical constraints that shaped the design. These are not abstract problems; they are real product and operational trade-offs that had to be resolved in the booking model.
+              Four steps, one purpose each. The guest picks a villa, dates,
+              and guest count; submits their details through the native GHL
+              form; passes through a demo payment step; and lands on a
+              confirmation page. Reservation data — villa, dates, guests,
+              promo code, running total — persists in the browser across all
+              four steps, so nothing has to be re-entered.
             </p>
-
-            <ul className="mt-8 list-disc space-y-3 ps-5 text-base leading-relaxed text-foreground/80">
-              <li>
-                <strong>Operational complexity without overbuilding the platform.</strong> The business needed a transaction path that handled enquiries, timing, and review without creating a full custom application.
-              </li>
-              <li>
-                <strong>Human review required before final confirmation.</strong> Because the property manages limited villa inventory, an automated booking decision would create unnecessary risk and reduce trust in the process.
-              </li>
-              <li>
-                <strong>Limited surface area on the form.</strong> The guest-facing booking experience needed to be simple, and the public form reflects that by keeping the intake clear without forcing a full payment or trip-planning flow.
-              </li>
-              <li>
-                <strong>Need for a clean operational record.</strong> A CRM contact alone was not enough; the team needed a working reservations log where the enquiry could be followed and reviewed in context.
-              </li>
-              <li>
-                <strong>Platform constraints within GoHighLevel.</strong> The project had to work inside the constraints of the platform while still designing a defensible business process rather than a purely aesthetic funnel.
-              </li>
-            </ul>
           </CaseStudySection>
+
+          <Container size="lg" className="mt-12">
+            <Reveal y={20}>
+              <div className="min-w-0">
+                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                  Step 1 · Booking Details
+                </p>
+                <ShotFigure
+                  src="/images/bahay-liwanag/bahay-liwanag-booking-details.png"
+                  alt="Booking Details page showing the three villa cards with pricing, a date and guest picker, and a promo-code field"
+                  url="hankerism.github.io/bahay-liwanag/book-now"
+                  caption="Villa cards, pricing, dates, guest count, and the BAHAY10 promo field — live."
+                  priority
+                />
+              </div>
+            </Reveal>
+          </Container>
+
+          <Container size="lg" className="mt-10">
+            <div className="grid gap-6 sm:grid-cols-3">
+              <Reveal y={12} delay={0}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                    Step 2 · Guest Details
+                  </p>
+                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Guest Details Form" note="Native GHL form — screenshot pending" />
+                </div>
+              </Reveal>
+              <Reveal y={12} delay={90}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                    Step 3 · Demo Payment
+                  </p>
+                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Demo Payment Step" note="Portfolio demo — no real payment processor" />
+                </div>
+              </Reveal>
+              <Reveal y={12} delay={180}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                    Step 4 · Confirmation
+                  </p>
+                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Reservation Confirmed" note="Screenshot pending" />
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+
+          {/* Villa pricing table */}
+          <Container size="md" className="mt-10">
+            <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-xs">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-surface/70 text-left">
+                    <th scope="col" className="px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">Villa</th>
+                    <th scope="col" className="px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">Rate</th>
+                    <th scope="col" className="hidden px-4 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground sm:table-cell">Capacity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {VILLAS.map((v) => (
+                    <tr key={v.name} className="border-b border-border last:border-0">
+                      <td className="px-4 py-3">
+                        <p className="text-sm font-semibold text-foreground">{v.name}</p>
+                        <p className="text-xs text-muted-foreground">{v.tag}</p>
+                      </td>
+                      <td className="px-4 py-3 text-sm text-foreground/85">{v.rate}<span className="text-xs text-muted-foreground">/night</span></td>
+                      <td className="hidden px-4 py-3 text-xs text-muted-foreground sm:table-cell">{v.sleeps} · {v.included}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Pricing handles nights, base villa rate, included guests, extra-guest
+              charges, subtotal, the BAHAY10 promo discount, and the final total.
+            </p>
+          </Container>
         </section>
 
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="solution" index="11" title="Solution">
+        {/* ── 05 CRM + Automation ──────────────────────────────────────────── */}
+        <section className="border-t border-border bg-surface py-20 sm:py-24">
+          <CaseStudySection id="crm-automation" index="04" title="CRM &amp; Automation">
             <p>
-              The implemented solution ties the business journey together in one sequence: the guest reaches the booking form, the enquiry is stored in the CRM, the workflow handles acknowledgement and routing, and the operational team reviews the request before confirming the booking.
+              Submitting the booking form creates the guest as a Contact and
+              the reservation as an Opportunity in the Bahay Liwanag
+              Reservations pipeline. As staff move that Opportunity through
+              its stages, the connected workflow reacts — sending the right
+              email at the right moment, with real reservation details merged
+              in.
             </p>
-            <p className="mt-4 text-base leading-relaxed text-foreground/80">
-              This is the same booking model introduced earlier in the system architecture: the customer-facing path stays simple, while the operational layer remains structured and reviewable.
-            </p>
+          </CaseStudySection>
 
-            <div className="mt-8 max-w-2xl text-lg text-foreground/80">
+          <Container size="lg" className="mt-12">
+            <Reveal y={20}>
+              <div className="min-w-0">
+                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                  Bahay Liwanag Reservations — Pipeline
+                </p>
+                <ShotFigure
+                  src="/images/bahay-liwanag/bahay-liwanag-ghl-pipeline-board.png"
+                  alt="GoHighLevel Opportunities board for the Bahay Liwanag Reservations pipeline, showing six stages"
+                  url="app.gohighlevel.com/opportunities"
+                  caption="The real GHL Opportunities board — 6 configured stages, captured directly from the account."
+                  aspect="aspect-[16/6]"
+                />
+              </div>
+            </Reveal>
+          </Container>
+
+          <Container size="lg" className="mt-10">
+            <div className="overflow-x-auto pb-2">
+              <div className="flex min-w-max gap-2">
+                {PIPELINE_STAGES.map((stage, i) => (
+                  <div
+                    key={stage.label}
+                    className={cx(
+                      "flex-shrink-0 rounded-[var(--radius-md)] border px-4 py-3 text-center",
+                      stage.tone === "muted"
+                        ? "border-dashed border-border-strong/70 bg-background/60"
+                        : "border-border bg-card shadow-xs",
+                    )}
+                  >
+                    <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">Stage {i + 1}</p>
+                    <p className="mt-1 text-sm font-semibold text-foreground">{stage.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-muted-foreground">
+              Cancelled is a real, configured pipeline stage — not just an
+              opportunity status — confirmed directly in the pipeline&rsquo;s
+              stage settings.
+            </p>
+          </Container>
+
+          <Container size="lg" className="mt-12">
+            <Reveal y={20}>
+              <div className="min-w-0">
+                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                  Bahay Liwanag - Life Cycle Workflow
+                </p>
+                <ShotFigure
+                  src="/images/bahay-liwanag/bahay-liwanag-ghl-lifecycle-workflow.png"
+                  alt="GoHighLevel workflow canvas for Bahay Liwanag - Life Cycle, showing the form-submitted default path and three stage-changed email branches"
+                  url="app.gohighlevel.com/workflows"
+                  caption="The published Life Cycle workflow — one default path, three independent stage-triggered branches."
+                />
+              </div>
+            </Reveal>
+          </Container>
+
+          <Container size="md" className="mt-8">
+            <div className="space-y-3 text-sm text-foreground/80">
               <p>
-                This addresses the original business problem by turning an unstructured, manual booking process into a predictable intake workflow. The result is a clearer guest experience, a better operational record, and a business process that respects the human decision point without making the team do unnecessary admin work.
+                <span className="font-semibold text-foreground">Default path:</span>{" "}
+                Form Submitted → Create Reservation Opportunity.
+              </p>
+              <p>
+                <span className="font-semibold text-foreground">Three independent branches</span>{" "}
+                fire only when staff change the Opportunity&rsquo;s stage:
+                Booking Confirmed → confirmation email · Ready for Check-In →
+                pre-arrival email · Stay Completed → thank-you email.
               </p>
             </div>
-          </CaseStudySection>
+          </Container>
         </section>
 
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="impact" index="12" title="Business Impact">
+        {/* ── 06 Automation Philosophy ─────────────────────────────────────── */}
+        <section className="border-t border-border py-20 sm:py-24">
+          <CaseStudySection id="automation-philosophy" index="05" title="Automation Philosophy">
             <p>
-              The project improved the business by creating a more structured reservation process without turning the guest experience into a heavy operational interface. The core value was operational clarity: the intake path, CRM record, and follow-up workflow all align around the same booking decision.
-            </p>
-            <p>
-              Qualitatively, the system reduces manual duplication, makes the booking process easier to review, and gives the operation a clearer internal path from enquiry to confirmation. It also improves maintainability by separating the customer-facing experience from the internal process, and it makes the customer journey easier to follow because the next step is always explicit.
+              The system does not decide when a reservation should become
+              confirmed, ready for check-in, or completed — those stay
+              human-controlled operational decisions. What&rsquo;s automated
+              is the repetitive communication that follows each decision.
+              That split is deliberate: it automates the part that&rsquo;s
+              tedious and error-prone to do by hand, and leaves the part that
+              still needs judgment to a person.
             </p>
           </CaseStudySection>
+
+          <Container size="md" className="mt-10">
+            <div className="space-y-4">
+              {[
+                { human: "Booking is confirmed.", automation: "Send booking confirmation email." },
+                { human: "Guest is ready for check-in.", automation: "Send pre-arrival information." },
+                { human: "Stay is completed.", automation: "Send thank-you email." },
+              ].map((row) => (
+                <div
+                  key={row.human}
+                  className="grid grid-cols-1 gap-3 rounded-[var(--radius-lg)] border border-border bg-card p-5 shadow-xs sm:grid-cols-[1fr_auto_1fr] sm:items-center"
+                >
+                  <div>
+                    <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">Human</p>
+                    <p className="mt-1 text-sm font-semibold text-foreground">{row.human}</p>
+                  </div>
+                  <div className="hidden text-muted-foreground sm:block" aria-hidden>→</div>
+                  <div>
+                    <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-wider text-muted-foreground">Automation</p>
+                    <p className="mt-1 text-sm font-semibold text-primary">{row.automation}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              This is thoughtful automation, not automated decision-making —
+              the system never guesses whether a guest actually checked in or
+              a payment actually cleared. It only reacts once a person says so.
+            </p>
+          </Container>
         </section>
 
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="lessons" index="13" title="Lessons Learned">
+        {/* ── 07 Lead Generation ───────────────────────────────────────────── */}
+        <section className="border-t border-border bg-surface py-20 sm:py-24">
+          <CaseStudySection id="lead-generation" index="06" title="Lead Generation">
             <p>
-              A few lessons were especially important on this project:
+              A tasteful on-site popup — cream background, forest green and
+              terracotta accents, matching the site&rsquo;s own design system
+              — offers 10% off a first stay. It appears after a short delay or
+              scroll depth (never on load), submits to a native GHL form, and
+              won&rsquo;t reappear once a visitor has seen it.
             </p>
-            <ul className="mt-8 list-disc space-y-3 ps-5 text-base leading-relaxed text-foreground/80">
-              <li>
-                <strong>CRM structure matters.</strong> If the form fields are not aligned to the operating model, the business can end up with a clean website and a messy back end. The schema has to support the way the team actually reviews and responds to bookings.
-              </li>
-              <li>
-                <strong>Workflow design has to respect the business decision.</strong> Not everything should be automated. This project showed that the right automation is the repetitive administrative work around the enquiry, while the availability decision should remain human-led.
-              </li>
-              <li>
-                <strong>UX decisions shape operational success.</strong> A simple intake form is not just a frontend choice; it changes how reliable and useful the whole system becomes. Fewer obstacles in front of the guest means more consistent data behind the scenes.
-              </li>
-              <li>
-                <strong>Operational systems need different thinking from marketing websites.</strong> The real work was not just making the site look polished. It was designing a repeatable business flow that could support guest experience and internal clarity at the same time.
-              </li>
-              <li>
-                <strong>Trade-offs should be explicit.</strong> Choosing a platform-first system created simplicity in delivery, but it also created platform constraints. Being clear about those trade-offs is part of engineering maturity.
-              </li>
-            </ul>
           </CaseStudySection>
-        </section>
 
-        <section className="border-t border-border bg-surface py-16 sm:py-20">
-          <CaseStudySection id="evidence-gallery" index="14" title="Evidence Gallery">
-            <p>
-              This gallery packages the live-system evidence that supports the narrative. It is intentionally explicit about what is already verified and what still needs a final capture pass before publication. Nothing here is presented as a screenshot or workflow artifact that has not been documented as part of the evidence checklist.
-            </p>
+          <Container size="lg" className="mt-12">
+            <Reveal y={20}>
+              <div className="min-w-0">
+                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                  10% Off Lead Popup
+                </p>
+                <ShotFigure
+                  src="/images/bahay-liwanag/bahay-liwanag-lead-popup.png"
+                  alt="Bahay Liwanag lead-generation popup offering 10% off a first stay, with First Name and Email fields"
+                  url="hankerism.github.io/bahay-liwanag"
+                  caption="The live popup — shown after a scroll/time trigger, suppressed after one view."
+                  aspect="aspect-[16/11]"
+                />
+              </div>
+            </Reveal>
+          </Container>
 
-            <div className="mt-8">
-              <EvidenceGallery
-                items={[
-                  {
-                    title: "Booking form settings",
-                    description: "The public booking intake is shaped around a narrow set of fields that match the real guest decision path.",
-                    whyItMatters: "This keeps the form short enough for conversion while still collecting the operational information the business needs.",
-                    placeholderLabel: "Booking Form Settings",
-                    alt: "Placeholder: booking form settings screenshot to be captured from the live GoHighLevel form builder",
-                    url: "booking-form-settings",
-                    annotation: "Live form schema",
-                  },
-                  {
-                    title: "Live booking page",
-                    description: "This is the public-facing reservation experience used to route a guest into the enquiry flow.",
-                    whyItMatters: "It establishes the actual customer journey and shows how the funnel turns marketing interest into a booking inquiry.",
-                    placeholderLabel: "Live Booking Page",
-                    alt: "Placeholder: public booking page screenshot to be captured from the live funnel",
-                    url: "bahay-liwanag-book-now",
-                    annotation: "Public funnel",
-                  },
-                  {
-                    title: "GoHighLevel workflow canvas",
-                    description: "The workflow layer is responsible for acknowledgment and routing once the enquiry is submitted.",
-                    whyItMatters: "This is where the business turns the intake event into a coordinated response rather than a lost message.",
-                    placeholderLabel: "GoHighLevel Workflow Canvas",
-                    alt: "Placeholder: workflow canvas screenshot to be captured from the GoHighLevel automation editor",
-                    url: "ghl-workflow-canvas",
-                    annotation: "Automation trigger and response path",
-                    fullWidth: true,
-                  },
-                  {
-                    title: "Make scenario",
-                    description: "The Make path moves the enquiry from the CRM layer into the operational record used by the team.",
-                    whyItMatters: "It reflects the chosen architecture: one intake signal, then a structured handoff into a reviewable operational log.",
-                    placeholderLabel: "Make Scenario",
-                    alt: "Placeholder: Make automation scenario to be captured from the internal workflow builder",
-                    url: "make-scenario",
-                    annotation: "Bridge to records and notifications",
-                  },
-                  {
-                    title: "Airtable reservation log",
-                    description: "The reservations table is the operational workspace where the team can review, filter, and follow up on new enquiries.",
-                    whyItMatters: "A single CRM record is not enough for the business; the operation needs a readable working log for the booking pipeline.",
-                    placeholderLabel: "Airtable Reservation Log",
-                    alt: "Placeholder: Airtable reservations table screenshot to be captured from the operational workspace",
-                    url: "airtable-reservation-log",
-                    annotation: "Operational review table",
-                  },
-                  {
-                    title: "Contact record",
-                    description: "The collected fields land in the contact schema so the business can read and act on the real booking intent.",
-                    whyItMatters: "The quality of the system depends on clean field mapping and consistent data capture from the first enquiry.",
-                    placeholderLabel: "Contact Record",
-                    alt: "Placeholder: GHL contact record screenshot to be captured from the CRM entry",
-                    url: "contact-record",
-                    annotation: "CRM source of truth",
-                  },
-                  {
-                    title: "Funnel map",
-                    description: "The funnel explains how the marketing pages guide the guest into a single conversion path.",
-                    whyItMatters: "This is the public architecture that keeps the user journey simple and the internal process easy to reason about.",
-                    placeholderLabel: "Funnel Map",
-                    alt: "Placeholder: funnel overview to be captured from the published website structure",
-                    url: "funnel-map",
-                    annotation: "Public journey architecture",
-                  },
-                  {
-                    title: "Pipeline snapshot",
-                    description: "The booking intake is surfaced as a simple operational pipeline rather than a vague, unstructured backlog.",
-                    whyItMatters: "This makes the inquiry path legible to the team and keeps momentum between enquiry, review, and response.",
-                    placeholderLabel: "Pipeline Snapshot",
-                    alt: "Placeholder: operational pipeline view to be captured from the management workflow",
-                    url: "pipeline-snapshot",
-                    annotation: "Review pipeline",
-                  },
-                  {
-                    title: "Confirmation email",
-                    description: "The response layer gives the guest a clear acknowledgment and sets expectations without forcing an instant payment flow.",
-                    whyItMatters: "Quick acknowledgment is a practical part of the customer experience and keeps the system feeling responsive.",
-                    placeholderLabel: "Confirmation Email",
-                    alt: "Placeholder: confirmation email screenshot to be captured from the live automation template",
-                    url: "confirmation-email",
-                    annotation: "Guest acknowledgement",
-                  },
-                  {
-                    title: "Booking form close-up",
-                    description: "The form fields are intentionally limited to the details that matter for the actual booking decision.",
-                    whyItMatters: "This is the design boundary that keeps the experience clear while preserving useful operational data.",
-                    placeholderLabel: "Booking Form Close-up",
-                    alt: "Placeholder: close-up of the live booking form fields",
-                    url: "booking-form-close-up",
-                    annotation: "Field clarity",
-                  },
-                  {
-                    title: "Workflow decision branch",
-                    description: "The workflow includes a deliberate human-review branch rather than a fully automated completion path.",
-                    whyItMatters: "This protects the operation from incorrect booking assumptions and keeps the review step visible in the system design.",
-                    placeholderLabel: "Workflow Decision Branch",
-                    alt: "Placeholder: automation branch screenshot to be captured from the workflow editor",
-                    url: "workflow-decision-branch",
-                    annotation: "Human review decision",
-                  },
-                  {
-                    title: "Public process card",
-                    description: "The guest-facing process is distilled into a clear action path that is simple to understand and easy to trust.",
-                    whyItMatters: "The business design is clearer when the public-facing story matches the actual operational logic behind the booking flow.",
-                    placeholderLabel: "Public Process Card",
-                    alt: "Placeholder: public process card or booking guidance screenshot",
-                    url: "public-process-card",
-                    annotation: "Customer-facing clarity",
-                  },
+          <Container size="md" className="mt-10">
+            <Reveal y={16}>
+              <ProcessFlow
+                nodes={[
+                  { label: "Visitor sees the offer", description: "Popup appears after ~5s or ~40% scroll — never on load" },
+                  { label: "Submits email", description: "Native GHL form embedded in the popup" },
+                  { label: "GHL contact created", description: "A Contact record is created from the submission" },
+                  { label: "Lead tag applied", description: "\"BL - 10% Off Lead\" tag added to the Contact" },
+                  { label: "Welcome email sent", description: "Delivers the BAHAY10 promo code" },
                 ]}
               />
+            </Reveal>
+          </Container>
+
+          <Container size="md" className="mt-8">
+            <div className="rounded-[var(--radius-lg)] border-2 border-dashed border-border-strong/70 bg-background/60 p-5">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">Current status — verified in GHL</p>
+              <p className="mt-2 text-sm text-foreground/80">
+                The <strong>BL - 10% Off Lead Welcome</strong> workflow (Form
+                Submitted → Add Tag → Send 10% Off Welcome Email → END) is
+                built and has been test-run once. As of this writing it is
+                still in <strong>Draft</strong> in GHL, not yet published — so
+                real visitor submissions aren&rsquo;t triggering the welcome
+                email in production yet. Flagging that honestly rather than
+                describing it as fully live.
+              </p>
             </div>
-          </CaseStudySection>
+          </Container>
         </section>
 
-        <section className="border-t border-border py-16 sm:py-20">
-          <CaseStudySection id="future" index="15" title="Future Improvements">
+        {/* ── 08 Email Automation ──────────────────────────────────────────── */}
+        <section className="border-t border-border py-20 sm:py-24">
+          <CaseStudySection id="email-automation" index="07" title="Email Automation">
             <p>
-              The current system is intentionally focused on a clear intake path and human review flow. A few realistic improvements would strengthen the operation further, but they are not implied to exist yet.
+              Four branded HTML emails share one visual system — warm cream,
+              deep forest green, terracotta accents, and editorial serif
+              headings. The three reservation-lifecycle emails merge in real
+              Contact fields, so every email reads as specific to that
+              booking, not a generic template.
             </p>
+          </CaseStudySection>
 
-            <div className="mt-8 space-y-6">
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Implemented</p>
-                <ul className="mt-3 list-disc space-y-2 ps-5 text-base leading-relaxed text-foreground/80">
-                  <li>Single booking intake flow</li>
-                  <li>Structured CRM field capture</li>
-                  <li>Operational handoff into the review workflow</li>
-                  <li>Human-led confirmation step</li>
-                </ul>
+          <Container size="lg" className="mt-12">
+            <div className="grid gap-6 sm:grid-cols-2">
+              <Reveal y={12} delay={0}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">Booking Confirmation</p>
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-email-booking-confirmation.png"
+                    alt="Booking Confirmation email showing reservation details merged from contact fields"
+                    url="GHL Email Builder"
+                    caption="Sent when an Opportunity moves to Booking Confirmed."
+                    aspect="aspect-[4/5]"
+                  />
+                </div>
+              </Reveal>
+              <Reveal y={12} delay={90}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">Pre-Arrival</p>
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-email-pre-arrival.png"
+                    alt="Pre-Arrival email reminding the guest of their upcoming stay details"
+                    url="GHL Email Builder"
+                    caption="Sent when an Opportunity moves to Ready for Check-In."
+                    aspect="aspect-[4/5]"
+                  />
+                </div>
+              </Reveal>
+              <Reveal y={12} delay={0}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">Thank You</p>
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-email-thank-you.png"
+                    alt="Thank You email sent after a guest's stay is marked completed"
+                    url="GHL Email Builder"
+                    caption="Sent when an Opportunity moves to Stay Completed."
+                    aspect="aspect-[4/5]"
+                  />
+                </div>
+              </Reveal>
+              <Reveal y={12} delay={90}>
+                <div className="min-w-0">
+                  <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">10% Off Welcome</p>
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-email-10pct-welcome.png"
+                    alt="10% Off Welcome email delivering the BAHAY10 promo code to a new lead"
+                    url="GHL Email Builder"
+                    caption="Sent by the lead-welcome workflow — currently in Draft (see Lead Generation)."
+                    aspect="aspect-[4/5]"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          </Container>
+
+          <Container size="md" className="mt-10">
+            <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Verified merge tags (contact-level)
+            </p>
+            <pre className="overflow-x-auto rounded-[var(--radius-md)] border border-border bg-card px-4 py-3 font-mono text-sm leading-relaxed text-foreground/85">
+              {MERGE_TAGS.join("\n")}
+            </pre>
+          </Container>
+        </section>
+
+        {/* ── 09 Testing & QA ──────────────────────────────────────────────── */}
+        <section className="border-t border-border bg-surface py-16 sm:py-20">
+          <CaseStudySection id="testing-qa" index="08" title="Testing &amp; QA">
+            <p>
+              The system was tested manually, end to end — not with an
+              automated test suite. Real form submissions were pushed through
+              the pipeline stage by stage, as staff would, and each resulting
+              email was checked for correct data and correct trigger timing.
+            </p>
+          </CaseStudySection>
+          <Container size="md" className="mt-8 space-y-6">
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {TEST_STEPS.map((step, i) => (
+                <li key={i} className="flex gap-3 text-sm text-foreground/80">
+                  <span className="flex-shrink-0 font-mono text-xs font-semibold text-accent-hover">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{step}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              No automated test suite exists for this project — every item
+              above was checked by hand. The lead-welcome path was verified
+              working as a workflow, but since it&rsquo;s still in Draft in
+              GHL, it hasn&rsquo;t yet been exercised by a real site visitor.
+            </p>
+          </Container>
+        </section>
+
+        {/* ── 10 Tech Stack ─────────────────────────────────────────────────── */}
+        <section className="border-t border-border py-16 sm:py-20">
+          <CaseStudySection id="tech-stack" index="09" title="Tech Stack">
+            <p>
+              The booking site itself is hand-built static HTML, CSS, and
+              JavaScript, deployed on GitHub Pages — not a framework
+              application. Next.js only renders this portfolio page, not
+              Bahay Liwanag itself.
+            </p>
+          </CaseStudySection>
+          <Container size="md" className="mt-8">
+            <div className="flex flex-wrap gap-2">
+              {[
+                "HTML / CSS / JavaScript",
+                "LocalStorage (booking-state persistence)",
+                "GoHighLevel — Funnels",
+                "GoHighLevel — Forms",
+                "GoHighLevel — CRM / Opportunities",
+                "GoHighLevel — Workflows",
+                "GoHighLevel — Custom Fields",
+                "GoHighLevel — Email Builder",
+                "GitHub",
+                "GitHub Pages",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold text-foreground/85 shadow-xs"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        {/* ── 11 CTA ──────────────────────────────────────────────────────── */}
+        <section className="border-t border-border py-16 sm:py-20">
+          <Container size="md">
+            <div className="flex flex-col items-start gap-5">
+              <p aria-hidden className="hand text-2xl text-primary">seen enough?</p>
+              <h2 className="max-w-xl">Explore more projects</h2>
+              <p className="max-w-xl text-foreground/80">
+                Skills demonstrated: booking-flow UX, GoHighLevel funnel and
+                form configuration, CRM/pipeline design, lifecycle workflow
+                logic, branded responsive HTML email, lead capture, and
+                hands-on end-to-end QA.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Button href={LIVE} target="_blank" rel="noreferrer" variant="primary">
+                  Visit the live site
+                </Button>
+                <Button href="/projects" as={Link} variant="outline">
+                  All projects
+                </Button>
+                <Button href="/#contact" variant="ghost">
+                  Get in touch
+                </Button>
               </div>
-
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Planned</p>
-                <ul className="mt-3 list-disc space-y-2 ps-5 text-base leading-relaxed text-foreground/80">
-                  <li>Calendar synchronization to keep reservation timing more visible</li>
-                  <li>Availability management to support clearer booking decisions</li>
-                  <li>Automated reminder workflow for follow-up or confirmation stages</li>
-                </ul>
-              </div>
-
-              <div>
-                <p className="font-serif text-xl font-semibold text-primary">Future possibilities</p>
-                <ul className="mt-3 list-disc space-y-2 ps-5 text-base leading-relaxed text-foreground/80">
-                  <li>Reporting dashboard for reservation patterns and lead flow</li>
-                  <li>Reservation analytics to support inventory decisions and staffing</li>
-                  <li>Internal operations dashboard for team visibility across new enquiries and confirmed stays</li>
-                </ul>
+              <div className="flex w-full flex-wrap items-center justify-between gap-3 border-t border-border/70 pt-6">
+                <a
+                  href="https://hazel-and-jhonel.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-semibold text-foreground/70 no-underline hover:text-primary"
+                >
+                  ← Wedding RSVP Platform
+                </a>
+                <a
+                  href="https://stephaniecenterwellness.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-sm font-semibold text-foreground/70 no-underline hover:text-primary"
+                >
+                  Stephanie Center Wellness →
+                </a>
               </div>
             </div>
-          </CaseStudySection>
+          </Container>
         </section>
       </main>
 
