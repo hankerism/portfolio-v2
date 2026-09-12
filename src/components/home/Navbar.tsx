@@ -110,7 +110,13 @@ export default function Navbar() {
             {/* Resume returns here as /resume when real resume content lands
                 (IA v2 §8 input 1) — the previous /resume.pdf href was dead. */}
             <div className="hidden md:block">
-              <Button href="/contact" as={Link} size="sm" variant="primary">
+              <Button
+                href="https://lets.controlyouraudience.com/preview/3vOMNpbZNOoLngbwIoWH"
+                target="_blank"
+                rel="noreferrer"
+                size="sm"
+                variant="primary"
+              >
                 Get in touch
               </Button>
             </div>
@@ -163,7 +169,13 @@ export default function Navbar() {
               );
             })}
             <li className="mt-2 px-1">
-              <Button href="/contact" as={Link} fullWidth onClick={() => setOpen(false)}>
+              <Button
+                href="https://lets.controlyouraudience.com/preview/3vOMNpbZNOoLngbwIoWH"
+                target="_blank"
+                rel="noreferrer"
+                fullWidth
+                onClick={() => setOpen(false)}
+              >
                 Get in touch
               </Button>
             </li>
