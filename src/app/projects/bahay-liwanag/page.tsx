@@ -4,7 +4,6 @@ import Navbar from "@/components/home/Navbar";
 import Footer from "@/components/home/Footer";
 import Container from "@/components/layout/Container";
 import Button from "@/components/ui/Button";
-import BrowserFrame from "@/components/ui/BrowserFrame";
 import CaseStudyHero from "@/components/case-study/CaseStudyHero";
 import CaseStudySection from "@/components/case-study/CaseStudySection";
 import ShotFigure from "@/components/case-study/ShotFigure";
@@ -86,40 +85,6 @@ const TEST_STEPS = [
   "Lead popup trigger, suppression, and the 10% Off Welcome email",
   "Responsive layout on mobile for the booking flow and the lead popup",
 ];
-
-/* ── Local building blocks ────────────────────────────────────────────────── */
-
-/** A BrowserFrame placeholder for a screenshot not yet captured. */
-function ShotPlaceholder({
-  url,
-  label,
-  note,
-  aspect = "aspect-[16/10]",
-}: {
-  url: string;
-  label: string;
-  note?: string;
-  aspect?: string;
-}) {
-  return (
-    <div className="min-w-0">
-      <BrowserFrame url={url} className="shadow-soft">
-        <div className={cx("relative w-full overflow-hidden bg-surface", aspect)}>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(163,122,180,0.14),_transparent_45%),linear-gradient(135deg,_rgba(93,66,74,0.08),_transparent_68%)]" />
-          <div className="absolute inset-0 flex items-center justify-center p-6">
-            <div className="relative z-10 max-w-md rounded-[var(--radius-md)] border border-border bg-background/75 px-4 py-3 text-center shadow-xs backdrop-blur-sm">
-              <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                Placeholder
-              </p>
-              <p className="mt-1.5 text-sm font-semibold text-foreground">{label}</p>
-              {note && <p className="mt-1 text-xs text-foreground/70">{note}</p>}
-            </div>
-          </div>
-        </div>
-      </BrowserFrame>
-    </div>
-  );
-}
 
 /* ── Page ─────────────────────────────────────────────────────────────────── */
 
@@ -230,9 +195,9 @@ export default function BahayLiwanagCaseStudy() {
                 </p>
                 <ShotFigure
                   src="/images/bahay-liwanag/bahay-liwanag-booking-details.png"
-                  alt="Booking Details page showing the three villa cards with pricing, a date and guest picker, and a promo-code field"
-                  url="hankerism.github.io/bahay-liwanag/book-now"
-                  caption="Villa cards, pricing, dates, guest count, and the BAHAY10 promo field — live."
+                  alt="Booking Details page with Villa Sampaguita selected, dates and guest count set, and the BAHAY10 promo code applied showing a discounted total"
+                  url="lets.controlyouraudience.com/preview/HIHrGr20tLK7zGmx2Vop"
+                  caption="Villa selected, dates and guests set, BAHAY10 applied — the live pricing summary updates in real time."
                   priority
                 />
               </div>
@@ -246,7 +211,12 @@ export default function BahayLiwanagCaseStudy() {
                   <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
                     Step 2 · Guest Details
                   </p>
-                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Guest Details Form" note="Native GHL form — screenshot pending" />
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-guest-details.png"
+                    alt="Guest Details step — a native GHL form collecting first name, last name, phone, email, and a guest note, with the reservation summary alongside"
+                    url="lets.controlyouraudience.com/preview/Gi2Ai1tFZaNNATn5yifG"
+                    caption="The native GHL form — First Name, Last Name, Phone, Email, and a guest note."
+                  />
                 </div>
               </Reveal>
               <Reveal y={12} delay={90}>
@@ -254,7 +224,12 @@ export default function BahayLiwanagCaseStudy() {
                   <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
                     Step 3 · Demo Payment
                   </p>
-                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Demo Payment Step" note="Portfolio demo — no real payment processor" />
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-payment.png"
+                    alt="Demo Payment step showing a card-entry form with GCash and Maya options, a portfolio-demo disclaimer, and the recalculated stay total with BAHAY10 applied"
+                    url="lets.controlyouraudience.com/preview/941NustibgFNLGToABY3"
+                    caption="A demo checkout — Card, GCash, or Maya — labelled plainly as a portfolio demo. No real payment is processed."
+                  />
                 </div>
               </Reveal>
               <Reveal y={12} delay={180}>
@@ -262,7 +237,12 @@ export default function BahayLiwanagCaseStudy() {
                   <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
                     Step 4 · Confirmation
                   </p>
-                  <ShotPlaceholder url="bahay-liwanag/book-now" label="Reservation Confirmed" note="Screenshot pending" />
+                  <ShotFigure
+                    src="/images/bahay-liwanag/bahay-liwanag-confirmation.png"
+                    alt="Confirmation page reading Your Stay Is Confirmed, badged Booking Confirmed! - Demo Booking - No Real Payment, with a full booking summary and demo booking reference"
+                    url="lets.controlyouraudience.com/preview/oduOOS18zh2Na6We283L"
+                    caption="&ldquo;Booking Confirmed! — Demo Booking — No Real Payment,&rdquo; with the full booking summary and a demo reference number."
+                  />
                 </div>
               </Reveal>
             </div>
@@ -473,6 +453,22 @@ export default function BahayLiwanagCaseStudy() {
                   { label: "Welcome email sent", description: "Delivers the BAHAY10 promo code" },
                 ]}
               />
+            </Reveal>
+          </Container>
+
+          <Container size="lg" className="mt-10">
+            <Reveal y={20}>
+              <div className="min-w-0">
+                <p className="mb-3 font-mono text-xs font-semibold uppercase tracking-widest text-accent-hover">
+                  BL - 10% Off Lead Welcome Workflow
+                </p>
+                <ShotFigure
+                  src="/images/bahay-liwanag/bahay-liwanag-ghl-lead-welcome-workflow.png"
+                  alt="GoHighLevel workflow canvas for BL - 10% Off Lead Welcome, showing Form Submitted, Add Tag, and Send Email nodes, with the Draft/Publish toggle set to Draft"
+                  url="app.gohighlevel.com/workflows"
+                  caption="Form Submitted → Add Tag → Send Email → END — the Draft/Publish toggle (top right) confirms it isn&rsquo;t published yet."
+                />
+              </div>
             </Reveal>
           </Container>
 
