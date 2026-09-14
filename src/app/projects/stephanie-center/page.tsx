@@ -201,6 +201,17 @@ export default function StephanieCenterCaseStudy() {
                 </div>
               ))}
             </dl>
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Button
+                href="https://www.stephaniecenterwellness.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                variant="primary"
+              >
+                Visit Live Site
+              </Button>
+            </div>
           </Container>
         </header>
 
@@ -286,10 +297,10 @@ export default function StephanieCenterCaseStudy() {
             </SectionHeader>
 
             <Plate
-              src="/images/stephanie-center/steph-homepage.png"
-              alt="The Stephanie Center Wellness homepage, rebuilt in GoHighLevel — an education-first page presenting the client's root-cause hair-growth program"
-              caption="The homepage as rebuilt in GoHighLevel. Everything it says — the program, the framework, the promise — is the client's; the build, the responsive layout, and the page assembly are mine."
-              aspect="aspect-[4/3]"
+              src="/images/stephanie-center/steph-homepage-current.jpg"
+              alt="The current Stephanie Center Wellness homepage, rebuilt in GoHighLevel — an education-first page presenting the client's root-cause hair-loss offer"
+              caption="The homepage as rebuilt in GoHighLevel. Everything it says — the offer, the promise — is the client's; the build, the responsive layout, and the page assembly are mine."
+              aspect="aspect-[1036/824]"
             />
           </Container>
         </section>
@@ -317,7 +328,7 @@ export default function StephanieCenterCaseStudy() {
                   { name: "Email nurture — AWeber", desc: "The practice's existing email tool, kept in place, carries the follow-up", shown: false },
                   { name: "Consultation booked", desc: "A “Book a Call” / Root Cause Assessment invitation — the human step", shown: true },
                   { name: "Practice Better", desc: "The client's existing consultation, portal, and appointment tool", shown: false },
-                  { name: "Hair Growth Accelerator program", desc: "Enrollment in the client's root-cause program", shown: true },
+                  { name: "The client's program", desc: "Enrollment in the client's current root-cause offering", shown: true },
                 ].map((node, i, arr) => (
                   <div key={node.name}>
                     <div
@@ -467,8 +478,8 @@ export default function StephanieCenterCaseStudy() {
             <div className="grid gap-8 lg:grid-cols-2 lg:gap-10">
               <Plate
                 src="/images/stephanie-center/steph-quiz-page.png"
-                alt="The Hair Loss Type Quiz funnel page, built in GoHighLevel — a nine-question quiz that returns a primary and secondary root-cause driver"
-                caption="The quiz funnel: a nine-question “Hair Loss Type Quiz” across five root-cause drivers. The diagnostic idea is the client's; the funnel page and its capture are the build."
+                alt="The Hair Loss Type Quiz funnel page, built in GoHighLevel — a seven-question quiz that returns a primary and secondary root-cause driver"
+                caption="The quiz funnel: a seven-question “Hair Loss Type Quiz” across five root-cause drivers. The diagnostic idea is the client's; the funnel page and its capture are the build."
                 tape="tape-peach"
                 rotate="motion-safe:rotate-[0.6deg]"
                 aspect="aspect-[3/4]"
