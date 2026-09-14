@@ -9,12 +9,12 @@ import Doodle from "@/components/ui/Doodle";
  * Leads with the product-builder positioning (web developer · AI automation
  * builder · GoHighLevel specialist) in the warm voice, and filters visitors
  * toward the work or a conversation. At
- * lg+ a restrained scrapbook collage of the flagship (KATHA) sits alongside,
- * so "I build products" is proven the instant the page loads.
+ * lg+ a single pinned polaroid of completed client work (Bahay Liwanag) sits
+ * alongside, so "I build products" is proven the instant the page loads.
  *
- * Motion: a soft staggered entrance on the copy; the collage pieces float on
- * independent slow clocks; blobs breathe; one star twinkles, one flower
- * drifts. All CSS-driven, all silenced by prefers-reduced-motion.
+ * Motion: a soft staggered entrance on the copy; the polaroid floats on its
+ * own slow clock; blobs breathe; one star twinkles, one flower drifts. All
+ * CSS-driven, all silenced by prefers-reduced-motion.
  * ------------------------------------------------------------------------- */
 
 const STACK = ["Next.js", "TypeScript", "Supabase", "GoHighLevel", "Claude Code"];
@@ -77,7 +77,10 @@ export default function Hero() {
               aria-label="Core tools"
             >
               {STACK.map((tool) => (
-                <li key={tool} className="text-sm font-semibold text-muted-foreground">
+                <li
+                  key={tool}
+                  className="rounded-full border border-border bg-card/70 px-2.5 py-0.5 text-xs font-semibold text-muted-foreground"
+                >
                   {tool}
                 </li>
               ))}
@@ -88,28 +91,14 @@ export default function Hero() {
         {/* Product peek — a hand-pinned collage of the flagship (lg+ only) */}
         <div aria-hidden className="relative hidden animate-fade-in lg:block" style={{ animationDelay: "300ms" }}>
           <div className="relative mx-auto aspect-square w-full max-w-md">
-            {/* Book-cover token, tucked behind and up-right */}
-            <div className="absolute right-2 top-0 z-0 w-[40%] rotate-6">
-              <span className="tape tape-peach left-1/2 -top-2.5 h-6 w-16 -translate-x-1/2 rotate-3 rounded-[2px]" />
-              <div className="paper overflow-hidden rounded-[var(--radius-lg)] p-1.5 shadow-soft">
-                <Image
-                  src="/images/katha/katha-cover.png"
-                  alt=""
-                  width={322}
-                  height={462}
-                  className="w-full rounded-[var(--radius-sm)]"
-                  sizes="180px"
-                />
-              </div>
-            </div>
-
-            {/* Library polaroid — the star, pinned front-left */}
+            {/* Bahay Liwanag polaroid — the star, pinned front-left */}
             <div className="absolute bottom-2 left-0 z-10 w-[82%] -rotate-2">
               <span className="tape left-10 -top-3 -rotate-6 rounded-[2px]" />
+
               <div className="paper p-3 shadow-lg">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-md)] bg-muted">
                   <Image
-                    src="/images/katha/katha-library.png"
+                    src="/images/bahay-liwanag/bahay-liwanag-homepage.png"
                     alt=""
                     fill
                     priority
