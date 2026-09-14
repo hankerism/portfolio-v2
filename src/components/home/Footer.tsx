@@ -20,7 +20,7 @@ const NAV = [
 ];
 
 const EMAIL = "blujayabby@gmail.com";
-const LIVE_PORTFOLIO = "https://hankerism.vercel.app/";
+const LIVE_PORTFOLIO = "https://www.heyitsabby.space/";
 
 /* Latest updates — understated, newest first, never a blog. */
 const RECENTLY = [
@@ -103,7 +103,7 @@ export default function Footer() {
                   rel="noreferrer"
                   className="text-sm text-foreground/80 no-underline hover:text-primary"
                 >
-                  hankerism.vercel.app
+                  heyitsabby.space
                 </a>
               </li>
             </ul>

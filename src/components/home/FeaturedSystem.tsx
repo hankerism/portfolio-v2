@@ -24,10 +24,10 @@ import { BAHAY_LIWANAG_LIVE } from "@/lib/projectLinks";
  * ------------------------------------------------------------------------- */
 
 const STEPS = [
-  { n: "01", title: "New enquiry arrives", body: "A form fill or DM lands in the inbox." },
-  { n: "02", title: "Saved & sorted", body: "Details logged neatly in Airtable." },
-  { n: "03", title: "Booked in", body: "Calendar invite sent automatically." },
-  { n: "04", title: "You're notified", body: "A tidy summary pings your phone." },
+  { n: "01", title: "Booking submitted", body: "The guest works through the GHL-connected booking flow." },
+  { n: "02", title: "Contact & Opportunity created", body: "GoHighLevel logs the guest and the reservation." },
+  { n: "03", title: "Stage moves, on purpose", body: "Staff update the pipeline as things really happen." },
+  { n: "04", title: "Right email, right moment", body: "A workflow sends the matching guest email automatically." },
 ] as const;
 
 /* One personality per note: colour, rest angle, number tint. */
@@ -38,7 +38,7 @@ const NOTES = [
   { color: "sticky-sage", tilt: "motion-safe:rotate-2", num: "text-sage" },
 ] as const;
 
-const TOOLS = ["GoHighLevel", "Airtable", "Make", "Zapier", "AWeber", "Supabase", "CRM & pipelines"];
+const TOOLS = ["GoHighLevel", "CRM & Contacts", "Reservation Pipeline", "Workflows", "Email Automation"];
 
 const LIVE = BAHAY_LIWANAG_LIVE;
 
@@ -167,7 +167,7 @@ export default function FeaturedSystem() {
                 .
               </p>
               <ul className="flex flex-wrap gap-2 pt-1" aria-label="Project details">
-                {["Case Study", "GoHighLevel", "Make + Airtable", "System design"].map((t) => (
+                {["Case Study", "GoHighLevel", "CRM & Workflows", "System design"].map((t) => (
                   <li
                     key={t}
                     className="rounded-full border border-border bg-surface/70 px-2.5 py-0.5 text-xs font-semibold text-muted-foreground"

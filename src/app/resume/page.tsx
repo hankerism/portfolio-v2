@@ -33,8 +33,8 @@ export const metadata: Metadata = {
 };
 
 const LINKS = {
-  portfolio: "https://hankerism.vercel.app/",
-  portfolioLabel: "hankerism.vercel.app",
+  portfolio: "https://www.heyitsabby.space/",
+  portfolioLabel: "heyitsabby.space",
   github: "https://github.com/hankerism",
   githubLabel: "github.com/hankerism",
   linkedin: "https://www.linkedin.com/in/abigailmarte/",
@@ -113,7 +113,7 @@ const EXPERIENCE = [
     when: "2026–Present",
     role: "Web Developer & AI Automation Builder",
     org: "Independent Projects",
-    body: "Building complete digital products with AI-assisted workflows — Next.js and TypeScript web apps like KATHA, and GoHighLevel systems wired to Make and Airtable.",
+    body: "Building complete digital products with AI-assisted workflows — Next.js and TypeScript web apps like KATHA, and GoHighLevel systems with CRM pipelines and automated workflows.",
   },
   {
     when: "2024–2026",
@@ -164,8 +164,8 @@ const SELECTED_WORK: {
   {
     title: "Bahay Liwanag",
     href: "/projects/bahay-liwanag",
-    desc: "A boutique resort's booking system — a site paired with a Make + Airtable pipeline that turns enquiries into reservations.",
-    tech: "GoHighLevel · Make · Airtable",
+    desc: "A boutique resort's booking system — a GoHighLevel CRM pipeline and workflow automation that turns enquiries into reservations.",
+    tech: "GoHighLevel · CRM · Workflows",
   },
 ];
 
