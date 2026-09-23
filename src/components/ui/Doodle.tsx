@@ -31,7 +31,9 @@ export type DoodleKind =
   | "route"
   | "mountains"
   | "paperclip"
-  | "sprig";
+  | "sprig"
+  | "cursor"
+  | "node";
 
 export interface DoodleProps {
   kind: DoodleKind;
@@ -223,6 +225,23 @@ const paths: Record<DoodleKind, { viewBox: string; node: React.ReactNode }> = {
         strokeLinecap="round"
         pathLength={1}
       />
+    ),
+  },
+  /* ——— Tech marks. Same hand, different desk: the pointer and the workflow
+     node that belong to a developer's margin doodles rather than a craft
+     drawer. Filled where the silhouette carries the meaning at 16px. */
+  cursor: {
+    viewBox: "0 0 24 24",
+    node: <path d="M5 3l14 8.5-6.2 1.4L9.8 19 5 3z" fill="currentColor" />,
+  },
+  node: {
+    viewBox: "0 0 40 16",
+    node: (
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <circle cx="6" cy="8" r="4" />
+        <path d="M11 8h18" strokeDasharray="3 3" pathLength={1} />
+        <path d="M26 4l4 4-4 4" strokeLinejoin="round" />
+      </g>
     ),
   },
   sprig: {

@@ -90,6 +90,24 @@
      more premium at rest than in perpetual motion (Phase F polish). Entrance
      reveals and hover transitions carry the life instead. */
   --animate-breathe:  breathe 8s ease-in-out infinite;
+  /* Hero-only motion: subtle, ambient movement for the pinned polaroid
+     and small scrapbook ornaments. */
+  --animate-hero-float: hero-float 8s ease-in-out infinite;
+  --animate-twinkle:    twinkle 5s ease-in-out infinite;
+  --animate-drift:      drift 7s ease-in-out infinite;
+  /* Hero desk — one clock per prop, deliberately out of step (different
+     durations below, different animation-delay per instance in the markup)
+     so the composition never reads as a single group moving together.
+     Translate/rotate only, amplitudes small enough that nothing nears the
+     section's overflow-hidden edge. Reused keyframes (drift/twinkle) get a
+     slower sibling token here rather than a new shape, for variety without
+     more motion vocabulary than the desk needs. */
+  --animate-card-drift:   card-drift 10s ease-in-out infinite;
+  --animate-snippet-bob:  snippet-bob 7s ease-in-out infinite;
+  --animate-note-sway:    note-sway 6.5s ease-in-out infinite;
+  --animate-tab-sway:     tab-sway 11s ease-in-out infinite;
+  --animate-tag-float:    tag-float 5.5s ease-in-out infinite;
+  --animate-drift-slow:   drift 11s ease-in-out infinite;
 }
 
 /* 3 · SEMANTIC TOKENS ----------------------------------------------------- */
@@ -475,6 +493,58 @@
   .sticky-peach    { --sticky: #fcebd9; }
   .sticky-pink     { --sticky: #fbe9ee; }
   .sticky-sage     { --sticky: #e7f4ec; }
+  .sticky-cream    { --sticky: #f3ead9; } /* plain aged-paper scrap — no pastel */
+
+  /* Torn edge — a hand-torn silhouette for wherever one paper "sheet" meets
+     the next: a section boundary, a card foot, a background scrap. Fill it
+     with the sheet's own background colour; the drop-shadow (not box-shadow,
+     so it follows the zigzag rather than the rectangle) is what actually
+     reads as a tear. Generic — apply to any sized element. */
+  .torn-edge {
+    clip-path: polygon(
+      0 0, 100% 0, 100% calc(100% - 5px), 93% 100%, 86% calc(100% - 7px),
+      79% 100%, 72% calc(100% - 4px), 65% 100%, 58% calc(100% - 7px),
+      51% 100%, 44% calc(100% - 5px), 37% 100%, 30% calc(100% - 7px),
+      23% 100%, 16% calc(100% - 4px), 9% 100%, 2% calc(100% - 6px), 0 100%
+    );
+    filter: drop-shadow(0 6px 8px rgba(75, 66, 87, 0.1));
+  }
+
+  /* Notebook holes — a thin strip of punched spiral-binding holes along one
+     edge, so a full-bleed section reads as a page torn from a pad rather
+     than a flat panel. Generic: drop it against any positioned ancestor;
+     defaults to the left edge — flip with a scale-x-[-1] utility if a right
+     edge is ever needed, rather than a second primitive. */
+  .notebook-holes {
+    position: absolute;
+    inset-block: 0;
+    left: 0;
+    width: 1.5rem;
+    pointer-events: none;
+    /* A soft punched hole, not a flat UI dot: a darker centre with a faint
+       halo of shadow, like real paper catching a little light at the edge. */
+    background-image: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--color-ink) 16%, transparent) 0,
+      color-mix(in srgb, var(--color-ink) 16%, transparent) 1.5px,
+      color-mix(in srgb, var(--color-ink) 5%, transparent) 2.5px,
+      transparent 3.25px
+    );
+    background-size: 100% 2.75rem;
+    background-position: center 1.25rem;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 6%, black 94%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 6%, black 94%, transparent);
+  }
+
+  /* Dot grid — a faint design-system/blueprint texture behind section
+     backgrounds, the one "technical" note in an otherwise paper-and-ink
+     page. One hairline dot per 24px cell (~0.3% coverage) in the existing
+     --border tone, so it reads as tooth, not decoration. Sits on the
+     section's own background-color; never applied over content. */
+  .dot-grid {
+    background-image: radial-gradient(var(--border) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 
   /* Paper grain — a whisper of tooth on tinted panels so large flats read as
      stock, not screen. Parent must be positioned; radius is inherited.       */
@@ -486,6 +556,45 @@
     pointer-events: none;
     opacity: 0.05;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Paper fibre — a second, coarser texture layer for large surfaces that
+     need to read as an actual sheet rather than a flat tint: elongated,
+     desaturated noise (anisotropic baseFrequency) standing in for fibre
+     grain, multiplied so it only ever darkens, never washes the paper out.
+     Pairs with .grain on the same element (::before + ::after both free)
+     — className="grain paper-fiber" layers both at once. */
+  .paper-fiber::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.055;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.35' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23f)'/%3E%3C/svg%3E");
+  }
+
+  /* Paper vignette — the barest warm falloff toward the edges, so content
+     reads as sitting on a surface rather than floating on flat colour. Kept
+     to a few percent of ink; nowhere near a SaaS-style glow gradient. */
+  .paper-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      130% 100% at 50% 8%,
+      transparent 55%,
+      color-mix(in srgb, var(--color-ink) 5%, transparent) 100%
+    );
+  }
+
+  /* Fade-fragment — soft-edges a decorative texture patch (a ruled corner,
+     a stain) so it reads as a faded scrap of the surface rather than a
+     hard-edged rectangle pasted on top. */
+  .fade-fragment {
+    -webkit-mask-image: radial-gradient(closest-side, black, transparent);
+    mask-image: radial-gradient(closest-side, black, transparent);
   }
 
   /* Ruled notebook lines — the wellness-journal / recipe-page surface. */
@@ -526,6 +635,88 @@
     border: 1.5px dashed var(--border-strong);
     pointer-events: none;
   }
+
+  /* ——— Tech-scrapbook props ————————————————————————————————————————————
+     The same physical vocabulary as tape/stamp/sticky above, but drawn from
+     a developer's desk instead of a craft drawer. Each is ornamental: set
+     aria-hidden at the markup level, never the sole carrier of meaning, and
+     never placed where it can cover text. Colour swaps via a custom property
+     so one element can serve many compositions.                            */
+
+  /* Pushpin — a domed head with a specular highlight. The alternative to
+     tape when a card should read as pinned to a board rather than taped to
+     a page; varying the two keeps a composition from looking stamped.      */
+  .pin {
+    position: absolute;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.9), transparent 46%),
+      var(--pin-color, var(--color-lavender-deep));
+    box-shadow:
+      inset 0 -1px 2px rgba(75, 66, 87, 0.25),
+      0 3px 5px -1px rgba(75, 66, 87, 0.38);
+  }
+  .pin-peach { --pin-color: var(--color-peach); }
+  .pin-sage  { --pin-color: var(--color-sage); }
+
+  /* Collaborator cursor tag — the pointer-and-label chip from a shared
+     design or code tool. The tech counterpart to a washi-tape flourish: it
+     reads instantly as "assembled in a tool, by a person". Pair with the
+     `cursor` Doodle for the pointer glyph; this class is the label chip.   */
+  .cursor-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.08rem 0.4rem;
+    border-radius: 0.45rem 0.45rem 0.45rem 0.1rem;
+    background: var(--cursor-color, var(--color-lavender-deep));
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: var(--ds-shadow-sm);
+  }
+
+  /* Code snippet — a torn strip of editor output pinned to the board.
+     Deliberately NOT a full dark IDE panel: one plum card that belongs to
+     the warm palette rather than fighting it. Content stays real and short;
+     a snippet nobody can read is decoration pretending to be evidence.     */
+  .snippet {
+    background: var(--color-plum-ink);
+    color: #f3ecff;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    line-height: 1.6;
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.85rem;
+    box-shadow: var(--ds-shadow-paper);
+  }
+  .snippet .tok-key { color: #d7b8ff; }
+  .snippet .tok-str { color: #ffd9a8; }
+  .snippet .tok-dim { color: rgba(243, 236, 255, 0.55); }
+
+  /* File-tab label — a project/file label on the top edge of a card, the
+     way a tab sits on a manila folder, or an open-file tab in an editor.  */
+  .label-tab {
+    display: inline-block;
+    padding: 0.15rem 0.7rem 0.2rem;
+    border-radius: 0.4rem 0.4rem 0 0;
+    background: var(--tab-color, var(--color-lavender-tint));
+    border: 1px solid var(--border);
+    border-bottom: none;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-plum-ink);
+  }
+  .tab-peach { --tab-color: #fcebd9; }
 
   /* Peach marker highlight behind inline text (editorial emphasis) */
   .marker {
@@ -619,6 +810,76 @@
   0%, 100% { transform: scale(1);    opacity: 0.7; }
   50%      { transform: scale(1.08); opacity: 1; }
 }
+
+/* Hero polaroid — a slow, uneven float with a whisper of rotation drift, like
+   a paper photo never quite settling flat on its pin. The resting -rotate-2
+   utility on the element supplies the 0%/100% angle, so a reduced-motion
+   viewer (where this animation never starts — see motion-safe: in markup)
+   still sees the same tilt, just held still. */
+@keyframes hero-float {
+  0%   { translate: 0 0;       rotate: -2deg; }
+  24%  { translate: -2px -5px; rotate: -1.6deg; }
+  52%  { translate: 1px -8px;  rotate: -2.4deg; }
+  78%  { translate: 2px -3px;  rotate: -1.8deg; }
+  100% { translate: 0 0;       rotate: -2deg; }
+}
+
+/* Pipeline board — a slower, independent float; a card pinned slightly
+   imperfectly, never quite settling square. Resting angle matches the
+   element's static rotate-3 utility. */
+@keyframes card-drift {
+  0%   { rotate: 3deg;    translate: 0 0; }
+  30%  { rotate: 1.7deg;  translate: -1px 3px; }
+  62%  { rotate: 3.6deg;  translate: 1px -3px; }
+  100% { rotate: 3deg;    translate: 0 0; }
+}
+
+/* Automation snippet — its own small bob/rock, on a different clock than the
+   board it sits beside. Resting angle matches the -rotate-[4deg] utility. */
+@keyframes snippet-bob {
+  0%   { rotate: -4deg;   translate: 0 0; }
+  35%  { rotate: -5.3deg; translate: 1px -4px; }
+  70%  { rotate: -3.2deg; translate: -1px 2px; }
+  100% { rotate: -4deg;   translate: 0 0; }
+}
+
+/* Sticky note / small paper props — rotation-only oscillation, a note that
+   never quite lies flat. */
+@keyframes note-sway {
+  0%   { rotate: 4deg; }
+  40%  { rotate: 2.4deg; }
+  75%  { rotate: 5.1deg; }
+  100% { rotate: 4deg; }
+}
+
+/* Folder tab — the same idea as note-sway, tuned to its own resting angle
+   and a much longer, near-imperceptible clock. */
+@keyframes tab-sway {
+  0%   { rotate: -6deg; }
+  45%  { rotate: -4.3deg; }
+  80%  { rotate: -6.8deg; }
+  100% { rotate: -6deg; }
+}
+
+/* Cursor tag — the smallest, gentlest float; stays attached to whatever it's
+   pinned on rather than roaming on its own path. */
+@keyframes tag-float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -3px; }
+}
+
+/* One star twinkles… */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.6; scale: 0.9; }
+  50%      { opacity: 1;   scale: 1.08; }
+}
+
+/* …one flower drifts */
+@keyframes drift {
+  0%, 100% { translate: 0 0;       rotate: 0deg; }
+  50%      { translate: -3px 4px;  rotate: -5deg; }
+}
+
 @keyframes draw {
   to { stroke-dashoffset: 0; }
 }

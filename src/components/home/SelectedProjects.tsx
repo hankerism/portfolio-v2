@@ -214,7 +214,7 @@ function PurrHeaven() {
                 alt="Purr Heaven — website homepage"
                 fill
                 className="object-cover object-top transition-transform duration-[600ms] ease-[var(--ease-paper)] motion-safe:group-hover:scale-[1.04]"
-                sizes="(min-width: 1024px) 560px, 86vw"
+                sizes="(min-width: 1024px) 320px, 86vw"
               />
             </a>
             <p aria-hidden className="hand relative py-2 text-center text-2xl leading-none text-pink-deep">
@@ -343,7 +343,12 @@ function StephanieCenter() {
 
 export default function SelectedProjects() {
   return (
-    <Section id="projects" tone="default" aria-labelledby="projects-heading">
+    <Section
+      id="projects"
+      tone="default"
+      className="!bg-transparent bg-none"
+      aria-labelledby="projects-heading"
+    >
       <Reveal>
         <SectionHeading
           id="projects-heading"

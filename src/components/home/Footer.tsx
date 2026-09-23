@@ -1,6 +1,7 @@
 import Container from "@/components/layout/Container";
 import Link from "next/link";
 import Doodle from "@/components/ui/Doodle";
+import { cx } from "@/lib/cx";
 
 /* ---------------------------------------------------------------------------
  * Footer — a clean landing. Brand echo, real links only (section anchors +
@@ -14,6 +15,7 @@ const NAV = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/business-systems", label: "Business Systems" },
+  { href: "/social-designs", label: "Designs" },
   { href: "/#about", label: "About" },
   { href: "/resume", label: "Résumé" },
   { href: "/contact", label: "Contact" },
@@ -30,11 +32,18 @@ const RECENTLY = [
   { when: "Jul 2026", what: "Microsoft Clarity analytics added" },
 ];
 
-export default function Footer() {
+export interface FooterProps {
+  /** Override the resting bg-surface — used on the homepage, where the
+   *  scrapbook page background needs to stay visible all the way to the
+   *  bottom, not fade into a flat surface band. @default '' */
+  className?: string;
+}
+
+export default function Footer({ className }: FooterProps) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-border bg-surface">
+    <footer className={cx("mt-auto border-t border-border bg-surface", className)}>
       <Container size="lg">
         <div className="grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div className="max-w-xs">

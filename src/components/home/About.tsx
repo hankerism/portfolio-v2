@@ -17,7 +17,12 @@ import Reveal from "@/components/ui/Reveal";
 
 export default function About() {
   return (
-    <Section id="about" tone="surface" aria-labelledby="about-heading">
+    <Section
+      id="about"
+      tone="surface"
+      className="!bg-transparent bg-none"
+      aria-labelledby="about-heading"
+    >
       <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-16">
         {/* Real portrait in a scrapbook paper mount — settles in, straightens
             politely when greeted */}

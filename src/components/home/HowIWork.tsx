@@ -36,7 +36,12 @@ const STEPS = [
 
 export default function HowIWork() {
   return (
-    <Section id="how-i-work" tone="default" aria-labelledby="how-heading">
+    <Section
+      id="how-i-work"
+      tone="default"
+      className="!bg-transparent bg-none"
+      aria-labelledby="how-heading"
+    >
       <Reveal>
         <SectionHeading
           id="how-heading"

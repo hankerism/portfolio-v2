@@ -12,8 +12,9 @@ import { HAZEL_AND_JHONEL_REPO } from "@/lib/projectLinks";
 /* ---------------------------------------------------------------------------
  * FeaturedRsvp — the second product band, KATHA's sibling. Same editorial
  * treatment (a launch, not a thumbnail), mirrored composition so the two
- * bands read as facing gallery walls: scene left, copy right, warmed by an
- * ivory-and-gold wash that echoes the wedding's own palette.
+ * bands read as facing gallery walls: scene left, copy right. No section-wide
+ * wash — the homepage scrapbook background is the one continuous sheet
+ * running behind both bands; this section stays transparent over it.
  *
  * Facts are drawn from the hazel-and-jhonel codebase (verifiable), not
  * invented: Supabase Auth + RLS, config-driven RSVP flow with duplicate
@@ -40,13 +41,8 @@ export default function FeaturedRsvp() {
       tone="default"
       contained={false}
       aria-labelledby="rsvp-heading"
-      className="relative overflow-hidden"
+      className="!bg-transparent bg-none relative overflow-hidden"
     >
-      {/* Ivory-and-gold wash — the wedding's palette, in the scrapbook's light */}
-      <div
-        aria-hidden
-        className="grain pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-surface via-background to-background"
-      />
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="absolute -left-12 top-20 hidden size-64 rounded-full bg-peach/15 blur-3xl lg:block" />
         <span className="absolute right-[6%] bottom-8 hidden size-56 rounded-full bg-lavender-tint/50 blur-3xl lg:block" />
@@ -88,7 +84,7 @@ export default function FeaturedRsvp() {
                       alt="The Hazel & Jhonel wedding invitation — names, date, and countdown over a full-bleed photograph"
                       fill
                       className="object-cover object-top"
-                      sizes="(min-width: 1024px) 520px, 82vw"
+                      sizes="(min-width: 1024px) 420px, 82vw"
                     />
                   </div>
                 </BrowserFrame>

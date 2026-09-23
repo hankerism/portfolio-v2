@@ -29,6 +29,7 @@ const LINKS = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
   { href: "/business-systems", label: "Business Systems" },
+  { href: "/social-designs", label: "Designs" },
   { href: "/#about", label: "About" },
   { href: "/resume", label: "Résumé" },
 ] as const;
@@ -86,10 +87,9 @@ export default function Navbar() {
           <ul className="hidden items-center gap-8 md:flex">
             {LINKS.map((l) => {
               const active = isActive(pathname, l.href);
-              const Tag = l.href.includes("#") ? "a" : Link;
               return (
                 <li key={l.href}>
-                  <Tag
+                  <Link
                     href={l.href}
                     aria-current={active ? "page" : undefined}
                     className={cx(
@@ -100,7 +100,7 @@ export default function Navbar() {
                     )}
                   >
                     {l.label}
-                  </Tag>
+                  </Link>
                 </li>
               );
             })}
@@ -151,10 +151,9 @@ export default function Navbar() {
           <ul className="flex flex-col gap-1 border-t border-border py-4">
             {LINKS.map((l) => {
               const active = isActive(pathname, l.href);
-              const Tag = l.href.includes("#") ? "a" : Link;
               return (
                 <li key={l.href}>
-                  <Tag
+                  <Link
                     href={l.href}
                     onClick={() => setOpen(false)}
                     aria-current={active ? "page" : undefined}
@@ -164,7 +163,7 @@ export default function Navbar() {
                     )}
                   >
                     {l.label}
-                  </Tag>
+                  </Link>
                 </li>
               );
             })}

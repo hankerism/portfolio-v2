@@ -20,7 +20,12 @@ const EMAIL = "blujayabby@gmail.com";
 
 export default function Contact() {
   return (
-    <Section id="contact" tone="muted" aria-labelledby="contact-heading">
+    <Section
+      id="contact"
+      tone="muted"
+      className="!bg-transparent bg-none"
+      aria-labelledby="contact-heading"
+    >
       <Reveal rot={-1.2} y={22}>
       <div className="paper-stack grain relative mx-auto max-w-3xl rounded-[var(--radius-2xl)] border border-border bg-card p-8 text-center shadow-lg motion-safe:-rotate-[0.5deg] sm:p-14">
         <span aria-hidden className="tape tape-peach left-10 -top-3 z-10 -rotate-6 rounded-[2px]" />
@@ -37,8 +42,7 @@ export default function Contact() {
           <span className="hand text-3xl text-primary sm:text-4xl">let&apos;s make something lovely</span>
           <h2 id="contact-heading">Have a project in mind?</h2>
           <p className="max-w-xl text-lg text-foreground/80">
-            Whether you need a website, an automation that finally takes a task
-            off your plate, or a full product built end to end — I&apos;d love to help.
+            Whether you need a website, an automation that takes a task off your plate, or a full product built end to end, I&apos;d love to help.
           </p>
           {/* One conversion action; the address itself stays visible as a
               quiet, copyable text link rather than a competing second button.
@@ -48,7 +52,7 @@ export default function Contact() {
             <Button href={`mailto:${EMAIL}`} size="lg" variant="primary">
               Say hello
             </Button>
-            <a href={`mailto:${EMAIL}`} className="px-2 py-2 font-semibold">
+            <a href={`mailto:${EMAIL}`} className="px-2 py-2 text-sm text-muted-foreground">
               {EMAIL}
             </a>
           </Stack>

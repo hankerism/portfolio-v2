@@ -51,7 +51,12 @@ export default function CurrentlyExploring() {
   return (
     // surface tone keeps the About → method → focus → contact rhythm
     // alternating: surface / default / surface / muted
-    <Section id="exploring" tone="surface" aria-labelledby="exploring-heading">
+    <Section
+      id="exploring"
+      tone="surface"
+      className="!bg-transparent bg-none"
+      aria-labelledby="exploring-heading"
+    >
       <Reveal>
         <SectionHeading
           id="exploring-heading"

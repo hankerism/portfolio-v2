@@ -13,9 +13,9 @@ import Container, { type ContainerSize } from "./Container";
 export type SectionTone = "default" | "surface" | "muted";
 
 const tones: Record<SectionTone, string> = {
-  default: "bg-background text-foreground",
-  surface: "bg-surface text-foreground",   // aged-paper band
-  muted: "bg-muted text-foreground",        // quiet plum wash
+  default: "bg-background dot-grid text-foreground",
+  surface: "bg-surface dot-grid text-foreground",   // aged-paper band
+  muted: "bg-muted dot-grid text-foreground",        // quiet plum wash
 };
 
 export interface SectionProps extends HTMLAttributes<HTMLElement> {

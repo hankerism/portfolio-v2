@@ -44,7 +44,12 @@ const LIVE = BAHAY_LIWANAG_LIVE;
 
 export default function FeaturedSystem() {
   return (
-    <Section id="automation" tone="surface" aria-labelledby="automation-heading">
+    <Section
+      id="automation"
+      tone="surface"
+      className="!bg-transparent bg-none"
+      aria-labelledby="automation-heading"
+    >
       <Reveal>
         <SectionHeading
           id="automation-heading"
@@ -147,7 +152,7 @@ export default function FeaturedSystem() {
             {/* The journal entry */}
             <div className="flex flex-col gap-4">
               <span aria-hidden className="hand text-2xl text-primary">
-                the featured system
+                The Flagship
               </span>
               <h3 className="text-3xl">Bahay Liwanag</h3>
               <p className="text-lg text-foreground/80">

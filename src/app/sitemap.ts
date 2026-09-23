@@ -16,6 +16,7 @@ const ROUTES = [
   "/projects/stephanie-center",
   "/projects/wedding-rsvp",
   "/business-systems",
+  "/social-designs",
   "/resume",
   "/contact",
 ];

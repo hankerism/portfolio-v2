@@ -10,11 +10,13 @@ import { KATHA_LIVE, KATHA_REPO } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * FeaturedProject — KATHA, the flagship. One project treated like a launch,
- * not a thumbnail. It gets its own richer, plum-washed band (distinct from the
- * lighter Selected Projects grid) and a cinematic, layered screenshot scene:
- * the live homepage in a browser frame, the reader view peeking behind, and the
- * book cover floating free — pinned with tape and drawn marks. Facts are drawn
- * from the KATHA codebase (verifiable), not invented.
+ * not a thumbnail: a cinematic, layered screenshot scene — the live homepage
+ * in a browser frame, the reader view peeking behind, and the book cover
+ * floating free, pinned with tape and drawn marks — distinct from the
+ * lighter Selected Projects grid through that composition, not through a
+ * section-wide colour band (the homepage scrapbook background is the one
+ * continuous sheet; this section stays transparent over it). Facts are
+ * drawn from the KATHA codebase (verifiable), not invented.
  * ------------------------------------------------------------------------- */
 
 const HIGHLIGHTS = [
@@ -33,13 +35,13 @@ export default function FeaturedProject() {
       tone="default"
       contained={false}
       aria-labelledby="work-heading"
-      className="relative overflow-hidden"
+      className="!bg-transparent bg-none relative overflow-hidden"
     >
-      {/* Distinct flagship band — a soft plum wash settling into aged paper */}
-      <div
-        aria-hidden
-        className="grain pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-lavender-tint/70 via-background to-surface"
-      />
+      {/* No full-bleed wash here — the homepage scrapbook background is the
+          page's only "sheet"; a section-wide tint on top of it reads as a
+          seam between sections rather than one continuous page. A couple of
+          small ambient glows stay, since they're localised accents, not a
+          band. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <span className="absolute right-[8%] top-16 hidden size-72 rounded-full bg-lavender/20 blur-3xl lg:block" />
         <span className="absolute -left-10 bottom-10 hidden size-56 rounded-full bg-peach/10 blur-3xl lg:block" />
@@ -52,7 +54,7 @@ export default function FeaturedProject() {
             <Stack gap="md" align="start">
             {/* No "01" chip: it implied a numbered series that never continues,
                 and clashed with the projects' "№ n" hand style */}
-            <span className="hand text-2xl text-primary sm:text-3xl">The flagship</span>
+            <span className="hand text-2xl text-primary sm:text-3xl">Personal product</span>
             <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               Product Engineering
             </p>
@@ -163,7 +165,7 @@ export default function FeaturedProject() {
                       alt="The KATHA homepage — a calm, editorial reading experience with the featured novel Table for Two"
                       fill
                       className="object-cover object-top"
-                      sizes="(min-width: 1024px) 520px, 82vw"
+                      sizes="(min-width: 1024px) 420px, 82vw"
                     />
                   </div>
                 </BrowserFrame>
