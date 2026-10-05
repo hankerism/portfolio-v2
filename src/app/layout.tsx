@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Nunito_Sans, Caveat } from "next/font/google";
 import Clarity from "@/components/clarity";
+import ChatWidget from "@/components/chat-widget";
 import "./globals.css";
 
 /* Brand typefaces, self-hosted via next/font (no render-blocking @import).
@@ -66,6 +67,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         {children}
         <Clarity />
+        <ChatWidget />
       </body>
     </html>
   );
