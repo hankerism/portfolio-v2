@@ -12,6 +12,7 @@ import {
   BAHAY_LIWANAG_LIVE,
   CASA_KAPE_LIVE,
   PURR_HEAVEN_LIVE,
+  AUTOMATION_LAB_LIVE,
   KATHA_REPO,
   HAZEL_AND_JHONEL_REPO,
 } from "@/lib/projectLinks";
@@ -144,6 +145,19 @@ const ENTRIES: Entry[] = [
     pending: true,
     accent: "text-sage",
   },
+  {
+    n: "07",
+    title: "Abby's Automation Lab",
+    category: "Interactive showcase · Automation demos",
+    description:
+      "A companion site of interactive automation demos and CRM case studies. Visitors can run simulated lead capture, supplier notification, lead nurturing and commercial solar pipeline workflows, step through troubleshooting scenarios, and read anonymised GoHighLevel case studies. Every demo uses fictional data and runs in the browser.",
+    meta: ["Personal project", "Live"],
+    tech: ["React", "TypeScript", "Tailwind CSS"],
+    sourceNote: "Private repository",
+    live: { href: AUTOMATION_LAB_LIVE, label: "Explore the Lab" },
+    note: "the workbench",
+    accent: "text-primary",
+  },
 ];
 
 /** External-link arrow, matching the homepage VisitLink glyph. */
@@ -244,7 +258,8 @@ export default function ProjectsIndex() {
               Everything I&rsquo;ve built, in one place — two complete products
               (a publishing platform and a wedding RSVP platform), two business
               systems on GoHighLevel, and the client sites with automations
-              working quietly behind them. Read this page like a table of
+              working quietly behind them, plus an interactive lab where you
+              can try the workflows yourself. Read this page like a table of
               contents: four chapters are written in full, the rest are live
               and linkable.
             </p>

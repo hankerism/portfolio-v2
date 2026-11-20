@@ -13,6 +13,8 @@ import HowIWork from "@/components/home/HowIWork";
 import CurrentlyExploring from "@/components/home/CurrentlyExploring";
 import Contact from "@/components/home/Contact";
 import Footer from "@/components/home/Footer";
+import Button from "@/components/ui/Button";
+import { AUTOMATION_LAB_LIVE } from "@/lib/projectLinks";
 
 /* ---------------------------------------------------------------------------
  * Homepage — the introduction, not the destination (IA v2 §4.1):
@@ -71,6 +73,28 @@ export default function Home() {
             with automations behind them to CRM pipelines that catch and route
             enquiries without spreadsheets.
           </p>
+
+          {/* Link out to the companion Automation Lab (lab.heyitsabby.space) */}
+          <div className="mt-8 flex flex-col items-center gap-5 text-center">
+            <p className="max-w-xl text-foreground/80">
+              Try those workflows yourself in my Automation Lab: interactive
+              automation demos and CRM case studies. Demo data is fictional.
+            </p>
+            <Button
+              href={AUTOMATION_LAB_LIVE}
+              target="_blank"
+              rel="noreferrer"
+              variant="primary"
+              rightIcon={
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              }
+            >
+              Explore the Automation Lab
+              <span className="sr-only"> (opens in a new tab)</span>
+            </Button>
+          </div>
         </Section>
 
         <SelectedProjects />
